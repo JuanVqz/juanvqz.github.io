@@ -1,9 +1,18 @@
 {
+  "name": "juanvqz",
+  "version": "0.0.1",
+  "description": "Blog personal",
+  "authors": {
+    "name": "JuanVqz",
+    "email": "juan@logicalbricks.com"
+  },
   "scripts": {
-    "dev": "vuepress dev blog",
+    "dev": "vuepress dev blog --open --no-clear-screen",
     "build": "vuepress build blog"
   },
+  "license": "MIT",
   "dependencies": {
-    "vuepress": "^1.2.0"
+    "@vuepress/theme-blog": "^2.1.0",
+    "vuepress": "^1.3.0"
   }
 }
