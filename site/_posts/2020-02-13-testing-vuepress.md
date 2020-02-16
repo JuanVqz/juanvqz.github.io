@@ -1,6 +1,9 @@
 ---
 title: Probando vuepress
 date: 2020-02-13
+tag:
+  - vue
+  - vuepress
 ---
 
 # Probando vuepress
