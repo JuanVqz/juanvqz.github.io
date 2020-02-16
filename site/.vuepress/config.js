@@ -1,39 +1,34 @@
 module.exports = {
   title: 'JuanVqz',
-  description: 'JuanVqz description',
+  description: 'Mi blog personal',
+  theme: '@vuepress/theme-blog',
   themeConfig: {
+    hostname: 'https://juanvqz.github.io',
     nav: [
-      { text: 'Blog', link:'/blog/' }
-    ]
-  },
-  plugins: [
-    [ '@vuepress/blog', {
-      directories: [
-        {
-          id: 'posts',
-          dirname: '_posts',
-          path: '/',
-          itemPermalink: '/blog/:year/:month/:day/:slug',
-          pagination: {
-            lengthPerPage: 2
-          }
-        },
+      { text: 'Blog', link: '/' },
+      { text: 'Tags', link: '/tag/' },
+    ],
+    footer: {
+      contact: [
+        { type: 'github', link: 'https://github.com/juanvqz/' },
+        { type: 'twitter', link: 'https://twitter.com/javasgon' },
       ],
-      frontmatters: [
+      copyright: [
         {
-          id: 'tag',
-          keys: ['tag'],
-          path: '/tags/',
-          layout: 'Tags',
-          scopeLayout: 'Tags'
+          text: 'Privacy Policy',
+          link: 'https://policies.google.com/privacy?hl=en-US'
         },
+        { text: 'MIT Licensed | Copyright © 2020', link: '/' },
       ],
-      sitemap: {
-        hostname: 'https://juanvqz.github.io'
-      },
-      feed: {
-        canonical_base: 'https://juanvqz.github.io',
-      },
-    }]
-  ]
+    },
+    frontmatters: [
+      {
+        id: 'tag',
+        keys: ['tag'],
+        path: '/tag/',
+        layout: 'Tags',
+        scopeLayout: 'Tag'
+      }
+    ],
+  }
 }
