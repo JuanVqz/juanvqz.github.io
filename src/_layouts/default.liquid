@@ -3,10 +3,11 @@
   <head>
     {% render "head", metadata: site.metadata, title: page.title %}
   </head>
-  <body class="{{ page.layout }} {{ page.page_class }}">
+
+<body class="{{ page.layout }} {{ page.page_class }} px-2 md:px-16 lg:px-24 xl:px-48 flex flex-col min-h-screen bg-white">
     {% render "navbar", metadata: site.metadata, page: page %}
 
-    <main>
+    <main class="flex-grow">
       {{ content }}
     </main>
 
