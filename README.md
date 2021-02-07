@@ -1,4 +1,11 @@
-## [juanvqz.github.io](https://juanvqz.github.io/)
+## juanvqz.github.io
+
+
+* [Vercel juanvqz](https://juanvqz.vercel.app/posts)
+
+
+* [Github juanvqz](https://juanvqz.vercel.app/posts)
+
 
 > This is my personal blog
 
