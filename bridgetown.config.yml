@@ -19,5 +19,7 @@ baseurl: "" # OPTIONAL: the subpath of your site, e.g. /blog
 url: "https://juanvqz.github.io" # the base hostname & protocol for your site, e.g. https://example.com
 
 #permalink: pretty
-permalink: /articles/:categories/:year/:month/:day/:title/
+permalink: /posts/:year/:month/:day/:slug/
 timezone: America/Mexico_City
+pagination:
+  enabled: true
