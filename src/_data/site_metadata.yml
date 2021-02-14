@@ -5,7 +5,7 @@
 # in the templates via {{ site.metadata.myvariable }}.
 
 title: Juan Vasquez
-tagline: This site is totally awesome
+tagline: Home
 email: juan@logicalbricks.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+  Quisiera decir algo muy ingenioso o tal vez algo que enganche para que sigas leyendo y revisando mi pagina sin embargo lo unico que te puedo decir es que trato de subir contenido semanal y estos artículos están relacionados con la programación web donde utilizó lenguajes como ruby y javascript.
