@@ -61,18 +61,14 @@ module.exports = {
         test: /\.(s[ac]|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
           {
-            loader: "sass-loader",
+            loader: "css-loader",
             options: {
-              sassOptions: {
-                includePaths: [
-                  path.resolve(__dirname, "src/_components")
-                ],
-              },
-            },
+              url: url => !url.startsWith('/'),
+              importLoaders: 1
+            }
           },
+          "postcss-loader"
         ],
       },
 
@@ -80,8 +76,18 @@ module.exports = {
         test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
         loader: "file-loader",
         options: {
+          name: "[name]-[contenthash].[ext]",
           outputPath: "../fonts",
           publicPath: "../fonts",
+        },
+      },
+      {
+        test: /\.png?$|\.gif$|\.jpg$|\.svg$/,
+        loader: "file-loader",
+        options: {
+          name: "[name]-[contenthash].[ext]",
+          outputPath: "../images",
+          publicPath: "../images",
         },
       },
     ],
