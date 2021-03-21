@@ -1,11 +1,11 @@
-import { Layout, Article } from "../components"
+import { Layout, ArticleListItem } from "../../components"
 
-const Articles = ({ articles }) => {
+const ArticlesPage = ({ articles }) => {
   return (
-    <Layout title="My articles">
+    <Layout title="My Articles">
       <ul>
         {articles.map((article) => (
-          <Article {...article} key={article.id} />
+          <ArticleListItem article={article} key={article.id} />
         ))}
       </ul>
     </Layout>
@@ -13,7 +13,7 @@ const Articles = ({ articles }) => {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("https://dev.to/api/articles/me", {
+  const res = await fetch(`${process.env.API_HOST}/articles/me`, {
     method: "GET",
     headers: { "api-key": process.env.DEV_TO_API_KEY },
   })
@@ -32,4 +32,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default Articles
+export default ArticlesPage
