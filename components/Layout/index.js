@@ -9,9 +9,11 @@ const Layout = ({ children, title = "Home" }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>{children}</main>
+      <div className="flex flex-col h-screen bg-white-500 md:bg-blue-500 sm:bg-yellow-500 lg:bg-gray-500 xl:bg-pink-500 2xl:bg-green-500">
+        <main className="flex-grow">{children}</main>
 
-      <Footer />
+        <Footer />
+      </div>
     </>
   )
 }
