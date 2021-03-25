@@ -3,9 +3,9 @@ import { Layout, ArticleListItem } from "../../components"
 const ArticlesPage = ({ articles }) => {
   return (
     <Layout title="My Articles">
-      <div className="container p-4 grid">
+      <div className="container mx-auto p-4 flex flex-col">
         {articles.map((article) => (
-          <ArticleListItem article={article} key={article.id} />
+          <ArticleListItem {...article} key={article.id} />
         ))}
       </div>
     </Layout>
@@ -21,7 +21,10 @@ export async function getServerSideProps() {
 
   if (!articles) {
     return {
-      notFound: true,
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
     }
   }
 

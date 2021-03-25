@@ -5,8 +5,8 @@ const HomePage = () => {
     <Layout>
       <h1 className="text-6xl font-bold text-center">
         Welcome to{" "}
-        <AppLink href="/articles" className="text-blue-600">
-          Articles
+        <AppLink href="/articles">
+          <a className="text-blue-500">Articles</a>
         </AppLink>
       </h1>
     </Layout>
