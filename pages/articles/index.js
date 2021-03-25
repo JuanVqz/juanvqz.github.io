@@ -3,11 +3,11 @@ import { Layout, ArticleListItem } from "../../components"
 const ArticlesPage = ({ articles }) => {
   return (
     <Layout title="My Articles">
-      <ul>
+      <div className="container p-4 grid">
         {articles.map((article) => (
           <ArticleListItem article={article} key={article.id} />
         ))}
-      </ul>
+      </div>
     </Layout>
   )
 }
