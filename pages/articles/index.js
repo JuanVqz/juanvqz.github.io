@@ -3,7 +3,7 @@ import { Layout, ArticleListItem } from "../../components"
 const ArticlesPage = ({ articles }) => {
   return (
     <Layout title="My Articles">
-      <div className="container mx-auto p-4 flex flex-col">
+      <div className="container mx-auto flex flex-col">
         {articles.map((article) => (
           <ArticleListItem {...article} key={article.id} />
         ))}
