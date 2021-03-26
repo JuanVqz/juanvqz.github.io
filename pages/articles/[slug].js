@@ -1,13 +1,7 @@
 import { Layout, AppLink } from "../../components"
 import { stringToDate } from "../../utils"
 
-const ArticlePage = ({
-  published_at,
-  title,
-  body_markdown,
-  user,
-  tag_list,
-}) => {
+const ArticlePage = ({ published_at, title, user, tag_list, body_html }) => {
   return (
     <PageLayout>
       <div className="py-12 border-t-2 border-green-700 border-opacity-30 space-y-4">
@@ -33,7 +27,10 @@ const ArticlePage = ({
                 ))}
           </div>
         </div>
-        <div className="text-justify">{body_markdown}</div>
+        <div
+          className="prose"
+          dangerouslySetInnerHTML={{ __html: body_html }}
+        />
       </div>
     </PageLayout>
   )
@@ -73,8 +70,6 @@ export async function getStaticProps({ params }) {
     }
   )
   const article = await res.json()
-  // params contains the post `id`.
-  // If the route is like /posts/1, then params.id is 1
 
   return {
     props: article,
