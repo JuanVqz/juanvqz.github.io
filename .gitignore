@@ -1,36 +1,35 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Bridgetown
+output
+.bridgetown-cache
+.bridgetown-metadata
+.bridgetown-webpack
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Dependency folders
+node_modules
+bower_components
+vendor
 
-# testing
-/coverage
+# Caches
+.sass-cache
+.npm
+.node_repl_history
 
-# next.js
-/.next/
-/out/
+# Ignore bundler config.
+/.bundle
 
-# production
-/build
+# Ignore Byebug command history file.
+.byebug_history
 
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# vercel
-.vercel
-
+# dotenv environment variables file
 .env
+
+# Mac files
+.DS_Store
+
+# Yarn
+yarn-error.log
+yarn-debug.log*
+.pnp/
+.pnp.js
+# Yarn Integrity file
+.yarn-integrity

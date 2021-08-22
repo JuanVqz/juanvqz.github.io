@@ -1,23 +1,70 @@
-# Next.js + Tailwind CSS Example
+# Bridgetown Website README
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) (v2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+Welcome to your new Bridgetown website! You can update this README file to provide additional context and setup information for yourself or other contributors.
 
-It uses the new [`@tailwindcss/jit`](https://github.com/tailwindlabs/tailwindcss-jit) engine for Tailwind CSS.
+## Table of Contents
 
-## Deploy your own
+- [Prerequisites](#prerequisites)
+- [Install](#install)
+- [Development](#development)
+- [Commands](#commands)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+## Prerequisites
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+- [GCC](https://gcc.gnu.org/install/)
+- [Make](https://www.gnu.org/software/make/)
+- [Ruby](https://www.ruby-lang.org/en/downloads/)
+  - `>= 2.5`
+- [Bridgetown Gem](https://rubygems.org/gems/bridgetown)
+  - `gem install bundler bridgetown -N`
+- [Node](https://nodejs.org)
+  - `>= 10.13`
+- [Yarn](https://yarnpkg.com)
 
-## How to use
+## Install
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+```sh
+cd bridgetown-site-folder
+bundle install && yarn install
+```
+> Learn more: [Bridgetown Getting Started Documentation](https://www.bridgetownrb.com/docs/).
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+## Development
+
+To start your site in development mode, run `yarn start` and navigate to [localhost:4000](https://localhost:4000/)!
+
+Use a [theme](https://github.com/topics/bridgetown-theme), add some [plugins](https://www.bridgetownrb.com/plugins/), and/or run some [automations](https://github.com/topics/bridgetown-automation) to get started quickly.
+
+### Commands
+
+```sh
+# running locally
+yarn start
+
+# build & deploy to production
+yarn deploy
+
+# load the site up within a Ruby console (IRB)
+bundle exec bridgetown console
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+> Learn more: [Bridgetown CLI Documentation](https://www.bridgetownrb.com/docs/command-line-usage)
+
+## Deployment
+
+You can deploy Bridgetown sites on "Jamstack" hosts (Netlify, Vercel, Render, etc.) or virtually any tranditional web server by simply building and copying the output folder to your HTML root.
+
+> Read the [Bridgetown Deployment Documentation](https://www.bridgetownrb.com/docs/deployment) for more information.
+
+## Contributing
+
+If repo is on GitHub:
+
+1. Fork it
+2. Clone the fork using `git clone` to your local development machine.
+3. Create your feature branch (`git checkout -b my-new-feature`)
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create a new Pull Request
