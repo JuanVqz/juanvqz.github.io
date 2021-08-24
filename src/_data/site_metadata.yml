@@ -4,8 +4,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.metadata.myvariable }}.
 
-title: Juan Vasquez
+title: Juan Vásquez
 tagline: This site is totally awesome
 email: juan@logicalbricks.com
+github: https://github.com/JuanVqz
+youtube: https://www.youtube.com/channel/UC9bsDBNvCZEEjrjFdFLtIYA
+twitter: https://twitter.com/juanvqz_
+rss: https://juanvqz.github.io/feed.xml
 description: >-
   Write an awesome description for your new site here. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
