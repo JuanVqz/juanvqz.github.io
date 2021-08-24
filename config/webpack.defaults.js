@@ -46,7 +46,7 @@ const cssRules = {
       }
     }
   ],
-  mode: 'sass',
+  mode: 'postcss',
 
   postcss: () => {
     cssRules.use.push("postcss-loader")
