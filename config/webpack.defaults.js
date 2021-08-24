@@ -8,14 +8,16 @@
 //
 // Shipped with Bridgetown v0.21.3
 
-const path = require("path");
+const path = require("path")
 const rootDir = path.resolve(__dirname, "..")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin")
 
 // Input and output
 
-const entry = { main: path.resolve(rootDir, "frontend", "javascript", "index.js") }
+const entry = {
+  main: path.resolve(rootDir, "frontend", "javascript", "index.js"),
+}
 const output = {
   path: path.resolve(rootDir, "output", "_bridgetown", "static", "js"),
   filename: "[name].[contenthash].js",
@@ -24,12 +26,12 @@ const output = {
 
 // Rules and Loaders
 
-const jsRule =  {
+const jsRule = {
   test: /\.(js|jsx)/,
   use: {
     loader: "esbuild-loader",
     options: {
-      target: 'es2016'
+      target: "es2016",
     },
   },
 }
@@ -41,12 +43,12 @@ const cssRules = {
     {
       loader: "css-loader",
       options: {
-        url: url => !url.startsWith('/'),
-        importLoaders: 1
-      }
-    }
+        url: (url) => !url.startsWith("/"),
+        importLoaders: 1,
+      },
+    },
   ],
-  mode: 'postcss',
+  mode: "postcss",
 
   postcss: () => {
     cssRules.use.push("postcss-loader")
@@ -60,14 +62,12 @@ const cssRules = {
         implementation: require("sass"),
         sassOptions: {
           fiber: false,
-          includePaths: [
-            path.resolve(rootDir, "src/_components")
-          ],
+          includePaths: [path.resolve(rootDir, "src/_components")],
         },
       },
     })
     return { test: cssRules.test, use: cssRules.use }
-  }
+  },
 }
 
 const fontsRule = {
@@ -106,13 +106,13 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
     modules: [
-      path.resolve(rootDir, 'frontend', 'javascript'),
-      path.resolve(rootDir, 'frontend', 'styles'),
-      path.resolve(rootDir, 'node_modules')
+      path.resolve(rootDir, "frontend", "javascript"),
+      path.resolve(rootDir, "frontend", "styles"),
+      path.resolve(rootDir, "node_modules"),
     ],
     alias: {
-      bridgetownComponents: path.resolve(rootDir, "src", "_components")
-    }
+      bridgetownComponents: path.resolve(rootDir, "src", "_components"),
+    },
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -123,8 +123,7 @@ module.exports = {
     }),
   ],
   module: {
-    rules: [
-      jsRule, cssRules[cssRules.mode](), fontsRule, imagesRule
-    ]
-  }
+    rules: [jsRule, cssRules[cssRules.mode](), fontsRule, imagesRule],
+  },
 }
+
