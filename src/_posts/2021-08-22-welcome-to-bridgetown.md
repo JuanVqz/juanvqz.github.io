@@ -2,6 +2,7 @@
 layout: post
 title: "Mi primer artículo en Bridgetown"
 date: 2021-08-22 15:54:51 -0500
+categories: ruby
 ---
 
 You’ll find this post in your `_posts` directory.
