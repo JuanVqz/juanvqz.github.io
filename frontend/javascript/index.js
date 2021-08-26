@@ -1,3 +1,4 @@
+import "gruvbox.css"
 import "index.scss"
 
 // Import all javascript files from src/_components

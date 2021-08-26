@@ -19,7 +19,7 @@ Go ahead and edit it and re-build the site to see your changes. You can rebuild 
 
 Bridgetown requires blog post files to be named according to the following format:
 
-```javascript
+```js
 function name() {
   return true
 }
