@@ -41,11 +41,11 @@ GEM
       webrick (~> 1.7)
     bridgetown-feed (2.0.1)
       bridgetown (>= 0.20, < 2.0)
-    bridgetown-inline-svg (1.1.1)
-      bridgetown (>= 0.15, < 2.0)
-      svg_optimizer (~> 0.2.5)
     bridgetown-paginate (0.21.3)
       bridgetown-core (= 0.21.3)
+    bridgetown-svg-inliner (1.0.2)
+      bridgetown (>= 0.20, < 2.0)
+      nokogiri
     colorator (1.1.0)
     concurrent-ruby (1.1.9)
     erubi (1.10.0)
@@ -99,8 +99,6 @@ GEM
     rouge (3.26.0)
     ruby2_keywords (0.0.5)
     safe_yaml (1.0.5)
-    svg_optimizer (0.2.5)
-      nokogiri
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
     thor (1.1.0)
@@ -117,7 +115,7 @@ PLATFORMS
 DEPENDENCIES
   bridgetown (~> 0.21.3)
   bridgetown-feed
-  bridgetown-inline-svg (~> 1.1.0)
+  bridgetown-svg-inliner
 
 BUNDLED WITH
    2.2.26
