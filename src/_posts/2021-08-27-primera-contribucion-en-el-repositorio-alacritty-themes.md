@@ -1,13 +1,11 @@
 ---
 layout: post
-title: "Primera contribución en Alacritty-Themes"
+title: "Hice mi primera contribución en el código de alacritty-themes"
 date: 2021-08-22 15:54:51 -0500
 categories: contribución, alacritty
 ---
 
-# Hice mi primera contribución en el código de [alacritty-themes](https://github.com/rajasegar/alacritty-themes).
-
-Maldito tiempo!!!
+En tiempos de COVID el tiempo pasa muy rapido!!!
 
 Hoy me doy cuenta que el tiempo pasa muy rápido pues ya tengo más de un año utilizando la terminal **alacritty**, la cual la he encontrado muy efectiva pues me gusta la forma en que se configura con un simple archivo yaml.
 
@@ -19,15 +17,15 @@ Después de un tiempo usándolo me dio curiosidad en que lenguaje está escrito 
 
 Entonces comencé a ver el código y observé que tenía posibles lugares para contribuir, sin más, hice la copia del repositorio y realice un cambio sencillo.
 
-Existía un archivo llamado `test.js` en la carpeta de `tests` y hasta donde conozco, la convención para pruebas debería ser:
+Existía un archivo llamado **test.js** en la carpeta de **tests** y hasta donde conozco, la convención para pruebas debería ser:
 
-| archivo a ser probado    | archivo de prueba              |
+| Archivo a ser probado    | Archivo de prueba              |
 | ------------------------ | ------------------------------ |
 | src/index.js             | test/index.test.js             |
 | src/helpers/locations.js | test/helpers/locations.test.js |
 | src/components/Home.js   | test/components/Home.test.js   |
 
-Por lo tanto mi contribución fue cambiar el nombre del archivo de `test.js` a `index.test.js`
+Por lo tanto mi contribución fue cambiar el nombre del archivo de **test.js** a **index.test.js**
 
 Aquí está el [link al Pull Request en GitHub.](https://github.com/rajasegar/alacritty-themes/pull/27)
 

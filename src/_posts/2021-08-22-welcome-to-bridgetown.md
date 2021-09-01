@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Mi primer artículo en Bridgetown"
+title: "Welcome to Bridgetownrb"
 date: 2021-08-22 15:54:51 -0500
-categories: ruby
+categories: bridgetownrb
 ---
 
 You’ll find this post in your `_posts` directory.

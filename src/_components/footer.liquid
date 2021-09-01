@@ -1,15 +1,8 @@
-<footer class="flex flex-wrap px-4 py-12 space-x-4 md:px-6">
-  {% render "social_media_links" %}
-  <a href="{{ metadata.rss }}" target="_blank">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss">
-      <path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path>
-      <circle cx="5" cy="19" r="1"></circle>
-    </svg>
-  </a>
-  <a href="mailto:{{ metadata.email }}">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
-      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-      <polyline points="22,6 12,13 2,6"></polyline>
-    </svg>
-  </a>
+<footer class="flex flex-col p-4 md:p-6">
+  <div class="flex flex-row justify-evenly">
+    {% render "social_media_links", metadata: metadata %}
+  </div>
+  <div>
+    Hecho con ❤️ en <a href="https://www.bridgetownrb.com/" class="font-bold" target="_blank">Bridgetownrb</a>
+  </div>
 </footer>

@@ -9,12 +9,8 @@ title: Últimos artículos
       <a href="{{ post.url }}">
         <h1 class="text-xl md:text-2xl uppercase font-bold">{{ post.title }}</h1>
         <div class="flex flex-wrap justify-between py-3 text-lg">
-          <div>
-            {{ post.categories }}
-          </div>
-          <div>
-          {{ post.date | date_to_string: "ordinal", "US" }}
-          </div>
+          <div>{{ post.categories }}</div>
+          <div>{{ post.date | date_to_string: "ordinal", "US" }}</div>
         </div>
         <div class="text-justify">{{ post.excerpt | markdownify }}</div>
       </a>
