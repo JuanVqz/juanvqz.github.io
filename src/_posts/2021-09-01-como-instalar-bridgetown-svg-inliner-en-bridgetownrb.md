@@ -35,11 +35,12 @@ end
 ```liquid
 # formato liquid
 {#% svg "images/github.svg" %}
+{% svg "images/github.svg" %}
 ```
 
 ```ruby
 # formato erb
-<#%= svg "images/youtube.svg" %>
+<%= svg "images/youtube.svg" %>
 ```
 
 > NOTA: Si copia el código anterior, remover el símbolo de gato.
