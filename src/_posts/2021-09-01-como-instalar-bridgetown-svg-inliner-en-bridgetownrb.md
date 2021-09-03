@@ -33,9 +33,10 @@ end
 3. Listo! ya puedes usar archivos svg desde una etiqueta svg, mira!
 
 ```liquid
-# formato liquid
-{#% svg "images/github.svg" %}
+<!--  formato liquid -->
+{% raw %}
 {% svg "images/github.svg" %}
+{% endraw %}
 ```
 
 ```ruby

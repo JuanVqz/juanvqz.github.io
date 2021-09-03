@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Hoy aprendí que internet explorer no soporta Array.from"
-date: 2021-09-01 08:30:51 -0500
+title: "Hoy aprendí que Internet Explorer no soporta Array.from"
+date: 2021-09-02 08:30:51 -0500
 categories: diario, javascript
 ---
 
@@ -38,4 +38,3 @@ Array.prototype.slice(document.querySelectorAll(".class"))
 ```
 
 Espero que te ayude, saludos!
-
