@@ -5,9 +5,9 @@ title: Últimos artículos
 
 <div class="space-y-8 mt-4">
   {% for post in site.posts %}
-    <div class="border-b-2 pb-6 border-divide-gray-100 hover:border-gray-300">
+    <div class="border-b-2 pb-6 hover:border-green-700">
       <a href="{{ post.url }}">
-        <h1 class="text-xl md:text-2xl uppercase font-bold">{{ post.title }}</h1>
+        <h1 class="text-xl md:text-2xl font-bold hover:text-green-700">{{ post.title }}</h1>
         <div class="flex flex-wrap justify-between py-3 text-lg">
           <div>{{ post.categories }}</div>
           <div>{{ post.date | date_to_string: "ordinal", "US" }}</div>

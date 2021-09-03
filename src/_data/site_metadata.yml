@@ -6,11 +6,23 @@
 
 title: Juan Vásquez
 tagline: This site is totally awesome
-email: juan@logicalbricks.com
-github: https://github.com/JuanVqz
-youtube: https://www.youtube.com/channel/UC9bsDBNvCZEEjrjFdFLtIYA
-twitter: https://twitter.com/juanvqz_
-rss: https://juanvqz.github.io/feed.xml
+author: Juan Vásquez
+accounts:
+  youtube:
+    url: https://www.youtube.com/channel/UC9bsDBNvCZEEjrjFdFLtIYA
+    color: hover:text-red-500
+  twitter:
+    url: https://twitter.com/juanvqz_
+    color: hover:text-blue-500
+  github:
+    url: https://github.com/JuanVqz
+    color: hover:text-gray-500
+  email:
+    url: "mailto: juan@logicalbricks.com"
+    color: hover:text-green-500
+  rss:
+    url: https://juanvqz.github.io/feed.xml
+    color: hover:text-yellow-500
 description: >-
   Hola, ¡qué onda! Soy Juan Vásquez.
   En este espacio encontrarás artículos relacionados al desarrollo web en su mayoría en lenguajes de programación como Ruby y JavaScript.
