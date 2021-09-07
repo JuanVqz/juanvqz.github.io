@@ -21,7 +21,7 @@ accounts:
     url: "mailto: juan@logicalbricks.com"
     color: hover:text-green-500
   rss:
-    url: https://juanvqz.github.io/feed.xml
+    url: https://juanvasquez.dev/feed.xml
     color: hover:text-yellow-500
 description: >-
   Hola, ¡qué onda! Soy Juan Vásquez.
