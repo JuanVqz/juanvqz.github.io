@@ -5,7 +5,7 @@
 # in the templates via {{ site.metadata.myvariable }}.
 
 title: Juan Vásquez
-tagline: This site is totally awesome
+tagline: Hablamos de programación web usando Ruby y JavaScript.
 author: Juan Vásquez
 accounts:
   youtube:
