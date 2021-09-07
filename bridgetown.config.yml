@@ -18,11 +18,12 @@
 url: "https://juanvasquez.dev"
 permalink: pretty
 author: Juan Vásquez
-
+feed:
+  path: atom.xml
 # Other options you might want to investigate:
 #
 # base_path: "/" # the subpath of your site, e.g. /blog
-# timezone: America/Los_Angeles
+# timezone: America/Mexico_City
 # pagination:
 #   enabled: true
 svg:
