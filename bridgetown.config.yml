@@ -15,11 +15,11 @@
 # https://learnxinyminutes.com/docs/yaml/
 #
 
-url: "https://juanvqz.github.io"
-
+url: "https://juanvasquez.dev"
 permalink: pretty
-author:
-  twitter: juanvqz_
+author: Juan Vásquez
+twitter:
+  username: juanvqz_
 
 # Other options you might want to investigate:
 #
