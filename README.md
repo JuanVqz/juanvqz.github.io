@@ -1,43 +1,50 @@
-# Bridgetown Website README
+# [juanvasquez.dev](https://juanvasquez.dev) 🤘
 
-Welcome to your new Bridgetown website! You can update this README file to provide additional context and setup information for yourself or other contributors.
+## Tabla de contenido 📑
 
-## Table of Contents
+- [Descripción](#descripcion)
+- [Requisitos](#requisitos)
+- [Instalación](#instalacion)
+- [Desarrollo](#desarrollo)
+- [Commandos](#commandos)
+- [Despliegue](#despliegue)
+- [Autor](#autor)
 
-- [Prerequisites](#prerequisites)
-- [Install](#install)
-- [Development](#development)
-- [Commands](#commands)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
+## Descripción
 
-## Prerequisites
+Esta es mi **página personal** donde me gusta escribir acerca de tecnologías web como **Ruby** y **Javascript**, obviamente lo que esto conlleva es hablar sobre **Ruby on Rails**, gemas interesantes, **Node.js**, React y mucho más.
 
-- [GCC](https://gcc.gnu.org/install/)
-- [Make](https://www.gnu.org/software/make/)
+La pagina esta hecha con **Bridgetown** el cual utiliza Ruby como **centro** del engranaje y está rodeado de herramientas como **webpack**, **recarga de código** en tiempo real, también tiene un **proxy** para que puedas visualizar la página desde otro dispositivo en la misma red y todo esto ya lo incluye listo para trabajar.
+
+Si te interesa Bridgetown no dudes en tomar código de aquí y si tienes dudas en como funciona o como configurarlo abre un [issue](https://github.com/JuanVqz/juanvqz.github.io/issues/new) en este mismo repositorio para poder ayudarte a solucionar tu duda en medida de lo posible.
+
+> Leer más: [acerca de Bridgetown](https://www.bridgetownrb.com/docs/).
+
+## Requisitos
+
 - [Ruby](https://www.ruby-lang.org/en/downloads/)
-  - `>= 2.5`
+  - `>= 2.7`
 - [Bridgetown Gem](https://rubygems.org/gems/bridgetown)
   - `gem install bundler bridgetown -N`
 - [Node](https://nodejs.org)
   - `>= 10.13`
 - [Yarn](https://yarnpkg.com)
 
-## Install
+## Instalación
 
 ```sh
-cd bridgetown-site-folder
+git clone git@github.com:JuanVqz/juanvqz.github.io.git
+
+cd juanvqz.github.io
+
 bundle install && yarn install
 ```
-> Learn more: [Bridgetown Getting Started Documentation](https://www.bridgetownrb.com/docs/).
 
-## Development
+## Desarrollo
 
-To start your site in development mode, run `yarn start` and navigate to [localhost:4000](https://localhost:4000/)!
+Para iniciar el servidor ejecuta **yarn start** y navega hacia [localhost:4000](https://localhost:4000/)!
 
-Use a [theme](https://github.com/topics/bridgetown-theme), add some [plugins](https://www.bridgetownrb.com/plugins/), and/or run some [automations](https://github.com/topics/bridgetown-automation) to get started quickly.
-
-### Commands
+### Commandos
 
 ```sh
 # running locally
@@ -50,21 +57,13 @@ yarn deploy
 bundle exec bridgetown console
 ```
 
-> Learn more: [Bridgetown CLI Documentation](https://www.bridgetownrb.com/docs/command-line-usage)
+## Despliegue
 
-## Deployment
+Utilizo [GitHub Actions](https://github.com/andrewmcodes/bridgetown-gh-pages-action) para ejecutar el comando (yarn deploy) de despliegue.
 
-You can deploy Bridgetown sites on "Jamstack" hosts (Netlify, Vercel, Render, etc.) or virtually any tranditional web server by simply building and copying the output folder to your HTML root.
+Utilizo la rama **gh-pages** para el despliegue de los archivos estaticos.
 
-> Read the [Bridgetown Deployment Documentation](https://www.bridgetownrb.com/docs/deployment) for more information.
+## Autor
 
-## Contributing
+🇲🇽 [@juanvqz\_](https://twitter.com/juanvqz_)
 
-If repo is on GitHub:
-
-1. Fork it
-2. Clone the fork using `git clone` to your local development machine.
-3. Create your feature branch (`git checkout -b my-new-feature`)
-4. Commit your changes (`git commit -am 'Add some feature'`)
-5. Push to the branch (`git push origin my-new-feature`)
-6. Create a new Pull Request
