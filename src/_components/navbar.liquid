@@ -1,3 +1,10 @@
 <nav class="flex flex-row justify-between p-4 md:p-6">
   <a href="/" class="text-2xl font-bold hover:text-green-500">{{ metadata.title }}</a>
+
+  <div class="flex flex-row">
+    <button type="button" id="toggle_dark_mode">
+      {% svg "images/sun.svg", width: "24", class: "hidden sun fill-current text-yellow-300 hover:text-yellow-500" %}
+      {% svg "images/moon.svg", width: "24", class: "hidden moon fill-current text-black hover:text-gray-500" %}
+    </button>
+  </div>
 </nav>
