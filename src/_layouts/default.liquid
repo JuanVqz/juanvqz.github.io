@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     {% render "head", metadata: site.metadata, title: page.title %}
   </head>
-  <body class="{{ page.layout }} {{ page.page_class }} min-h-screen flex flex-col mx-auto container bg-white ">
+  <body class="{{ page.layout }} {{ page.page_class }} min-h-screen flex flex-col mx-auto container dark:bg-gray-700 dark:text-gray-200 bg-white text-black">
     {% render "navbar", metadata: site.metadata, page: page %}
 
     <main class="flex-1 p-4 md:p-6">
