@@ -2,7 +2,7 @@
 layout: post
 title: "¿Cómo instalar bridgetown-svg-inliner en Bridgetown?"
 date: 2021-09-01 08:30:51 -0500
-categories: bridgetownrb
+tags: [bridgetownrb]
 ---
 
 Esto se arma de dos patadas!

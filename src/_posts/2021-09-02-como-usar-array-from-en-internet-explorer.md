@@ -2,7 +2,7 @@
 layout: post
 title: "Hoy aprendí que Internet Explorer no soporta Array.from"
 date: 2021-09-02 08:30:51 -0500
-categories: diario, javascript
+tags: [diario, javascript]
 ---
 
 Ni Microsoft quiere a Internet Explorer, LOL.

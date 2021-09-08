@@ -2,7 +2,7 @@
 layout: post
 title: "Welcome to Bridgetownrb"
 date: 2021-08-22 15:54:51 -0500
-categories: bridgetownrb
+tags: [bridgetownrb]
 ---
 
 You’ll find this post in your `_posts` directory.
