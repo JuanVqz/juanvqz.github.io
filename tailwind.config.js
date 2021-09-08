@@ -1,5 +1,15 @@
 module.exports = {
-  purge: [],
+  purge: {
+    mode: "all",
+    content: [
+      "./frontend/**/*.css",
+      "./frontend/**/*.scss",
+      "./src/**/*.erb",
+      "./src/**/*.html",
+      "./src/**/*.liquid",
+      "./src/**/*.md",
+    ],
+  },
   darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {},
