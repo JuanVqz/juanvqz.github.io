@@ -1,6 +1,6 @@
 module.exports = {
   purge: {
-    mode: "jit",
+    mode: "all",
     content: [
       "./frontend/**/*.css",
       "./frontend/**/*.scss",
