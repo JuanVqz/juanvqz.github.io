@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Hice mi primera contribución en el código de alacritty-themes"
-date: 2021-08-27 21:54:51 -0500
+created_at: 2021-08-27 21:54:51 -0500
+updated_at: 2021-08-27 21:54:51 -0500
 tags: [contribución, alacritty]
 ---
 
