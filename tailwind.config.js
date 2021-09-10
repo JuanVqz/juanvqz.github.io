@@ -1,5 +1,15 @@
 module.exports = {
-  purge: [],
+  purge: {
+    enabled: process.env.NODE_ENV === "production",
+    content: [
+      "./frontend/**/*.css",
+      "./frontend/**/*.scss",
+      "./src/**/*.erb",
+      "./src/**/*.html",
+      "./src/**/*.liquid",
+      "./src/**/*.md",
+    ],
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
