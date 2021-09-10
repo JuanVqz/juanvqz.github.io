@@ -43,5 +43,5 @@ function changeDarkMode() {
   toggleDarkMode()
 }
 
-darkModeButton().addEventListener("click", changeDarkMode)
-toggleDarkMode()
+//darkModeButton().addEventListener("click", changeDarkMode)
+//toggleDarkMode()
