@@ -1,23 +1,9 @@
 module.exports = {
-  purge: {
-    mode: "all",
-    content: [
-      "./frontend/**/*.css",
-      "./frontend/**/*.scss",
-      "./src/**/*.erb",
-      "./src/**/*.html",
-      "./src/**/*.liquid",
-      "./src/**/*.md",
-    ],
-  },
-  darkMode: "class", // or 'media' or 'class'
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
-  variants: {
-    extend: {
-      textOpacity: ["dark"],
-    },
-  },
+  variants: {},
   plugins: [require("@tailwindcss/typography")],
 }
