@@ -1,4 +1,4 @@
-<div class="border-b-2 hover:border-green-500 hover:text-green-500">
+<div class="border-b-2 hover:border-green-600 hover:text-green-600">
   <a href="{{ post.url }}">
     <h1 class="text-xl font-bold md:text-2xl">{{ post.title }}</h1>
     <div class="flex flex-wrap justify-start py-4">
@@ -7,7 +7,7 @@
           <div class="mr-1">{{ tag | titleize }}</div>
         {% endfor %}
       </div>
-      <div>| {{ post.date | date_to_long_string }}</div>
+      <div>| {{ post.created_at | date_to_long_string }}</div>
     </div>
     <div class="pb-4">{{ post.excerpt | markdownify }}</div>
   </a>

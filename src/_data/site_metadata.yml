@@ -22,7 +22,7 @@ accounts:
     color: hover:text-green-500
   rss:
     url: https://juanvasquez.dev/feed.xml
-    color: hover:text-purple-500
+    color: hover:text-yellow-500
 description: >-
   Hola, ¡qué onda! Soy Juan Vásquez.
   En este espacio encontrarás artículos relacionados al desarrollo web en su mayoría en lenguajes de programación como Ruby y JavaScript.
