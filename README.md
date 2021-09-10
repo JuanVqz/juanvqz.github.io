@@ -1,5 +1,7 @@
 # [juanvasquez.dev](https://juanvasquez.dev) 🤘
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e2e802fd-44ea-412c-9565-38e9a31b516b/deploy-status)](https://app.netlify.com/sites/juanvqz/deploys)
+
 ## Tabla de contenido 📑
 
 - [Descripción](#descripcion)
@@ -66,4 +68,3 @@ Utilizo la rama **gh-pages** para el despliegue de los archivos estaticos.
 ## Autor
 
 🇲🇽 [@juanvqz\_](https://twitter.com/juanvqz_)
-
