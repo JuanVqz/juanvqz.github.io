@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Hice mi primera contribución en el código de alacritty-themes"
-created_at: 2021-08-27 21:54:51 -0500
+data: 2021-08-27 21:54:51 -0500
 updated_at: 2021-08-27 21:54:51 -0500
-tags: [contribución, alacritty]
+categories: [contribución, alacritty]
 ---
 
 En tiempos de COVID el tiempo pasa muy rapido!!!

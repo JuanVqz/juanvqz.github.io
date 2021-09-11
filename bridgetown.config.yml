@@ -20,6 +20,7 @@ permalink: pretty
 author: Juan Vásquez
 base_path: "/" # the subpath of your site, e.g. /blog
 timezone: America/Mexico_City
+template_engine: erb
 # pagination:
 #   enabled: true
 svg:

@@ -17,6 +17,7 @@ module.exports = {
         DEFAULT: {
           css: {
             a: {
+              color: theme("colors.green.600"),
               "&:hover": {
                 color: theme("colors.green.500"),
               },
@@ -33,11 +34,17 @@ module.exports = {
             thead: {
               color: theme("colors.green.600"),
             },
+            pre: {
+              backgroundColor: "#282828",
+            },
           },
         },
       }),
     },
   },
   variants: {},
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("tailwindcss-debug-screens"),
+  ],
 }

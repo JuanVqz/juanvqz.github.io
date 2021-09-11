@@ -1,4 +1,4 @@
-{% for account in metadata.accounts %}
+{% for account in accounts %}
   <a href="{{ account[1].url }}" target="_brank" class="hover:fill-current {{ account[1].color }}">
     {% svg "images/{{ account[0] }}.svg", width: "24" %}
   </a>

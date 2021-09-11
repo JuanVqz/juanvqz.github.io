@@ -1,0 +1,8 @@
+<footer class="flex flex-col p-4 md:flex-row justify-evenly md:p-6">
+  <div class="flex flex-row justify-around py-6 md:space-x-6">
+    <%= liquid_render "account_links", accounts: metadata.accounts %>
+  </div>
+  <div class="flex justify-center py-6">
+    <div>Hecho con ❤️  en <a href="<%= metadata.generator.url %>" class="font-bold text-green-600 hover:text-gray-200" target="_blank"> <%= metadata.generator.name %></a></div>
+  </div>
+</footer>

@@ -1,0 +1,10 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="<%= metadata.description %>" />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title><%= "#{title} | #{metadata.title}" %></title>
+<%= feed_meta %>
+
+<link rel="stylesheet" href="<%= webpack_path :css %>" />
+<script src="<%= webpack_path :js %>" defer></script>

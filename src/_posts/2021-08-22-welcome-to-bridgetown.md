@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Welcome to Bridgetownrb"
-created_at: 2021-08-22 15:54:51 -0500
+data: 2021-08-22 15:54:51 -0500
 updated_at: 2021-08-22 15:54:51 -0500
-tags: [bridgetownrb]
+categories: [bridgetown]
 ---
 
 You’ll find this post in your **\_posts** directory.

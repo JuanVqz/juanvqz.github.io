@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "New Relic para resolver errores de JavaScript"
-created_at: 2021-09-07 08:30:51 -0500
+data: 2021-09-07 08:30:51 -0500
 updated_at: 2021-09-07 08:30:51 -0500
-tags: [diario, javascript]
+categories: [diario, javascript]
 ---
 
 La semana pasada estuvimos limpiando errores de javascript con la ayuda de New Relic.

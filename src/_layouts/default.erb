@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <%= render "head", metadata: site.data.site_metadata, title: page.data.title %>
+  </head>
+  <body class="<%= class_map "debug-screens": Bridgetown.env.development? %> container flex flex-col min-h-screen mx-auto text-gray-200 bg-gray-700">
+    <%= render "navbar", metadata: site.data.site_metadata %>
+
+    <main class="flex-1 p-4 md:p-6">
+      <%= yield %>
+    </main>
+
+    <%= render "footer", metadata: site.data.site_metadata %>
+  </body>
+</html>

@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Contribución en localtunnel, libreria de javascript"
-created_at: 2021-09-10 12:30:51 -0500
+data: 2021-09-10 12:30:51 -0500
 updated_at: 2021-09-10 12:30:51 -0500
-tags: [contribución, javascript]
+categories: [contribución, javascript]
 ---
 
 Gracias GitHub!!!
