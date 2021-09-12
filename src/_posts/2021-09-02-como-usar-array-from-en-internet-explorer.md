@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Hoy aprendí que Internet Explorer no soporta Array.from"
-data: 2021-09-02 08:30:51 -0500
+date: 2021-09-02 08:30:51 -0500
 updated_at: 2021-09-02 08:30:51 -0500
 categories: [diario, javascript]
 ---
