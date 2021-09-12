@@ -21,4 +21,5 @@ gem "bridgetown", "~> 0.21.3"
 group :bridgetown_plugins do
   gem "bridgetown-feed"
   gem "bridgetown-svg-inliner"
+  gem "bridgetown-cloudinary", "~> 1.2"
 end

@@ -25,3 +25,6 @@ template_engine: erb
 #   enabled: true
 svg:
   optimize: true
+
+cloudinary:
+  cloud_name: juanvqz
