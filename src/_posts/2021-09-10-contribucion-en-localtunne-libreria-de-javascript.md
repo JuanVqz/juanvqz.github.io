@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Contribución en localtunnel, libreria de javascript"
-data: 2021-09-10 12:30:51 -0500
+date: 2021-09-10 12:30:51 -0500
 updated_at: 2021-09-10 12:30:51 -0500
 categories: [contribución, javascript]
 ---

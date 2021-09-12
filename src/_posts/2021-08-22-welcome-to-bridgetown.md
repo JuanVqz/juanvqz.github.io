@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Welcome to Bridgetownrb"
-data: 2021-08-22 15:54:51 -0500
+date: 2021-08-22 15:54:51 -0500
 updated_at: 2021-08-22 15:54:51 -0500
 categories: [bridgetown]
 ---
