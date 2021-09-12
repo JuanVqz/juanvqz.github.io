@@ -1,6 +1,6 @@
 # [juanvasquez.dev](https://juanvasquez.dev) 🤘
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e2e802fd-44ea-412c-9565-38e9a31b516b/deploy-status)](https://app.netlify.com/sites/juanvqz/deploys)
+![Vercel Deploy](https://vercelbadge.vercel.app/api/JuanVqz/juanvqz.github.io?style=flat-square)
 
 ## Tabla de contenido 📑
 
