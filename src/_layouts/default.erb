@@ -3,7 +3,7 @@
   <head>
     <%= render "head", metadata: site.data.site_metadata, title: page.data.title %>
   </head>
-  <body class="<%= 'debug-screens' if Bridgetown.environment == 'development' %> container flex flex-col min-h-screen mx-auto text-gray-200 bg-gray-700">
+  <body class="<%= 'debug-screens' if Bridgetown.environment == 'development' %> container flex flex-col min-h-screen mx-auto text-gray-200 bg-gray-700 font-serif">
     <%= render "navbar", metadata: site.data.site_metadata %>
 
     <main class="flex-1 p-4 md:p-6">
