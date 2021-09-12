@@ -12,7 +12,7 @@
 - [Despliegue](#despliegue)
 - [Autor](#autor)
 
-## Descripción
+## Descripción ✍
 
 Esta es mi **página personal** donde me gusta escribir acerca de tecnologías web como **Ruby** y **Javascript**, obviamente lo que esto conlleva es hablar sobre **Ruby on Rails**, gemas interesantes, **Node.js**, React y mucho más.
 
@@ -22,7 +22,7 @@ Si te interesa Bridgetown no dudes en tomar código de aquí y si tienes dudas e
 
 > Leer más: [acerca de Bridgetown](https://www.bridgetownrb.com/docs/).
 
-## Requisitos
+## Requisitos 👩‍🔧
 
 - [Ruby](https://www.ruby-lang.org/en/downloads/)
   - `>= 2.7`
@@ -32,7 +32,7 @@ Si te interesa Bridgetown no dudes en tomar código de aquí y si tienes dudas e
   - `>= 10.13`
 - [Yarn](https://yarnpkg.com)
 
-## Instalación
+## Instalación 🔥
 
 ```sh
 git clone git@github.com:JuanVqz/juanvqz.github.io.git
@@ -42,11 +42,11 @@ cd juanvqz.github.io
 bundle install && yarn install
 ```
 
-## Desarrollo
+## Desarrollo 📝
 
 Para iniciar el servidor ejecuta **yarn start** y navega hacia [localhost:4000](https://localhost:4000/)!
 
-### Commandos
+### Comandos ⌨
 
 ```sh
 # running locally
@@ -59,12 +59,29 @@ yarn deploy
 bundle exec bridgetown console
 ```
 
-## Despliegue
+## Despliegue 🚀
+
+> El despliegue en GitHub Actions es solo para ejemplo, por el momento estoy usando vercel como despliegue principal.
 
 Utilizo [GitHub Actions](https://github.com/andrewmcodes/bridgetown-gh-pages-action) para ejecutar el comando (yarn deploy) de despliegue.
 
 Utilizo la rama **gh-pages** para el despliegue de los archivos estaticos.
 
-## Autor
+## Extras
 
-🇲🇽 [@juanvqz\_](https://twitter.com/juanvqz_)
+### Cloudinary
+
+Para utiliza [Cloudinary](https://cloudinary.com/) solo necesitas una cuenta (tiene con un plan gratuito) y configurar [bridgetown-cloudinary.](https://github.com/bridgetownrb/bridgetown-cloudinary)
+
+```ruby
+
+---
+cloudinary_id: "blog/image"
+---
+
+<img alt="<%= page.data.title %>" src="<%= cloudinary_url page.data.cloudinary_id, :medium %>" />
+```
+
+## Autor 🇲🇽
+
+[@juanvqz\_](https://twitter.com/juanvqz_)

@@ -3,12 +3,15 @@ layout: post
 title: "Contribución en localtunnel, libreria de javascript"
 date: 2021-09-10 12:30:51 -0500
 updated_at: 2021-09-10 12:30:51 -0500
+cloudinary_id: "blog/2021-09-10/dependabot_rnncdz"
 categories: [contribución, javascript]
 ---
 
 Gracias GitHub!!!
 
-GitHub reportó una vulnerabilidad de seguridad 🙈 en mi repositorio de [juanvqz.github.io]({{site.url}}) (este blog) el cual está relacionado con axios.
+GitHub reportó una vulnerabilidad de seguridad 🙈 en mi repositorio de [juanvqz.github.io](https:/www.juanvasquez.dev) (este blog) el cual está relacionado con axios.
+
+![<%= page.data.title %>](<%= cloudinary_url page.data.cloudinary_id, :medium %>)
 
 > Axios, Promise based HTTP client for the browser and node.js
 

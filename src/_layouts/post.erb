@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<div class="text-center">
+  <h1 class="text-xl font-bold md:text-2xl"><%= page.data.title %></h1>
+
+  <div class="flex flex-wrap justify-center py-4">
+    <div class="flex flex-row">
+      <% page.data.categories.each do |tag|%>
+        <div class="mr-1"><%= tag.capitalize %></div>
+      <% end %>
+    </div>
+    <div>| <%= date_to_string page.data.date, :ordinal %></div>
+  </div>
+</div>
+
+<div class="mx-auto mt-8 text-white prose prose-xl prose-green">
+  <%= markdownify content %>
+
+  <p class="text-base text-right opacity-70">última actualización <%= date_to_string page.data.updated_at %></p>
+</div>
