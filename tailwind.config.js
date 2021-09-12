@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme")
+
 module.exports = {
   purge: {
     enabled: process.env.NODE_ENV === "production",
@@ -12,6 +14,11 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      sans: [...defaultTheme.fontFamily.sans],
+      serif: ["Rubik", ...defaultTheme.fontFamily.serif],
+      mono: [...defaultTheme.fontFamily.mono],
+    },
     extend: {
       typography: (theme) => ({
         DEFAULT: {
