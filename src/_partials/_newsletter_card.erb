@@ -1,0 +1,43 @@
+<div id="revue-embed" class="w-full p-4 text-gray-900 bg-gray-200 rounded shadow-2xl md:p-8 lg:w-2/3 xl:w-1/2">
+  <h2 class="mb-4 text-xl font-medium text-green-600 md:text-2xl">¿Quieres recibir noticias y actualizaciones?</h2>
+
+  <form action="https://www.getrevue.co/profile/juanvqz_/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank" class="space-y-4">
+    <div class="block">
+      <label class="block mb-2 font-bold text-gray-600" for="member_email">Correo Electrónico</label>
+      <input type="email"
+             name="member[email]"
+             id="member_email"
+             class="block w-full p-3 border-2 border-gray-200 rounded outline-none focus:border-blue-400"
+             required="required"
+             placeholder="kenia@gmail.com">
+    </div>
+    <div class="revue-form-group">
+      <label class="block mb-2 font-bold text-gray-600" for="member_first_name">Nombre <span class="text-xs">(Opcional)</span></label>
+      <input type="email"
+             name="member[first_name]"
+             id="member_first_name"
+             class="block w-full p-3 border-2 border-gray-200 rounded outline-none focus:border-blue-400"
+             placeholder="Kenia">
+    </div>
+    <div class="revue-form-group">
+      <label class="block mb-2 font-bold text-gray-600" for="member_last_name">Apellido <span class="text-xs">(Opcional)</span></label>
+      <input type="email"
+             name="member[last_name]"
+             id="member_last_name"
+             class="block w-full p-3 border-2 border-gray-200 rounded outline-none focus:border-blue-400"
+             placeholder="Pérez">
+    </div>
+    <div class="revue-form-actions">
+      <input type="submit"
+             value="Suscribirme"
+             name="member[subscribe]"
+             id="member_submit"
+             class="block w-full p-4 text-white bg-green-700 hover:text-gray-200 hover:bg-green-600 transition duration-300">
+    </div>
+    <div class="text-sm text-gray-600 revue-form-footer">
+      Al subscribirte, aceptas los <a href="https://www.getrevue.co/terms" class="text-green-600" target="_blank">terminos</a>
+      y las <a href="https://www.getrevue.co/privacy" class="text-green-600" target="_blank">politicas de privacidad </a>
+      de <a href="https://www.getrevue.co" class="text-green-600" target="_blank">Revue.</a>
+    </div>
+  </form>
+</div>
