@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Reemplazo de Byebug por Debug 🔥🐛"
+title: "Reemplazo de Byebug por Debug en Ruby on Rails 🔥🐛"
 date: 2021-09-13 07:30:00 -0500
 updated_at: 2021-09-13 07:30:00 -0500
 categories: [thisweekinrails]
