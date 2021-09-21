@@ -8,10 +8,6 @@
 
     <main class="flex-1 p-4 md:p-6">
       <%= yield %>
-
-      <div class="flex flex-row justify-center my-8">
-        <%= render "newsletter_card" %>
-      </div>
     </main>
 
     <%= render "footer", metadata: site.data.site_metadata %>
