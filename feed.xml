@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="0.21.3">Bridgetown</generator><link href="https://juanvasquez.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juanvasquez.dev/" rel="alternate" type="text/html" /><updated>2021-09-21T17:11:23+00:00</updated><id>https://juanvasquez.dev/feed.xml</id><title type="html">Juan Vásquez</title><subtitle>Hola, ¡qué onda! Soy Juan Vásquez. En este espacio encontrarás artículos relacionados al desarrollo web en su mayoría en lenguajes de programación como Ruby y JavaScript. Si te interesa no dudes en agregarme a tu RSS favorito y te estarán llegando los artículos cada que escriba algo nuevo. Cuando gustes contactarme búscame en twitter como @juanvqz_</subtitle><author><name>Juan Vásquez</name></author><entry><title type="html">Se liberó la versión 4.1.2 de Alacritty Themes</title><link href="https://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/09/21/alacritty-themes-4-1-2-release/" rel="alternate" type="text/html" title="Se liberó la versión 4.1.2 de Alacritty Themes" /><published>2021-09-21T15:54:51+00:00</published><updated>2021-09-21T15:54:51+00:00</updated><id>https://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/09/21/alacritty-themes-4-1-2-release</id><content type="html" xml:base="https://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/09/21/alacritty-themes-4-1-2-release/">&lt;p&gt;Recuerdan que unos días atrás publiqué un artículo donde comencé a &lt;a href=&quot;http://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/08/27/primera-contribucion-en-el-repositorio-alacritty-themes/&quot;&gt;contribuir&lt;/a&gt; al proyecto de &lt;strong&gt;Alacritty-Themes&lt;/strong&gt;, bueno a partir de ahí muchas cosas han pasado.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://github.com/rajasegar/alacritty-themes/releases/tag/v4.1.2&quot;&gt;Alacritty-Themes versión 4.1.2&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rajasegar&quot;&gt;Rajasejar Chandran&lt;/a&gt; el creador de este paquete me invitó a ser parte del proyecto
+y apartir de ahí &lt;strong&gt;unimos&lt;/strong&gt; esfuerzos para resolver algunos problemas que se habían tenido en la librería,
+sin duda, el &lt;strong&gt;más importante&lt;/strong&gt; que se resolvió era el hecho que cuando se actualizaba
+el archivo &lt;strong&gt;alacritty.yml&lt;/strong&gt; del usuario se borraban &lt;strong&gt;TODOS&lt;/strong&gt; los comentarios que el usuario tenía en su archivo &lt;strong&gt;YAML&lt;/strong&gt; y esta liberación arregla eso.&lt;/p&gt;
+
+&lt;h3 id=&quot;te-invito-a-probar-alacritty-themes-&quot;&gt;&lt;a href=&quot;https://github.com/rajasegar/alacritty-themes&quot;&gt;Te invito a probar Alacritty-Themes 🌈😍&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://res.cloudinary.com/juanvqz/image/upload/w_1200,c_limit,q_80/v1/blog/2021-09-21/invitation_alacritty_themes_fe7rcx.jpg&quot; alt=&quot;Se liberó la versión 4.1.2 de Alacritty Themes&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;espero seguir contribuyendo en este proyecto pues me agrada mucho! 🚀&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><summary type="html">Recuerdan que unos días atrás publiqué un artículo donde comencé a contribuir al proyecto de Alacritty-Themes, bueno a partir de ahí muchas cosas han pasado.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/juanvqz/image/upload/c_fill,g_face:center,w_1600,h_900,q_50/v1/blog/2021-09-21/invitation_alacritty_themes_fe7rcx.jpg" /><media:content medium="image" url="https://res.cloudinary.com/juanvqz/image/upload/c_fill,g_face:center,w_1600,h_900,q_50/v1/blog/2021-09-21/invitation_alacritty_themes_fe7rcx.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Reemplazo de Byebug por Debug 🔥🐛</title><link href="https://juanvasquez.dev/thisweekinrails/2021/09/13/reemplazo-de-byebug-por-debug-rb/" rel="alternate" type="text/html" title="Reemplazo de Byebug por Debug 🔥🐛" /><published>2021-09-13T12:30:00+00:00</published><updated>2021-09-13T12:30:00+00:00</updated><id>https://juanvasquez.dev/thisweekinrails/2021/09/13/reemplazo-de-byebug-por-debug-rb</id><content type="html" xml:base="https://juanvasquez.dev/thisweekinrails/2021/09/13/reemplazo-de-byebug-por-debug-rb/">&lt;blockquote&gt;
+  &lt;p&gt;Desde que conozco Ruby on Rails incluye la gema de Bye Bug 😥 claro, tiene más de 7 años que fue introducido al Gemfile de Ruby on Rails.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;El Pull Request &lt;a href=&quot;https://github.com/rails/rails/pull/43187&quot;&gt;Depend on ruby/debug, replacing Byebug&lt;/a&gt; que nos brindó la información.&lt;/p&gt;
+
+&lt;p&gt;Creo que la pregunta obligada es ¿Por qué se remueve la gema de byebug?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Byebug y Zeitwerk no son &lt;a href=&quot;https://github.com/deivid-rodriguez/byebug/issues/564&quot;&gt;totalmente compatibles&lt;/a&gt;. Eso sí, eso no es un error de ninguna de las gemas, es una limitación técnica.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;En Ruby 3.1 está previsto que la depuración se envíe con &lt;strong&gt;debug.rb&lt;/strong&gt; y este cambio alinea Rails con Ruby.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;dato-histórico&quot;&gt;Dato histórico&lt;/h4&gt;
+
+&lt;p&gt;El &lt;em&gt;08 de Abril del 2014&lt;/em&gt; se creó el &lt;a href=&quot;https://github.com/rails/rails/pull/14646&quot;&gt;Pull Request&lt;/a&gt; para introducir Bye Bug en Ruby on Rails pero fue hasta el 11 de Abril del 2014 que se hizo merge.&lt;/p&gt;
+
+&lt;h4 id=&quot;adios-bye-bug&quot;&gt;Adios Bye Bug&lt;/h4&gt;
+
+&lt;p&gt;¿Qué es Bye Bug? En palabras de la misma gema.&lt;/p&gt;
+
+&lt;p&gt;Byebug es un &lt;strong&gt;depurador&lt;/strong&gt; rico en funciones y fácil de usar para Ruby. Utiliza la API de TracePoint para el control de ejecución y la API del inspector de depuración para la navegación de la pila de llamadas. Por lo tanto, Byebug no depende de fuentes centrales internas. Byebug también es rápido porque está desarrollado como una extensión de C y confiable porque es compatible con un conjunto de pruebas completo.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/deivid-rodriguez/byebug&quot;&gt;Saber más de Byebug&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;hola-debug&quot;&gt;Hola Debug&lt;/h4&gt;
+
+&lt;p&gt;debug.rb proporciona funcionalidad de depuración a Ruby&lt;/p&gt;
+
+&lt;p&gt;Ventajas&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Rápido:&lt;/strong&gt; Sin penalización de rendimiento en el modo sin pasos y sin puntos de interrupción.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Depuración remota:&lt;/strong&gt; Admite la depuración remota de forma nativa.
+Socket de dominio UNIX
+TCP / IP
+Integración VSCode / DAP (VSCode rdbg Ruby Debugger - Visual Studio Marketplace)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Extensible:&lt;/strong&gt; La aplicación puede introducir soporte de depuración de varias formas:
+Por comando rdbg
+Al cargar bibliotecas con la opción de línea de comando -r
+Al llamar al método de Ruby explícitamente&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Entre otras cosas&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Hilos de soporte (casi terminado) y ractores (TODO).&lt;/li&gt;
+  &lt;li&gt;Admite suspender e ingresar a la consola de depuración con Ctrl-C en la mayor parte del tiempo.&lt;/li&gt;
+  &lt;li&gt;Mostrar parámetros en el comando backtrace.&lt;/li&gt;
+  &lt;li&gt;Admite depuración de grabación y respuesta.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ruby/debug&quot;&gt;Saber más de Debug&lt;/a&gt;&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><summary type="html">Desde que conozco Ruby on Rails incluye la gema de Bye Bug 😥 claro, tiene más de 7 años que fue introducido al Gemfile de Ruby on Rails.</summary></entry><entry><title type="html">Contribución en localtunnel, libreria de javascript</title><link href="https://juanvasquez.dev/contribuci%C3%B3n/javascript/2021/09/10/contribucion-en-localtunne-libreria-de-javascript/" rel="alternate" type="text/html" title="Contribución en localtunnel, libreria de javascript" /><published>2021-09-10T17:30:51+00:00</published><updated>2021-09-10T17:30:51+00:00</updated><id>https://juanvasquez.dev/contribuci%C3%B3n/javascript/2021/09/10/contribucion-en-localtunne-libreria-de-javascript</id><content type="html" xml:base="https://juanvasquez.dev/contribuci%C3%B3n/javascript/2021/09/10/contribucion-en-localtunne-libreria-de-javascript/">&lt;p&gt;Gracias GitHub!!!&lt;/p&gt;
+
+&lt;p&gt;GitHub reportó una vulnerabilidad de seguridad 🙈 en mi repositorio de &lt;a href=&quot;https:/www.juanvasquez.dev&quot;&gt;juanvqz.github.io&lt;/a&gt; (este blog) el cual está relacionado con axios.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://res.cloudinary.com/juanvqz/image/upload/w_1200,c_limit,q_80/v1/blog/2021-09-10/dependabot_rnncdz.jpg&quot; alt=&quot;Contribución en localtunnel, libreria de javascript&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Axios, Promise based HTTP client for the browser and node.js&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lo cual fue curioso porque hasta donde sabía no estaba usando axios en mi blog, por lo tanto me di a la tarea de actualizar las &lt;strong&gt;dependencias&lt;/strong&gt; que tan difícil podía ser ejecutar &lt;strong&gt;yarn upgrade&lt;/strong&gt; y después ver si todo sigue funcionando.&lt;/p&gt;
+
+&lt;p&gt;Después de ejecutar el comando y viendo el git diff, &lt;strong&gt;axios seguía desactualizado&lt;/strong&gt;, entonces entre a yarn.lock el cual contiene la versión exacta de tus dependencias que se encuentran en el package.json y ahí me di cuenta que efectivamente Axios no era una dependencia directa de mi blog, era una dependencia de una dependencia llamada &lt;a href=&quot;https://github.com/localtunnel/localtunnel&quot;&gt;local tunnel&lt;/a&gt; 😂.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;localtunnel exposes your localhost to the world for easy testing and sharing! No need to mess with DNS or deploy just to have others test out your changes.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Así que abrí un &lt;a href=&quot;https://github.com/localtunnel/localtunnel/pull/432&quot;&gt;Pull Request&lt;/a&gt; en el repositorio de local tunnel y estamos en espera de que sea aceptado o rechazado, que por cierto, ya tiene dos comentarios apoyando que incluyan la solución en el repositorio.&lt;/p&gt;
+
+&lt;p&gt;Más adelante haré una actualización en este artículo indicando que paso con el Pull Request o igual y hago otro artículo. ya veremos!!&lt;/p&gt;
+
+&lt;h4 id=&quot;dato-curioso-yarn-no-tiene-un-comando-para-actualizar-las-dependencias-en-segundo-nivel-al-menos-no-lo-encontre-si-conoces-el-comando-estaria-bueno-que-lo-compartas&quot;&gt;Dato curioso, yarn no tiene un comando para actualizar las dependencias en segundo nivel, al menos no lo encontre, si conoces el comando estaria bueno que lo &lt;a href=&quot;https://github.com/JuanVqz/juanvqz.github.io/discussions&quot;&gt;compartas.&lt;/a&gt;&lt;/h4&gt;</content><author><name>Juan Vásquez</name></author><summary type="html">Gracias GitHub!!!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/juanvqz/image/upload/c_fill,g_face:center,w_1600,h_900,q_50/v1/blog/2021-09-10/dependabot_rnncdz.jpg" /><media:content medium="image" url="https://res.cloudinary.com/juanvqz/image/upload/c_fill,g_face:center,w_1600,h_900,q_50/v1/blog/2021-09-10/dependabot_rnncdz.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">New Relic para resolver errores de JavaScript</title><link href="https://juanvasquez.dev/diario/javascript/2021/09/07/new-relic-para-resolver-errores-de-javascript/" rel="alternate" type="text/html" title="New Relic para resolver errores de JavaScript" /><published>2021-09-07T13:30:51+00:00</published><updated>2021-09-07T13:30:51+00:00</updated><id>https://juanvasquez.dev/diario/javascript/2021/09/07/new-relic-para-resolver-errores-de-javascript</id><content type="html" xml:base="https://juanvasquez.dev/diario/javascript/2021/09/07/new-relic-para-resolver-errores-de-javascript/">&lt;p&gt;La semana pasada estuvimos limpiando errores de javascript con la ayuda de New Relic.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;New Relic One: Una plataforma de observabilidad sencilla pero potente.
+Detectar, corregir y prevenir.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;New Relic&lt;/strong&gt; se encarga de &lt;strong&gt;monitorear&lt;/strong&gt; la aplicación web y nos da reportes o estadísticas del trazado de sesiones, cuales son las páginas más visitadas, las páginas con reportes de errores, el tiempo de carga de las páginas, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Hoy&lt;/strong&gt; hablaré del apartado de errores de Javascript, prácticamente New Relic te regresa un &lt;strong&gt;listado de errores&lt;/strong&gt; que han sido &lt;strong&gt;recurrentes&lt;/strong&gt; en las últimas horas o los últimos días, puedes configurarlo a través de un selector de fecha y hora.&lt;/p&gt;
+
+&lt;p&gt;Una vez &lt;strong&gt;seleccionado&lt;/strong&gt; el error que quieres &lt;strong&gt;solucionar&lt;/strong&gt; te dará más detalles de dicho error:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;El mensaje de error&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Hasta ahora el mensaje de error es muy descriptivo y eso ayuda a tener una clara idea de como solucionar el error, pongamos de ejemplo el siguiente caso.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;Cannot&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;read&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;checked&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;La fecha de la primera vez que se vio el error en el sistema (Hace 2 días).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;El porcentaje de errores que representa (0.5%).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Descripcion general.&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;El nombre del navegador donde ocurrió el incidente, incluso la version del navegador.&lt;/p&gt;
+
+        &lt;p&gt;&lt;em&gt;Chrome, Firefox, IE, Edge, Safari&lt;/em&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;El tipo de dispositivo.&lt;/p&gt;
+
+        &lt;p&gt;&lt;em&gt;Escritorio o Móvil&lt;/em&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;El sistema operativo del dispositivo.&lt;/p&gt;
+
+        &lt;p&gt;&lt;em&gt;iOS, Android, Windows 10, Windows XP&lt;/em&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;La &lt;strong&gt;ruta de la petición&lt;/strong&gt; donde se detectó el error.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;para-concluir-me-gustaría-comentar-que-he-encontrado-que-los-errores-de-javascript-ocurren-por-3-principales-razones&quot;&gt;Para concluir me gustaría comentar que he encontrado que los errores de javascript ocurren por 3 principales razones.&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;No &lt;strong&gt;minificar&lt;/strong&gt; el Javascript y contar con un archivo .map&lt;/li&gt;
+  &lt;li&gt;El &lt;strong&gt;orden de carga&lt;/strong&gt; de los archivos, por ejemplo cuando usamos el Framework CSS Bootstrap, tenemos que cargar jquery (hasta ahora) y después el Javascript de Bootstrap de lo contrario es muy probable que el Javascript Bootstrap no funcione.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Compatibilidad&lt;/strong&gt; con navegadores, por lo regular siempre es IE el malo del cuento.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Creo que si usas Heroku puedes instalar New Relic de forma gratuita, no estaría mal echarle un ojo, verdad? te invito a que lo hagas.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Mas informancion acerca de &lt;a href=&quot;https://newrelic.com/es/resources/datasheets/new-relic-one&quot;&gt;New Relic&lt;/a&gt;&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><summary type="html">La semana pasada estuvimos limpiando errores de javascript con la ayuda de New Relic.</summary></entry><entry><title type="html">¿Cuál es la diferencia entre append y appendChild en JavaScript?</title><link href="https://juanvasquez.dev/diario/javascript/2021/09/03/diferencia-entre-append-y-append-child-en-javascript/" rel="alternate" type="text/html" title="¿Cuál es la diferencia entre append y appendChild en JavaScript?" /><published>2021-09-03T12:30:51+00:00</published><updated>2021-09-03T12:30:51+00:00</updated><id>https://juanvasquez.dev/diario/javascript/2021/09/03/diferencia-entre-append-y-append-child-en-javascript</id><content type="html" xml:base="https://juanvasquez.dev/diario/javascript/2021/09/03/diferencia-entre-append-y-append-child-en-javascript/">&lt;p&gt;Pa pronto es tarde!&lt;/p&gt;
+
+&lt;p&gt;La diferencia entre &lt;strong&gt;append&lt;/strong&gt; y &lt;strong&gt;appendChild&lt;/strong&gt; es que append &lt;strong&gt;acepta&lt;/strong&gt; cadenas de &lt;strong&gt;texto&lt;/strong&gt; y &lt;strong&gt;nodos&lt;/strong&gt; (o elementos del DOM) y &lt;strong&gt;appendChild&lt;/strong&gt; solo acepta nodos.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Some text&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;childNodes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// NodeList [ #text &quot;Some text&quot;, &amp;lt;p&amp;gt; ]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;La mayoría de los navegadores ya soporta append pero &lt;strong&gt;no&lt;/strong&gt; en el caso de navegadores que no estén actualizados, como &lt;strong&gt;Internet Explorer&lt;/strong&gt; 🐒.&lt;/p&gt;
+
+&lt;p&gt;Este &lt;strong&gt;error&lt;/strong&gt; es el que verás en navegadores sin soporte de &lt;strong&gt;append&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;doesn&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;t support property or method &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Si lo que deseas es agregar un &lt;strong&gt;Node&lt;/strong&gt; solo cambia de &lt;strong&gt;append&lt;/strong&gt; a &lt;strong&gt;appendChild&lt;/strong&gt;, para más información puedes revisar la &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Element/append&quot;&gt;documentación.&lt;/a&gt;&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><summary type="html">Pa pronto es tarde!</summary></entry><entry><title type="html">Hoy aprendí que Internet Explorer no soporta Array.from</title><link href="https://juanvasquez.dev/diario/javascript/2021/09/02/como-usar-array-from-en-internet-explorer/" rel="alternate" type="text/html" title="Hoy aprendí que Internet Explorer no soporta Array.from" /><published>2021-09-02T13:30:51+00:00</published><updated>2021-09-02T13:30:51+00:00</updated><id>https://juanvasquez.dev/diario/javascript/2021/09/02/como-usar-array-from-en-internet-explorer</id><content type="html" xml:base="https://juanvasquez.dev/diario/javascript/2021/09/02/como-usar-array-from-en-internet-explorer/">&lt;p&gt;Ni Microsoft quiere a Internet Explorer, LOL.&lt;/p&gt;
+
+&lt;p&gt;Cuando recién abrí Internet Explorer me salto una ventana invitándome a cambiarme al navegador &lt;strong&gt;Edge&lt;/strong&gt; lo cual me confirma que ya quedará en el olvido hasta por el mismo Microsoft.&lt;/p&gt;
+
+&lt;p&gt;Bueno, en la &lt;strong&gt;chamba&lt;/strong&gt; usamos selectores &lt;strong&gt;document.querySelector&lt;/strong&gt; por si no sabias eso regresa una coleccion de tipo &lt;strong&gt;NodeList&lt;/strong&gt; y esa colección no es capaz de utilizar el método &lt;strong&gt;map&lt;/strong&gt; que le pertenece a la “clase” &lt;strong&gt;Array&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.class&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// NodeList(2) [&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//  div.class,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//  div.class&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Entonces para poder usar el método &lt;strong&gt;map&lt;/strong&gt; en esa &lt;strong&gt;colección&lt;/strong&gt; usamos &lt;strong&gt;Array.from&lt;/strong&gt; para convertir la colección de NodeList a un array común y corriente.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.class&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//(2) [&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//  div.class,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//  div.class&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;pero Internet Explorer no lo soporta por lo tanto tienes dos opciones usar el &lt;a href=&quot;https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/from#polyfill&quot;&gt;polifill&lt;/a&gt; o usar &lt;a href=&quot;https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/slice&quot;&gt;slice&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;slice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.class&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Espero que te ayude, saludos!&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><summary type="html">Ni Microsoft quiere a Internet Explorer, LOL.</summary></entry><entry><title type="html">¿Cómo instalar bridgetown-svg-inliner en Bridgetown?</title><link href="https://juanvasquez.dev/bridgetown/2021/09/01/como-instalar-bridgetown-svg-inliner-en-bridgetownrb/" rel="alternate" type="text/html" title="¿Cómo instalar bridgetown-svg-inliner en Bridgetown?" /><published>2021-09-01T13:30:51+00:00</published><updated>2021-09-01T13:30:51+00:00</updated><id>https://juanvasquez.dev/bridgetown/2021/09/01/como-instalar-bridgetown-svg-inliner-en-bridgetownrb</id><content type="html" xml:base="https://juanvasquez.dev/bridgetown/2021/09/01/como-instalar-bridgetown-svg-inliner-en-bridgetownrb/">&lt;p&gt;Esto se arma de dos patadas!&lt;/p&gt;
+
+&lt;p&gt;La verdad la tarea es muy sencilla si has usado ruby on rails seguramente ya sabes como instalar gemas en un archivo Gemfile, es exactamente igual, te enumero los pasos.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;NOTA:
+Mucho cuidado!
+Existe otra gema llamada &lt;a href=&quot;https://github.com/andrewmcodes/bridgetown-inline-svg#readme&quot;&gt;bridgetown-inline-svg&lt;/a&gt; pero ya esta en &lt;strong&gt;Modo de Mantenimiento&lt;/strong&gt; así que no es recomendable usarla.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;La gema que estamos usando es la siguiente &lt;a href=&quot;https://github.com/ayushn21/bridgetown-svg-inliner&quot;&gt;bridgetown-svg-inliner&lt;/a&gt;, tiene compatibilidad con la ultima versión de Bridgetown y la licencia es &lt;strong&gt;MIT&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Agrega la gema a tu Gemfile&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:bridgetown_plugins&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;bridgetown-svg-inliner&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Ejecuta &lt;strong&gt;bundle install&lt;/strong&gt; en la terminal.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;c&quot;&gt;# el la carpeta principal, en mi caso es juanvqz.github.io&lt;/span&gt;
+  bundle &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Listo! ya puedes usar archivos svg desde una etiqueta svg, mira!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;!--  formato liquid --&amp;gt;
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;svg&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;images/github.svg&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# formato erb&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;%= svg &quot;images/youtube.svg&quot; %&amp;gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;NOTA: Si copia el código anterior, remover el símbolo de gato.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;No es necesario usar la ruta completa desde la raiz del projecto, basta con la ruta relativa que apunta a la carpeta de imagenes que proporciona Bridgetown por default en:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;proyecto/src/images
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Para información más detallada revisa el &lt;a href=&quot;https://github.com/ayushn21/bridgetown-svg-inliner#installation&quot;&gt;README&lt;/a&gt; de la gema, por favor.&lt;/p&gt;
+
+&lt;p&gt;Sin mas por el momento me despudo de Usted, Don Joaquin!&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><summary type="html">Esto se arma de dos patadas!</summary></entry><entry><title type="html">Hice mi primera contribución en el código de alacritty-themes</title><link href="https://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/08/28/primera-contribucion-en-el-repositorio-alacritty-themes/" rel="alternate" type="text/html" title="Hice mi primera contribución en el código de alacritty-themes" /><published>2021-08-28T02:54:51+00:00</published><updated>2021-08-28T02:54:51+00:00</updated><id>https://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/08/28/primera-contribucion-en-el-repositorio-alacritty-themes</id><content type="html" xml:base="https://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/08/28/primera-contribucion-en-el-repositorio-alacritty-themes/">&lt;p&gt;En tiempos de COVID el tiempo pasa muy rapido!!!&lt;/p&gt;
+
+&lt;p&gt;Hoy me doy cuenta que el tiempo pasa muy rápido pues ya tengo más de un año utilizando la terminal &lt;strong&gt;alacritty&lt;/strong&gt;, la cual la he encontrado muy efectiva pues me gusta la forma en que se configura con un simple archivo yaml.&lt;/p&gt;
+
+&lt;p&gt;Sin embargo, a pesar de ser usuario de alacritty siempre buscaba los colores repositorio por repositorio después los copiaba y pegaba aveces los comentaba por si quería regresar al color anterior 🤯 pensándolo bien un poco desastroso el asunto.&lt;/p&gt;
+
+&lt;p&gt;No hace mucho me di a la tarea de buscar una mejor solución para administrar mis colores en alacritty y encontré el &lt;strong&gt;alacritty-themes&lt;/strong&gt; ❤️, el cual te facilita el acceso a más de 100 colores distintos, teniendo la capacidad de cambiarlos &lt;strong&gt;en tiempo real&lt;/strong&gt; desde la terminal, es decir no tienes que ir al archivo de &lt;strong&gt;~/.config/alacritty.yml&lt;/strong&gt; a cambiar el color 👏.&lt;/p&gt;
+
+&lt;p&gt;Después de un tiempo usándolo me dio curiosidad en que lenguaje está escrito yo apostaba que era un script de bash pero ¡oh sorpresa¡ está escrito en &lt;strong&gt;javascript&lt;/strong&gt; bueno para ser precisos en &lt;strong&gt;node.js&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Entonces comencé a ver el código y observé que tenía posibles lugares para contribuir, sin más, hice la copia del repositorio y realice un cambio sencillo.&lt;/p&gt;
+
+&lt;p&gt;Existía un archivo llamado &lt;strong&gt;test.js&lt;/strong&gt; en la carpeta de &lt;strong&gt;tests&lt;/strong&gt; y hasta donde conozco, la convención para pruebas debería ser:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Archivo a ser probado&lt;/th&gt;
+      &lt;th&gt;Archivo de prueba&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;src/index.js&lt;/td&gt;
+      &lt;td&gt;test/index.test.js&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;src/helpers/locations.js&lt;/td&gt;
+      &lt;td&gt;test/helpers/locations.test.js&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;src/components/Home.js&lt;/td&gt;
+      &lt;td&gt;test/components/Home.test.js&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Por lo tanto mi contribución fue cambiar el nombre del archivo de &lt;strong&gt;test.js&lt;/strong&gt; a &lt;strong&gt;index.test.js&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Aquí está el &lt;a href=&quot;https://github.com/rajasegar/alacritty-themes/pull/27&quot;&gt;link al Pull Request en GitHub.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Quiero concluir diciendo que no es necesario hacer un cambio enorme en el codigo para contribuir.&lt;/p&gt;
+
+&lt;p&gt;Saludos, con animo y ganas de seguir contribuyendo, &lt;a href=&quot;https://github.com/juanvqz&quot;&gt;Juan Vásquez!&lt;/a&gt;&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><summary type="html">En tiempos de COVID el tiempo pasa muy rapido!!!</summary></entry><entry><title type="html">Welcome to Bridgetownrb</title><link href="https://juanvasquez.dev/bridgetown/2021/08/22/welcome-to-bridgetown/" rel="alternate" type="text/html" title="Welcome to Bridgetownrb" /><published>2021-08-22T20:54:51+00:00</published><updated>2021-08-22T20:54:51+00:00</updated><id>https://juanvasquez.dev/bridgetown/2021/08/22/welcome-to-bridgetown</id><content type="html" xml:base="https://juanvasquez.dev/bridgetown/2021/08/22/welcome-to-bridgetown/">&lt;p&gt;You’ll find this post in your &lt;strong&gt;_posts&lt;/strong&gt; directory.
+Go ahead and edit it and re-build the site to see your changes.&lt;/p&gt;
+
+&lt;p&gt;You can rebuild the site in many different ways, but the most common way is to run &lt;strong&gt;bridgetown serve&lt;/strong&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;Bridgetown requires blog post files to be named according to the following format:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;YEAR-MONTH-DAY-title.EXT&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Where &lt;strong&gt;YEAR&lt;/strong&gt; is a four-digit number, &lt;strong&gt;MONTH&lt;/strong&gt; and &lt;strong&gt;DAY&lt;/strong&gt; are both two-digit numbers, and &lt;strong&gt;EXT&lt;/strong&gt; is the file extension representing the format used in the file (for example, &lt;strong&gt;md&lt;/strong&gt; for Markdown). After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Bridgetown also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://bridgetownrb.com/docs/&quot;&gt;Bridgetown docs&lt;/a&gt; for more info on how to get the most out of Bridgetown. File all bugs/feature requests at &lt;a href=&quot;https://github.com/bridgetownrb/bridgetown&quot;&gt;Bridgetown’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/bridgetownrb/bridgetown/discussions&quot;&gt;Bridgetown Discussions on GitHub&lt;/a&gt;.&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes.</summary></entry></feed>
