@@ -61,6 +61,12 @@ bundle exec bridgetown console
 
 ## Despliegue 🚀
 
+### Vercel
+
+Agregalo a tu cuenta como app
+
+### GitHub Actions
+
 > El despliegue en GitHub Actions es solo para ejemplo, por el momento estoy usando vercel como despliegue principal.
 
 Utilizo [GitHub Actions](https://github.com/andrewmcodes/bridgetown-gh-pages-action) para ejecutar el comando (yarn deploy) de despliegue.
