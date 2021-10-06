@@ -82,6 +82,17 @@ cloudinary_id: "blog/image"
 <img alt="<%= page.data.title %>" src="<%= cloudinary_url page.data.cloudinary_id, :medium %>" />
 ```
 
+## Categorias
+
+- alacritty
+- bridgetown
+- contribucion
+- css
+- diario
+- javascript
+- thisweekinrails
+- vim
+
 ## Autor 🇲🇽
 
 [@juanvqz\_](https://twitter.com/juanvqz_)
