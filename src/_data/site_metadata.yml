@@ -8,7 +8,7 @@ title: Juan Vásquez
 tagline: Hablamos de programación web usando Ruby y JavaScript.
 author: Juan Vásquez
 lang: es
-locale: es_MX
+# locale: es_MX
 generator:
   name: BridgetownRb
   url: https://www.bridgetownrb.com
