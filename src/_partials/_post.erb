@@ -1,6 +1,8 @@
 <div class="border-b-2 hover:border-green-600 hover:text-green-600">
-  <a href="<%= post.url %>">
-    <h1 class="text-xl font-bold md:text-2xl"><%= post.data.title %></h1>
+  <a href="<%= post.absolute_url %>">
+    <h1 class="text-xl font-bold md:text-2xl">
+      <%= post.data.title %>
+    </h1>
     <div class="flex flex-wrap justify-start py-4">
       <div class="flex flex-row">
         <% post.data.categories.each do |tag|%>
