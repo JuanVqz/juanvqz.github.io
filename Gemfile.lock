@@ -56,6 +56,10 @@ GEM
       webrick (~> 1.7)
     bridgetown-paginate (1.0.0.alpha1)
       bridgetown-core (= 1.0.0.alpha1)
+    bridgetown-seo-tag (5.0.0)
+      bridgetown (>= 0.20.0, < 2.0)
+    bridgetown-sitemap (1.1.1)
+      bridgetown (>= 0.20, < 2.0)
     bridgetown-svg-inliner (1.0.2)
       bridgetown (>= 0.20, < 2.0)
       nokogiri
@@ -155,6 +159,8 @@ DEPENDENCIES
   bridgetown (= 1.0.0.alpha1)
   bridgetown-cloudinary (= 1.2.0)
   bridgetown-feed!
+  bridgetown-seo-tag (= 5.0.0)
+  bridgetown-sitemap (= 1.1.1)
   bridgetown-svg-inliner (= 1.0.2)
 
 BUNDLED WITH

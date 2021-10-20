@@ -2,9 +2,9 @@
 layout: post
 title: "Se liberó la versión 4.1.2 de Alacritty Themes"
 date: 2021-09-21 10:54:51 -0500
-updated_at: 2021-09-21 10:54:51 -0500
+last_modified_at: 2021-09-21 10:54:51 -0500
 cloudinary_id: "blog/2021-09-21/invitation_alacritty_themes_fe7rcx"
-categories: [contribución, alacritty]
+categories: [alacritty]
 ---
 
 Recuerdan que unos días atrás publiqué un artículo donde comencé a [contribuir](http://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/08/27/primera-contribucion-en-el-repositorio-alacritty-themes/) al proyecto de **Alacritty-Themes**, bueno a partir de ahí muchas cosas han pasado.

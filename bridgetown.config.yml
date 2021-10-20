@@ -16,6 +16,7 @@
 #
 
 url: "https://juanvasquez.dev"
+lang: es
 permalink: pretty
 author: Juan Vásquez
 base_path: "/" # the subpath of your site, e.g. /blog
@@ -28,3 +29,5 @@ svg:
 
 cloudinary:
   cloud_name: juanvqz
+
+content_engine: resource

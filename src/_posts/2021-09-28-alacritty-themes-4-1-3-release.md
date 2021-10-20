@@ -2,8 +2,8 @@
 layout: post
 title: "¡Urge actualizar Alacritty Themes a la versión 4.1.3!"
 date: 2021-09-28 12:30:51 -0500
-updated_at: 2021-09-28 12:30:51 -0500
-categories: [contribución, alacritty]
+last_modified_at: 2021-09-28 12:30:51 -0500
+categories: [alacritty]
 ---
 
 ¿Sabes que hace el comando **PWD** en linux?
