@@ -18,5 +18,7 @@ layout: default
 <div class="mx-auto mt-8 text-white prose prose-xl prose-green">
   <%= markdownify content %>
 
-  <p class="text-base text-right opacity-70">última actualización <%= date_to_string page.data.updated_at %></p>
+  <p class="text-base text-right opacity-70">
+    última actualización <%= date_to_string page.data.last_modified_at, :ordinal %>
+  </p>
 </div>

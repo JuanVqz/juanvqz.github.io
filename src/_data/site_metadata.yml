@@ -7,6 +7,9 @@
 title: Juan Vásquez
 tagline: Hablamos de programación web usando Ruby y JavaScript.
 author: Juan Vásquez
+twitter:
+  username: juanvqz_
+  card: summary
 lang: es
 # locale: es_MX
 generator:
