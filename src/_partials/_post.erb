@@ -1,16 +1,13 @@
-<div class="border-b-2 hover:border-green-600 hover:text-green-600">
-  <a href="<%= post.absolute_url %>">
-    <h1 class="text-xl font-bold md:text-2xl">
-      <%= post.data.title %>
-    </h1>
-    <div class="flex flex-wrap justify-start py-4">
-      <div class="flex flex-row">
-        <% post.data.categories.each do |tag|%>
-          <div class="mr-1"><%= tag.capitalize %></div>
-        <% end %>
-      </div>
-      <div>| <%= date_to_string post.data.date, :ordinal %></div>
+<a href="<%= post.absolute_url %>" class="article">
+  <h1>
+    <%= post.data.title %>
+  </h1>
+  <div class="article_body">
+    <div class="article_categories">
+      <% post.data.tags.each do |tag|%>
+        <div><%= tag %></div>
+      <% end %>
     </div>
-    <div class="pb-4"><%= markdownify post.data.excerpt %></div>
-  </a>
-</div>
+    <div>| <%= date_to_string post.data.date, :ordinal %></div>
+  </div>
+</a>

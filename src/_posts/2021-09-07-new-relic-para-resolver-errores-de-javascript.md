@@ -4,6 +4,7 @@ title: "New Relic para resolver errores de JavaScript"
 date: 2021-09-07 08:30:51 -0500
 last_modified_at: 2021-09-07 08:30:51 -0500
 categories: [javascript]
+tags: [daily, javascript]
 ---
 
 La semana pasada estuvimos limpiando errores de javascript con la ayuda de New Relic.

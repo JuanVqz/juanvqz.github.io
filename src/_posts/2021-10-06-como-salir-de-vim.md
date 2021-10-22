@@ -5,6 +5,7 @@ date: 2021-10-06 08:00:00 -0500
 last_modified_at: 2021-10-06 08:00:00 -0500
 cloudinary_id: "blog/2021-10-06/how_to_exit_on_vim_hf9p2d"
 categories: [vim]
+tags: [vim, tooling]
 ---
 
 -\_-

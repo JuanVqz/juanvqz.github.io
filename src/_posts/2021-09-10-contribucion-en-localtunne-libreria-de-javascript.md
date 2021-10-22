@@ -5,6 +5,7 @@ date: 2021-09-10 12:30:51 -0500
 last_modified_at: 2021-09-10 12:30:51 -0500
 cloudinary_id: "blog/2021-09-10/dependabot_rnncdz"
 categories: [javascript]
+tags: [contributing, javascript]
 ---
 
 Gracias GitHub!!!
