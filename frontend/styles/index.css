@@ -73,7 +73,7 @@ body {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid rgba(11, 156, 49, 0.9);
-  padding: 1rem 0;
+  padding: 1.5rem 0 1rem;
 }
 
 .article .article_date {
@@ -81,3 +81,47 @@ body {
   opacity: 0.6;
 }
 /* end articles layout */
+
+/* Small devices (landscape phones, 576px and up) */
+/* @media (min-width: 576px) { */
+/*   .page { */
+/*     background-color: pink; */
+/*   } */
+/* } */
+
+/* Medium devices (tablets, 768px and up) */
+/* @media (min-width: 768px) { */
+/*   .page { */
+/*     background-color: red; */
+/*   } */
+/* } */
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  /* .page { */
+  /*   background-color: purple; */
+  /* } */
+
+  .header {
+    padding: 2rem 6rem 1rem;
+  }
+
+  .main {
+    margin: 0 auto;
+    padding: 3rem 6rem;
+  }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+/* @media (min-width: 1200px) { */
+/*   .page { */
+/*     background-color: green; */
+/*   } */
+/* } */
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+/* @media (min-width: 1400px) { */
+/*   .page { */
+/*     background-color: yellow; */
+/*   } */
+/* } */
