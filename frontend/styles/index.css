@@ -69,18 +69,38 @@ body {
   flex-direction: column;
 }
 
-.article_list .article {
+.article_list .article_item {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid rgba(11, 156, 49, 0.9);
   padding: 1.5rem 0 1rem;
 }
 
-.article .article_date {
+.article_item .article_date {
   font-size: 16px;
   opacity: 0.6;
 }
 /* end articles layout */
+
+/* start article */
+.article {
+  line-height: 2;
+}
+
+.article pre.highlight {
+  overflow-x: scroll;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+}
+
+/* end article */
 
 /* Small devices (landscape phones, 576px and up) */
 /* @media (min-width: 576px) { */
