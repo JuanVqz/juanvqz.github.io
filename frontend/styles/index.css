@@ -75,16 +75,17 @@ body {
   border-bottom: 1px solid rgba(11, 156, 49, 0.9);
   padding: 1.5rem 0 1rem;
 }
+/* end articles layout */
 
-.article_item .article_date {
+.article_date {
   font-size: 16px;
   opacity: 0.6;
 }
-/* end articles layout */
 
 /* start article */
 .article {
   line-height: 2;
+  text-align: justify;
 }
 
 .article pre.highlight {
@@ -95,11 +96,18 @@ body {
   text-align: center;
 }
 
-.tags {
+.article .tags {
   display: flex;
   flex-direction: row;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
+.article .article_content img {
+  width: 100%;
+  height: auto;
+}
 /* end article */
 
 /* Small devices (landscape phones, 576px and up) */

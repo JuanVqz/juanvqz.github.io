@@ -3,7 +3,10 @@ layout: default
 ---
 
 <div class="article">
-  <h2 class="text-center"><%= page.data.title %></h2>
+  <h2 class="text-center">
+    <%= page.data.title %>
+    <div class="article_date"><%= date_to_string page.data.date, :ordinal %></div>
+  </h2>
 
   <div class="tags">
     <% page.data.tags.each do |tag|%>
@@ -11,9 +14,7 @@ layout: default
     <% end %>
   </div>
 
-  <%= date_to_string page.data.date, :ordinal %>
-
-  <div><%= markdownify content %></div>
+  <div class="article_content"><%= markdownify content %></div>
 
   <p>
     última actualización <%= date_to_string page.data.last_modified_at, :ordinal %>

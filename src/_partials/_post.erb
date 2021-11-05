@@ -1,5 +1,5 @@
 <article class="article_item">
-  <a href="<%= post.absolute_url %>">
+  <a href="<%= post.relative_url %>">
     <h4><%= post.data.title %></h4>
     <div class="article_date">
       <%= date_to_string post.data.date, :ordinal %>
