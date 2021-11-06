@@ -2,21 +2,19 @@
 layout: default
 ---
 
-<div class="article">
-  <h2 class="text-center">
-    <%= page.data.title %>
-    <div class="article_date"><%= date_to_string page.data.date, :ordinal %></div>
-  </h2>
 
+<div class="article">
+  <h2 class="text-center"><%= page.data.title %></h2>
+  <div class="article_date text-center"><%= date_to_string page.data.date, :ordinal %></div>
   <div class="tags">
     <% page.data.tags.each do |tag|%>
       <div><%= tag.capitalize %></div>
     <% end %>
   </div>
 
-  <div class="article_content"><%= markdownify content %></div>
+  <article><%= markdownify content %></article>
 
-  <p>
+  <p class="article_footer">
     última actualización <%= date_to_string page.data.last_modified_at, :ordinal %>
   </p>
 </div>
