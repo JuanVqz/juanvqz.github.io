@@ -5,6 +5,7 @@ date: 2021-09-13 07:30:00 -0500
 last_modified_at: 2021-09-13 07:30:00 -0500
 categories: [thisweekinrails]
 tags: [ruby, rails]
+author: Juan Vásquez
 ---
 
 > Desde que conozco Ruby on Rails incluye la gema de Bye Bug 😥 claro, tiene más de 7 años que fue introducido al Gemfile de Ruby on Rails.

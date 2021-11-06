@@ -5,6 +5,7 @@ date: 2021-08-27 21:54:51 -0500
 last_modified_at: 2021-08-27 21:54:51 -0500
 categories: [alacritty]
 tags: [contributing, alacritty, javascript]
+author: Juan Vásquez
 ---
 
 En tiempos de COVID el tiempo pasa muy rapido!!!

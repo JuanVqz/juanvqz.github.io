@@ -5,6 +5,7 @@ date: 2021-09-02 08:30:51 -0500
 last_modified_at: 2021-09-02 08:30:51 -0500
 categories: [javascript]
 tags: [daily, javascript]
+author: Juan Vásquez
 ---
 
 Ni Microsoft quiere a Internet Explorer, LOL.

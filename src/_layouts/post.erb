@@ -5,12 +5,10 @@ layout: default
 
 <div class="article">
   <h2 class="text-center"><%= page.data.title %></h2>
-  <div class="article_date text-center"><%= date_to_string page.data.date, :ordinal %></div>
   <div class="tags">
-    <% page.data.tags.each do |tag|%>
-      <div><%= tag.capitalize %></div>
-    <% end %>
+    por <%= page.data.author %> el <%= date_to_string page.data.date, :ordinal %>
   </div>
+  <div class="tags"><%= page.data.tags.to_a.join(", ") %></div>
 
   <article><%= markdownify content %></article>
 

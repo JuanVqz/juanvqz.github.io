@@ -5,6 +5,7 @@ date: 2021-09-01 08:30:51 -0500
 last_modified_at: 2021-09-01 08:30:51 -0500
 categories: [bridgetown]
 tags: [ruby, bridgetown, javascript]
+author: Juan Vásquez
 ---
 
 Esto se arma de dos patadas!

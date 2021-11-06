@@ -5,6 +5,7 @@ date: 2021-08-22 15:54:51 -0500
 last_modified_at: 2021-08-22 15:54:51 -0500
 categories: [bridgetown]
 tags: [ruby, bridgetown, javascript]
+author: Juan Vásquez
 ---
 
 You’ll find this post in your **\_posts** directory.
