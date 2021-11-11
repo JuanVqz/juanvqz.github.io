@@ -137,11 +137,24 @@ body {
 /* } */
 
 /* Medium devices (tablets, 768px and up) */
-/* @media (min-width: 768px) { */
-/*   .page { */
-/*     background-color: red; */
-/*   } */
-/* } */
+@media (min-width: 768px) {
+  /* .page { */
+  /*   background-color: red; */
+  /* } */
+
+  .header {
+    padding: 2rem 6rem 1rem;
+  }
+
+  .main {
+    margin: 0 auto;
+    padding: 3rem 6rem;
+  }
+
+  .main .article {
+    padding: 2rem 6rem;
+  }
+}
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -157,18 +170,34 @@ body {
     margin: 0 auto;
     padding: 3rem 6rem;
   }
+
+  .main .article {
+    padding: 3rem 7rem;
+  }
 }
 
 /* X-Large devices (large desktops, 1200px and up) */
-/* @media (min-width: 1200px) { */
-/*   .page { */
-/*     background-color: green; */
-/*   } */
-/* } */
+@media (min-width: 1200px) {
+  /* .page { */
+  /*   background-color: green; */
+  /* } */
+
+  .main .article {
+    padding: 3rem 12rem;
+  }
+}
 
 /* XX-Large devices (larger desktops, 1400px and up) */
-/* @media (min-width: 1400px) { */
-/*   .page { */
-/*     background-color: yellow; */
-/*   } */
-/* } */
+@media (min-width: 1400px) {
+  /* .page { */
+  /*   background-color: yellow; */
+  /* } */
+
+  .main .article img {
+    max-width: 80%;
+  }
+
+  .main .article {
+    padding: 3rem 18rem;
+  }
+}
