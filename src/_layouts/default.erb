@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="es">
+<html lang="<%= site.data.site_metadata.lang %>">
   <head>
     <%= render "head", metadata: site.data.site_metadata, title: page.data.title %>
   </head>
-  <body class="<%= 'debug-screens' if Bridgetown.environment == 'development' %> container flex flex-col min-h-screen mx-auto text-gray-200 bg-gray-700 font-serif">
-    <%= render "navbar", metadata: site.data.site_metadata %>
+  <body class="<%= page.data.layout %>">
+    <%= render "header", metadata: site.data.site_metadata %>
 
-    <main class="flex-1 p-4 md:p-6">
+    <main class="main">
       <%= yield %>
     </main>
 

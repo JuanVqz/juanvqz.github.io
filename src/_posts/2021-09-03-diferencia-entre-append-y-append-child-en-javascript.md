@@ -4,6 +4,8 @@ title: "¿Cuál es la diferencia entre append y appendChild en JavaScript?"
 date: 2021-09-03 07:30:51 -0500
 last_modified_at: 2021-09-03 07:30:51 -0500
 categories: [javascript]
+tags: [daily, javascript]
+author: Juan Vásquez
 ---
 
 Pa pronto es tarde!

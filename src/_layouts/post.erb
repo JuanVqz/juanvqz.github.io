@@ -2,23 +2,17 @@
 layout: default
 ---
 
-<div class="text-center">
-  <h1 class="text-xl font-bold md:text-2xl"><%= page.data.title %></h1>
 
-  <div class="flex flex-wrap justify-center py-4">
-    <div class="flex flex-row">
-      <% page.data.categories.each do |tag|%>
-        <div class="mr-1"><%= tag.capitalize %></div>
-      <% end %>
-    </div>
-    <div>| <%= date_to_string page.data.date, :ordinal %></div>
+<div class="article">
+  <h2 class="text-center"><%= page.data.title %></h2>
+  <div class="tags">
+    por <%= page.data.author %> el <%= date_to_string page.data.date, :ordinal %>
   </div>
-</div>
+  <div class="tags"><%= page.data.tags.to_a.join(", ") %></div>
 
-<div class="mx-auto mt-8 text-white prose prose-xl prose-green">
-  <%= markdownify content %>
+  <article><%= markdownify content %></article>
 
-  <p class="text-base text-right opacity-70">
+  <p class="article_footer">
     última actualización <%= date_to_string page.data.last_modified_at, :ordinal %>
   </p>
 </div>

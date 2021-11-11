@@ -1,5 +1,9 @@
-import "gruvbox.css"
-import "index.scss"
+import "index.css"
+import Prism from "prismjs"
+
+import "prismjs/themes/prism-solarizedlight.css"
+
+Prism.highlightAll()
 
 // Import all javascript files from src/_components
 const componentsContext = require.context("bridgetownComponents", true, /.js$/)
