@@ -61,10 +61,14 @@ body {
 .footer div {
   padding: 1rem;
 }
+
+.footer div .account {
+  padding-right: 2rem;
+}
 /* end page layout */
 
 .article_date {
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .text-center {
