@@ -2,14 +2,15 @@
 layout: post
 title: "Se liberó la versión 4.1.2 de Alacritty Themes"
 date: 2021-09-21 10:54:51 -0500
-last_modified_at: 2021-09-21 10:54:51 -0500
-cloudinary_id: "blog/2021-09-21/invitation_alacritty_themes_fe7rcx"
+last_modified_at: 2022-01-12 10:54:51 -0500
 categories: [alacritty]
 tags: [contributing, alacritty, javascript]
 author: Juan Vásquez
 ---
 
-Recuerdan que unos días atrás publiqué un artículo donde comencé a [contribuir](http://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/08/27/primera-contribucion-en-el-repositorio-alacritty-themes/) al proyecto de **Alacritty-Themes**, bueno a partir de ahí muchas cosas han pasado.
+Recuerdan que unos días atrás publiqué un artículo donde comencé a
+[contribuir](http://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/08/27/primera-contribucion-en-el-repositorio-alacritty-themes/)
+al proyecto de **Alacritty-Themes**, bueno a partir de ahí muchas cosas han pasado.
 
 > [Alacritty-Themes versión 4.1.2](https://github.com/rajasegar/alacritty-themes/releases/tag/v4.1.2)
 
@@ -20,6 +21,6 @@ el archivo **alacritty.yml** del usuario se borraban **TODOS** los comentarios q
 
 ### [Te invito a probar Alacritty-Themes 🌈😍](https://github.com/rajasegar/alacritty-themes)
 
-![<%= page.data.title %>](<%= cloudinary_url page.data.cloudinary_id, :medium %>)
+![<%= page.data.title %>](https://res.cloudinary.com/juanvqz/image/upload/w_1200,c_limit,q_80/v1/blog/2021-09-21/invitation_alacritty_themes_fe7rcx.jpg#center)
 
 espero seguir contribuyendo en este proyecto pues me agrada mucho! 🚀

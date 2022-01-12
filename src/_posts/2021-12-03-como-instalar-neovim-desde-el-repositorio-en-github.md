@@ -36,15 +36,15 @@ sudo pacman -S base-devel cmake unzip ninja tree-sitter curl
 git clone https://github.com/neovim/neovim
 ```
 
-3 Entrar en la carpeta clonada y ejecutar el comando `make`.
+3 Entrar en la carpeta clonada y ejecutar el comando _make_.
 
-- opcional, si quieres la versión estable, ejecuta `git checkout stable`.
+- opcional, si quieres la versión estable, ejecuta _git checkout stable_.
 
 ```bash
 cd neovim && make
 ```
 
-4 Instalar Neovim en tu computadora, se instala en `/usr/local` por default.
+4 Instalar Neovim en tu computadora, se instala en _/usr/local_ por default.
 
 ```bash
 sudo make install

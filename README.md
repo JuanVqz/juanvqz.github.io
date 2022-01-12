@@ -69,19 +69,6 @@ Utilizo la rama **gh-pages** para el despliegue de los archivos estaticos.
 
 ## Extras
 
-### Cloudinary
-
-Para utiliza [Cloudinary](https://cloudinary.com/) solo necesitas una cuenta (tiene con un plan gratuito) y configurar [bridgetown-cloudinary.](https://github.com/bridgetownrb/bridgetown-cloudinary)
-
-```ruby
-
----
-cloudinary_id: "blog/image"
----
-
-<img alt="<%= page.data.title %>" src="<%= cloudinary_url page.data.cloudinary_id, :medium %>" />
-```
-
 ## Categorias
 
 - alacritty

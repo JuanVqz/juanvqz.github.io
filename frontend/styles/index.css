@@ -26,6 +26,11 @@ body {
   font-size: 20px;
 }
 
+img[src*="#center"] {
+  display: block;
+  margin: auto;
+}
+
 /* start page layout */
 .page {
   display: flex;
