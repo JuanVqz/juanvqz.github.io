@@ -27,7 +27,4 @@ template_engine: erb
 svg:
   optimize: true
 
-cloudinary:
-  cloud_name: juanvqz
-
 content_engine: resource
