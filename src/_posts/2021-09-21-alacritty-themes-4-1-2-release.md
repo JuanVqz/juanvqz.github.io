@@ -21,6 +21,6 @@ el archivo **alacritty.yml** del usuario se borraban **TODOS** los comentarios q
 
 ### [Te invito a probar Alacritty-Themes 🌈😍](https://github.com/rajasegar/alacritty-themes)
 
-![<%= page.data.title %>](https://res.cloudinary.com/juanvqz/image/upload/w_1200,c_limit,q_80/v1/blog/2021-09-21/invitation_alacritty_themes_fe7rcx.jpg)
+![<%= page.data.title %>](https://res.cloudinary.com/juanvqz/image/upload/w_1200,c_limit,q_80/v1/blog/2021-09-21/invitation_alacritty_themes_fe7rcx.jpg#center)
 
 espero seguir contribuyendo en este proyecto pues me agrada mucho! 🚀

@@ -12,7 +12,7 @@ Gracias GitHub!!!
 
 GitHub reportó una vulnerabilidad de seguridad 🙈 en mi repositorio de [juanvqz.github.io](<%= page.data.base_path %>) el cual está relacionado con axios.
 
-![<%= page.data.title %>](https://res.cloudinary.com/juanvqz/image/upload/w_1200,c_limit,q_80/v1/blog/2021-09-10/dependabot_rnncdz.jpg)
+![<%= page.data.title %>](https://res.cloudinary.com/juanvqz/image/upload/w_1200,c_limit,q_80/v1/blog/2021-09-10/dependabot_rnncdz.jpg#center)
 
 > Axios, Promise based HTTP client for the browser and node.js
 

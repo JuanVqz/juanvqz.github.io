@@ -8,7 +8,7 @@ tags: [vim, tooling]
 author: Juan Vásquez
 ---
 
-![<%= page.data.title %>](https://res.cloudinary.com/juanvqz/image/upload/w_1200,c_limit,q_80/v1/blog/2021-10-06/how_to_exit_on_vim_hf9p2d.jpg)
+![<%= page.data.title %>](https://res.cloudinary.com/juanvqz/image/upload/w_1200,c_limit,q_80/v1/blog/2021-10-06/how_to_exit_on_vim_hf9p2d.jpg#center)
 
 Asumiendo que ya se encuentra dentro del editor Vim **sin ninguna modificación**
 pendiente de ser guardada.
