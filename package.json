@@ -39,6 +39,6 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "prismjs": "1.25.0"
+    "prismjs": "1.26.0"
   }
 }
