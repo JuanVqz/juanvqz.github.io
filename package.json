@@ -22,7 +22,7 @@
     "start": "node start.js"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.27.7",
     "concurrently": "^5.2.0",
     "css-loader": "^4.3.0",
     "esbuild": "^0.14.11",
