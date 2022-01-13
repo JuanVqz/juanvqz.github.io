@@ -32,7 +32,7 @@
     "postcss": "8.3.0",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-loader": "4.3.0",
-    "postcss-preset-env": "^6.7.0",
+    "postcss-preset-env": "^7.1.0",
     "webpack": "^5.39.1",
     "webpack-cli": "^4.7.2",
     "webpack-manifest-plugin": "^3.1.1",
