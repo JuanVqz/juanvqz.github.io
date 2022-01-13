@@ -24,7 +24,7 @@
   "devDependencies": {
     "browser-sync": "^2.26.7",
     "concurrently": "^5.2.0",
-    "css-loader": "^4.3.0",
+    "css-loader": "^6.5.1",
     "esbuild": "^0.12.7",
     "esbuild-loader": "^2.18.0",
     "file-loader": "^6.2.0",
