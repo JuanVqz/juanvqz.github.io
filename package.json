@@ -28,7 +28,7 @@
     "esbuild": "^0.14.11",
     "esbuild-loader": "^2.18.0",
     "file-loader": "^6.2.0",
-    "mini-css-extract-plugin": "^2.4.6",
+    "mini-css-extract-plugin": "^2.4.7",
     "postcss": "8.4.5",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-loader": "6.2.1",
