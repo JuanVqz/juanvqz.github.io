@@ -1,42 +1,20 @@
 {
-  "name": "juanvasquez.dev",
+  "name": "hola",
   "version": "1.0.0",
   "private": true,
-  "description": "Hablamos de programación web usando Ruby y JavaScript.",
-  "homepage": "https://juanvasquez.dev",
-  "bugs": {
-    "url": "https://github.com/JuanVqz/juanvqz.github.io/issues"
-  },
-  "author": {
-    "name": "Juan Vásquez",
-    "email": "me@juanvasquez.dev"
-  },
   "scripts": {
-    "build": "bundle exec bridgetown build",
-    "serve": "bundle exec bridgetown serve",
-    "clean": "bundle exec bridgetown clean",
-    "webpack-build": "NODE_ENV=production webpack --mode production",
-    "webpack-dev": "webpack --mode development -w",
-    "deploy": "yarn clean && yarn webpack-build && yarn build",
-    "sync": "node sync.js",
-    "start": "node start.js"
+    "deploy": "bundle exec bridgetown deploy",
+    "esbuild": "node esbuild.config.js --minify",
+    "esbuild-dev": "node esbuild.config.js --watch"
   },
   "devDependencies": {
-    "browser-sync": "^2.27.7",
-    "concurrently": "^7.0.0",
-    "css-loader": "^4.3.0",
-    "esbuild": "^0.14.11",
-    "esbuild-loader": "^2.18.0",
-    "file-loader": "^6.2.0",
-    "mini-css-extract-plugin": "^2.4.7",
-    "postcss": "8.4.5",
-    "postcss-flexbugs-fixes": "5.0.2",
-    "postcss-loader": "6.2.1",
-    "postcss-preset-env": "^7.2.3",
-    "webpack": "^5.66.0",
-    "webpack-cli": "^4.7.2",
-    "webpack-manifest-plugin": "^4.1.1",
-    "webpack-merge": "^5.8.0"
+    "esbuild": "^0.13.15",
+    "glob": "^7.2.0",
+    "postcss": "^8.4.0",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-import": "^14.0.2",
+    "postcss-load-config": "^3.1.0",
+    "postcss-preset-env": "^7.0.1"
   },
   "dependencies": {
     "prismjs": "1.26.0"
