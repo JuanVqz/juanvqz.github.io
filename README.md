@@ -36,28 +36,31 @@ Si te interesa Bridgetown no dudes en tomar código de aquí y si tienes dudas e
 
 ```sh
 git clone git@github.com:JuanVqz/juanvqz.github.io.git
-
 cd juanvqz.github.io
-
 bundle install && yarn install
 ```
 
+> Learn more: [Bridgetown Getting Started Documentation](https://www.bridgetownrb.com/docs/).
+
 ## Desarrollo 📝
 
-Para iniciar el servidor ejecuta **yarn start** y navega hacia [localhost:4000](https://localhost:4000/)!
+Para iniciar el servidor en desarrollo, ejecuta `bin/bridgetown start` y
+navega hacia [localhost:4000](https://localhost:4000/)!
 
 ### Comandos ⌨
 
 ```sh
 # running locally
-yarn start
+bin/bridgetown start
 
 # build & deploy to production
-yarn deploy
+bin/bridgetown deploy
 
 # load the site up within a Ruby console (IRB)
-bundle exec bridgetown console
+bin/bridgetown console
 ```
+
+> Learn more: [Bridgetown CLI Documentation](https://www.bridgetownrb.com/docs/command-line-usage)
 
 ## Despliegue 🚀
 
@@ -67,19 +70,5 @@ Utilizo [GitHub Actions](https://github.com/andrewmcodes/bridgetown-gh-pages-act
 
 Utilizo la rama **gh-pages** para el despliegue de los archivos estaticos.
 
-## Extras
-
-## Categorias
-
-- alacritty
-- bridgetown
-- contribucion
-- css
-- diario
-- javascript
-- thisweekinrails
-- vim
-
-## Autor 🇲🇽
-
 [@juanvqz\_](https://twitter.com/juanvqz_)
+
