@@ -2,11 +2,19 @@
 layout: post
 title: "Words for the day!"
 date: 2022-01-06 08:00:00 -0500
-last_modified_at: 2022-01-06 08:00:00 -0500
+last_modified_at: 2022-01-20 08:00:00 -0500
 categories: [english]
 tags: [english]
 author: Juan Vásquez
 ---
+
+# 2022-01-20
+
+**Clunky**
+old and not working well
+
+**Torpe**
+Viejo y no funciona bien
 
 # 2022-01-06
 
