@@ -18,6 +18,17 @@ Viejo y no funciona bien
 
 # 2022-01-06
 
+**admonish**
+warn or reprimand someone firmly.
+
+> she admonished me for appearing at breakfast unshaven
+
+**advertir/reprender/amontestar**
+
+> Los científicos -al igual que las madres- nos advierten que comamos frutas y verduras.
+
+# 2022-01-06
+
 **Keep on plugging**
 To continue doing something even though it is difficult or boring
 
