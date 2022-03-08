@@ -8,6 +8,17 @@ tags: [english, Dawn]
 author: Juan Vásquez
 ---
 
+# 2022-03-08
+
+**Fluke**
+
+> It was a fluke
+> An unlikely chance occurrence, especially a surprising piece of luck.
+
+**Casualidad/Anomalia/Flaquesa**
+
+> Una casualidad improbable.
+
 # 2022-02-17
 
 **Bragging**
