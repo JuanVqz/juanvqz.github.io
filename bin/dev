@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+require "pathname"
+require "fileutils"
+include FileUtils
+
+# move to the root application.
+APP_ROOT = Pathname.new File.expand_path("../../", __FILE__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+chdir APP_ROOT do
+  puts "== Copy .env file =="
+  unless File.exist?("docker.env")
+    cp "docker.sample", "docker.env"
+  end
+
+  puts "== Build container =="
+  system! "docker-compose build"
+
+  puts "== Running container =="
+  system! "docker-compose up -d"
+
+  puts "== Visit at http://localhost:4000 =="
+  system! "docker-compose logs -f web"
+end
