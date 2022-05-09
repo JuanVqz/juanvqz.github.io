@@ -1,0 +1,21 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+        GROUP_ID: ${GROUP_ID:-1000}
+        DOCKER_USER: ${DOCKER_USER:-user}
+        APP_DIR: ${APP_DIR:-/home/user/blog}
+    command: sh -c "bundle exec bridgetown dev"
+    ports:
+      - 4000:4000
+      - 4001:4001
+      - 4002:4002
+    volumes:
+      - .:${APP_DIR:-/home/user/blog}
+      - node_modules:${APP_DIR:-/home/user/blog}/node_modules
+volumes:
+  node_modules:
