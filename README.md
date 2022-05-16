@@ -37,6 +37,7 @@ Si te interesa Bridgetown no dudes en tomar código de aquí y si tienes dudas e
 ```sh
 git clone git@github.com:JuanVqz/juanvqz.github.io.git
 cd juanvqz.github.io
+./bin/setup
 ./bin/dev
 # visita [localhost:4000](https://localhost:4000/)!
 ```
@@ -80,4 +81,32 @@ Utilizo [GitHub Actions](https://github.com/andrewmcodes/bridgetown-gh-pages-act
 Utilizo la rama **gh-pages** para el despliegue de los archivos estaticos.
 
 [@juanvqz\_](https://twitter.com/juanvqz_)
+
+
+## Categorias
+
+Trataré de llevar el control de la cantiadad de articulos por caterogia en el blog
+
+```rb
+{
+  contributing: [
+    alacritty_themes: 2,
+    localtunnel: 1,
+  ],
+  development: [
+    bridgetown_svg: 1,
+    css: 1,
+    javascript: 2,
+    thisweekinrails: 1,
+  ],
+  english: [
+    words: 1,
+  ],
+  tools: [
+    alacritty_themes: 1,
+    new_relic: 1,
+    vim: 2,
+  ],
+}
+```
 

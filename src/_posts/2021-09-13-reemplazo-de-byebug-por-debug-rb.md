@@ -3,8 +3,8 @@ layout: post
 title: "Reemplazo de Byebug por Debug 🔥🐛"
 date: 2021-09-13 07:30:00 -0500
 last_modified_at: 2021-09-13 07:30:00 -0500
-categories: [thisweekinrails]
-tags: [ruby, rails]
+categories: [development]
+tags: [ruby, thisweekinrails]
 author: Juan Vásquez
 ---
 

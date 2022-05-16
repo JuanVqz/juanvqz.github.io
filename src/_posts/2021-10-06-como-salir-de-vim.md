@@ -3,8 +3,8 @@ layout: post
 title: "¿como salir de vim?"
 date: 2021-10-06 08:00:00 -0500
 last_modified_at: 2021-10-06 08:00:00 -0500
-categories: [vim]
-tags: [vim, tooling]
+categories: [tools]
+tags: [vim, neovim]
 author: Juan Vásquez
 ---
 
