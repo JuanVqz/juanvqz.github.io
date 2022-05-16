@@ -11,13 +11,15 @@ def system!(*args)
 end
 
 chdir APP_ROOT do
+  puts "== Copy .env file =="
   unless File.exist?("docker.env")
-    puts "== First run ./bin/setup =="
+    cp "docker.sample", "docker.env"
   end
 
-  puts "== Running container =="
-  system! "docker-compose up -d"
+  puts "== Build container =="
+  system! "docker-compose build"
 
-  puts "== Visit at http://localhost:4000 =="
-  system! "docker-compose logs -f web"
+  puts "== Image created =="
+  system! "docker images | grep juanvqz"
 end
+
