@@ -11,10 +11,6 @@ def system!(*args)
 end
 
 chdir APP_ROOT do
-  unless File.exist?("docker.env")
-    puts "== First run ./bin/setup =="
-  end
-
   puts "== Running container =="
   system! "docker-compose up -d"
 
