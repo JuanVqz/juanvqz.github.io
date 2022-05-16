@@ -26,7 +26,7 @@ accounts:
     url: https://github.com/JuanVqz
     color: github_social
   email:
-    url: "mailto: juan@logicalbricks.com"
+    url: "mailto: juan@ombulabs.com"
     color: email_social
   rss:
     url: https://juanvasquez.dev/feed.xml
