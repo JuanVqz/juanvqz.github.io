@@ -3,7 +3,7 @@ layout: post
 title: "Template hecho con CSS GRID"
 date: 2021-10-05 11:00:00 -0500
 last_modified_at: 2021-10-05 11:00:00 -0500
-categories: [css]
+categories: [development]
 tags: [daily, css]
 author: Juan Vásquez
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "New Relic para resolver errores de JavaScript"
 date: 2021-09-07 08:30:51 -0500
 last_modified_at: 2021-09-07 08:30:51 -0500
-categories: [javascript]
+categories: [tools]
 tags: [daily, javascript]
 author: Juan Vásquez
 ---
@@ -13,15 +13,19 @@ La semana pasada estuvimos limpiando errores de javascript con la ayuda de New R
 > New Relic One: Una plataforma de observabilidad sencilla pero potente.
 > Detectar, corregir y prevenir.
 
-**New Relic** se encarga de **monitorear** la aplicación web y nos da reportes o estadísticas del trazado de sesiones, cuales son las páginas más visitadas, las páginas con reportes de errores, el tiempo de carga de las páginas, etc.
+**New Relic** se encarga de **monitorear** la aplicación web y nos da reportes o estadísticas del trazado de sesiones,
+cuales son las páginas más visitadas, las páginas con reportes de errores, el tiempo de carga de las páginas, etc.
 
-**Hoy** hablaré del apartado de errores de Javascript, prácticamente New Relic te regresa un **listado de errores** que han sido **recurrentes** en las últimas horas o los últimos días, puedes configurarlo a través de un selector de fecha y hora.
+**Hoy** hablaré del apartado de errores de Javascript,
+prácticamente New Relic te regresa un **listado de errores** que han sido **recurrentes** en las últimas horas o los últimos días,
+puedes configurarlo a través de un selector de fecha y hora.
 
 Una vez **seleccionado** el error que quieres **solucionar** te dará más detalles de dicho error:
 
 - El mensaje de error
 
-Hasta ahora el mensaje de error es muy descriptivo y eso ayuda a tener una clara idea de como solucionar el error, pongamos de ejemplo el siguiente caso.
+Hasta ahora el mensaje de error es muy descriptivo y eso ayuda a tener una clara idea de como solucionar el error,
+pongamos de ejemplo el siguiente caso.
 
 ```javascript
 Cannot read property 'checked' of undefined.

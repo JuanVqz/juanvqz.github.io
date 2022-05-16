@@ -3,7 +3,7 @@ layout: post
 title: "Contribución en localtunnel, libreria de javascript"
 date: 2021-09-10 12:30:51 -0500
 last_modified_at: 2022-01-12 16:30:51 -0500
-categories: [javascript]
+categories: [contributing]
 tags: [contributing, javascript]
 author: Juan Vásquez
 ---
