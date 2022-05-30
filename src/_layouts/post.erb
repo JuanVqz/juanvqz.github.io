@@ -6,13 +6,13 @@ layout: default
 <div class="article">
   <h2 class="text-center"><%= page.data.title %></h2>
   <div class="tags">
-    por <%= page.data.author %> el <%= date_to_string page.data.date, :ordinal %>
+    by <%= page.data.author %>, <%= date_to_string page.data.date, :ordinal %>
   </div>
   <div class="tags"><%= page.data.tags.to_a.join(", ") %></div>
 
   <article><%= markdownify content %></article>
 
   <p class="article_footer">
-    última actualización <%= date_to_string page.data.last_modified_at, :ordinal %>
+    Last Update <%= date_to_string page.data.last_modified_at, :ordinal %>
   </p>
 </div>

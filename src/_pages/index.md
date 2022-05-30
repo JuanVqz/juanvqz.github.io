@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Últimos artículos
+title: Latest Articles
 ---
 
 <h2><%= page.data.title %></h2>

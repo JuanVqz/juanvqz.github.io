@@ -6,12 +6,12 @@
 
 title: Juan Vásquez
 tagline: Hablamos de programación web usando Ruby y JavaScript.
+tagline: I post stuff about programming, mostly using Ruby and JavaScript.
 author: Juan Vásquez
 twitter:
   username: juanvqz_
   card: summary
-lang: es
-# locale: es_MX
+lang: en
 bridgetown:
   name: bridgetown.rb
   url: https://www.bridgetownrb.com
@@ -32,7 +32,7 @@ accounts:
     url: https://juanvasquez.dev/feed.xml
     color: rss_social
 description: >-
-  Hola, ¡qué onda! Soy Juan Vásquez.
-  En este espacio encontrarás artículos relacionados al desarrollo web en su mayoría en lenguajes de programación como Ruby y JavaScript.
-  Si te interesa no dudes en agregarme a tu RSS favorito y te estarán llegando los artículos cada que escriba algo nuevo.
-  Cuando gustes contactarme búscame en twitter como @juanvqz_
+  Hi! What's up? I'm Juan Vásquez.
+  In this space you will find articles related to web development mostly using Ruby and JavaScript languages.
+  If you are interested add my blog in your favorite RSS, every time I write something you will receive it.
+  Feel free to contact me on twitter @juanvqz_ when you want.
