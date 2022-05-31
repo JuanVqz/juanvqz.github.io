@@ -1,6 +1,7 @@
 :root {
   --color-black: #111827;
   --color-white: white;
+  --color-gray: rgba(72, 72, 72, 1);
   --color-primary: rgba(11, 156, 49, 1);
 }
 
@@ -26,9 +27,15 @@ body {
   font-size: 20px;
 }
 
-img[src*="#center"] {
+.twitter-tweet, img[src*="#center"] {
   display: block;
   margin: auto;
+}
+
+blockquote {
+  color: var(--color-gray);
+  font-style: italic;
+  padding-left: 4mm ridge var(--color-primary);
 }
 
 /* start page layout */
