@@ -14,16 +14,15 @@
 # https://learnxinyminutes.com/docs/yaml/
 #
 
-url: "https://juanvasquez.dev"
+url: https://juanvasquez.dev
 lang: es
 permalink: pretty
 author: Juan Vásquez
-base_path: "/" # the subpath of your site, e.g. /blog
+base_path: /
 timezone: America/Mexico_City
 template_engine: erb
-# pagination:
-#   enabled: false
+pagination:
+  enabled: true
 svg:
   optimize: true
-
 content_engine: resource
