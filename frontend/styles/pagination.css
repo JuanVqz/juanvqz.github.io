@@ -1,0 +1,14 @@
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.pagination a {
+  padding: 8px 16px;
+  color: var(--color-black);
+}
+
+.pagination a:hover {
+  color: var(--color-primary);
+}

@@ -41,21 +41,7 @@ cd juanvqz.github.io
 ./bin/dev
 # visita [localhost:4000](https://localhost:4000/)!
 ```
-
-## Instalación 🔥
-
-```sh
-git clone git@github.com:JuanVqz/juanvqz.github.io.git
-cd juanvqz.github.io
-bundle install && yarn install
-```
-
 > Learn more: [Bridgetown Getting Started Documentation](https://www.bridgetownrb.com/docs/).
-
-## Desarrollo 📝
-
-Para iniciar el servidor en desarrollo, ejecuta `bin/bridgetown start` y
-navega hacia [localhost:4000](https://localhost:4000/)!
 
 ### Comandos ⌨
 

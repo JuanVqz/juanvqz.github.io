@@ -1,4 +1,5 @@
 import "index.css"
+import "pagination.css"
 import Prism from "prismjs"
 
 import "prismjs/themes/prism-solarizedlight.css"
