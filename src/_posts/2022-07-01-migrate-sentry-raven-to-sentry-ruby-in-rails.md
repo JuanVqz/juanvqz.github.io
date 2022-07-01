@@ -60,8 +60,8 @@ The only thing I had to check was related to a key called `sanitize_fields`
 that was removed in this new SDK (sentry-ruby) but they implemented at least
 three new options:
 
-1. Use the new key called `send_default_pii = true` already filter the params.
-2. Use a filtering method in the initialization config.
+- Use the new key called `send_default_pii = true` already filter the params.
+- Use a filtering method in the initialization config.
 
 ```ruby
 Copied
@@ -79,7 +79,9 @@ Sentry.init do |config|
   end
 end
 ```
-3. Install a [sentry-sanitizer](https://github.com/mrexox/sentry-sanitizer) gem.
+- Install a [sentry-sanitizer](https://github.com/mrexox/sentry-sanitizer) gem.
+
+Feel free to pick one, we picked the second one.
 
 [more info about sanitize fields](https://github.com/getsentry/sentry-ruby/issues/1140)
 
