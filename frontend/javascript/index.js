@@ -1,5 +1,6 @@
 import "index.css"
 import "pagination.css"
+import "search.css"
 import Prism from "prismjs"
 
 import "prismjs/themes/prism-solarizedlight.css"
@@ -11,6 +12,8 @@ import "prismjs/components/prism-yaml.js"
 import "prismjs/components/prism-ruby.js"
 
 Prism.highlightAll()
+
+import "bridgetown-quick-search/dist"
 
 // Import all JavaScript & CSS files from src/_components
 // import components from "bridgetownComponents/**/*.{js,jsx,js.rb,css}";

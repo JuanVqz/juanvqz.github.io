@@ -17,6 +17,7 @@
     "postcss-preset-env": "7.7.2"
   },
   "dependencies": {
+    "bridgetown-quick-search": "1.1.2",
     "prismjs": "1.28.0"
   }
 }

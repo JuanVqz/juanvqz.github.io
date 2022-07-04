@@ -1,0 +1,5 @@
+bridgetown-search-results {
+  --link-color: var(--color-primary);
+  --divider-color: var(--color-gray);
+  --text-color: var(--color-black);
+}

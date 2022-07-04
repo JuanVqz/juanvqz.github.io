@@ -45,6 +45,8 @@ GEM
       bridgetown (>= 1.0.0.alpha5, < 2.0)
     bridgetown-paginate (1.1.0.beta3)
       bridgetown-core (= 1.1.0.beta3)
+    bridgetown-quick-search (1.1.2)
+      bridgetown (>= 0.15.0.beta1, < 2.0)
     bridgetown-seo-tag (5.0.0)
       bridgetown (>= 0.20.0, < 2.0)
     bridgetown-sitemap (1.1.2)
@@ -132,6 +134,7 @@ PLATFORMS
 DEPENDENCIES
   bridgetown (~> 1.1.0.beta3)
   bridgetown-feed (= 2.1.0)
+  bridgetown-quick-search (= 1.1.2)
   bridgetown-seo-tag (= 5.0.0)
   bridgetown-sitemap (= 1.1.2)
   bridgetown-svg-inliner (= 1.0.2)
