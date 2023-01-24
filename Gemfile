@@ -31,6 +31,6 @@ gem "puma", "~> 6.0"
 group :bridgetown_plugins do
   gem "bridgetown-feed", "2.1.0"
   gem "bridgetown-seo-tag", "5.0.0"
-  gem "bridgetown-sitemap", "1.1.2"
+  gem "bridgetown-sitemap", "1.2.0"
   gem "bridgetown-svg-inliner", "1.0.2"
 end
