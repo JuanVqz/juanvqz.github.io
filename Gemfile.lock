@@ -1,9 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (7.0.4.1)
-      activesupport (= 7.0.4.1)
-    activesupport (7.0.4.1)
+    activemodel (7.0.4.2)
+      activesupport (= 7.0.4.2)
+    activesupport (7.0.4.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -49,8 +49,8 @@ GEM
       bridgetown (>= 0.20.0, < 2.0)
     bridgetown-sitemap (1.2.0)
       bridgetown (>= 1.0, < 2.0)
-    bridgetown-svg-inliner (1.0.2)
-      bridgetown (>= 0.20, < 2.0)
+    bridgetown-svg-inliner (1.1.0)
+      bridgetown (>= 1.0, < 2.0)
       nokogiri
     colorator (1.1.0)
     concurrent-ruby (1.2.0)
@@ -94,14 +94,14 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     minitest (5.17.0)
-    multipart-post (2.2.3)
+    multipart-post (2.3.0)
     nio4r (2.5.8)
-    nokogiri (1.13.10-x86_64-linux)
+    nokogiri (1.14.0-x86_64-linux)
       racc (~> 1.4)
     public_suffix (5.0.1)
     puma (6.0.2)
       nio4r (~> 2.0)
-    racc (1.6.1)
+    racc (1.6.2)
     rack (3.0.4.1)
     rake (13.0.6)
     rb-fsevent (0.11.2)
@@ -134,7 +134,7 @@ DEPENDENCIES
   bridgetown-feed (= 2.1.0)
   bridgetown-seo-tag (= 5.0.0)
   bridgetown-sitemap (= 1.2.0)
-  bridgetown-svg-inliner (= 1.0.2)
+  bridgetown-svg-inliner (= 1.1.0)
   puma (~> 6.0)
 
 BUNDLED WITH
