@@ -94,6 +94,8 @@ Trataré de llevar el control de la cantiadad de articulos por caterogia en el b
     new_relic: 1,
     vim: 2,
   ],
+  personal: [
+    daily: 1,
+  ],
 }
 ```
-
