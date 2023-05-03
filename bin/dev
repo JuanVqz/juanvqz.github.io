@@ -15,5 +15,5 @@ chdir APP_ROOT do
   system! "docker-compose up -d"
 
   puts "== Visit at http://localhost:4000 =="
-  system! "docker-compose logs -f web"
+  system! "docker-compose logs -f app"
 end

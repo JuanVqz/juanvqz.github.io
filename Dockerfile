@@ -1,4 +1,4 @@
-FROM ruby:3.0-alpine3.14 as builder
+FROM ruby:3.0-alpine3.16 as builder
 
 RUN apk add --no-cache --virtual nodejs-dev yarn build-base libnotify-dev
 
