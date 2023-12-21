@@ -1,5 +1,5 @@
 {% for account in accounts %}
-  <a href="{{ account[1].url }}" target="_brank" class="account">
+  <a href="{{ account[1].url }}" target="_brank" class="account" aria-label="Link to my {{account[0]}}" >
     {% svg "images/{{ account[0] }}.svg", width: "24" %}
   </a>
 {% endfor %}
