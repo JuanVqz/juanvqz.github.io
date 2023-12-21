@@ -2,4 +2,5 @@
 
 Bridgetown.configure do
   init :"bridgetown-feed"
+  init :"bridgetown-seo-tag"
 end
