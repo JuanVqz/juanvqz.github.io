@@ -1,3 +1,5 @@
 # frozen_string_literal: true
 
-init :"bridgetown-feed"
+Bridgetown.configure do
+  init :"bridgetown-feed"
+end
