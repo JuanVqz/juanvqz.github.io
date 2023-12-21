@@ -32,5 +32,5 @@ group :bridgetown_plugins do
   gem "bridgetown-feed", "3.0.0"
   gem "bridgetown-seo-tag", "6.0.0"
   gem "bridgetown-sitemap", "2.0.2"
-  gem "bridgetown-svg-inliner", "1.1.0"
+  gem "bridgetown-svg-inliner", "2.0.0"
 end
