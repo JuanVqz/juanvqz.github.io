@@ -5,7 +5,6 @@
 # in the templates via {{ site.metadata.myvariable }}.
 
 title: Juan Vásquez
-tagline: Hablamos de programación web usando Ruby y JavaScript.
 tagline: I post stuff about programming, mostly using Ruby and JavaScript.
 author: Juan Vásquez
 twitter:
