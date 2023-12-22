@@ -17,6 +17,7 @@
     "postcss-preset-env": "9.3.0"
   },
   "dependencies": {
+    "jquery": "^3.7.1",
     "prismjs": "1.29.0"
   }
 }

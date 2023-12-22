@@ -14,6 +14,12 @@ Prism.highlightAll()
 
 // Import all JavaScript & CSS files from src/_components
 // import components from "bridgetownComponents/**/*.{js,jsx,js.rb,css}";
+import $ from "jquery";
+
+$(document).ready(function () {
+  console.log("jQuery is ready!")
+  $("main h2").css("color", "red");
+});
 
 console.info("Bridgetown is loaded!")
 
