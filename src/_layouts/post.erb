@@ -4,7 +4,11 @@ layout: default
 
 
 <div class="article">
-  <img src="/images/default.jpg" alt="<%= page.data.title %>" />
+  <picture>
+    <source srcset="/images/default.avif 1600w, /images/default.avif 800w" type="image/avif">
+    <source srcset="/images/default.webp 1600w, /images/default.webp 800w" type="image/webp">
+    <img fetchpriority="high" src="/images/default.jpg" alt="<%= page.data.title %>" />
+  </picture>
   <h2 class="text-center"><%= page.data.title %></h2>
   <div class="tags">
     by <%= page.data.author %>, <%= date_to_string page.data.date, :ordinal %>

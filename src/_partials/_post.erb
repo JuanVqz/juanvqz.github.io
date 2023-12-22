@@ -1,6 +1,10 @@
 <article>
   <a href="<%= post.relative_url %>">
-    <img src="/images/default.jpg" alt="<%= page.data.title %>" />
+    <picture>
+      <source srcset="/images/default.avif 1600w, /images/default.avif 800w" type="image/avif">
+      <source srcset="/images/default.webp 1600w, /images/default.webp 800w" type="image/webp">
+      <img fetchpriority="high" src="/images/default.jpg" alt="<%= page.data.title %>" />
+    </picture>
     <h4><%= post.data.title %></h4>
     <div class="article_date">
       <%= date_to_string post.data.date, :ordinal %>
