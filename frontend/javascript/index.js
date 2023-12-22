@@ -16,3 +16,11 @@ Prism.highlightAll()
 // import components from "bridgetownComponents/**/*.{js,jsx,js.rb,css}";
 
 console.info("Bridgetown is loaded!")
+
+document.addEventListener('DOMContentLoaded', () => {
+  new PerformanceObserver((entryList) => {
+    for (const entry of entryList.getEntries()) {
+      console.log('LCP candidate:', entry.startTime, entry);
+    }
+  }).observe({type: 'largest-contentful-paint', buffered: true});
+});
