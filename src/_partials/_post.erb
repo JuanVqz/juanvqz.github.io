@@ -1,5 +1,6 @@
 <article>
   <a href="<%= post.relative_url %>">
+    <img src="/images/default.jpg" alt="<%= page.data.title %>" />
     <h4><%= post.data.title %></h4>
     <div class="article_date">
       <%= date_to_string post.data.date, :ordinal %>
