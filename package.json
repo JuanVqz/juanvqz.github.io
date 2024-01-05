@@ -7,6 +7,10 @@
     "esbuild": "node esbuild.config.js --minify",
     "esbuild-dev": "node esbuild.config.js --watch"
   },
+  "engines": {
+    "node": ">= 19.9.0",
+    "npm": ">= 9.6.3"
+  },
   "devDependencies": {
     "esbuild": "0.16.17",
     "glob": "10.3.10",
