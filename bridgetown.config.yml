@@ -15,7 +15,7 @@
 #
 
 url: https://juanvasquez.dev
-lang: es
+lang: en
 permalink: pretty
 author: Juan Vásquez
 base_path: /
@@ -26,3 +26,6 @@ pagination:
 svg:
   optimize: true
 content_engine: resource
+collections:
+  posts:
+    permalink: /blog/:title/

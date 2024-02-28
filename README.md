@@ -84,7 +84,7 @@ Trataré de llevar el control de la cantiadad de articulos por caterogia en el b
     css: 1,
     javascript: 2,
     thisweekinrails: 1,
-    rails: 1,
+    rails: 2,
     git: 1
   ],
   english: [
