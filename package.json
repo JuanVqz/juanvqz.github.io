@@ -2,6 +2,9 @@
   "name": "juanvasquez.dev",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "deploy": "bundle exec bridgetown deploy",
     "esbuild": "node esbuild.config.js --minify",
