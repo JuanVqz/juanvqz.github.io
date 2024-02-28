@@ -12,9 +12,10 @@ author: Juan Vásquez
 
 I recently had to remove a table from a Rails application, so, I want to share ways to do it.
 
-1. **Using a migration:**
+## Using a Migration
 
-I'll go with this option because:
+**why this option?**
+
 - It's a standard way to make changes to the database.
 - It's reversible, so I can rollback the change if needed. (won't recover the data though).
 
@@ -49,9 +50,9 @@ To avoid mistakes, drop_table is only reversible if given options or a block (ca
 
 use the block to avoid the error.
 
-2. **Using the Rails Console:**
+## Using the Rails Console
 
-I'll go with this option because:
+**why this option?**
 
 - I don't want to track the history of the change.
 
@@ -64,9 +65,10 @@ ActiveRecord::Base.connection.execute("DROP TABLE IF EXISTS users;")
 ActiveRecord::Migration.drop_table :users
 ```
 
-3. **Using a database client:**
+## Using a Database Client
 
-I'll go with this option because:
+**why this option?**
+
 - I don't care about the history of the change.
 - I don't have access to run Rails commands.
 
