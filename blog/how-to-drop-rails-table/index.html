@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<title>How to Drop Rails Table | Juan Vásquez</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>How to Drop Rails Table | Juan Vásquez</title>
+<meta property="og:title" content="How to Drop Rails Table" />
+<meta name="author" content="Juan Vásquez" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Hi! What’s up? I’m Juan Vásquez. In this space you will find articles related to web development mostly using Ruby and JavaScript languages. If you are interested add my blog in your favorite RSS, every time I write something you will receive it. Feel free to contact me on twitter @juanvqz_ when you want." />
+<meta property="og:description" content="Hi! What’s up? I’m Juan Vásquez. In this space you will find articles related to web development mostly using Ruby and JavaScript languages. If you are interested add my blog in your favorite RSS, every time I write something you will receive it. Feel free to contact me on twitter @juanvqz_ when you want." />
+<link rel="canonical" href="https://juanvasquez.dev/blog/how-to-drop-rails-table/" />
+<meta property="og:url" content="https://juanvasquez.dev/blog/how-to-drop-rails-table/" />
+<meta property="og:site_name" content="Juan Vásquez" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-02-27T08:00:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="How to Drop Rails Table" />
+<meta name="twitter:site" content="@juanvqz_" />
+<meta name="twitter:creator" content="@Juan Vásquez" />
+<!-- End Bridgetown SEO tag -->
+
+<link type="application/atom+xml" rel="alternate" href="https://juanvasquez.dev/feed.xml" title="Juan Vásquez" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/_bridgetown/static/index.ZKZ3FOQA.css" />
+<script src="/_bridgetown/static/index.WN5PKAGR.js" defer></script>
+
+    
+  </head>
+  <body class="post">
+    <header class="header">
+  <a href="/" class="logo">Juan Vásquez</a>
+</header>
+
+
+    <main class="main">
+      <div class="article">
+  <h2 class="text-center">How to Drop Rails Table</h2>
+  <div class="tags">
+    by Juan Vásquez, 27 Feb 2024
+  </div>
+  <div class="tags">rails</div>
+
+  <article><blockquote>
+  <p><strong>Note:</strong> Remember dropping a table will remove all the data from it.</p>
+</blockquote>
+
+<p>I recently had to remove a table from a Rails application, so, I want to share ways to do it.</p>
+
+<h2 id="using-a-migration">Using a Migration</h2>
+
+<p><strong>why this option?</strong></p>
+
+<ul>
+  <li>It’s a standard way to make changes to the database.</li>
+  <li>It’s reversible, so I can rollback the change if needed. (won’t recover the data though).</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails generate migration DropUsers
+</code></pre></div></div>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DropUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><span class="p">[</span><span class="mf">7.0</span><span class="p">]</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">drop_table</span> <span class="ss">:users</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+      <span class="n">t</span><span class="p">.</span><span class="nf">string</span> <span class="ss">:name</span>
+      <span class="n">t</span><span class="p">.</span><span class="nf">string</span> <span class="ss">:email</span>
+      <span class="n">t</span><span class="p">.</span><span class="nf">timestamps</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>I saw some blog posts that only use <code class="highlighter-rouge">drop_table :users</code>, but that is not reversible, you may see this error when rolling back:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To avoid mistakes, drop_table is only reversible <span class="k">if </span>given options or a block <span class="o">(</span>can be empty<span class="o">)</span><span class="nb">.</span>
+
+doctors/db/migrate/20240228054356_drop_users.rb:3:in <span class="sb">`</span>change<span class="s1">'
+
+Caused by:
+ActiveRecord::IrreversibleMigration:
+
+To avoid mistakes, drop_table is only reversible if given options or a block (can be empty).
+</span></code></pre></div></div>
+
+<p>use the block to avoid the error.</p>
+
+<h2 id="using-the-rails-console">Using the Rails Console</h2>
+
+<p><strong>why this option?</strong></p>
+
+<ul>
+  <li>I don’t want to track the history of the change.</li>
+</ul>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bin</span><span class="o">/</span><span class="n">rails</span> <span class="n">console</span>
+<span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="s2">"DROP TABLE IF EXISTS users;"</span><span class="p">)</span>
+
+<span class="c1"># or using the helper method:</span>
+
+<span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><span class="p">.</span><span class="nf">drop_table</span> <span class="ss">:users</span>
+</code></pre></div></div>
+
+<h2 id="using-a-database-client">Using a Database Client</h2>
+
+<p><strong>why this option?</strong></p>
+
+<ul>
+  <li>I don’t care about the history of the change.</li>
+  <li>I don’t have access to run Rails commands.</li>
+</ul>
+
+<p>Depending on the database you are using, you can use the client to drop the table.</p>
+
+<p>For example, using the <code class="highlighter-rouge">psql</code> client for PostgreSQL:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>psql <span class="nt">-U</span> username <span class="nt">-d</span> database_name
+DROP TABLE IF EXISTS <span class="nb">users</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><a href="https://github.com/JuanVqz/doctors/pull/466/files#diff-7e80a8047615e45e8edbf2f36d8cd899e929d16711bdeb78e22dbbbc8e2f13e0">Here</a> you can see the pull request where I dropped the table.</p></article>
+
+  <p class="article_footer">
+    Last Update 27 Feb 2024
+  </p>
+</div>
+
+    </main>
+
+    <footer class="footer">
+  <div>
+    
+  <a href="https://www.youtube.com/channel/UC9bsDBNvCZEEjrjFdFLtIYA" target="_brank" class="account" aria-label="Link to my youtube" >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube" width="24">
+  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+  <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+</svg>
+  </a>
+
+  <a href="https://twitter.com/juanvqz_" target="_brank" class="account" aria-label="Link to my twitter" >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter" width="24">
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+</svg>
+  </a>
+
+  <a href="https://github.com/JuanVqz" target="_brank" class="account" aria-label="Link to my github" >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github" width="24">
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+</svg>
+  </a>
+
+  <a href="mailto: juan@ombulabs.com" target="_brank" class="account" aria-label="Link to my email" >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail" width="24">
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+</svg>
+  </a>
+
+  <a href="https://juanvasquez.dev/feed.xml" target="_brank" class="account" aria-label="Link to my rss" >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss" width="24">
+  <path d="M4 11a9 9 0 0 1 9 9"/>
+  <path d="M4 4a16 16 0 0 1 16 16"/>
+  <circle cx="5" cy="19" r="1"/>
+</svg>
+  </a>
+
+
+  </div>
+  <div>
+    Building with ❤️  in
+    <a href="https://www.bridgetownrb.com" target="_blank">
+      bridgetown.rb
+    </a>
+  </div>
+</footer>
+
+  </body>
+</html>
