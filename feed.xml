@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://bridgetownrb.com/" version="1.3.4">Bridgetown</generator><link href="https://juanvasquez.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://juanvasquez.dev/" rel="alternate" type="text/html" hreflang="en" /><updated>2024-06-13T08:24:58-06:00</updated><id>https://juanvasquez.dev/feed.xml</id><title type="html">Juan Vásquez</title><subtitle>Hi! What&apos;s up? I&apos;m Juan Vásquez. In this space you will find articles related to web development mostly using Ruby and JavaScript languages. If you are interested add my blog in your favorite RSS, every time I write something you will receive it. Feel free to contact me on twitter @juanvqz_ when you want.</subtitle><author><name>Juan Vásquez</name></author><entry><title type="html">MySQL on Linux</title><link href="https://juanvasquez.dev/blog/mysql-on-linux/" rel="alternate" type="text/html" title="MySQL on Linux" /><published>2024-04-19T08:00:00-06:00</published><updated>2024-04-19T08:00:00-06:00</updated><id>repo://posts.collection/_posts/2024-04-19-mysql-on-linux.md</id><content type="html" xml:base="https://juanvasquez.dev/blog/mysql-on-linux/">&lt;h1 id=&quot;install-mysql-on-linux&quot;&gt;Install MySQL on Linux&lt;/h1&gt;
+
+&lt;p&gt;MySQL is one of the most popular open-source relational database management systems.&lt;/p&gt;
+
+&lt;p&gt;In this guide, we’ll walk you through the steps to install MySQL on Linux.&lt;/p&gt;
+
+&lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
+
+&lt;p&gt;Before you begin, make sure you have the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A Linux-based operating system&lt;/li&gt;
+  &lt;li&gt;A user account with sudo privileges&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;step-1-update-package-list&quot;&gt;Step 1: Update Package List&lt;/h3&gt;
+
+&lt;p&gt;First, update the package list to ensure you have the latest information about available packages:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;step-2-install-mysql-server&quot;&gt;Step 2: Install MySQL Server&lt;/h3&gt;
+
+&lt;p&gt;To install MySQL Server, run the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;mysql-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;During the installation process, you’ll be prompted to set a root password for MySQL. Make sure to choose a strong password and keep it secure.&lt;/p&gt;
+
+&lt;p&gt;If you are not prompted to set a password, you can set it manually by running the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;ALTER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;USER&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;root&apos;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;localhost&apos;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IDENTIFIED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WITH&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mysql_native_password&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;your_password&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;secure-mysql-installation&quot;&gt;Secure MySQL Installation&lt;/h2&gt;
+
+&lt;p&gt;MySQL comes with a script that helps you secure the installation. Run the following command to start the script:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mysql_secure_installation
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The script will guide you through the process of securing your MySQL installation. You can choose to set a root password, remove anonymous users, disallow root login remotely, and remove the test database.&lt;/p&gt;
+
+&lt;h2 id=&quot;useful-mysql-commands&quot;&gt;Useful MySQL Commands&lt;/h2&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start mysql
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop mysql
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;verify-mysql-installation&quot;&gt;Verify MySQL Installation&lt;/h2&gt;
+
+&lt;p&gt;To verify that MySQL is installed and running correctly, log in to the MySQL shell as the root user:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mysql &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; root &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Enter the root password you set during the installation process. If you can log in without any errors, MySQL is installed and running correctly.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;You have successfully installed MySQL on your Linux system. You can now start using MySQL to create databases, tables, and manage your data.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, feel free to contact me on &lt;a href=&quot;https://twitter.com/juanvqz_&quot;&gt;Twitter&lt;/a&gt;. I’d be happy to help!&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><category term="database" /><category term="mysql" /></entry><entry><title type="html">How to Drop Rails Table</title><link href="https://juanvasquez.dev/blog/how-to-drop-rails-table/" rel="alternate" type="text/html" title="How to Drop Rails Table" /><published>2024-02-27T08:00:00-06:00</published><updated>2024-02-27T08:00:00-06:00</updated><id>repo://posts.collection/_posts/2024-02-27-drop-rails-table.md</id><content type="html" xml:base="https://juanvasquez.dev/blog/how-to-drop-rails-table/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Remember dropping a table will remove all the data from it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I recently had to remove a table from a Rails application, so, I want to share ways to do it.&lt;/p&gt;
+
+&lt;h2 id=&quot;using-a-migration&quot;&gt;Using a Migration&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;why this option?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It’s a standard way to make changes to the database.&lt;/li&gt;
+  &lt;li&gt;It’s reversible, so I can rollback the change if needed. (won’t recover the data though).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rails generate migration DropUsers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DropUsers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;7.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;change&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;drop_table&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:users&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:email&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;timestamps&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I saw some blog posts that only use &lt;code class=&quot;highlighter-rouge&quot;&gt;drop_table :users&lt;/code&gt;, but that is not reversible, you may see this error when rolling back:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;To avoid mistakes, drop_table is only reversible &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;given options or a block &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;can be empty&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+
+doctors/db/migrate/20240228054356_drop_users.rb:3:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;change&lt;span class=&quot;s1&quot;&gt;&apos;
+
+Caused by:
+ActiveRecord::IrreversibleMigration:
+
+To avoid mistakes, drop_table is only reversible if given options or a block (can be empty).
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;use the block to avoid the error.&lt;/p&gt;
+
+&lt;h2 id=&quot;using-the-rails-console&quot;&gt;Using the Rails Console&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;why this option?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I don’t want to track the history of the change.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rails&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;console&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;DROP TABLE IF EXISTS users;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# or using the helper method:&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;drop_table&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:users&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;using-a-database-client&quot;&gt;Using a Database Client&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;why this option?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I don’t care about the history of the change.&lt;/li&gt;
+  &lt;li&gt;I don’t have access to run Rails commands.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Depending on the database you are using, you can use the client to drop the table.&lt;/p&gt;
+
+&lt;p&gt;For example, using the &lt;code class=&quot;highlighter-rouge&quot;&gt;psql&lt;/code&gt; client for PostgreSQL:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;psql &lt;span class=&quot;nt&quot;&gt;-U&lt;/span&gt; username &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; database_name
+DROP TABLE IF EXISTS &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/JuanVqz/doctors/pull/466/files#diff-7e80a8047615e45e8edbf2f36d8cd899e929d16711bdeb78e22dbbbc8e2f13e0&quot;&gt;Here&lt;/a&gt; you can see the pull request where I dropped the table.&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><category term="rails" /></entry><entry><title type="html">Mastering Git Bisect: Finding Bugs with Precision</title><link href="https://juanvasquez.dev/blog/mastering-git-bisect-finding-bugs-with-precision/" rel="alternate" type="text/html" title="Mastering Git Bisect: Finding Bugs with Precision" /><published>2023-09-03T08:00:00-06:00</published><updated>2023-09-03T08:00:00-06:00</updated><id>repo://posts.collection/_posts/2023-09-03-git-bisect.md</id><content type="html" xml:base="https://juanvasquez.dev/blog/mastering-git-bisect-finding-bugs-with-precision/">&lt;h1 id=&quot;mastering-git-bisect-finding-bugs-with-precision&quot;&gt;Mastering Git Bisect: Finding Bugs with Precision&lt;/h1&gt;
+
+&lt;p&gt;In the world of software development, bugs are a common adversary.
+They can be elusive, popping up when you least expect them and wreaking havoc in your codebase.
+When you encounter a bug, one of the most critical tasks is to identify the exact commit that introduced it.
+This is where Git Bisect, a powerful tool provided by Git, comes to the rescue.&lt;/p&gt;
+
+&lt;p&gt;Git Bisect is a tool that helps you perform a binary search through your commit history
+to find the specific commit responsible for a bug.
+It automates the process of checking out different commits,
+allowing you to quickly narrow down the culprit.
+In this article, we’ll explore how to use Git Bisect effectively.&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-the-stage&quot;&gt;Setting the Stage&lt;/h2&gt;
+
+&lt;p&gt;Imagine you’re working on a project with a large codebase,
+and you’ve discovered a bug - let’s call it Bug X. You know that at some point in the project’s history,
+everything was working perfectly.
+However, due to the complexity of the code and the number of commits,
+you have no idea when or where Bug X was introduced.&lt;/p&gt;
+
+&lt;p&gt;This is where Git Bisect shines. It helps you find the problematic commit methodically and efficiently.&lt;/p&gt;
+
+&lt;h2 id=&quot;starting-git-bisect&quot;&gt;Starting Git Bisect&lt;/h2&gt;
+
+&lt;p&gt;The first step is to start the Git Bisect process. Open your terminal and navigate to your project’s repository. Then, run:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git bisect start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This command initializes the bisect process and prepares Git to help you find the bug’s root cause.&lt;/p&gt;
+
+&lt;h2 id=&quot;marking-good-and-bad-commits&quot;&gt;Marking Good and Bad Commits&lt;/h2&gt;
+
+&lt;p&gt;To begin the search, you need to identify two commits:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;A &lt;strong&gt;bad&lt;/strong&gt; commit: This is a commit where you know for sure that Bug X exists.&lt;/li&gt;
+  &lt;li&gt;A &lt;strong&gt;good&lt;/strong&gt; commit: This is a commit where you are certain that Bug X does not exist.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Use the following commands to mark these commits:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;To mark a commit as &lt;strong&gt;bad&lt;/strong&gt;, use:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git bisect bad &amp;lt;commit&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;To mark a commit as &lt;strong&gt;good&lt;/strong&gt;, use:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git bisect good &amp;lt;commit&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;let-the-binary-search-begin&quot;&gt;Let the Binary Search Begin&lt;/h2&gt;
+
+&lt;p&gt;With the good and bad commits marked, Git will now perform a binary search through your commit history.
+It will check out commits in the middle of the range you specified (between the good and bad commits).
+You will need to test each of these commits and inform Git if they are “good” or “bad.”&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If a checked-out commit is &lt;strong&gt;bad&lt;/strong&gt;, run:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git bisect bad
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If a checked-out commit is &lt;strong&gt;good&lt;/strong&gt;, run:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git bisect good
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Git will then proceed to check out the next commit in the middle of the remaining range,
+and you repeat the testing process.
+Git will continue this cycle until it has identified the exact commit where Bug X was introduced.&lt;/p&gt;
+
+&lt;h2 id=&quot;viewing-bisect-progress&quot;&gt;Viewing Bisect Progress&lt;/h2&gt;
+
+&lt;p&gt;During the bisect process, it’s useful to keep track of the progress.
+To view the history of the bisect process, you can use:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git bisect log
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This command displays a table with information about the commits that have been checked,
+including their commit hash, commit message, and whether they were marked as “good” or “bad.”&lt;/p&gt;
+
+&lt;h2 id=&quot;ending-the-bisect-process&quot;&gt;Ending the Bisect Process&lt;/h2&gt;
+
+&lt;p&gt;Once Git has identified the commit that introduced the bug,
+it will display the commit hash and any additional information.
+You can end the bisect process by running:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git bisect reset
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;At this point, you can investigate the problematic commit, fix the bug,
+or take any other necessary actions.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Git Bisect is an invaluable tool in a developer’s toolkit for debugging.
+It simplifies the process of finding the commit that introduced a bug,
+saving you time and frustration.
+Whether you’re working on a large codebase or a small project,
+Git Bisect can help you pinpoint and resolve issues efficiently,
+allowing you to deliver more reliable software to your users.&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><category term="git" /></entry><entry><title type="html">How to Remove Multiple Git Branches at Once</title><link href="https://juanvasquez.dev/blog/how-to-remove-multiple-git-branches-at-once/" rel="alternate" type="text/html" title="How to Remove Multiple Git Branches at Once" /><published>2023-05-02T08:00:00-06:00</published><updated>2023-05-02T08:00:00-06:00</updated><id>repo://posts.collection/_posts/2023-05-02-how-to-remove-multiple-git-branches-at-once.md</id><content type="html" xml:base="https://juanvasquez.dev/blog/how-to-remove-multiple-git-branches-at-once/">&lt;p&gt;Git is a powerful version control system that allows developers to manage their source code effectively.
+One of the features of Git is the ability to create branches,
+which allow developers to work on multiple features or bug fixes simultaneously without interfering with each other’s code.&lt;/p&gt;
+
+&lt;p&gt;However, when a project has many branches, it can become challenging to manage them effectively.&lt;/p&gt;
+
+&lt;p&gt;In this article, we’ll show you how to remove multiple Git branches at once to help you keep your repository tidy.&lt;/p&gt;
+
+&lt;h1 id=&quot;removing-a-single-git-branch&quot;&gt;Removing a Single Git Branch&lt;/h1&gt;
+
+&lt;p&gt;Before we dive into removing multiple branches, let’s first review how to remove a single branch.&lt;/p&gt;
+
+&lt;p&gt;To remove a branch, you can use the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git branch -D branch-name-you-want-to-remove
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;removing-multiple-git-branches&quot;&gt;Removing Multiple Git Branches&lt;/h1&gt;
+
+&lt;p&gt;Git does not have a native way to remove multiple branches in one single command.
+However, there is a straightforward process that you can follow to remove many branches at once.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Open the terminal.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the following command to filter the branches you want to remove:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git branch | grep &quot;&amp;lt;pattern&amp;gt;&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pattern&amp;gt;&lt;/code&gt; with a regular expression that matches the branches you want to remove.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, if you want to remove all branches that start with “feature,” you could use the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git branch | grep &quot;feature.*&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Once you’ve verified that the correct branches have been filtered, run the following command to remove them:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git branch | grep &quot;&amp;lt;pattern&amp;gt;&quot; | xargs git branch -D
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;xargs&lt;/code&gt; command to execute the &lt;code class=&quot;highlighter-rouge&quot;&gt;git branch -D&lt;/code&gt; command on each filtered branch.&lt;/p&gt;
+
+&lt;p&gt;And that’s it! By following these simple steps, you can easily remove multiple branches from your Git repository.&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><category term="git" /></entry><entry><title type="html">Happy New Year 2023</title><link href="https://juanvasquez.dev/blog/happy-new-year-2023/" rel="alternate" type="text/html" title="Happy New Year 2023" /><published>2023-01-29T20:54:51-06:00</published><updated>2021-08-27T21:54:51-05:00</updated><id>repo://posts.collection/_posts/2023-01-29-happy-new-year-2023.md</id><content type="html" xml:base="https://juanvasquez.dev/blog/happy-new-year-2023/">&lt;p&gt;Hey folks, I just wanted to say….&lt;/p&gt;
+
+&lt;h1 id=&quot;happy-new-year--&quot;&gt;Happy New Year 🥳 !!!&lt;/h1&gt;</content><author><name>Juan Vásquez</name></author><category term="daily" /></entry><entry><title type="html">Migrate sentry-raven to sentry-ruby gem in rails</title><link href="https://juanvasquez.dev/blog/migrate-sentry-raven-to-sentry-ruby-gem-in-rails/" rel="alternate" type="text/html" title="Migrate sentry-raven to sentry-ruby gem in rails" /><published>2022-07-01T09:00:00-05:00</published><updated>2022-07-01T09:00:00-05:00</updated><id>repo://posts.collection/_posts/2022-07-01-migrate-sentry-raven-to-sentry-ruby-in-rails.md</id><content type="html" xml:base="https://juanvasquez.dev/blog/migrate-sentry-raven-to-sentry-ruby-gem-in-rails/">&lt;p&gt;To be honest, following the
+&lt;a href=&quot;https://docs.sentry.io/platforms/ruby/migration&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sentry&lt;/code&gt; documentation&lt;/a&gt;
+was pretty straightforward.&lt;/p&gt;
+
+&lt;h2 id=&quot;change-gems&quot;&gt;Change gems&lt;/h2&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Old&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sentry-raven&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# New&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sentry-ruby&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sentry-rails&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;change-initialization&quot;&gt;Change initialization&lt;/h2&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Raven&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;dsn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;DSN&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# New&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Sentry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;dsn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;DSN&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;change-raven-to-sentry&quot;&gt;Change Raven to Sentry&lt;/h2&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Old&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Raven&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;capture_message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;extra: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;debug: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# New&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Sentry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;capture_message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;extra: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;debug: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;extra&quot;&gt;Extra&lt;/h2&gt;
+
+&lt;p&gt;The only thing I had to check was related to a key called &lt;code class=&quot;highlighter-rouge&quot;&gt;sanitize_fields&lt;/code&gt;
+that was removed in this new SDK (sentry-ruby) but they implemented at least
+three new options:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Use the new key called &lt;code class=&quot;highlighter-rouge&quot;&gt;send_default_pii = true&lt;/code&gt; already filter the params.&lt;/li&gt;
+  &lt;li&gt;Use a filtering method in the initialization config.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Copied&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Sentry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#...&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# this example uses Rails&apos; parameter filter to sanitize the event payload&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# for Rails 6+&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveSupport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ParameterFilter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rails&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;filter_parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# for Rails 5&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActionDispatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ParameterFilter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rails&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;filter_parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;before_send&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;Install a &lt;a href=&quot;https://github.com/mrexox/sentry-sanitizer&quot;&gt;sentry-sanitizer&lt;/a&gt; gem.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Feel free to pick one, we picked the second one.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/getsentry/sentry-ruby/issues/1140&quot;&gt;more info about sanitize fields&lt;/a&gt;&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><category term="daily" /><category term="rails" /></entry><entry><title type="html">How to fix RVM openssl error in ubuntu 22.04</title><link href="https://juanvasquez.dev/blog/how-to-fix-rvm-openssl-error-in-ubuntu-22.04/" rel="alternate" type="text/html" title="How to fix RVM openssl error in ubuntu 22.04" /><published>2022-06-15T09:00:00-05:00</published><updated>2022-06-15T09:00:00-05:00</updated><id>repo://posts.collection/_posts/2022-06-15-how-to-fix-openssl-error-with-rvm-in-ubuntu-22-04.md</id><content type="html" xml:base="https://juanvasquez.dev/blog/how-to-fix-rvm-openssl-error-in-ubuntu-22.04/">&lt;p&gt;Recently, I installed Ubuntu 22.04 because I wanted to be on the latest version.&lt;/p&gt;
+
+&lt;p&gt;I installed &lt;a href=&quot;https://rvm.io/&quot;&gt;rvm.io&lt;/a&gt; without issues,
+then I just wanted to download the ruby binary as usual.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rvm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;2.6.9
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;and oh, surprise! ran in the following error&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://res.cloudinary.com/juanvqz/image/upload/v1655678572/blog/2022-06-15/download-ruby-error_mhgvj0.png#center&quot; alt=&quot;How to fix RVM openssl error in ubuntu 22.04&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;at the beginning I didn’t understand the error,
+I thought needed to install some &lt;code class=&quot;highlighter-rouge&quot;&gt;rvm requirements&lt;/code&gt;, but didn’t work.&lt;/p&gt;
+
+&lt;p&gt;to solve it, need to downgrade the &lt;code class=&quot;highlighter-rouge&quot;&gt;openssl&lt;/code&gt; version&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rvm pkg &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;openssl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;then&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rvm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby-2.6.9 &lt;span class=&quot;nt&quot;&gt;--with-openssl-dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.rvm/usr
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;problably you will have errors in another gems, though&lt;/p&gt;
+
+&lt;h1 id=&quot;resouces&quot;&gt;Resouces&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rvm/rvm/issues/5209&quot;&gt;https://github.com/rvm/rvm/issues/5209&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rvm/ubuntu_rvm/issues/67&quot;&gt;https://github.com/rvm/ubuntu_rvm/issues/67&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Juan Vásquez</name></author><category term="daily" /><category term="ubuntu" /></entry><entry><title type="html">How to install zsh and oh-my-zsh on ubuntu?</title><link href="https://juanvasquez.dev/blog/how-to-install-zsh-and-oh-my-zsh-on-ubuntu/" rel="alternate" type="text/html" title="How to install zsh and oh-my-zsh on ubuntu?" /><published>2022-06-03T09:00:00-05:00</published><updated>2022-06-03T09:00:00-05:00</updated><id>repo://posts.collection/_posts/2022-06-03-how-to-install-zsh-and-oh-my-zsh-on-ubuntu.md</id><content type="html" xml:base="https://juanvasquez.dev/blog/how-to-install-zsh-and-oh-my-zsh-on-ubuntu/">&lt;p&gt;Do you want to use a fancy terminal?, then install zsh and ohmyzsh.&lt;/p&gt;
+
+&lt;h1 id=&quot;install-zsh&quot;&gt;Install zsh&lt;/h1&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;zsh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;install-oh-my-zsh&quot;&gt;Install Oh-My-Zsh&lt;/h1&gt;
+
+&lt;p&gt;Then go to &lt;a href=&quot;https://ohmyz.sh#install&quot;&gt;https://ohmyz.sh&lt;/a&gt; page copy and execute
+the following command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-fsSL&lt;/span&gt; https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;plugins&quot;&gt;Plugins&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins&quot;&gt;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/zsh-users&quot;&gt;https://github.com/zsh-users&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh&quot;&gt;https://github.com/zsh-users/zsh-autosuggestions&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;install-plugin-example&quot;&gt;Install Plugin Example&lt;/h1&gt;
+
+&lt;p&gt;I have used zsh-autosuggestions for a long time, so, I’ll show you how to add
+this plugin in your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; file&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-autosuggestions &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ZSH_CUSTOM&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;~/.oh-my-zsh/custom&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/plugins/zsh-autosuggestions
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;then open your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; file, find the &lt;code class=&quot;highlighter-rouge&quot;&gt;plugins&lt;/code&gt; section and add &lt;code class=&quot;highlighter-rouge&quot;&gt;zsh-autosuggestions&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# other plugins...&lt;/span&gt;
+    zsh-autosuggestions
+&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;start a new terminal session and bom! will have autosuggestions.&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><category term="daily" /><category term="tools" /></entry><entry><title type="html">How Do I Use Prismjs in My blog?</title><link href="https://juanvasquez.dev/blog/how-do-i-use-prismjs-in-my-blog/" rel="alternate" type="text/html" title="How Do I Use Prismjs in My blog?" /><published>2022-05-30T09:00:00-05:00</published><updated>2022-05-30T09:00:00-05:00</updated><id>repo://posts.collection/_posts/2022-05-30-how-do-i-use-prismjs-in-my-blog.md</id><content type="html" xml:base="https://juanvasquez.dev/blog/how-do-i-use-prismjs-in-my-blog/">&lt;blockquote&gt;
+  &lt;p&gt;Prism is a lightweight, extensible syntax highlighter,
+built with modern web standards in mind. It’s used in millions of websites,
+including some of those you visit daily. - &lt;a href=&quot;https://prismjs.com/&quot;&gt;prismjs documentation&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;how-to-install-it&quot;&gt;How to install it?&lt;/h2&gt;
+&lt;p&gt;There are several ways to install it, if you want to know more about it just
+navigate to its web page &lt;a href=&quot;https://prismjs.com&quot;&gt;https://prismjs.com&lt;/a&gt; and download it.&lt;/p&gt;
+
+&lt;p&gt;In my case I used &lt;code class=&quot;highlighter-rouge&quot;&gt;npm&lt;/code&gt; to install it&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;prismjs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;how-to-enable-prismjs&quot;&gt;How to enable prismjs?&lt;/h1&gt;
+
+&lt;p&gt;Add the following lines in your js file&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Prism&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;prismjs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;Prism&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;highlightAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;how-to-enable-a-theme&quot;&gt;How to enable a theme?&lt;/h1&gt;
+
+&lt;p&gt;There are some &lt;a href=&quot;https://github.com/PrismJS/prism-themes&quot;&gt;themes&lt;/a&gt; included by default,
+you could add more if decired, though.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;prismjs/themes/prism-solarizedlight.css&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;how-to-enable-more-languages&quot;&gt;How to enable more languages?&lt;/h1&gt;
+
+&lt;p&gt;PrismJS supports many &lt;a href=&quot;https://github.com/PrismJS/prism/tree/master/components&quot;&gt;languages&lt;/a&gt;
+but they are disabled by default, in order to use them you must enable them as shown below.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;prismjs/components/prism-bash.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;prismjs/components/prism-docker.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;prismjs/components/prism-dot.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;prismjs/components/prism-yaml.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;prismjs/components/prism-ruby.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;syntax-examples&quot;&gt;Syntax examples&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Bash&lt;/span&gt;
+gh &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;checkout 100
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-dockerfile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Dockerfile&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; ruby:2.7-alphine&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Ruby&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Class&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Dog&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bark&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Guaw guaw!!!&quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Dog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bark&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Guaw guaw!!!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You can navigate into &lt;strong&gt;node_modules&lt;/strong&gt; and see all the available components.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Pros&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Easy to use&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Modular&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Cons&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Tricky, when you don’t know how to enable more components&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>Juan Vásquez</name></author><category term="daily" /><category term="bridgetownrb" /></entry><entry><title type="html">Dockerizing Bridwgetownrb v1</title><link href="https://juanvasquez.dev/blog/dockerizing-bridwgetownrb-v1/" rel="alternate" type="text/html" title="Dockerizing Bridwgetownrb v1" /><published>2022-05-15T09:00:00-05:00</published><updated>2022-05-15T09:00:00-05:00</updated><id>repo://posts.collection/_posts/2022-05-15-dockerizing-bridgetownrb-v1.md</id><content type="html" xml:base="https://juanvasquez.dev/blog/dockerizing-bridwgetownrb-v1/">&lt;p&gt;I’m working in a new pc, as a result I wanted to dockerize my bridgetownrb blog
+because not want to have my pc dirty XD&lt;/p&gt;
+
+&lt;p&gt;As usual I started searching how to dockerize &lt;a href=&quot;https://www.bridgetownrb.com/&quot;&gt;bridgetownrb&lt;/a&gt;
+I found this easy to follow &lt;a href=&quot;https://blog.konnor.site/bridgetownrb/dockerizing-bridgetown/&quot;&gt;post&lt;/a&gt;
+(Konnor thank you for that) but wait a minute it is not up to date, we are actually
+in bridgetownrb version 1 (in a few days will be a beta release of Bridgwtown 1.1).&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;
+Crossing our fingers we&amp;#39;ll have a beta release of Bridgetown 1.1 ready to roll next week,
+just in time for Bridgetown Bash during RailsConf! 🤞&lt;/p&gt;&amp;mdash; Bridgetown (@bridgetownrb)
+&lt;a href=&quot;https://twitter.com/bridgetownrb/status/1525126134626545664?ref_src=twsrc%5Etfw&quot;&gt;May 13, 2022&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;dockerizing-it&quot;&gt;Dockerizing it!&lt;/h2&gt;
+
+&lt;p&gt;In root directory create the following files&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I’m only covering esbuild config since I’m using it&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;dockerfile&quot;&gt;Dockerfile&lt;/h2&gt;
+
+&lt;div class=&quot;language-docker highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ruby:3.0-alpine3.14&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;as&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;builder&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;apk add &lt;span class=&quot;nt&quot;&gt;--no-cache&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--virtual&lt;/span&gt; nodejs-dev yarn build-base libnotify-dev
+
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;as&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;bridgetownrb&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;ARG&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; USER_ID=${USER_ID:-1000}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;ARG&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; GROUP_ID=${GROUP_ID:-1000}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;ARG&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; DOCKER_USER=${DOCKER_USER:-user}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;ARG&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; APP_DIR=${APP_DIR:-/home/user/blog}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;addgroup &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$GROUP_ID&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$GROUP_ID&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;adduser &lt;span class=&quot;nt&quot;&gt;--disabled-password&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-G&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$GROUP_ID&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--uid&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$USER_ID&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$DOCKER_USER&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$APP_DIR&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;chown&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$USER_ID&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$GROUP_ID&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$APP_DIR&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;WORKDIR&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; $APP_DIR&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;COPY&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; --chown=$USER_ID:$GROUP_ID Gemfile* $APP_DIR/&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bundler:&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 1 Gemfile.lock&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;COPY&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; --chown=$USER_ID:$GROUP_ID package.json $APP_DIR&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;COPY&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; --chown=$USER_ID:$GROUP_ID yarn.lock $APP_DIR&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;yarn &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;docker-composeyml&quot;&gt;docker-compose.yml&lt;/h2&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;USER_ID&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${USER_ID:-1000}&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;GROUP_ID&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${GROUP_ID:-1000}&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;DOCKER_USER&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${DOCKER_USER:-user}&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;APP_DIR&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${APP_DIR:-/home/user/blog}&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sh -c &quot;bundle exec bridgetown dev&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;4000:4000&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;4001:4001&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;4002:4002&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.:${APP_DIR:-/home/user/blog}&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;node_modules:${APP_DIR:-/home/user/blog}/node_modules&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;node_modules&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;dockerignore&quot;&gt;.dockerignore&lt;/h2&gt;
+
+&lt;div class=&quot;language-dot highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Bridgetown&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;output&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;bridgetown&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cache&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;bridgetown&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;metadata&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;bridgetown&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;webpack&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Dependency folders&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;node_modules&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;bower_components&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;vendor&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Caches&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sass&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cache&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;npm&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;node_repl_history&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Ignore bundler config.&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;/.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;bundle&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Ignore Byebug command history file.&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;byebug_history&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# dotenv environment variables file&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;env&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Mac files&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DS_Store&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Yarn&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;yarn&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;log&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;yarn&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pnp&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pnp&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;js&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Yarn Integrity file&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;yarn&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;integrity&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;git&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;then just run the following steps&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker-compose up &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;and visit &lt;a href=&quot;http://localhost:4000&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4000&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;extra&quot;&gt;Extra&lt;/h2&gt;
+
+&lt;p&gt;Under &lt;code class=&quot;highlighter-rouge&quot;&gt;bin&lt;/code&gt; directory, create the following files
+and add the &lt;code class=&quot;highlighter-rouge&quot;&gt;execution&lt;/code&gt; permission.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;bin/setup
+&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;bin/dev
+
+&lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x bin/setup
+&lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x bin/dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;binsetup&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bin/setup&lt;/code&gt;&lt;/h2&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;pathname&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;fileutils&quot;&lt;/span&gt;
+&lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;FileUtils&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# move to the root application.&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;APP_ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Pathname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expand_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../../&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;__FILE__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;system!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;abort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;== Command &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; failed ==&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;chdir&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;APP_ROOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;== Build container ==&quot;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;docker-compose build&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;== Image created ==&quot;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;docker images | grep juanvqz&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;then run &lt;code class=&quot;highlighter-rouge&quot;&gt;./bin/setup&lt;/code&gt; first time or when want to build the image (not used to often).&lt;/p&gt;
+
+&lt;h2 id=&quot;bindev&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bin/dev&lt;/code&gt;&lt;/h2&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;pathname&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;fileutils&quot;&lt;/span&gt;
+&lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;FileUtils&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# move to the root application.&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;APP_ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Pathname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expand_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../../&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;__FILE__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;system!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;abort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;== Command &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; failed ==&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;chdir&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;APP_ROOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;== Running container ==&quot;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;docker-compose up -d&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;== Visit at http://localhost:4000 ==&quot;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;docker-compose logs -f web&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;then run &lt;code class=&quot;highlighter-rouge&quot;&gt;./bin/dev&lt;/code&gt; (this is used all the time).&lt;/p&gt;</content><author><name>Juan Vásquez</name></author><category term="docker" /><category term="bridgetownrb" /></entry></feed>
