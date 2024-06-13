@@ -131,4 +131,4 @@ DEPENDENCIES
   puma (~> 6.4)
 
 BUNDLED WITH
-   2.2.3
+   2.5.11
