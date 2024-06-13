@@ -25,7 +25,7 @@ Si te interesa Bridgetown no dudes en tomar código de aquí y si tienes dudas e
 ## Requisitos 👩‍🔧
 
 - [Ruby](https://www.ruby-lang.org/en/downloads/)
-  - `>= 3.0.0`
+  - `>= 3.3.2`
 - [Bridgetown Gem](https://rubygems.org/gems/bridgetown)
   - `gem install bundler bridgetown -N`
 - [Node](https://nodejs.org)
