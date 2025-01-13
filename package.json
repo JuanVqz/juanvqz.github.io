@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "esbuild": "0.16.17",
-    "glob": "11.0.0",
+    "glob": "11.0.1",
     "postcss": "8.4.49",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-import": "16.1.0",
