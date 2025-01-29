@@ -30,6 +30,7 @@ twitter_username: juanvqz_
 github_username:  juanvqz
 
 # Build settings
+show_excerpts: true
 theme: minima
 plugins:
   - jekyll-feed
