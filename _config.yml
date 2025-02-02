@@ -1,18 +1,30 @@
-title: Juan Vasquez
-email: contact@juanvasquez.dev
+title: Juan's Blog
+
+author:
+  name: Juan Vásquez
+  email: contact@juanvasquez.dev
+
 description: >-
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: /
+  Welcome to my blog! I'm a senior software developer with expertise in Ruby, Rails, and JavaScript,
+  sharing insights on development, best practices, technical challenges, and career growth.
+  Here, you'll find posts on upgrading legacy applications, optimizing web apps, writing RSpec tests, and boosting team productivity.
+  I also share personal experiences, from home remodeling to setting up a local server for photo storage.
+  Whether you're seeking technical guidance or leadership tips, this blog offers valuable insights into the ever-evolving world of software development.
+
 url: https://juanvasquez.dev
-twitter_username: juanvqz_
-github_username:  juanvqz
-
-show_excerpts: true
-theme: minima
-plugins:
-  - jekyll-feed
-
+baseurl: /
 permalink: /blog/:title/
 timezone: America/Mexico_City
+
+theme: minima
+show_excerpts: true
+header_pages:
+  - about.md
+
+minima:
+  social_links:
+    - { platform: github,  user_url: 'https://github.com/juanvqz', title: "Juan's GitHub" }
+    - { platform: twitter, user_url: 'https://twitter.com/juanvqz_', title: "Juan's Twitter" }
+
+plugins:
+  - jekyll-feed
