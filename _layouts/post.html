@@ -30,26 +30,9 @@ layout: base
     {{ content }}
   </div>
 
-  {%- if site.disqus.shortname -%}
-    {%- include disqus_comments.html -%}
+  {%- if site.giscus.category -%}
+    {%- include giscus_comments.html -%}
   {%- endif -%}
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
-
-<script src="https://giscus.app/client.js"
-  data-repo="juanvqz/juanvqz.github.io"
-  data-repo-id="MDEwOlJlcG9zaXRvcnkyMzA4MTQ4Njc="
-  data-category="Giscus"
-  data-category-id="DIC_kwDODcH0k84CmdnD"
-  data-mapping="pathname"
-  data-strict="0"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light_high_contrast"
-  data-lang="en"
-  data-loading="lazy"
-  crossorigin="anonymous"
-  async>
-</script>

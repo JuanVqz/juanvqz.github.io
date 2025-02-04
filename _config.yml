@@ -15,16 +15,26 @@ url: https://juanvasquez.dev
 baseurl: /
 permalink: /blog/:title/
 timezone: America/Mexico_City
-
-theme: minima
 show_excerpts: true
 header_pages:
   - about.md
+
+theme: minima
 
 minima:
   social_links:
     - { platform: github,  user_url: 'https://github.com/juanvqz', title: "Juan's GitHub" }
     - { platform: twitter, user_url: 'https://twitter.com/juanvqz_', title: "Juan's Twitter" }
+
+giscus:
+  repo: juanvqz/juanvqz.github.io
+  repo_id: MDEwOlJlcG9zaXRvcnkzNzYwNjYwNzg=
+  category: Giscus
+  reactions: 1
+  input_position: top
+  theme: light_high_contrast
+  lang: en
+  loading: lazy
 
 plugins:
   - jekyll-feed
