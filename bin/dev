@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+gem list -i jekyll > /dev/null 2>&1 || gem install jekyll && echo "Jekyll gem installed successfully."
+
+jekyll server

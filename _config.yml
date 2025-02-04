@@ -28,3 +28,6 @@ minima:
 
 plugins:
   - jekyll-feed
+
+exclude:
+  - bin
