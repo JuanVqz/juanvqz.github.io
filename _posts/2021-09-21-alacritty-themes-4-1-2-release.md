@@ -8,7 +8,7 @@ tags: [alacritty, alacritty-themes, javascript]
 ---
 
 Recuerdan que unos días atrás publiqué un artículo donde comencé a
-[contribuir](http://juanvasquez.dev/contribuci%C3%B3n/alacritty/2021/08/27/primera-contribucion-en-el-repositorio-alacritty-themes/)
+[contribuir](https://juanvasquez.dev/blog/primera-contribucion-en-el-repositorio-alacritty-themes/)
 al proyecto de **Alacritty-Themes**, bueno a partir de ahí muchas cosas han pasado.
 
 > [Alacritty-Themes versión 4.1.2](https://github.com/rajasegar/alacritty-themes/releases/tag/v4.1.2)
