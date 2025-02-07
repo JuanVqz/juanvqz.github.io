@@ -4,8 +4,7 @@ title: "Hoy aprendí que Internet Explorer no soporta Array.from"
 date: 2021-09-02 08:30:51 -0500
 last_modified_at: 2021-09-02 08:30:51 -0500
 categories: [development]
-tags: [daily, javascript]
-author: Juan Vásquez
+tags: [TIL, javascript]
 ---
 
 Ni Microsoft quiere a Internet Explorer, LOL.

@@ -5,7 +5,6 @@ date: 2021-09-21 10:54:51 -0500
 last_modified_at: 2022-01-12 10:54:51 -0500
 categories: [contributing]
 tags: [alacritty, alacritty-themes, javascript]
-author: Juan Vásquez
 ---
 
 Recuerdan que unos días atrás publiqué un artículo donde comencé a

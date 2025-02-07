@@ -5,7 +5,6 @@ date: 2024-02-27 09:00:00 -0500
 last_modified_at: 2024-02-27 09:00:00 -0500
 categories: [development]
 tags: [rails]
-author: Juan Vásquez
 ---
 
 > **Note:** Remember dropping a table will remove all the data from it.

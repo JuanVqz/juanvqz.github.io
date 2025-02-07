@@ -4,8 +4,7 @@ title: "How Do I Use Prismjs in My blog?"
 date: 2022-05-30 9:00:00 -0500
 last_modified_at: 2022-05-30 9:00:00 -0500
 categories: [development]
-tags: [daily, bridgetownrb]
-author: Juan Vásquez
+tags: [TIL, bridgetownrb]
 ---
 
 > Prism is a lightweight, extensible syntax highlighter,
@@ -89,4 +88,3 @@ Dog.bark # Guaw guaw!!!
 |Cons|
 |----|
 |Tricky, when you don't know how to enable more components |
-

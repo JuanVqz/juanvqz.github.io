@@ -5,7 +5,6 @@ date: 2021-09-28 12:30:51 -0500
 last_modified_at: 2021-09-28 12:30:51 -0500
 categories: [contributing]
 tags: [alacritty, alacritty-themes, javascript]
-author: Juan Vásquez
 ---
 
 ¿Sabes que hace el comando **PWD** en linux?

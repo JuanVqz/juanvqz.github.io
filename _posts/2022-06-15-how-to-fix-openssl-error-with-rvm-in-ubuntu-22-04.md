@@ -4,8 +4,7 @@ title: "How to fix RVM openssl error in ubuntu 22.04"
 date: 2022-06-15 9:00:00 -0500
 last_modified_at: 2022-06-15 9:00:00 -0500
 categories: [development]
-tags: [daily, ubuntu]
-author: Juan Vásquez
+tags: [TIL, ubuntu]
 ---
 
 Recently, I installed Ubuntu 22.04 because I wanted to be on the latest version.

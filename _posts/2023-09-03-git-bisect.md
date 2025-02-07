@@ -5,7 +5,6 @@ date: 2023-09-03 09:00:00 -0500
 last_modified_at: 2023-09-03 09:00:00 -0500
 categories: [development]
 tags: [git]
-author: Juan Vásquez
 ---
 
 # Mastering Git Bisect: Finding Bugs with Precision

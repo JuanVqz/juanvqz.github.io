@@ -5,7 +5,6 @@ date: 2023-05-02 09:00:00 -0500
 last_modified_at: 2023-05-02 09:00:00 -0500
 categories: [development]
 tags: [git]
-author: Juan Vásquez
 ---
 
 Git is a powerful version control system that allows developers to manage their source code effectively.

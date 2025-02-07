@@ -4,8 +4,7 @@ title: "Migrate sentry-raven to sentry-ruby gem in rails"
 date: 2022-07-01 9:00:00 -0500
 last_modified_at: 2022-07-01 9:00:00 -0500
 categories: [development]
-tags: [daily, rails]
-author: Juan Vásquez
+tags: [TIL, rails]
 ---
 
 To be honest, following the
@@ -84,5 +83,3 @@ end
 Feel free to pick one, we picked the second one.
 
 [more info about sanitize fields](https://github.com/getsentry/sentry-ruby/issues/1140)
-
-
