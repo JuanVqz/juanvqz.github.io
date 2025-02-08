@@ -3,8 +3,8 @@ layout: post
 title: "How to Drop Rails Table"
 date: 2024-02-27 09:00:00 -0500
 last_modified_at: 2024-02-27 09:00:00 -0500
-categories: [development]
-tags: [rails]
+categories: [Development, Rails, Database]
+tags: [database, rails, migration, tutorial]
 ---
 
 > **Note:** Remember dropping a table will remove all the data from it.

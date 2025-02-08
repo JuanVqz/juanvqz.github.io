@@ -3,8 +3,8 @@ layout: post
 title: "Hoy aprendí que Internet Explorer no soporta Array.from"
 date: 2021-09-02 08:30:51 -0500
 last_modified_at: 2021-09-02 08:30:51 -0500
-categories: [development]
-tags: [TIL, javascript]
+categories: [Development, JavaScript]
+tags: [TIL, javascript, internet-explorer, array.from, polyfill]
 ---
 
 Ni Microsoft quiere a Internet Explorer, LOL.

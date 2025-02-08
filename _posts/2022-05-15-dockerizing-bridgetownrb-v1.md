@@ -1,12 +1,11 @@
 ---
 layout: post
-title: "Dockerizing Bridwgetownrb v1"
+title: "Dockerizing Bridgetownrb v1"
 date: 2022-05-15 9:00:00 -0500
 last_modified_at: 2022-05-15 09:00:00 -0500
-categories: [development]
-tags: [docker, bridgetownrb]
+categories: [Development, Tools, Docker]
+tags: [docker, bridgetownrb, setup, tutorial]
 ---
-
 I'm working in a new pc, as a result I wanted to dockerize my bridgetownrb blog
 because not want to have my pc dirty XD
 

@@ -3,8 +3,8 @@ layout: post
 title: "Hice mi primera contribución en el código de alacritty-themes"
 date: 2021-08-27 21:54:51 -0500
 last_modified_at: 2021-08-27 21:54:51 -0500
-categories: [contributing]
-tags: [contributing, alacritty-themes, javascript]
+categories: [Contributing, Tools]
+tags: [alacritty-themes, javascript, contribution]
 ---
 
 En tiempos de COVID el tiempo pasa muy rapido!!!
