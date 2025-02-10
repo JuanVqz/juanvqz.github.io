@@ -3,8 +3,8 @@ layout: post
 title: "How to install zsh and oh-my-zsh on ubuntu?"
 date: 2022-06-03 9:00:00 -0500
 last_modified_at: 2022-06-03 9:00:00 -0500
-categories: [development]
-tags: [TIL, tools]
+categories: [Development, Tools]
+tags: [TIL, zsh, ohmyzsh, ubuntu, installation]
 ---
 
 Do you want to use a fancy terminal?, then install zsh and ohmyzsh.

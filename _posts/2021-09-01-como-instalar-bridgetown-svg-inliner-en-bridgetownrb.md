@@ -3,8 +3,8 @@ layout: post
 title: "¿Cómo instalar bridgetown-svg-inliner en Bridgetown?"
 date: 2021-09-01 08:30:51 -0500
 last_modified_at: 2021-09-01 08:30:51 -0500
-categories: [development]
-tags: [ruby, bridgetownrb, javascript]
+categories: [Development, Ruby]
+tags: [bridgetownrb, javascript, svg, installation]
 ---
 
 Esto se arma de dos patadas!

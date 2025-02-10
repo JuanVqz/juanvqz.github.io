@@ -3,8 +3,8 @@ layout: post
 title: "¿Cómo instalar Neovim desde el repositorio en GitHub?"
 date: 2021-12-03 08:00:00 -0500
 last_modified_at: 2021-12-03 08:00:00 -0500
-categories: [tools]
-tags: [vim, neovim]
+categories: [Development, Tools]
+tags: [vim, neovim, installation, GitHub]
 ---
 
 **Vim/Neovim** ha sido mi editor de codigo desde hace aproximadamente 5 años,

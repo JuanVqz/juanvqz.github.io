@@ -3,8 +3,8 @@ layout: post
 title: "Words for the day!"
 date: 2022-01-06 08:00:00 -0500
 last_modified_at: 2022-02-18 08:00:00 -0500
-categories: [english]
-tags: [TIL, english]
+categories: [Learning, English]
+tags: [TIL, words, learn, idioms]
 ---
 
 # 2022-03-08

@@ -3,8 +3,8 @@ layout: post
 title: "Migrate sentry-raven to sentry-ruby gem in rails"
 date: 2022-07-01 9:00:00 -0500
 last_modified_at: 2022-07-01 9:00:00 -0500
-categories: [development]
-tags: [TIL, rails]
+categories: [Development, Rails, Monitoring]
+tags: [TIL, sentry, monitoring, migration, rails]
 ---
 
 To be honest, following the

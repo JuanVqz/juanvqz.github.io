@@ -3,8 +3,8 @@ layout: post
 title: "Se liberó la versión 4.1.2 de Alacritty Themes"
 date: 2021-09-21 10:54:51 -0500
 last_modified_at: 2022-01-12 10:54:51 -0500
-categories: [contributing]
-tags: [alacritty, alacritty-themes, javascript]
+categories: [Contributing, Tools]
+tags: [alacritty, alacritty-themes, javascript, release]
 ---
 
 Recuerdan que unos días atrás publiqué un artículo donde comencé a

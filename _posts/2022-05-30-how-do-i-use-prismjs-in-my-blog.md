@@ -3,8 +3,8 @@ layout: post
 title: "How Do I Use Prismjs in My blog?"
 date: 2022-05-30 9:00:00 -0500
 last_modified_at: 2022-05-30 9:00:00 -0500
-categories: [development]
-tags: [TIL, bridgetownrb]
+categories: [Development, Ruby]
+tags: [TIL, bridgetownrb, prismjs, syntax-highlighting]
 ---
 
 > Prism is a lightweight, extensible syntax highlighter,
