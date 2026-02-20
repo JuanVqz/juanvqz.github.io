@@ -1,32 +1,24 @@
 ---
 layout: post
-title: "Dockerizing Bridgetownrb v1"
+title: "Dockerizing Bridwgetownrb v1"
 date: 2022-05-15 9:00:00 -0500
-last_modified_at: 2022-05-15 09:00:00 -0500
-categories: [Development, Tools, Docker]
-tags: [docker, bridgetownrb, setup, tutorial]
+last_modified_at: 2026-02-20 09:00:00 -0500
+categories: [development]
+tags: [docker, bridgetownrb]
 ---
-I'm working in a new pc, as a result I wanted to dockerize my bridgetownrb blog
-because not want to have my pc dirty XD
 
-As usual I started searching how to dockerize [bridgetownrb](https://www.bridgetownrb.com/)
-I found this easy to follow [post](https://blog.konnor.site/bridgetownrb/dockerizing-bridgetown/)
-(Konnor thank you for that) but wait a minute it is not up to date, we are actually
-in bridgetownrb version 1 (in a few days will be a beta release of Bridgwtown 1.1).
+I'm working on a new PC and wanted to dockerize my Bridgetownrb blog to avoid cluttering my system.
 
-<blockquote class="twitter-tweet">
-<p lang="en" dir="ltr">
-Crossing our fingers we&#39;ll have a beta release of Bridgetown 1.1 ready to roll next week,
-just in time for Bridgetown Bash during RailsConf! 🤞</p>&mdash; Bridgetown (@bridgetownrb)
-<a href="https://twitter.com/bridgetownrb/status/1525126134626545664?ref_src=twsrc%5Etfw">May 13, 2022</a>
-</blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+I searched how to dockerize [bridgetownrb](https://www.bridgetownrb.com/) and found this easy-to-follow [post](https://blog.konnor.site/bridgetownrb/dockerizing-bridgetown/) (thank you, Konnor), but it's not up to date. We're currently on Bridgetownrb v1, and a beta release of Bridgetown 1.1 is coming soon.
 
-## Dockerizing it!
+> Cross your fingers! We'll have a beta release of Bridgetown 1.1 ready to roll next week, just in time for Bridgetown Bash during RailsConf! 🤞
+> — Bridgetown (@bridgetownrb), May 13, 2022
 
-In root directory create the following files
+## Dockerizing It!
 
-> I'm only covering esbuild config since I'm using it
+Create the following files in the root directory:
+
+> I'm only covering the esbuild config since I'm using it.
 
 ## Dockerfile
 
@@ -86,50 +78,57 @@ volumes:
 
 ## .dockerignore
 
-```dot
+```text
 # Bridgetown
 output
 .bridgetown-cache
 .bridgetown-metadata
 .bridgetown-webpack
+
 # Dependency folders
 node_modules
 bower_components
 vendor
+
 # Caches
 .sass-cache
 .npm
 .node_repl_history
-# Ignore bundler config.
+
+# Ignore bundler config
 /.bundle
-# Ignore Byebug command history file.
+
+# Ignore Byebug command history file
 .byebug_history
+
 # dotenv environment variables file
 .env
+
 # Mac files
 .DS_Store
+
 # Yarn
 yarn-error.log
 yarn-debug.log*
 .pnp/
 .pnp.js
-# Yarn Integrity file
 .yarn-integrity
+
+# Git
 .git
 ```
 
-then just run the following steps
+Run the following command:
 
 ```bash
 docker-compose up -d
 ```
 
-and visit [`http://localhost:4000`](http://localhost:4000)
+Then visit [`http://localhost:4000`](http://localhost:4000).
 
 ## Extra
 
-Under `bin` directory, create the following files
-and add the `execution` permission.
+Under the `bin` directory, create the following files and add execution permissions:
 
 ```bash
 touch bin/setup
@@ -139,7 +138,7 @@ chmod +x bin/setup
 chmod +x bin/dev
 ```
 
-## `bin/setup`
+## bin/setup
 
 ```ruby
 #!/usr/bin/env ruby
@@ -147,7 +146,7 @@ require "pathname"
 require "fileutils"
 include FileUtils
 
-# move to the root application.
+# Move to the root application
 APP_ROOT = Pathname.new File.expand_path("../../", __FILE__)
 
 def system!(*args)
@@ -163,9 +162,9 @@ chdir APP_ROOT do
 end
 ```
 
-then run `./bin/setup` first time or when want to build the image (not used to often).
+Run `./bin/setup` the first time or when you want to build the image.
 
-## `bin/dev`
+## bin/dev
 
 ```ruby
 #!/usr/bin/env ruby
@@ -173,7 +172,7 @@ require "pathname"
 require "fileutils"
 include FileUtils
 
-# move to the root application.
+# Move to the root application
 APP_ROOT = Pathname.new File.expand_path("../../", __FILE__)
 
 def system!(*args)
@@ -189,4 +188,4 @@ chdir APP_ROOT do
 end
 ```
 
-then run `./bin/dev` (this is used all the time).
+Run `./bin/dev` (this is the command you'll use most often).

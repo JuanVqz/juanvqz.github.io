@@ -2,21 +2,21 @@
 layout: post
 title: "How to Drop Rails Table"
 date: 2024-02-27 09:00:00 -0500
-last_modified_at: 2024-02-27 09:00:00 -0500
-categories: [Development, Rails, Database]
-tags: [database, rails, migration, tutorial]
+last_modified_at: 2026-02-20 09:00:00 -0500
+categories: [development]
+tags: [rails]
 ---
 
-> **Note:** Remember dropping a table will remove all the data from it.
+> **Note:** Dropping a table will remove all the data from it.
 
-I recently had to remove a table from a Rails application, so, I want to share ways to do it.
+I recently had to remove a table from a Rails application. Here are the ways to do it.
 
 ## Using a Migration
 
-**why this option?**
+**Why this option?**
 
-- It's a standard way to make changes to the database.
-- It's reversible, so I can rollback the change if needed. (won't recover the data though).
+- It's a standard way to make database changes
+- It's reversible, so you can rollback if needed (though data won't be recovered)
 
 ```bash
 rails generate migration DropUsers
@@ -34,7 +34,7 @@ class DropUsers < ActiveRecord::Migration[7.0]
 end
 ```
 
-I saw some blog posts that only use `drop_table :users`, but that is not reversible, you may see this error when rolling back:
+I saw some blog posts that only use `drop_table :users`, but that's not reversible. You may see this error when rolling back:
 
 ```bash
 To avoid mistakes, drop_table is only reversible if given options or a block (can be empty).
@@ -47,13 +47,13 @@ ActiveRecord::IrreversibleMigration:
 To avoid mistakes, drop_table is only reversible if given options or a block (can be empty).
 ```
 
-use the block to avoid the error.
+Use a block to avoid the error.
 
 ## Using the Rails Console
 
-**why this option?**
+**Why this option?**
 
-- I don't want to track the history of the change.
+- You don't want to track the change history
 
 ```ruby
 bin/rails console
@@ -66,10 +66,10 @@ ActiveRecord::Migration.drop_table :users
 
 ## Using a Database Client
 
-**why this option?**
+**Why this option?**
 
-- I don't care about the history of the change.
-- I don't have access to run Rails commands.
+- You don't care about change history
+- You don't have access to run Rails commands
 
 Depending on the database you are using, you can use the client to drop the table.
 

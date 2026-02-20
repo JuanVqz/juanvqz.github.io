@@ -2,26 +2,21 @@
 layout: post
 title: "¿Cómo instalar bridgetown-svg-inliner en Bridgetown?"
 date: 2021-09-01 08:30:51 -0500
-last_modified_at: 2021-09-01 08:30:51 -0500
-categories: [Development, Ruby]
-tags: [bridgetownrb, javascript, svg, installation]
+last_modified_at: 2026-02-20 09:00:00 -0500
+categories: [development]
+tags: [ruby, bridgetownrb, javascript]
 ---
 
-Esto se arma de dos patadas!
+Es más sencillo de lo que parece.
 
-La verdad la tarea es muy sencilla si has usado ruby on rails seguramente
-ya sabes como instalar gemas en un archivo Gemfile,
-es exactamente igual, te enumero los pasos.
+La tarea es sencilla si has usado Ruby on Rails, ya que el proceso es idéntico a instalar gemas en un Gemfile. Te detallo los pasos:
 
 > NOTA:
-> Mucho cuidado!
-> Existe otra gema llamada
-[bridgetown-inline-svg](https://github.com/andrewmcodes/bridgetown-inline-svg#readme)
-pero ya esta en **Modo de Mantenimiento** así que no es recomendable usarla.
+> Existe otra gema llamada [bridgetown-inline-svg](https://github.com/andrewmcodes/bridgetown-inline-svg#readme)
+> pero está en **modo de mantenimiento**, por lo que no se recomienda su uso.
 
-La gema que estamos usando es la siguiente
-[bridgetown-svg-inliner](https://github.com/ayushn21/bridgetown-svg-inliner),
-tiene compatibilidad con la ultima versión de Bridgetown y la licencia es **MIT**.
+La gema recomendada es [bridgetown-svg-inliner](https://github.com/ayushn21/bridgetown-svg-inliner),
+que tiene compatibilidad con la última versión de Bridgetown y licencia **MIT**.
 
 * Agrega la gema a tu Gemfile
 
@@ -34,11 +29,11 @@ end
 * Ejecuta **bundle install** en la terminal.
 
 ```bash
-  # el la carpeta principal, en mi caso es juanvqz.github.io
+  # En la carpeta principal del proyecto
   bundle install
 ```
 
-* Listo! ya puedes usar archivos svg desde una etiqueta svg, mira!
+* Listo. Ya puedes usar archivos SVG desde una etiqueta SVG:
 
 ```liquid
 <!-- formato liquid -->
@@ -50,16 +45,13 @@ end
 <%= svg "images/youtube.svg" %>
 ```
 
-> NOTA: Si copia el código anterior, remover el símbolo de gato.
+> NOTA: Si copias el código anterior, elimina los comentarios.
 
-* No es necesario usar la ruta completa desde la raiz del projecto,
-basta con la ruta relativa que apunta a la carpeta de imagenes que proporciona Bridgetown por default en:
+* No es necesario usar la ruta completa desde la raíz del proyecto,
+basta con la ruta relativa a la carpeta de imágenes que Bridgetown proporciona por defecto en:
 
 ```bash
 proyecto/src/images
 ```
 
-Para información más detallada revisa el
-[README](https://github.com/ayushn21/bridgetown-svg-inliner#installation) de la gema, por favor.
-
-Sin mas por el momento me despudo de Usted, Don Joaquin!
+Para más información, revisa el [README](https://github.com/ayushn21/bridgetown-svg-inliner#installation) de la gema.
