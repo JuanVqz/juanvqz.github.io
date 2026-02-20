@@ -2,9 +2,9 @@
 layout: post
 title: "Mastering Git Bisect: Finding Bugs with Precision"
 date: 2023-09-03 09:00:00 -0500
-last_modified_at: 2023-09-03 09:00:00 -0500
-categories: [Development, Tools]
-tags: [git, debugging, bisect, tutorial]
+last_modified_at: 2026-02-20 09:00:00 -0500
+categories: [development]
+tags: [git]
 ---
 
 # Mastering Git Bisect: Finding Bugs with Precision

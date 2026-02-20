@@ -2,19 +2,18 @@
 layout: post
 title: "Words for the day!"
 date: 2022-01-06 08:00:00 -0500
-last_modified_at: 2022-02-18 08:00:00 -0500
-categories: [Learning, English]
-tags: [TIL, words, learn, idioms]
+last_modified_at: 2026-02-20 09:00:00 -0500
+categories: [english]
+tags: [TIL, english]
 ---
 
 # 2022-03-08
 
 **Fluke**
 
-> It was a fluke
 > An unlikely chance occurrence, especially a surprising piece of luck.
 
-**Casualidad/Anomalia/Flaquesa**
+**Casualidad/Anomalía/Flaqueza**
 
 > Una casualidad improbable.
 
@@ -22,7 +21,7 @@ tags: [TIL, words, learn, idioms]
 
 **Bragging**
 
-> You usually lie like a bragging fisherman
+> You usually lie like a bragging fisherman.
 > My sister has 10 expensive cars...
 
 **Fanfarronería**
@@ -33,52 +32,47 @@ Modo de hablar y comportarse propio de la persona fanfarrona.
 
 **Clunky**
 
-old and not working well
+> Old and not working well
 
 **Torpe**
 
-Viejo y no funciona bien
+Viejo y no funciona bien.
 
 # 2022-01-06
 
 **Admonish**
 
-warn or reprimand someone firmly.
+> Warn or reprimand someone firmly.
+> She admonished me for appearing at breakfast unshaven.
 
-> she admonished me for appearing at breakfast unshaven
+**Advertir/Reprender/Amonestar**
 
-**Advertir/Reprender/Amontestar**
-
-> Los científicos -al igual que las madres- nos advierten que comamos frutas y verduras.
+> Los científicos, al igual que las madres, nos advierten que comamos frutas y verduras.
 
 # 2022-01-06
 
 **Keep on plugging**
 
-To continue doing something even though it is difficult or boring
+> To continue doing something even though it is difficult or boring.
 
-**Continua trabajando**
+**Continuar trabajando**
 
-Apesar de ser una tarea dificil o aburrida continua haciendola
-
----
+A pesar de ser una tarea difícil o aburrida, continúa haciéndola.
 
 **Quandary**
 
-A state of perpixity or uncertainty over what to do in a difficult situation
+> A state of perplexity or uncertainty over what to do in a difficult situation.
 
 **Dilema**
 
-Situación dificil o comprometida y no se sabe cuál de ellas escoger
-
----
+Situación difícil o comprometida en la que no se sabe qué opción escoger.
 
 **Litany**
 
-Tedious recital or repetitive series
+> Tedious recital or repetitive series.
 
 **Letanía**
 
-Lista larga y monótona
+Lista larga y monótona.
 
 ---

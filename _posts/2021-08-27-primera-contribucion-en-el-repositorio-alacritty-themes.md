@@ -2,36 +2,24 @@
 layout: post
 title: "Hice mi primera contribución en el código de alacritty-themes"
 date: 2021-08-27 21:54:51 -0500
-last_modified_at: 2021-08-27 21:54:51 -0500
-categories: [Contributing, Tools]
-tags: [alacritty-themes, javascript, contribution]
+last_modified_at: 2026-02-20 09:00:00 -0500
+categories: [contributing]
+tags: [contributing, alacritty-themes, javascript]
 ---
 
-En tiempos de COVID el tiempo pasa muy rapido!!!
+Durante la pandemia, el tiempo pasa muy rápido.
 
-Hoy me doy cuenta que el tiempo pasa muy rápido pues ya tengo más de un año utilizando la terminal **alacritty**,
-la cual la he encontrado muy efectiva pues me gusta la forma en que se configura con un simple archivo yaml.
+Me di cuenta de que llevo más de un año utilizando la terminal **Alacritty**, que he encontrado muy efectiva por su configuración simple con un archivo YAML.
 
-Sin embargo, a pesar de ser usuario de alacritty siempre buscaba los colores
-repositorio por repositorio después los copiaba y pegaba aveces los comentaba
-por si quería regresar al color anterior 🤯 pensándolo bien un poco desastroso el asunto.
+Sin embargo, siempre buscaba colores en diferentes repositorios, los copiaba y pegaba, y a veces los comentaba por si quería volver al color anterior. En retrospectiva, este proceso era desastroso.
 
-No hace mucho me di a la tarea de buscar una mejor solución para administrar
-mis colores en alacritty y encontré el **alacritty-themes** ❤️,
-el cual te facilita el acceso a más de 100 colores distintos,
-teniendo la capacidad de cambiarlos **en tiempo real** desde la terminal,
-es decir no tienes que ir al archivo de `~/.config/alacritty.yml` a cambiar
-el color 👏.
+Busqué una mejor solución para administrar los colores en Alacritty y encontré **alacritty-themes** ❤️. Este paquete facilita el acceso a más de 100 colores distintos con la capacidad de cambiarlos en tiempo real desde la terminal, sin necesidad de editar manualmente el archivo `~/.config/alacritty.yml`.
 
-Después de un tiempo usándolo me dio curiosidad en que lenguaje está escrito
-yo apostaba que era un script de bash pero ¡oh sorpresa¡
-está escrito en **javascript** bueno para ser precisos en **node.js**.
+Después de usarlo por un tiempo, me dio curiosidad saber en qué lenguaje estaba escrito. Asumí que era un script de bash, pero para mi sorpresa está escrito en JavaScript, específicamente en Node.js.
 
-Entonces comencé a ver el código y observé que tenía posibles lugares para
-contribuir, sin más, hice la copia del repositorio y realice un cambio sencillo.
+Al revisar el código, identifiqué oportunidades para contribuir, así que bifurqué el repositorio e hice un cambio sencillo.
 
-Existía un archivo llamado **test.js** en la carpeta de **tests** y hasta
-donde conozco, la convención para pruebas debería ser:
+Existía un archivo llamado **test.js** en la carpeta **tests**. Según la convención estándar para pruebas, la estructura debería ser:
 
 ```js
 src/index.js              test/index.test.js
@@ -39,10 +27,10 @@ src/helpers/locations.js  test/helpers/locations.test.js
 src/components/Home.js    test/components/Home.test.js
 ```
 
-Por lo tanto mi contribución fue cambiar el nombre del archivo de **test.js** a **index.test.js**
+Mi contribución consistió en renombrar el archivo **test.js** a **index.test.js**.
 
 Aquí está el [link al Pull Request en GitHub.](https://github.com/rajasegar/alacritty-themes/pull/27)
 
-Quiero concluir diciendo que no es necesario hacer un cambio enorme en el codigo para contribuir.
+Para concluir, no es necesario hacer cambios grandes para contribuir a un proyecto.
 
-Saludos, con animo y ganas de seguir contribuyendo, [Juan Vásquez!](https://github.com/juanvqz)
+Saludos, con ganas de seguir contribuyendo, [Juan Vásquez](https://github.com/juanvqz).
