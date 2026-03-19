@@ -102,7 +102,7 @@ comments:
   provider: giscus
   giscus:
     repo: JuanVqz/juanvqz.github.io
-    repo_id: MDEwOlJlcG9zaXRvcnkzNzYwNjYwNzg=
+    repo_id: MDEwOlJlcG9zaXRvcnkyMzA4MTQ4Njc=
     category: Giscus
     category_id: DIC_kwDODcH0k84CmdnD
     mapping: pathname
