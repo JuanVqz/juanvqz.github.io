@@ -10,14 +10,14 @@ This is a personal blog built with [Jekyll](https://jekyllrb.com/) using the [Ch
 
 ### Prerequisites
 
-1. **Ruby 3.3** - Install via [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or [Ruby official](https://www.ruby-lang.org/)
+1. **Ruby 3.4** - Install via [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), [asdf](https://asdf-vm.com/), or [Ruby official](https://www.ruby-lang.org/)
 2. **Bundler** - Install with `gem install bundler`
 
 ### Step-by-Step Setup
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/juanvqz/juanvqz.github.io.git
+git clone https://github.com/JuanVqz/juanvqz.github.io.git
 cd juanvqz.github.io
 
 # 2. Install Ruby dependencies
@@ -72,7 +72,7 @@ There is no concept of "single test" in this project since htmlproofer tests the
 ### CI/CD
 
 The GitHub Actions workflow (`.github/workflows/pages-deploy.yml`) runs:
-1. Ruby 3.3 setup
+1. Ruby 3.4 setup
 2. `jekyll build` with production environment
 3. htmlproofer validation
 
@@ -96,9 +96,10 @@ The project uses `.editorconfig` with these settings:
 ```
 _root/
 ├── _posts/           # Blog posts (YYYY-MM-DD-title.md)
-├── _tabs/            # Tab pages (about, links, etc.)
+├── _tabs/            # Tab pages (about, crochet, etc.)
 ├── _data/            # YAML data files
 ├── _plugins/         # Jekyll plugins
+├── assets/img/crochet/ # Crochet project images
 ├── tools/            # Helper scripts (run.sh, test.sh)
 ├── .github/          # GitHub workflows
 ├── Gemfile           # Ruby dependencies
@@ -169,8 +170,8 @@ bash tools/test.sh
 ```
 
 ## Dependencies
-- Ruby 3.3
-- Jekyll 7.x (Chirpy theme 7.2+)
+- Ruby 3.4
+- Jekyll 7.x (Chirpy theme 7.5+)
 - htmlproofer 5.x (for testing)
 - Ruby LSP (in `.ruby-lsp/` for IDE support)
 

@@ -33,4 +33,4 @@ Aquí está el [link al Pull Request en GitHub.](https://github.com/rajasegar/al
 
 Para concluir, no es necesario hacer cambios grandes para contribuir a un proyecto.
 
-Saludos, con ganas de seguir contribuyendo, [Juan Vásquez](https://github.com/juanvqz).
+Saludos, con ganas de seguir contribuyendo, [Juan Vásquez](https://github.com/JuanVqz).
