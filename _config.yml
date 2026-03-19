@@ -22,7 +22,7 @@ description: >-
 url: "https://juanvasquez.dev"
 
 github:
-  username: juanvqz
+  username: JuanVqz
 
 twitter:
   username: juanvqz_
@@ -31,9 +31,9 @@ social:
   name: Juan Vázquez
   email: contact@juanvasquez.dev
   links:
-    - https://twitter.com/juanvqz_
-    - https://github.com/juanvqz
-    - https://linkedin.com/in/juanvqz
+    - https://x.com/juanvqz_
+    - https://github.com/JuanVqz
+    - https://linkedin.com/in/JuanVqz
 
 # Site Verification Settings
 webmaster_verifications:
@@ -93,7 +93,7 @@ avatar: https://avatars.githubusercontent.com/u/7331511?v=4
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-social_preview_image: # string, local or CORS resources
+social_preview_image: https://avatars.githubusercontent.com/u/7331511?v=4
 
 # boolean type, the global switch for TOC in posts.
 toc: true
@@ -106,7 +106,7 @@ comments:
     category: Giscus
     category_id: DIC_kwDODcH0k84CmdnD
     mapping: pathname
-    strict: 0
+    strict: 1 # Use strict URL matching to avoid accidental discussion matches
     input_position: top
     lang: en
     reactions_enabled: 1
