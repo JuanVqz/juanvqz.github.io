@@ -101,7 +101,7 @@ toc: true
 comments:
   provider: giscus
   giscus:
-    repo: juanvqz/juanvqz.github.io
+    repo: JuanVqz/juanvqz.github.io
     repo_id: MDEwOlJlcG9zaXRvcnkzNzYwNjYwNzg=
     category: Giscus
     category_id: DIC_kwDODcH0k84CmdnD
