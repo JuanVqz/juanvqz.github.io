@@ -1,55 +1,127 @@
 ---
 layout: post
-title: "Reemplazo de Byebug por Debug 🔥🐛"
+title: "Replacing Byebug with Debug 🔥🐛"
 date: 2021-09-13 07:30:00 -0500
-last_modified_at: 2026-02-20 09:00:00 -0500
+last_modified_at: 2026-03-26 09:00:00 -0500
 categories: [development]
 tags: [ruby, thisweekinrails]
 ---
 
-Desde que conozco Ruby on Rails, incluye la gema Byebug 😥. Fue introducida en el Gemfile hace más de 7 años.
+## The Change
 
-El Pull Request [Depend on ruby/debug, replacing Byebug](https://github.com/rails/rails/pull/43187) que nos brindó la información.
+Since I've known Ruby on Rails, it has included the Byebug gem 😥. It was introduced in the Gemfile over 7 years ago.
 
-La pregunta obligada es: ¿Por qué se remueve la gema de Byebug?
+But things are changing. The Pull Request [Depend on ruby/debug, replacing Byebug](https://github.com/rails/rails/pull/43187) announced that Rails is switching to `debug.rb`.
 
-- Byebug y Zeitwerk no son [totalmente compatibles](https://github.com/deivid-rodriguez/byebug/issues/564). Esto no es un error de ninguna de las gemas, es una limitación técnica.
+---
 
-- En Ruby 3.1, la depuración se incluirá con **debug.rb**, y este cambio alinea Rails con Ruby.
+## Why the Change?
 
-#### Dato histórico
+The obligatory question is: Why is the Byebug gem being removed?
 
-El 8 de abril de 2014 se creó el [Pull Request](https://github.com/rails/rails/pull/14646) para introducir Byebug en Ruby on Rails, pero se hizo merge hasta el 11 de abril de 2014.
+### 1. Zeitwerk Compatibility
 
-#### Adiós Byebug
+Byebug and Zeitwerk are not [fully compatible](https://github.com/deivid-rodriguez/byebug/issues/564). This isn't a bug in either gem — it's a technical limitation that Rails needed to address.
 
-¿Qué es Byebug? En palabras de la misma gema:
+### 2. Ruby 3.1 Alignment
 
-Byebug es un depurador rico en funciones y fácil de usar para Ruby. Utiliza la API de TracePoint para el control de ejecución y la API del inspector de depuración para la navegación de la pila de llamadas. No depende de fuentes centrales internas. Es rápido porque está desarrollado como una extensión de C y confiable porque es compatible con un conjunto completo de pruebas.
+In Ruby 3.1, debugging will be included with **debug.rb** as part of the standard library. This change aligns Rails with Ruby's direction and reduces dependencies.
 
-[Saber más de Byebug](https://github.com/deivid-rodriguez/byebug)
+---
 
-#### Hola Debug
+## Historical Context
 
-debug.rb proporciona funcionalidad de depuración a Ruby.
+On April 8, 2014, the [Pull Request](https://github.com/rails/rails/pull/14646) was created to introduce Byebug in Ruby on Rails. It was merged on April 11, 2014.
 
-Ventajas:
+Over 7 years, Byebug served the Ruby community well. But as Ruby and Rails evolved, the need for a native Ruby debugger became clear.
 
-0. **Rápido:** Sin penalización de rendimiento en el modo sin pasos y sin puntos de interrupción
-1. **Depuración remota:** Admite la depuración remota de forma nativa
-   - Socket de dominio UNIX
-   - TCP/IP
-   - Integración VSCode/DAP (VSCode rdbg Ruby Debugger)
-2. **Extensible:** La aplicación puede introducir soporte de depuración de varias formas
-   - Por comando rdbg
-   - Al cargar bibliotecas con la opción -r
-   - Al llamar al método de Ruby explícitamente
+---
 
-Entre otras cosas:
+## Goodbye Byebug
 
-0. Soporte para hilos (casi terminado) y ractores (TODO)
-1. Admite suspender e ingresar a la consola de depuración con Ctrl-C
-2. Muestra parámetros en el comando backtrace
-3. Admite depuración de grabación y respuesta
+What is Byebug? In the gem's own words:
 
-[Saber más de Debug](https://github.com/ruby/debug)
+> Byebug is a feature-rich and easy-to-use debugger for Ruby. It uses the TracePoint API for execution control and the Debug Inspector API for call stack navigation. It doesn't depend on internal core sources. It's fast because it's developed as a C extension and reliable because it's compatible with a comprehensive test suite.
+
+[Learn more about Byebug](https://github.com/deivid-rodriguez/byebug)
+
+Byebug served us well, but it had limitations:
+- C extension dependency
+- Compatibility issues with Zeitwerk
+- Not part of Ruby's standard library
+
+---
+
+## Hello Debug
+
+`debug.rb` provides debugging functionality to Ruby and will be included in Ruby 3.1+.
+
+### Advantages of debug.rb
+
+#### 1. Performance
+
+**Fast:** No performance penalty in step-less and breakpoint-free mode. You can leave the debugger in your code without worrying about slowing down production.
+
+#### 2. Remote Debugging
+
+Supports remote debugging natively through multiple protocols:
+- UNIX domain socket
+- TCP/IP
+- VSCode/DAP integration (VSCode rdbg Ruby Debugger)
+
+This is a game-changer for debugging production issues or remote containers.
+
+#### 3. Extensibility
+
+The application can introduce debugging support in several ways:
+- By `rdbg` command
+- When loading libraries with the `-r` option
+- By calling the Ruby method explicitly
+
+### Additional Features
+
+- Support for threads (almost done) and ractors (TODO)
+- Supports suspending and entering debug console with Ctrl-C
+- Shows parameters in backtrace command
+- Supports recording and replay debugging — useful for reproducing intermittent bugs
+
+---
+
+## Migration
+
+The migration from Byebug to `debug.rb` is straightforward:
+
+**Before (Byebug):**
+```ruby
+gem 'byebug'
+```
+
+**After (debug.rb in Ruby 3.1+):**
+```ruby
+# No gem needed! It's built into Ruby 3.1+
+```
+
+For Ruby 3.0 and earlier:
+```ruby
+gem 'debug', '>= 1.0.0'
+```
+
+The debugging commands remain similar, so the learning curve is minimal.
+
+---
+
+## What I Learned
+
+1. **Ruby is maturing** — The inclusion of `debug.rb` in Ruby 3.1 shows the language's commitment to providing a comprehensive standard library
+
+2. **Rails follows Ruby** — When Ruby adds new features or improves existing ones, Rails is quick to adopt them. This alignment keeps the ecosystem cohesive
+
+3. **Remote debugging matters** — The native support for remote debugging in `debug.rb` reflects the reality of modern development: containers, cloud environments, and production debugging
+
+4. **Dependencies are liabilities** — Moving debugging into the standard library reduces the dependency surface area and simplifies maintenance
+
+5. **The community moves forward** — While Byebug served us well, embracing `debug.rb` means we get features and improvements that come with being part of Ruby core
+
+---
+
+[Learn more about Debug](https://github.com/ruby/debug)
