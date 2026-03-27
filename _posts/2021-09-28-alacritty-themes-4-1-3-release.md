@@ -1,35 +1,35 @@
 ---
 layout: post
-title: "¡Urge actualizar Alacritty Themes a la versión 4.1.3!"
+title: "Update Alacritty Themes to Version 4.1.3 Now!"
 date: 2021-09-28 12:30:51 -0500
 last_modified_at: 2026-02-20 09:00:00 -0500
 categories: [contributing]
 tags: [alacritty, alacritty-themes, javascript]
 ---
 
-¿Sabes qué hace el comando **PWD** en Linux?
+Do you know what the **PWD** command does in Linux?
 
-Digamos que estamos en la carpeta **Descargas** de nuestra computadora.
+Let's say we're in the **Downloads** folder on our computer.
 
-¿Qué regresaría el comando pwd? Correcto, la ruta del directorio actual.
+What would the pwd command return? Correct, the current directory path.
 
 ```bash
-Descargas $ pwd
-/home/itox/Descargas
+Downloads $ pwd
+/home/itox/Downloads
 ```
 
-Hoy en alacritty-themes corregimos un bug importante que se nos pasó en la versión anterior 4.1.2.
+Today in alacritty-themes we fixed an important bug that we missed in the previous version 4.1.2.
 
 ```javascript
-Descargas $
+Downloads $
 function rootDirectory() {
   return process.PWD
 }
 
-// /home/itox/Descargas/themes
+// /home/itox/Downloads/themes
 ```
 
-Al hacer pruebas y llamar el método **rootDirectory**, que usaba **process.PWD** de **Node.js**, parecía que retornaba la ruta a la carpeta del proyecto, por ejemplo:
+When testing and calling the **rootDirectory** method, which used **process.PWD** from **Node.js**, it seemed to return the path to the project folder, for example:
 
 ```bash
 alacritty-themes
@@ -40,13 +40,13 @@ alacritty-themes
       index.js
 ```
 
-Esto significaba que, al ejecutar el método en el archivo **index.js** de la carpeta **helpers**, regresaba la ruta hasta la carpeta padre **alacritty-themes**, pero no hasta el archivo index.js.
+This meant that when running the method in the **index.js** file of the **helpers** folder, it returned the path up to the parent folder **alacritty-themes**, but not up to the index.js file.
 
-#### ¡Pues no!
+#### But no!
 
-Como sabemos, el comando PWD regresa la carpeta actual donde te encuentras. Por este motivo, cuando los usuarios del paquete comenzaron a cambiar sus temas, **¡sorpresa!** Error: la carpeta **themes** (donde se alojan los colores) no existía porque la buscaba en el directorio actual.
+As we know, the PWD command returns the current folder where you are. For this reason, when package users started changing their themes, **surprise!** Error: the **themes** folder (where colors are hosted) didn't exist because it was looking for it in the current directory.
 
-Lo resolvimos colocando un archivo **settings.js** en el directorio principal del repositorio:
+We solved it by placing a **settings.js** file in the main directory of the repository:
 
 ```javascript
 // settings.js
@@ -55,10 +55,10 @@ module.exports = {
 }
 ```
 
-**\_\_dirname** regresa el directorio actual sin importar dónde se ejecute el comando:
+**\_\_dirname** returns the current directory regardless of where the command is executed:
 
 ```javascript
-Descargas $
+Downloads $
 
 const { PROJECT_DIR } = require("settings")
 
@@ -69,6 +69,6 @@ function rootDirectory() {
 // /home/itox/code/alacritty-themes/themes
 ```
 
-Con esto solucionamos el problema.
+With this we solved the problem.
 
-Con esto solucionamos el problema.
+With this we solved the problem.

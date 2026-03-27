@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Words for the day!"
+title: "Words for the Day!"
 date: 2022-01-06 08:00:00 -0500
 last_modified_at: 2026-02-20 09:00:00 -0500
 categories: [english]
@@ -13,9 +13,7 @@ tags: [TIL, english]
 
 > An unlikely chance occurrence, especially a surprising piece of luck.
 
-**Casualidad/Anomalía/Flaqueza**
-
-> Una casualidad improbable.
+A surprising, unexpected, or unlikely event.
 
 # 2022-02-17
 
@@ -24,9 +22,7 @@ tags: [TIL, english]
 > You usually lie like a bragging fisherman.
 > My sister has 10 expensive cars...
 
-**Fanfarronería**
-
-Modo de hablar y comportarse propio de la persona fanfarrona.
+Boasting or talking with excessive pride and self-satisfaction about one's achievements, possessions, or abilities.
 
 # 2022-01-20
 
@@ -34,9 +30,7 @@ Modo de hablar y comportarse propio de la persona fanfarrona.
 
 > Old and not working well
 
-**Torpe**
-
-Viejo y no funciona bien.
+Awkward, outdated, or lacking in smoothness or efficiency.
 
 # 2022-01-06
 
@@ -45,34 +39,24 @@ Viejo y no funciona bien.
 > Warn or reprimand someone firmly.
 > She admonished me for appearing at breakfast unshaven.
 
-**Advertir/Reprender/Amonestar**
-
-> Los científicos, al igual que las madres, nos advierten que comamos frutas y verduras.
-
-# 2022-01-06
+To warn or reprimand someone firmly.
 
 **Keep on plugging**
 
 > To continue doing something even though it is difficult or boring.
 
-**Continuar trabajando**
-
-A pesar de ser una tarea difícil o aburrida, continúa haciéndola.
+To persist in doing something despite difficulties or boredom.
 
 **Quandary**
 
 > A state of perplexity or uncertainty over what to do in a difficult situation.
 
-**Dilema**
-
-Situación difícil o comprometida en la que no se sabe qué opción escoger.
+A state of perplexity or uncertainty over what to do in a difficult situation.
 
 **Litany**
 
 > Tedious recital or repetitive series.
 
-**Letanía**
-
-Lista larga y monótona.
+A long, tedious recitation or series of repetitive phrases or statements.
 
 ---

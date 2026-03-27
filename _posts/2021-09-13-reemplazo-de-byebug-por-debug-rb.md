@@ -1,55 +1,55 @@
 ---
 layout: post
-title: "Reemplazo de Byebug por Debug 🔥🐛"
+title: "Replacing Byebug with Debug 🔥🐛"
 date: 2021-09-13 07:30:00 -0500
 last_modified_at: 2026-02-20 09:00:00 -0500
 categories: [development]
 tags: [ruby, thisweekinrails]
 ---
 
-Desde que conozco Ruby on Rails, incluye la gema Byebug 😥. Fue introducida en el Gemfile hace más de 7 años.
+Since I've known Ruby on Rails, it includes the Byebug gem 😥. It was introduced in the Gemfile over 7 years ago.
 
-El Pull Request [Depend on ruby/debug, replacing Byebug](https://github.com/rails/rails/pull/43187) que nos brindó la información.
+The Pull Request [Depend on ruby/debug, replacing Byebug](https://github.com/rails/rails/pull/43187) gave us the information.
 
-La pregunta obligada es: ¿Por qué se remueve la gema de Byebug?
+The obligatory question is: Why is the Byebug gem being removed?
 
-- Byebug y Zeitwerk no son [totalmente compatibles](https://github.com/deivid-rodriguez/byebug/issues/564). Esto no es un error de ninguna de las gemas, es una limitación técnica.
+- Byebug and Zeitwerk are not [fully compatible](https://github.com/deivid-rodriguez/byebug/issues/564). This is not a bug in either gem, it's a technical limitation.
 
-- En Ruby 3.1, la depuración se incluirá con **debug.rb**, y este cambio alinea Rails con Ruby.
+- In Ruby 3.1, debugging will be included with **debug.rb**, and this change aligns Rails with Ruby.
 
-#### Dato histórico
+#### Historical note
 
-El 8 de abril de 2014 se creó el [Pull Request](https://github.com/rails/rails/pull/14646) para introducir Byebug en Ruby on Rails, pero se hizo merge hasta el 11 de abril de 2014.
+On April 8, 2014, the [Pull Request](https://github.com/rails/rails/pull/14646) was created to introduce Byebug in Ruby on Rails, but it was merged until April 11, 2014.
 
-#### Adiós Byebug
+#### Goodbye Byebug
 
-¿Qué es Byebug? En palabras de la misma gema:
+What is Byebug? In the gem's own words:
 
-Byebug es un depurador rico en funciones y fácil de usar para Ruby. Utiliza la API de TracePoint para el control de ejecución y la API del inspector de depuración para la navegación de la pila de llamadas. No depende de fuentes centrales internas. Es rápido porque está desarrollado como una extensión de C y confiable porque es compatible con un conjunto completo de pruebas.
+Byebug is a feature-rich and easy-to-use debugger for Ruby. It uses the TracePoint API for execution control and the Debug Inspector API for call stack navigation. It doesn't depend on internal core sources. It's fast because it's developed as a C extension and reliable because it's compatible with a comprehensive test suite.
 
-[Saber más de Byebug](https://github.com/deivid-rodriguez/byebug)
+[Learn more about Byebug](https://github.com/deivid-rodriguez/byebug)
 
-#### Hola Debug
+#### Hello Debug
 
-debug.rb proporciona funcionalidad de depuración a Ruby.
+debug.rb provides debugging functionality to Ruby.
 
-Ventajas:
+Advantages:
 
-0. **Rápido:** Sin penalización de rendimiento en el modo sin pasos y sin puntos de interrupción
-1. **Depuración remota:** Admite la depuración remota de forma nativa
-   - Socket de dominio UNIX
+0. **Fast:** No performance penalty in step-less and breakpoint-free mode
+1. **Remote debugging:** Supports remote debugging natively
+   - UNIX domain socket
    - TCP/IP
-   - Integración VSCode/DAP (VSCode rdbg Ruby Debugger)
-2. **Extensible:** La aplicación puede introducir soporte de depuración de varias formas
-   - Por comando rdbg
-   - Al cargar bibliotecas con la opción -r
-   - Al llamar al método de Ruby explícitamente
+   - VSCode/DAP integration (VSCode rdbg Ruby Debugger)
+2. **Extensible:** The application can introduce debugging support in several ways
+   - By rdbg command
+   - When loading libraries with the -r option
+   - By calling the Ruby method explicitly
 
-Entre otras cosas:
+Among other things:
 
-0. Soporte para hilos (casi terminado) y ractores (TODO)
-1. Admite suspender e ingresar a la consola de depuración con Ctrl-C
-2. Muestra parámetros en el comando backtrace
-3. Admite depuración de grabación y respuesta
+0. Support for threads (almost done) and ractors (TODO)
+1. Supports suspending and entering debug console with Ctrl-C
+2. Shows parameters in backtrace command
+3. Supports recording and replay debugging
 
-[Saber más de Debug](https://github.com/ruby/debug)
+[Learn more about Debug](https://github.com/ruby/debug)

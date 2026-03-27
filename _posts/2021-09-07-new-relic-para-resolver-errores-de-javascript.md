@@ -1,52 +1,52 @@
 ---
 layout: post
-title: "New Relic para resolver errores de JavaScript"
+title: "Using New Relic to Solve JavaScript Errors"
 date: 2021-09-07 08:30:51 -0500
 last_modified_at: 2026-02-20 09:00:00 -0500
 categories: [tools]
 tags: [TIL, javascript]
 ---
 
-La semana pasada estuvimos resolviendo errores de JavaScript con la ayuda de New Relic.
+Last week we were solving JavaScript errors with the help of New Relic.
 
-> New Relic One: Una plataforma de observabilidad sencilla pero potente.
-> Detectar, corregir y prevenir.
+> New Relic One: A simple yet powerful observability platform.
+> Detect, debug, and prevent.
 
-**New Relic** monitorea la aplicación web y proporciona reportes sobre el trazado de sesiones, las páginas más visitadas, las páginas con errores, el tiempo de carga, entre otros datos.
+**New Relic** monitors the web application and provides reports on session tracing, most visited pages, pages with errors, load time, among other data.
 
-Hoy me enfocaré en la sección de errores de JavaScript. New Relic muestra un **listado de errores recurrentes** en las últimas horas o días, configurable mediante un selector de fecha y hora.
+Today I'll focus on the JavaScript errors section. New Relic shows a **list of recurrent errors** in the last hours or days, configurable through a date and time selector.
 
-Al seleccionar el error que quieres **solucionar**, New Relic proporciona más detalles:
+When selecting the error you want to **solve**, New Relic provides more details:
 
-- El mensaje de error
+- The error message
 
-El mensaje de error es muy descriptivo y ayuda a tener una idea clara de cómo solucionar el problema. Por ejemplo:
+The error message is very descriptive and helps to have a clear idea of how to solve the problem. For example:
 
 ```javascript
 Cannot read property 'checked' of undefined.
 ```
 
-- La primera fecha en que se detectó el error
-- El porcentaje de errores que representa (0.5%)
-- Descripción general:
+- The first date the error was detected
+- The percentage of errors it represents (0.5%)
+- General overview:
 
-  0. El navegador donde ocurrió el incidente, incluyendo la versión
+  0. The browser where the incident occurred, including the version
      - Chrome, Firefox, IE, Edge, Safari
 
-  1. El tipo de dispositivo
-     - Escritorio o móvil
+  1. The device type
+     - Desktop or mobile
 
-  2. El sistema operativo del dispositivo
+  2. The device's operating system
      - iOS, Android, Windows 10, Windows XP
 
-  3. La ruta de la petición donde se detectó el error
+  3. The request path where the error was detected
 
-#### He encontrado que los errores de JavaScript ocurren principalmente por tres razones:
+#### I've found that JavaScript errors occur mainly for three reasons:
 
-0. No **minificar** el JavaScript sin incluir los archivos .map
-1. El **orden de carga** de los archivos. Por ejemplo, al usar Bootstrap CSS, debemos cargar jQuery primero y después el JavaScript de Bootstrap; de lo contrario, es probable que no funcione.
-2. **Compatibilidad** con navegadores, generalmente el problema es con Internet Explorer.
+0. Not **minifying** JavaScript without including the .map files
+1. The **loading order** of files. For example, when using Bootstrap CSS, we must load jQuery first and then Bootstrap JavaScript; otherwise, it probably won't work.
+2. **Compatibility** with browsers, generally the problem is with Internet Explorer.
 
-> Si usas Heroku, puedes instalar New Relic de forma gratuita. Te invito a probarlo.
+> If you use Heroku, you can install New Relic for free. I invite you to try it.
 
-Más información sobre [New Relic](https://newrelic.com/es/resources/datasheets/new-relic-one).
+More information about [New Relic](https://newrelic.com/resources/datasheets/new-relic-one).

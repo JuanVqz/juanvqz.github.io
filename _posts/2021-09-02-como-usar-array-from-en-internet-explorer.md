@@ -1,17 +1,17 @@
 ---
 layout: post
-title: "Hoy aprendí que Internet Explorer no soporta Array.from"
+title: "Today I Learned That Internet Explorer Doesn't Support Array.from"
 date: 2021-09-02 08:30:51 -0500
 last_modified_at: 2026-02-20 09:00:00 -0500
 categories: [development]
 tags: [TIL, javascript]
 ---
 
-Ni Microsoft quiere a Internet Explorer.
+Not even Microsoft wants Internet Explorer.
 
-Al abrir Internet Explorer, aparece una ventana invitándome a cambiar al navegador **Edge**, lo que confirma que Microsoft también lo ha dejado en el olvido.
+When opening Internet Explorer, a window appears inviting me to switch to the **Edge** browser, which confirms that Microsoft has also left it in the past.
 
-En el trabajo usamos selectores **document.querySelector**, que regresan una colección de tipo **NodeList**. Esta colección no puede utilizar el método **map**, que pertenece a la clase **Array**.
+At work we use **document.querySelector** selectors, which return a **NodeList** collection. This collection cannot use the **map** method, which belongs to the **Array** class.
 
 ```javascript
 document.querySelectorAll(".class")
@@ -22,7 +22,7 @@ document.querySelectorAll(".class")
 //]
 ```
 
-Para usar el método **map** en esa colección, usamos **Array.from** para convertir la NodeList a un array:
+To use the **map** method on that collection, we use **Array.from** to convert the NodeList to an array:
 
 ```javascript
 Array.from(document.querySelectorAll(".class"))
@@ -33,10 +33,10 @@ Array.from(document.querySelectorAll(".class"))
 //]
 ```
 
-Internet Explorer no soporta **Array.from**, por lo que tienes dos opciones: usar el [polyfill](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/from#polyfill) o usar **slice**:
+Internet Explorer doesn't support **Array.from**, so you have two options: use the [polyfill](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#polyfill) or use **slice**:
 
 ```javascript
 Array.prototype.slice(document.querySelectorAll(".class"))
 ```
 
-Espero que esto te ayude. Saludos.
+Hope this helps. Regards.
