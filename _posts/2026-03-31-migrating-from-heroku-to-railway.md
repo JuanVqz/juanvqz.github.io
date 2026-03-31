@@ -158,10 +158,16 @@ I also updated the CI pipeline — upgraded Postgres from 10.13 to 17 (matching 
 6. **Check your RACK_ENV.** It seems obvious, but it's easy to forget when you're focused on the database.
 7. **The `_railway-verify` DNS record is a TXT record**, even though it looks like it could be a CNAME. Your registrar will reject it if you pick the wrong type.
 
+## Fair warning
+
+Since migrating, I've seen reports from other developers that give me pause. One team experienced [persistent 150–200ms request queuing](https://www.reddit.com/r/rails/comments/1s51mfc/railway_vs_render_heroku_digital_ocean_fly_etc/) on Railway that they couldn't resolve even with Pro plan support — response times that were 40ms on Heroku, Render, and DigitalOcean. Another long-time customer [reported a caching misconfiguration](https://x.com/euboid/status/2038729202602500376) that leaked user data between accounts, on top of weeks of near-daily incidents.
+
+I measured my own response times after reading these reports, and for my scale they're good enough. But if you're running something larger or handling sensitive data, do thorough stress testing before committing, and have a rollback plan. Railway is young, and that cuts both ways: fast iteration, but also growing pains.
+
 ## Was it worth it?
 
 The whole migration took about an hour. Most of that was waiting for DNS propagation and debugging the Postgres incident. The actual work — dump, restore, set variables, flip DNS — was maybe 20 minutes.
 
 Railway feels like what Heroku should have become. The dashboard is clean, deploys are fast, and the Postgres integration just works. I miss `heroku run` (Railway's local execution model is confusing at first), but `railway shell` covers most cases.
 
-For a small multi-tenant Rails app like mine, it's a good fit.
+For a small multi-tenant Rails app like mine, it's a good fit. But I'm keeping my Heroku knowledge fresh — just in case.
