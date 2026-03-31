@@ -54,4 +54,4 @@ A short description of the project, yarn used, pattern, etc.
 
 ## License
 
-© Juan Vázquez
+© Juan Vásquez
