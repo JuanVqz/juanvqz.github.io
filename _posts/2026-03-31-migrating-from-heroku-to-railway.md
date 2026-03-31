@@ -7,7 +7,7 @@ categories: [devops]
 tags: [rails, heroku, railway, deployment, postgresql, doctors-journey]
 ---
 
-Tonight I migrated my Doctors App from Heroku to Railway.
+Last weekend I migrated my Doctors App from Heroku to Railway.
 
 It's a multi-tenant Rails app where each hospital gets its own subdomain — `one.doctors.com`, `two.doctors.com`, and so on.
 
@@ -34,30 +34,30 @@ Then I wiped the Railway database and restored:
 
 ```bash
 # Wipe
-psql -h <railway-host> -p <port> -U postgres -d railway \
+psql -h <railway-host> -p <port> -U postgres -d database_name \
   -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
 
 # Restore
 pg_restore --verbose --no-owner --no-acl \
-  -h <railway-host> -p <port> -U postgres -d railway /tmp/heroku_backup.dump
+  -h <railway-host> -p <port> -U postgres -d database_name /tmp/heroku_backup.dump
 ```
 
 The restore threw two errors — both about the `unaccent` extension. Heroku installs extensions in a `heroku_ext` schema that doesn't exist on Railway. The fix is to just create it manually afterward:
 
 ```bash
-psql -h <railway-host> -p <port> -U postgres -d railway \
+psql -h <railway-host> -p <port> -U postgres -d database_name \
   -c "CREATE EXTENSION IF NOT EXISTS unaccent;"
 ```
 
 Everything else restored cleanly. I verified every table:
 
-| Table | Heroku | Railway |
-|---|---|---|
-| users | 9,752 | 9,752 |
-| appointments | 25,481 | 25,481 |
-| addresses | 9,835 | 9,835 |
-| patient_referrals | 1,211 | 1,211 |
-| hospitals | 5 | 5 |
+| Table             | Heroku | Railway |
+|-------------------|--------|---------|
+| users             | 9,752  | 9,752   |
+| appointments      | 25,481 | 25,481  |
+| addresses         | 9,835  | 9,835   |
+| patient_referrals | 1,211  | 1,211   |
+| hospitals         | 5      | 5       |
 
 All 12 tables matched exactly. If you take one thing from this post: **always verify row counts after a restore**.
 
@@ -83,7 +83,7 @@ an SSL connection to a non-SSL Puma?>
 
 The web service was trying to connect to Postgres, but Postgres was now running Puma, responding to TCP connections with HTTP errors.
 
-The fix was to roll back the Postgres service to its last good deployment — the one using the `ghcr.io/railwayapp-templates/postgres-ssl:17` image. Railway's CLI doesn't have a rollback command, so I used the dashboard to roll back the deployment.
+The fix was to roll back the Postgres service to its last good deployment. Railway's CLI doesn't have a rollback command, so I used the dashboard to roll back the deployment.
 
 After about 45 seconds, Postgres was back. Data intact. Lesson learned: **always pass `--service web` when deploying**.
 
@@ -99,12 +99,12 @@ railway domain "*.doctors.com" --service web --port 8080
 
 Railway returned the DNS records I needed. In Squarespace (my domain registrar), I added:
 
-| Type | Host | Value |
-|---|---|---|
-| CNAME | `*` | `znjcefnu.up.railway.app` |
+| Type  | Host              | Value                               |
+|-------|-------------------|-------------------------------------|
+| CNAME | `*`               | `znjcefnu.up.railway.app`           |
 | CNAME | `_acme-challenge` | `znjcefnu.authorize.railwaydns.net` |
 
-There was also a `_railway-verify` record for domain ownership. I initially tried adding it as a CNAME, but Squarespace rejected the value — it's actually a **TXT record**, not a CNAME. Small thing, but it tripped me up.
+There was also a `_railway-verify` record for domain ownership. I initially tried adding it as a `CNAME`, but Squarespace rejected the value — it's actually a **TXT record**, not a `CNAME`. Small thing, but it tripped me up.
 
 DNS propagated fast. Within a couple of minutes, Railway confirmed the domain was verified and SSL was provisioned.
 
@@ -124,12 +124,12 @@ Railway's trial plan only allows **one custom domain per service**. The wildcard
 
 ## Pricing
 
-| | Heroku | Railway |
-|---|---|---|
-| Web service | $7/mo (Basic dyno) | Usage-based (~$5/mo) |
-| Postgres | $5/mo (Mini) | Included (500MB) |
-| Custom domains | Included | 1 per service (trial) |
-| SSL | Automatic | Automatic |
+|                  | Heroku                     | Railway                      |
+|------------------|----------------------------|------------------------------|
+| Web service      | $7/mo (Basic dyno)         | Usage-based (~$5/mo)         |
+| Postgres         | $5/mo (Mini)               | Included (500MB)             |
+| Custom domains   | Included                   | 1 per service (trial)        |
+| SSL              | Automatic                  | Automatic                    |
 | Chrome buildpack | Required for old PDF setup | Not needed (using Prawn now) |
 
 For my scale, Railway is slightly cheaper. The real win is simplicity — no buildpack configuration, no add-on marketplace to navigate, and Postgres is just there.
@@ -162,11 +162,11 @@ I also updated the CI pipeline — upgraded Postgres from 10.13 to 17 (matching 
 
 Since migrating, I've seen reports from other developers that give me pause. One team experienced [persistent 150–200ms request queuing](https://www.reddit.com/r/rails/comments/1s51mfc/railway_vs_render_heroku_digital_ocean_fly_etc/) on Railway that they couldn't resolve even with Pro plan support — response times that were 40ms on Heroku, Render, and DigitalOcean. Another long-time customer [reported a caching misconfiguration](https://x.com/euboid/status/2038729202602500376) that leaked user data between accounts, on top of weeks of near-daily incidents.
 
-I measured my own response times after reading these reports, and for my scale they're good enough. But if you're running something larger or handling sensitive data, do thorough stress testing before committing, and have a rollback plan. Railway is young, and that cuts both ways: fast iteration, but also growing pains.
+I measured my own response times after reading these reports, and for my scale they're good enough. But if you're running something larger, do thorough stress testing before committing, and have a rollback plan. Railway is young, and that cuts both ways: fast iteration, but also growing pains.
 
 ## Was it worth it?
 
-The whole migration took about an hour. Most of that was waiting for DNS propagation and debugging the Postgres incident. The actual work — dump, restore, set variables, flip DNS — was maybe 20 minutes.
+The whole migration took about an hour. Most of that was waiting for DNS propagation and debugging the Postgres incident. The actual work — dump, restore, set variables, flip DNS — was maybe 30 minutes.
 
 Railway feels like what Heroku should have become. The dashboard is clean, deploys are fast, and the Postgres integration just works. I miss `heroku run` (Railway's local execution model is confusing at first), but `railway shell` covers most cases.
 
