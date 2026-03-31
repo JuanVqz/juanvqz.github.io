@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Migrating a Rails App from Heroku to Railway"
-date: 2026-03-31 09:00:00 -0600
-last_modified_at: 2026-04-14 09:00:00 -0600
+date: 2026-03-31 00:00:00 -0600
+last_modified_at: 2026-03-31 00:00:00 -0600
 categories: [devops]
 tags: [rails, heroku, railway, deployment, postgresql, doctors-journey]
 ---

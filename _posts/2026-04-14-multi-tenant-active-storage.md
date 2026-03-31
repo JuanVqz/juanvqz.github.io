@@ -2,7 +2,7 @@
 layout: post
 title: "Multi-Tenant Active Storage Done Right"
 date: 2026-04-14 00:00:00 -0600
-last_modified_at: 2026-03-31 00:00:00 -0600
+last_modified_at: 2026-04-14 00:00:00 -0600
 categories: [development]
 tags: [rails, activestorage, s3, cloudflare, r2, multi-tenant, image-processing, doctors-journey]
 ---
