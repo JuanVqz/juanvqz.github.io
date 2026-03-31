@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctores - Bulma Version</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .menu-label { font-size: 0.75em; letter-spacing: 0.1em; text-transform: uppercase; color: #7a7a7a; }
+    .menu-list a.is-active { background-color: #3273dc; color: #fff; }
+    .tooltip { position: relative; }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" role="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <h6 class="title is-5">Demo Hospital</h6>
+        </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <div class="navbar-link">Dr. Juan Vasquez</div>
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                <i class="fa fa-sign-out-alt"></i>&nbsp; Cerrar Sesion
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <section class="section">
+    <div class="columns">
+      <!-- Sidebar -->
+      <aside class="column is-2">
+        <aside class="menu">
+          <p class="menu-label">MENU</p>
+          <ul class="menu-list">
+            <li>
+              <a class="is-active">
+                <span class="icon"><i class="fa fa-users"></i></span>
+                <span>Pacientes</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="icon"><i class="fa fa-book"></i></span>
+                <span>Consultas</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="icon"><i class="fa fa-ambulance"></i></span>
+                <span>Hospitalizaciones</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="icon"><i class="fa fa-share"></i></span>
+                <span>Referencia de paciente</span>
+              </a>
+            </li>
+          </ul>
+          <p class="menu-label">CONFIGURACION</p>
+          <ul class="menu-list">
+            <li>
+              <a>
+                <span class="icon"><i class="fa fa-user-md"></i></span>
+                <span>Referidos</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="icon"><i class="fa fa-hospital"></i></span>
+                <span>Pagina principal</span>
+              </a>
+            </li>
+          </ul>
+        </aside>
+      </aside>
+
+      <!-- Content -->
+      <div class="column is-10">
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <div class="field has-addons">
+                <div class="control has-icons-left">
+                  <input class="input" type="text" placeholder="Pacientes">
+                  <span class="icon is-left"><i class="fa fa-search"></i></span>
+                </div>
+                <div class="control">
+                  <button class="button is-info">Buscar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="level-right">
+            <div class="level-item">
+              <a class="button is-link">
+                <span class="icon"><i class="fa fa-plus"></i></span>
+                <span>Registrar Paciente</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="table-container">
+          <table class="table is-hoverable is-fullwidth">
+            <thead class="is-uppercase">
+              <tr>
+                <th>Nombre</th>
+                <th>Registrado</th>
+                <th>Actualizado</th>
+                <th class="has-text-right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Maria Garcia Lopez</td>
+                <td>15 ene 2024</td>
+                <td>20 mar 2026</td>
+                <td>
+                  <div class="buttons is-right">
+                    <a class="button is-success"><span class="icon"><i class="fa fa-print"></i></span></a>
+                    <a class="button is-default"><span class="icon"><i class="fa fa-ambulance"></i></span></a>
+                    <a class="button is-default"><span class="icon"><i class="fa fa-book"></i></span></a>
+                    <a class="button is-link"><span class="icon"><i class="fa fa-eye"></i></span></a>
+                    <a class="button is-danger"><span class="icon"><i class="fa fa-times"></i></span></a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Carlos Rodriguez Mendez</td>
+                <td>03 feb 2024</td>
+                <td>18 mar 2026</td>
+                <td>
+                  <div class="buttons is-right">
+                    <a class="button is-success"><span class="icon"><i class="fa fa-print"></i></span></a>
+                    <a class="button is-default"><span class="icon"><i class="fa fa-ambulance"></i></span></a>
+                    <a class="button is-default"><span class="icon"><i class="fa fa-book"></i></span></a>
+                    <a class="button is-link"><span class="icon"><i class="fa fa-eye"></i></span></a>
+                    <a class="button is-danger"><span class="icon"><i class="fa fa-times"></i></span></a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Ana Martinez Ruiz</td>
+                <td>22 mar 2024</td>
+                <td>15 mar 2026</td>
+                <td>
+                  <div class="buttons is-right">
+                    <a class="button is-success"><span class="icon"><i class="fa fa-print"></i></span></a>
+                    <a class="button is-default"><span class="icon"><i class="fa fa-ambulance"></i></span></a>
+                    <a class="button is-default"><span class="icon"><i class="fa fa-book"></i></span></a>
+                    <a class="button is-link"><span class="icon"><i class="fa fa-eye"></i></span></a>
+                    <a class="button is-danger"><span class="icon"><i class="fa fa-times"></i></span></a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Pedro Sanchez Flores</td>
+                <td>10 may 2024</td>
+                <td>12 mar 2026</td>
+                <td>
+                  <div class="buttons is-right">
+                    <a class="button is-success"><span class="icon"><i class="fa fa-print"></i></span></a>
+                    <a class="button is-default"><span class="icon"><i class="fa fa-ambulance"></i></span></a>
+                    <a class="button is-default"><span class="icon"><i class="fa fa-book"></i></span></a>
+                    <a class="button is-link"><span class="icon"><i class="fa fa-eye"></i></span></a>
+                    <a class="button is-danger"><span class="icon"><i class="fa fa-times"></i></span></a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Laura Hernandez Torres</td>
+                <td>08 jul 2024</td>
+                <td>10 mar 2026</td>
+                <td>
+                  <div class="buttons is-right">
+                    <a class="button is-success"><span class="icon"><i class="fa fa-print"></i></span></a>
+                    <a class="button is-default"><span class="icon"><i class="fa fa-ambulance"></i></span></a>
+                    <a class="button is-default"><span class="icon"><i class="fa fa-book"></i></span></a>
+                    <a class="button is-link"><span class="icon"><i class="fa fa-eye"></i></span></a>
+                    <a class="button is-danger"><span class="icon"><i class="fa fa-times"></i></span></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th colspan="4">
+                  <nav class="pagination is-small" role="navigation">
+                    <a class="pagination-previous" disabled>Anterior</a>
+                    <a class="pagination-next">Siguiente</a>
+                    <ul class="pagination-list">
+                      <li><a class="pagination-link is-current">1</a></li>
+                      <li><a class="pagination-link">2</a></li>
+                      <li><a class="pagination-link">3</a></li>
+                    </ul>
+                  </nav>
+                  <br>
+                  <div class="has-text-right">
+                    <small>Mostrando 5 de 23 pacientes</small>
+                  </div>
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
