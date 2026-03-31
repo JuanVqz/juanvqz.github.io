@@ -26,6 +26,9 @@ bundle install
 
 # Run the site locally
 bundle exec jekyll serve
+
+# Preview future-dated posts (scheduled posts hidden by default)
+bundle exec jekyll serve --future
 ```
 
 The site will be available at `http://localhost:4000`

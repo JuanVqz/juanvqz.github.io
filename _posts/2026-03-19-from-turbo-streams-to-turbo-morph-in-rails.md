@@ -4,7 +4,7 @@ title: "From Turbo Streams to Turbo Morph: Simplifying Real-Time Rails"
 date: 2026-03-19 09:00:00 -0500
 last_modified_at: 2026-03-19 09:00:00 -0500
 categories: [development]
-tags: [rails, hotwire, turbo, morph, real-time]
+tags: [rails, hotwire, turbo, morph, real-time, may-store-journey]
 ---
 
 ## The Setup
