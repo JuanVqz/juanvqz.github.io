@@ -28,7 +28,7 @@ twitter:
   username: juanvqz_
 
 social:
-  name: Juan Vázquez
+  name: Juan Vásquez
   email: contact@juanvasquez.dev
   links:
     - https://x.com/juanvqz_
@@ -129,7 +129,7 @@ pwa:
     deny_paths:
       # - "/example"  # URLs match `<SITE_URL>/example/*` will not be cached by the PWA
 
-paginate: 10
+paginate: 15
 
 # The base URL of your site
 baseurl: ""
@@ -189,6 +189,7 @@ compress_html:
 
 exclude:
   - README.md
+  - AGENTS.md
   - tools/
 
 jekyll-archives:
