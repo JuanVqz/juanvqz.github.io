@@ -9,7 +9,7 @@ tags: [rails, ruby, upgrade, next_rails, fastruby, doctors-journey]
 
 ## The Timeline
 
-I started the [Doctors app](/blog/from-wicked-pdf-to-prawn-rails-pdf-generation/) — the clinical assistance system I've been writing about recently — in October 2018 on **Rails 5.2.1** with **Ruby 2.5.1**. Today it runs **Rails 8.1** on **Ruby 3.4.8**. That's every major Rails version — 5.2, 6.0, 6.1, 7.0, 7.1, 7.2, 8.0, 8.1 — across seven years.
+I started the Doctors app — the clinical assistance system I've been writing about recently — in October 2018 on **Rails 5.2.1** with **Ruby 2.5.1**. Today it runs **Rails 8.1** on **Ruby 3.4.8**. That's every major Rails version — 5.2, 6.0, 6.1, 7.0, 7.1, 7.2, 8.0, 8.1 — across seven years.
 
 Here's the full upgrade history, pulled straight from git:
 
