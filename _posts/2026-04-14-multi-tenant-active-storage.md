@@ -9,7 +9,7 @@ tags: [rails, activestorage, s3, cloudflare, r2, multi-tenant, image-processing,
 
 ## The Starting Point
 
-The [Doctors app](/blog/upgrading-rails-from-5-to-8-seven-years/) — Asistencia Clínica — is a multi-tenant Rails 8.1 application. Each clinic gets its own subdomain: `demo.asistenciaclinica.com`, `drasmith.asistenciaclinica.com`, and so on. File storage goes to Cloudflare R2, which speaks the S3 API.
+The [Doctors app](/blog/upgrading-rails-from-5-to-8-seven-years/) — Asistencia Clínica — is a multi-tenant Rails 8.1 application. Each clinic gets its own subdomain: `demo.doctors.com`, `drasmith.doctors.com`, and so on. File storage goes to Cloudflare R2, which speaks the S3 API.
 
 The multi-tenant part means files from different clinics need to live under separate paths in the same bucket. A patient photo for the `demo` clinic should end up at `demo/attachments/user/42/<key>`, not mixed in with everyone else's files.
 
