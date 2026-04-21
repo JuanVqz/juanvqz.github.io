@@ -224,6 +224,6 @@ bash tools/test.sh
 
 ## Notes
 - External links are disabled in htmlproofer (only validates internal links)
-- The site uses GitHub Pages deployment from `gh-pages` branch
+- The site uses GitHub Pages deployment from `main` branch
 - PWA is enabled with offline caching
 - Comments via Giscus (GitHub Discussions)
