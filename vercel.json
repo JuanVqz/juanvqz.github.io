@@ -1,3 +1,0 @@
-{
-  "installCommand": "dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && dnf install -y vips && bundle install"
-}

@@ -129,13 +129,19 @@ image:
 
 ### Social Preview Images (Open Graph)
 
-Open Graph images are **auto-generated** by `jekyll-og-image` at build time. Generated PNGs are written into `_site/assets/images/og/posts/<slug>.png` and served as static assets. The plugin also injects `og:image` and `twitter:image` meta tags. No manual step — write a post, commit, push.
+Open Graph images are **auto-generated** by `jekyll-og-image` via a GitHub Actions workflow. No manual step — write a post, push, the workflow regenerates and commits the PNGs back to the branch, Vercel redeploys with them as static assets.
 
 Setup:
 
-1. `jekyll-og-image` gem is in the `Gemfile` and registered in `_config.yml` under `plugins:`. Style is configured in the `og_image:` block.
-2. `vercel.json` installs `libvips` at build time via `dnf`/`yum` so the plugin can run on Vercel.
+1. `jekyll-og-image` is in the `Gemfile` `:development` group and is **not** listed under `_config.yml` `plugins:`. `_plugins/og_image_loader.rb` requires the gem when it is available (rescuing `LoadError` so Vercel, where the gem is not installed, does not crash) and registers a `pre_render` hook that sets `page.image` from `assets/images/og/posts/<slug>.png` whenever a matching PNG exists. This makes Chirpy emit the correct `og:image` and `twitter:image` meta tags even when the plugin itself is not loaded.
+2. `.github/workflows/og-images.yml` runs on pushes that touch `_posts/`, `_config.yml`, the avatar, the Gemfile, or the workflow itself. It installs `libvips`, runs `tools/og-images.sh` (which builds the site and copies the generated PNGs into `assets/images/og/posts/`), and commits any new/changed images back to the branch with `[skip og]` in the message to prevent loops.
 3. The local `_layouts/home.html` override hides the image from the post list. The local `_layouts/post.html` override hides the banner at the top of post pages. The image is used only for social sharing.
+
+To regenerate locally:
+
+```bash
+bash tools/og-images.sh
+```
 
 **Custom image for a specific post:**
 

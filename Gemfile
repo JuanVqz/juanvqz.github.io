@@ -4,7 +4,9 @@ source 'https://rubygems.org'
 
 gem 'jekyll-theme-chirpy', '~> 7.2', '>= 7.2.4'
 
-gem 'jekyll-og-image', '~> 2.1'
+group :development do
+  gem 'jekyll-og-image', '~> 2.1'
+end
 
 gem 'html-proofer', '~> 5.0', group: :test
 
