@@ -117,12 +117,52 @@ date: YYYY-MM-DD HH:MM:SS ZONE
 last_modified_at: YYYY-MM-DD HH:MM:SS ZONE
 categories: [category1, category2]
 tags: [tag1, tag2]
+image:
+  path: /assets/img/posts/<slug>/og.png
+  alt: Short description
 ---
 ```
 
 - Date format: `YYYY-MM-DD HH:MM:SS -0500` (include timezone)
 - Use double quotes for title
 - Categories and tags use array syntax
+
+### Social Preview Images (Open Graph)
+
+Open Graph images are **auto-generated** by `jekyll-og-image` at build time. Generated PNGs are written into `_site/assets/images/og/posts/<slug>.png` and served as static assets. The plugin also injects `og:image` and `twitter:image` meta tags. No manual step — write a post, commit, push.
+
+Setup:
+
+1. `jekyll-og-image` gem is in the `Gemfile` and registered in `_config.yml` under `plugins:`. Style is configured in the `og_image:` block.
+2. `vercel.json` installs `libvips` at build time via `dnf`/`yum` so the plugin can run on Vercel.
+3. The local `_layouts/home.html` override hides the image from the post list. The local `_layouts/post.html` override hides the banner at the top of post pages. The image is used only for social sharing.
+
+**Custom image for a specific post:**
+
+Override via frontmatter:
+
+```yaml
+image:
+  path: /assets/img/posts/<slug>/og.png
+  alt: Short description
+```
+
+Image spec (for custom overrides or the site-wide default):
+
+- **Recommended size**: 1200×630 px (aspect ratio 1.91:1)
+- **Minimum size**: 600×315 px
+- **Max file size**: 5 MB (X/Twitter), 8 MB (Facebook/LinkedIn)
+- **Format**: PNG or JPG (avoid WebP — some scrapers do not support it)
+
+Crop an existing image to spec:
+
+```bash
+sips -z 630 1200 --cropToHeightWidth 630 1200 input.png --out og.png
+```
+
+Verify locally with a browser extension (e.g., "Social Share Preview") on the rendered post page.
+
+**Local dependency:** `libvips` must be installed for the plugin to run. On macOS: `brew install vips`.
 
 ### Markdown Guidelines
 - Use ATX-style headers (`#`, `##`, `###`)

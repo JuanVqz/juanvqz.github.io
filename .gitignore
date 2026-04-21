@@ -25,3 +25,9 @@ package-lock.json
 # Misc
 _sass/vendors
 assets/js/dist
+
+# Auto-generated Open Graph images (built at deploy time by jekyll-og-image)
+assets/images/og
+
+# Claude Code local state
+.claude

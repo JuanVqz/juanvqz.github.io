@@ -96,6 +96,37 @@ avatar: https://avatars.githubusercontent.com/u/7331511?v=4
 # It can be overridden by a customized `page.image` in front matter.
 social_preview_image: https://avatars.githubusercontent.com/u/7331511?v=4
 
+# Auto-generated Open Graph images via `jekyll-og-image`.
+# Produces 1200x630 PNGs at build time into `_site/assets/images/og/posts/<slug>.png`
+# and injects `og:image` meta tags. Per-post `image:` frontmatter overrides the
+# generated image. Requires `libvips` at build time (see `vercel.json`).
+plugins:
+  - jekyll-og-image
+
+og_image:
+  collections: ["posts"]
+  output_dir: "assets/images/og"
+  domain: "www.juanvasquez.dev"
+  image: "/assets/img/avatar.jpg"
+  canvas:
+    background_color: "#FFFFFF"
+    width: 1200
+    height: 630
+  header:
+    font_family: "Helvetica, Bold"
+    color: "#2f313d"
+  content:
+    font_family: "Helvetica, Regular"
+    color: "#535358"
+  metadata:
+    fields: ["date", "tags"]
+    separator: " • "
+    date_format: "%B %d, %Y"
+  border_bottom:
+    width: 20
+    fill:
+      - "#2f313d"
+
 # boolean type, the global switch for TOC in posts.
 toc: true
 
