@@ -5,8 +5,8 @@
 set -eu
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SRC_DIR="$ROOT/assets/images/og/posts"
-DEST_DIR="$ROOT/_site/assets/images/og/posts"
+SRC_DIR="$ROOT/assets/img/og/posts"
+DEST_DIR="$ROOT/_site/assets/img/og/posts"
 
 cd "$ROOT"
 bundle exec jekyll build

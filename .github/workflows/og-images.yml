@@ -46,10 +46,10 @@ jobs:
 
       - name: Commit regenerated images
         run: |
-          if [[ -n "$(git status --porcelain assets/images/og)" ]]; then
+          if [[ -n "$(git status --porcelain assets/img/og)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add assets/images/og
+            git add assets/img/og
             git commit -m "Regenerate OG images [skip og]"
             git push
           else
