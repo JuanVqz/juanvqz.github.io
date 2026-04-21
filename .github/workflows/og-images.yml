@@ -1,0 +1,57 @@
+name: "Generate OG Images"
+
+on:
+  push:
+    paths:
+      - "_posts/**"
+      - "_config.yml"
+      - "assets/img/avatar.jpg"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "tools/og-images.sh"
+      - ".github/workflows/og-images.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: og-images-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  regenerate:
+    if: "!contains(github.event.head_commit.message, '[skip og]')"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install libvips
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libvips-tools libvips-dev
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4
+          bundler-cache: true
+
+      - name: Generate OG images
+        run: bash tools/og-images.sh
+
+      - name: Commit regenerated images
+        run: |
+          if [[ -n "$(git status --porcelain assets/img/og)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add assets/img/og
+            git commit -m "Regenerate OG images [skip og]"
+            git push
+          else
+            echo "No OG image changes."
+          fi

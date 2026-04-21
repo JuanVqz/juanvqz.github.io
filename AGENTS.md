@@ -117,12 +117,59 @@ date: YYYY-MM-DD HH:MM:SS ZONE
 last_modified_at: YYYY-MM-DD HH:MM:SS ZONE
 categories: [category1, category2]
 tags: [tag1, tag2]
+image:
+  path: /assets/img/posts/<slug>/og.png
+  alt: Short description
 ---
 ```
 
 - Date format: `YYYY-MM-DD HH:MM:SS -0500` (include timezone)
 - Use double quotes for title
 - Categories and tags use array syntax
+
+### Social Preview Images (Open Graph)
+
+Open Graph images are **auto-generated** by `jekyll-og-image` via a GitHub Actions workflow. No manual step — write a post, push, the workflow regenerates and commits the PNGs back to the branch, Vercel redeploys with them as static assets.
+
+Setup:
+
+1. `jekyll-og-image` is in the `Gemfile` `:development` group and is **not** listed under `_config.yml` `plugins:`. `_plugins/og_image_loader.rb` requires the gem when it is available (rescuing `LoadError` so Vercel, where the gem is not installed, does not crash) and registers a `pre_render` hook that sets `page.image` from `assets/img/og/posts/<slug>.png` whenever a matching PNG exists. This makes Chirpy emit the correct `og:image` and `twitter:image` meta tags even when the plugin itself is not loaded.
+   - Vercel does not auto-exclude the `:development` group. The environment variable `BUNDLE_WITHOUT=development:test` must be set in Vercel → Project → Settings → Environment Variables (Production + Preview). Without it, Vercel installs the plugin, which then tries to call libvips at build time and crashes (AL2023 has no libvips package).
+2. `.github/workflows/og-images.yml` runs on pushes that touch `_posts/`, `_config.yml`, the avatar, the Gemfile, or the workflow itself. It installs `libvips`, runs `tools/og-images.sh` (which builds the site and copies the generated PNGs into `assets/img/og/posts/`), and commits any new/changed images back to the branch with `[skip og]` in the message to prevent loops.
+3. The local `_layouts/home.html` override hides the image from the post list. The local `_layouts/post.html` override hides the banner at the top of post pages. The image is used only for social sharing.
+
+To regenerate locally:
+
+```bash
+bash tools/og-images.sh
+```
+
+**Custom image for a specific post:**
+
+Override via frontmatter:
+
+```yaml
+image:
+  path: /assets/img/posts/<slug>/og.png
+  alt: Short description
+```
+
+Image spec (for custom overrides or the site-wide default):
+
+- **Recommended size**: 1200×630 px (aspect ratio 1.91:1)
+- **Minimum size**: 600×315 px
+- **Max file size**: 5 MB (X/Twitter), 8 MB (Facebook/LinkedIn)
+- **Format**: PNG or JPG (avoid WebP — some scrapers do not support it)
+
+Crop an existing image to spec:
+
+```bash
+sips -z 630 1200 --cropToHeightWidth 630 1200 input.png --out og.png
+```
+
+Verify locally with a browser extension (e.g., "Social Share Preview") on the rendered post page.
+
+**Local dependency:** `libvips` must be installed for the plugin to run. On macOS: `brew install vips`.
 
 ### Markdown Guidelines
 - Use ATX-style headers (`#`, `##`, `###`)
