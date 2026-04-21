@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "From Bulma to Tailwind: Migrating a Rails App's CSS Framework"
-date: 2026-04-28 09:00:00 -0600
-last_modified_at: 2026-04-28 09:00:00 -0600
+date: 2026-09-19 09:00:00 -0600
+last_modified_at: 2026-09-19 09:00:00 -0600
 categories: [development]
 tags: [rails, css, tailwind, bulma, frontend, doctors-journey]
 ---

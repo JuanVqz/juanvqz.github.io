@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "From Sprockets to Vite: Evolving a Rails Asset Pipeline"
-date: 2026-04-21 09:00:00 -0600
-last_modified_at: 2026-04-21 09:00:00 -0600
+date: 2026-04-28 09:00:00 -0600
+last_modified_at: 2026-04-28 09:00:00 -0600
 categories: [development]
 tags: [rails, vite, sprockets, javascript, asset-pipeline, importmaps, doctors-journey]
 ---

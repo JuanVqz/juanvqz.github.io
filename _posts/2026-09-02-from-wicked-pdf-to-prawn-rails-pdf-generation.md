@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "From wicked_pdf to Prawn: A Rails PDF Generation Journey"
-date: 2026-06-02 09:00:00 -0600
-last_modified_at: 2026-04-27 09:00:00 -0600
+date: 2026-09-02 09:00:00 -0600
+last_modified_at: 2026-09-02 09:00:00 -0600
 categories: [development]
 tags: [rails, pdf, prawn, wicked_pdf, grover, puppeteer, doctors-journey]
 ---
