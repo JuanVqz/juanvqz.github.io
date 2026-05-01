@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "From HAML to ERB: Going Back to Rails-Native Templates"
-date: 2026-05-12 09:00:00 -0600
-last_modified_at: 2026-05-11 09:00:00 -0600
+date: 2026-05-05 09:00:00 -0600
+last_modified_at: 2026-05-05 09:00:00 -0600
 categories: [development]
 tags: [rails, haml, erb, templates, reactionview, doctors-journey]
 ---
