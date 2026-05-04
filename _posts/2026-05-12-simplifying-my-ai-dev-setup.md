@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Simplifying My AI Dev Setup: What Worked and What I Cut"
-date: 2026-05-05 09:00:00 -0600
-last_modified_at: 2026-05-04 09:00:00 -0600
+date: 2026-05-12 09:00:00 -0600
+last_modified_at: 2026-05-12 09:00:00 -0600
 categories: [development]
 tags: [ai, claude-code, developer-tools, dotfiles]
 ---
