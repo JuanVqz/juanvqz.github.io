@@ -166,4 +166,4 @@ And if you're on Vite and happy with it, that's fine too. This migration was abo
 
 ---
 
-*This is part of a series about modernizing a Rails clinical management system. Previous posts covered [Sprockets to Vite](/development/2026/04/13/from-sprockets-to-vite-rails-asset-pipeline/), [Bulma to Tailwind](/development/2026/04/20/from-bulma-to-tailwind-css-migration-rails/), and [HAML to ERB](/development/2026/05/11/from-haml-to-erb-going-back-to-rails-native-templates/).*
+*This is part of a series about modernizing a Rails clinical management system. Previous posts covered [Sprockets to Vite](/blog/from-sprockets-to-vite-rails-asset-pipeline/) and [HAML to ERB](/blog/from-haml-to-erb-going-back-to-rails-native-templates/).*
