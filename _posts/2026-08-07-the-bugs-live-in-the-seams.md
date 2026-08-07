@@ -214,10 +214,53 @@ Which also drops the regression test from a browser test to a model test that ru
 
 ---
 
+## My Fix Had a Seam In It
+
+I want to be honest about how this ended, because it is the best evidence for the whole argument.
+
+Code review caught that my fix was half a fix.
+
+`dependent: :restrict_with_error` is **per association**. I guarded `payments`. But the schema has two foreign keys pointing at `payment_methods`:
+
+```ruby
+add_foreign_key "payments", "payment_methods"
+add_foreign_key "cash_closing_lines", "payment_methods"
+```
+
+There was no `cash_closing_lines` association on the model at all. So a payment method with zero payments but one cash closing line sailed straight past my guard and raised `InvalidForeignKey` exactly as before. One of my own fixtures was in precisely that state, and my new tests missed it because they happened to exercise the two payment methods where the guard did fire.
+
+A fix for a seam bug, with a seam in it. The model still held an incomplete picture of the schema.
+
+The interesting part is what fixes that permanently, and it is not "remember to add the association." It is asking the database directly:
+
+```ruby
+def unguarded_foreign_keys_for(model)
+  connection = ActiveRecord::Base.connection
+
+  inbound = connection.tables.flat_map do |table|
+    connection.foreign_keys(table)
+      .select { |fk| fk.to_table == model.table_name }
+      .map(&:from_table)
+  end.uniq
+
+  guarded = model.reflect_on_all_associations(:has_many)
+    .select { |association| association.options[:dependent] == :restrict_with_error }
+    .map { |association| association.klass.table_name }
+
+  inbound - guarded
+end
+```
+
+Add a foreign key to `payment_methods` next year and forget the association, and the suite fails with the offending table name in the message.
+
+That is a test that checks the two sides of a seam **agree**, rather than testing either side. It is the general move, whenever you can find it: not more tests on each side, a test on the agreement.
+
+---
+
 ## Takeaway
 
 If you have a green suite and no system tests, you do not have evidence your app works. You have evidence that each piece works when asked about in isolation, which is a different and much weaker claim.
 
 Write the browser tests. Expect them to find things. Then be disciplined about **where the regression test ends up**, because the browser is where bugs surface, not usually where they should be pinned down.
 
-Six bugs, one afternoon, and not one of them was a bad calculation.
+Six bugs, one afternoon, and not one of them was a bad calculation. Seven, if you count the one hiding in my fix.
