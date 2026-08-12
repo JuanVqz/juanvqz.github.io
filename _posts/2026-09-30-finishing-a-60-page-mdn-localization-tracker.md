@@ -7,7 +7,7 @@ categories: [development]
 tags: [mdn, localization, open-source, spanish, contribution, documentation]
 ---
 
-In August we closed [issue #35373](https://github.com/mdn/translated-content/issues/35373) in `mdn/translated-content`: the whole `/MDN/Writing_guidelines` section, 60 documents, synchronized with the English source. It took 114 days and 62 merged pull requests, spread across a handful of volunteers working in their spare time.
+In August I closed [issue #35373](https://github.com/mdn/translated-content/issues/35373) in `mdn/translated-content`: the whole `/MDN/Writing_guidelines` section, 60 documents, synchronized with the English source. It took 114 days and 62 merged pull requests, spread across a handful of volunteers working in their spare time. I maintain the Spanish locale, so I split the issue, reviewed most of the PRs, and translated some of the pages myself.
 
 This post is about what actually makes that kind of tracker finishable, and about the things I got wrong along the way.
 
@@ -17,7 +17,7 @@ This post is about what actually makes that kind of tracker finishable, and abou
 
 The issue had 58 subtasks, one per document, all checked. My first instinct was to read that as "done."
 
-It isn't. A checklist is a snapshot of the day the subtasks were generated. It does not grow when new English pages land upstream. Two pages (`howto/retiring_content` and `retired_content`) were created in `mdn/content` on May 11, three weeks after we split the parent issue on April 20. They had no subtask, no checkbox, and no one was tracking them.
+It isn't. A checklist is a snapshot of the day the subtasks were generated. It does not grow when new English pages land upstream. Two pages (`howto/retiring_content` and `retired_content`) were created in `mdn/content` on May 11, three weeks after I split the parent issue on April 20. They had no subtask, no checkbox, and no one was tracking them.
 
 The reliable check compares directories, not checkboxes:
 
@@ -79,7 +79,7 @@ The source of truth is the source of truth for *content*, not for *facts*. Links
 
 ## The Fallback That Doesn't Exist
 
-Our Spanish contributor guide told people that MDN renders English content as a fallback when a page isn't translated, and the entire anchor-linking section was built on that claim. It's how I explained `/es/` links to newcomers for months.
+The Spanish contributor guide told people that MDN renders English content as a fallback when a page isn't translated, and the entire anchor-linking section was built on that claim. It's how I explained `/es/` links to newcomers for months.
 
 It's false:
 
@@ -91,7 +91,7 @@ It's false:
 
 There is no whole-page fallback. A `/es/` URL with no translated file is a 404 until someone translates it.
 
-The rule the claim supported ("always use `/es/` in internal links") is still right, just for a different reason: locale consistency, and the link starts working the moment the target gets translated. But the anchor advice that followed from it was actively wrong. We were telling translators to keep the English fragment (`#browser_compatibility`) on links to untranslated pages "because MDN will serve English there." It won't. There is no page.
+The rule the claim supported ("always use `/es/` in internal links") is still right, just for a different reason: locale consistency, and the link starts working the moment the target gets translated. But the anchor advice that followed from it was actively wrong. I had been telling translators to keep the English fragment (`#browser_compatibility`) on links to untranslated pages "because MDN will serve English there." It won't. There is no page.
 
 The corrected advice: if the target page is translated, use the translated heading id. If it isn't, drop the fragment and keep the page link. A fragment that matches nothing just dumps the reader at the top of the page.
 
@@ -121,7 +121,7 @@ Two contributors translated the same two pages. I opened PRs for `Retiring_conte
 
 That's someone's evening spent on work that can't merge, and it's on the maintainers, not on them. The subtasks existed. What didn't exist was a visible reservation on them at the moment they started.
 
-The convention we use is "comment on the subtask to claim it," and it works when people know about it, which means it has to be in the issue body, in the review replies, and in the welcome message for first-time contributors, every single time. Repeating it feels redundant right up until it isn't.
+The convention is "comment on the subtask to claim it," and it works when people know about it, which means it has to be in the issue body, in the review replies, and in the welcome message for first-time contributors, every single time. Repeating it feels redundant right up until it isn't.
 
 ---
 
@@ -156,3 +156,11 @@ The thing that outlasts the issue is the shape of the work:
 That flow is now running on [issue #9638](https://github.com/mdn/translated-content/issues/9638), which is bigger: 43 open subtasks across the Learn Web Development section, sorted shortest-first, each with its sync status precomputed.
 
 If you read Spanish and want a first open source contribution with a genuinely well-scoped task waiting for you, that's the issue. Comment on a subtask to claim it, and open your PR with `Fixes #<subtask>`, not the parent, so the rest stay open. The [Spanish localization guide](https://github.com/mdn/translated-content/blob/main/docs/es/README.md) is the place to start.
+
+---
+
+## Links
+
+[Issue #35373](https://github.com/mdn/translated-content/issues/35373) — the tracker this post is about
+[Issue #9638](https://github.com/mdn/translated-content/issues/9638) — the next one, 43 subtasks open
+[Spanish localization guide](https://github.com/mdn/translated-content/blob/main/docs/es/README.md) — start here
