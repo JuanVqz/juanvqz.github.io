@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Contributing to oil.nvim: Adding a Copy Path Keymap"
-date: 2026-09-18 10:00:00 -0600
-last_modified_at: 2026-09-18 10:00:00 -0600
+date: 2026-10-13 09:00:00 -0600
+last_modified_at: 2026-10-13 09:00:00 -0600
 categories: [development]
 tags: [neovim, lua, open-source, oil-nvim, contribution]
 ---

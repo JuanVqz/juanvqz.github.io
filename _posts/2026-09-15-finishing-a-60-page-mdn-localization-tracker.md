@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Finishing a 60-Page MDN Localization Tracker"
-date: 2026-09-30 10:00:00 -0600
-last_modified_at: 2026-09-30 10:00:00 -0600
+date: 2026-09-15 09:00:00 -0600
+last_modified_at: 2026-09-15 09:00:00 -0600
 categories: [development]
 tags: [mdn, localization, open-source, spanish, contribution, documentation]
 ---

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Installing maquina-components in a Rails App"
-date: 2026-09-07 10:00:00 -0600
-last_modified_at: 2026-09-07 10:00:00 -0600
+date: 2026-09-29 09:00:00 -0600
+last_modified_at: 2026-09-29 09:00:00 -0600
 categories: [development]
 tags: [rails, tailwind-css, maquina-components, hotwire, ui]
 ---

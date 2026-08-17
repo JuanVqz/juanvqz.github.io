@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Contributing to maquina-components: Two PRs From Day One"
-date: 2026-09-14 10:00:00 -0600
-last_modified_at: 2026-09-14 10:00:00 -0600
+date: 2026-10-06 09:00:00 -0600
+last_modified_at: 2026-10-06 09:00:00 -0600
 categories: [development]
 tags: [rails, open-source, rails-engines, maquina-components, contribution, generators]
 ---
