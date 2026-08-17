@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "The Bugs Live in the Seams"
-date: 2026-08-07 07:00:00 -0600
-last_modified_at: 2026-08-07 07:00:00 -0600
+date: 2026-08-11 07:00:00 -0600
+last_modified_at: 2026-08-11 07:00:00 -0600
 categories: [development]
 tags: [rails, ruby, testing, capybara, hotwire, may-store-journey]
 ---
