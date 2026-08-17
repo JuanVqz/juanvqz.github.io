@@ -4,7 +4,23 @@ This document provides guidelines for agents working on this Jekyll-based blog r
 
 ## Project Overview
 
-This is a personal blog built with [Jekyll](https://jekyllrb.com/) using the [Chirpy theme](https://github.com/cotes2020/jekyll-theme-chirpy). The site is deployed to GitHub Pages.
+This is a personal blog built with [Jekyll](https://jekyllrb.com/) using the [Chirpy theme](https://github.com/cotes2020/jekyll-theme-chirpy).
+
+## Deployment: GitHub Pages, and only GitHub Pages
+
+`www.juanvasquez.dev` is served by **GitHub Pages**, built and deployed by
+`.github/workflows/pages-deploy.yml`. Evidence, so nobody has to guess again: the apex A records are
+GitHub's (185.199.108-111.153), `www` is a CNAME to `juanvqz.github.io`, the repo's `CNAME` file
+holds the domain (a Pages convention, which Vercel ignores), and the Pages API reports
+`build_type: workflow`.
+
+**A Vercel project also built this repo in parallel** and served a duplicate at `juanvqz.vercel.app`.
+It was never attached to the domain, and it was retired on 2026-08-17 to remove the duplication and
+the confusion it caused. Do not reconnect it without updating this file.
+
+The workflow builds on push to `main`, **on a daily cron at 13:00 UTC**, and on manual dispatch. The
+cron matters: Jekyll excludes future-dated posts, so a post dated ahead only appears when a build
+runs on or after its date. Without the cron, scheduled posts never publish.
 
 ## Installation
 
@@ -129,12 +145,14 @@ image:
 
 ### Social Preview Images (Open Graph)
 
-Open Graph images are **auto-generated** by `jekyll-og-image` via a GitHub Actions workflow. No manual step — write a post, push, the workflow regenerates and commits the PNGs back to the branch, Vercel redeploys with them as static assets.
+Open Graph images are **auto-generated** by `jekyll-og-image` via a GitHub Actions workflow. No manual step — write a post, push, the workflow regenerates and commits the PNGs back to the branch, and the Pages deploy picks them up as static assets.
 
 Setup:
 
-1. `jekyll-og-image` is in the `Gemfile` `:development` group and is **not** listed under `_config.yml` `plugins:`. `_plugins/og_image_loader.rb` requires the gem when it is available (rescuing `LoadError` so Vercel, where the gem is not installed, does not crash) and registers a `pre_render` hook that sets `page.image` from `assets/img/og/posts/<slug>.png` whenever a matching PNG exists. This makes Chirpy emit the correct `og:image` and `twitter:image` meta tags even when the plugin itself is not loaded.
-   - Vercel does not auto-exclude the `:development` group. The environment variable `BUNDLE_WITHOUT=development:test` must be set in Vercel → Project → Settings → Environment Variables (Production + Preview). Without it, Vercel installs the plugin, which then tries to call libvips at build time and crashes (AL2023 has no libvips package).
+1. `jekyll-og-image` is in the `Gemfile` `:development` group and is **not** listed under `_config.yml` `plugins:`. `_plugins/og_image_loader.rb` requires the gem when it is available (rescuing `LoadError` so a build without the gem installed does not crash) and registers a `pre_render` hook that sets `page.image` from `assets/img/og/posts/<slug>.png` whenever a matching PNG exists. This makes Chirpy emit the correct `og:image` and `twitter:image` meta tags even when the plugin itself is not loaded.
+   - The Pages workflow sets `BUNDLE_WITHOUT: "development"` so the plugin is not installed at
+     deploy time; it needs libvips, which the deploy image does not have. The `og-images.yml`
+     workflow installs libvips explicitly and is the only place the gem actually runs.
 2. `.github/workflows/og-images.yml` runs on pushes that touch `_posts/`, `_config.yml`, the avatar, the Gemfile, or the workflow itself. It installs `libvips`, runs `tools/og-images.sh` (which builds the site and copies the generated PNGs into `assets/img/og/posts/`), and commits any new/changed images back to the branch with `[skip og]` in the message to prevent loops.
 3. The local `_layouts/home.html` override hides the image from the post list. The local `_layouts/post.html` override hides the banner at the top of post pages. The image is used only for social sharing.
 

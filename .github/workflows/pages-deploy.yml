@@ -8,6 +8,13 @@ on:
       - README.md
       - LICENSE
 
+  # Daily rebuild so future-dated posts actually publish on their date.
+  # Jekyll excludes future posts (future: false by default), and this workflow otherwise only runs
+  # on push - so a post dated ahead stays invisible until something unrelated triggers a build.
+  # 13:00 UTC = 07:00 America/Mexico_City.
+  schedule:
+    - cron: "0 13 * * *"
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
