@@ -92,6 +92,31 @@ The GitHub Actions workflow (`.github/workflows/pages-deploy.yml`) runs:
 2. `jekyll build` with production environment
 3. htmlproofer validation
 
+## Prose style is linted
+
+`scripts/lint-prose.rb` checks posts against the house style. `.github/workflows/prose.yml` runs it
+on every pull request that touches `_posts/`, and **only on the files that PR changes** — linting the
+whole archive would fail on years of already-published writing, which is not the point. The point is
+to catch a new post before it merges.
+
+```bash
+ruby scripts/lint-prose.rb                    # audit everything
+ruby scripts/lint-prose.rb _posts/2026-09*.md # specific files
+./scripts/install-hooks.sh                    # also run it as a pre-commit hook
+```
+
+**Errors** block: em dashes, and phrases that read as generated (*I want to be honest*, *it's worth
+noting*, *the key insight*, *here's the thing*, *in conclusion*, *let's dive in*, *delve*, and
+corporate filler like *leverage*, *seamless*, *robust*).
+
+**Warnings** do not block: hedging (*kind of*, *I think maybe*) and filler adverbs (*just*, *really*,
+*actually*, *very*). These are judgement calls, and sometimes the filler word is the right word.
+
+Code is exempt. Fenced blocks, indented blocks and YAML front matter are skipped, so an em dash
+inside a shell comment stays.
+
+Add or relax a rule by editing the `ERRORS` and `WARNINGS` hashes at the top of the script.
+
 ## Code Style Guidelines
 
 ### General Conventions

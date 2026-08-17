@@ -1,0 +1,36 @@
+name: "Prose style"
+
+# Checks only the posts a pull request touches. Linting the whole archive would
+# fail on years of published writing, which is not what this is for: the point is
+# to catch style problems before a NEW post is merged.
+on:
+  pull_request:
+    paths:
+      - "_posts/**"
+      - "scripts/lint-prose.rb"
+  workflow_dispatch:
+
+jobs:
+  prose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4
+
+      - name: Lint the posts this PR changes
+        run: |
+          base="origin/${{ github.base_ref }}"
+          files=$(git diff --name-only --diff-filter=d "$base"...HEAD -- '_posts/*.md' | tr '\n' ' ')
+          if [ -z "$files" ]; then
+            echo "No post files changed."
+            exit 0
+          fi
+          echo "Checking: $files"
+          ruby scripts/lint-prose.rb $files

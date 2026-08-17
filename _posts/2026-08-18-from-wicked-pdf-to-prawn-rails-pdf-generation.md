@@ -9,7 +9,7 @@ tags: [rails, pdf, prawn, wicked_pdf, grover, puppeteer, doctors-journey]
 
 ## The Setup
 
-I run a clinical assistance system where doctors manage patient consultations, hospitalizations, and referrals. Every one of those records needs a printable PDF — prescriptions, discharge summaries, referral letters.
+I run a clinical assistance system where doctors manage patient consultations, hospitalizations, and referrals. Every one of those records needs a printable PDF: prescriptions, discharge summaries, referral letters.
 
 PDF generation sounds simple until you're three libraries deep and your CI pipeline needs a headless browser.
 
@@ -17,7 +17,7 @@ This is the story of migrating through **three different PDF solutions** in a Ra
 
 ---
 
-## Phase 1: wicked_pdf — The Classic
+## Phase 1: wicked_pdf, The Classic
 
 **wicked_pdf** was the original choice. It wraps **wkhtmltopdf**, a command-line tool that converts HTML to PDF using a WebKit rendering engine.
 
@@ -31,7 +31,7 @@ It worked fine for years. Then the cracks appeared.
 
 ### The problems
 
-**wkhtmltopdf is dead.** The project has been unmaintained since 2023. It's based on an old WebKit fork that doesn't support modern CSS (Flexbox? Forget it. Grid? No chance). You end up writing CSS like it's 2012 — floats, tables for layout, and vendor-specific hacks.
+**wkhtmltopdf is dead.** The project has been unmaintained since 2023. It's based on an old WebKit fork that doesn't support modern CSS (Flexbox? Forget it. Grid? No chance). You end up writing CSS like it's 2012: floats, tables for layout, and vendor-specific hacks.
 
 **Deployment is painful.** You need the wkhtmltopdf binary on your server. On Heroku, that meant a buildpack. On newer stacks like Heroku-24 or Railway, the old binary simply didn't work. I spent commits just trying to get `wkhtmltopdf-heroku` to cooperate with the platform.
 
@@ -41,7 +41,7 @@ After bumping the gem through versions 2.1.0 to 2.8.2 and fighting every deploym
 
 ---
 
-## Phase 2: Grover + Puppeteer — The Modern Approach
+## Phase 2: Grover + Puppeteer, The Modern Approach
 
 The natural successor was **Grover**, which uses **Puppeteer** (headless Chrome/Chromium) to render HTML to PDF. Modern CSS support, JavaScript execution, and Chrome DevTools for debugging.
 
@@ -72,7 +72,7 @@ module.exports = {
 }
 ```
 
-**CI became fragile.** GitHub Actions needed a Chromium setup step. Tests that generated PDFs were slow and occasionally flaky — a headless browser is a lot of moving parts for "turn this into a document."
+**CI became fragile.** GitHub Actions needed a Chromium setup step. Tests that generated PDFs were slow and occasionally flaky: a headless browser is a lot of moving parts for "turn this into a document."
 
 **Version churn.** In the span of two months, I went through Grover 1.2.6 to 1.2.9 and Puppeteer-core 24.36.0 to 24.39.1. Each bump had subtle behavior changes.
 
@@ -80,11 +80,11 @@ I realized I was maintaining a headless browser infrastructure just to lay text 
 
 ---
 
-## Phase 3: Prawn — Going Native
+## Phase 3: Prawn, Going Native
 
 Then I looked at **Prawn**.
 
-Prawn is a pure Ruby PDF generation library. No HTML, no CSS, no browser. You build the PDF programmatically — placing text, setting fonts, drawing lines. It felt like going backwards at first.
+Prawn is a pure Ruby PDF generation library. No HTML, no CSS, no browser. You build the PDF programmatically: placing text, setting fonts, drawing lines. It felt like going backwards at first.
 
 ```ruby
 gem "prawn"
@@ -108,9 +108,9 @@ No browser. No Node.js. No binary dependencies. Just Ruby.
 
 I migrated in two phases:
 
-**First**, hospitalizations and patient referrals — the simpler PDFs with mostly label-value pairs.
+**First**, hospitalizations and patient referrals: the simpler PDFs with mostly label-value pairs.
 
-**Then**, appointments (prescriptions) — which have rich text content from a Trix editor that needed HTML-to-Prawn conversion.
+**Then**, appointments (prescriptions), which have rich text content from a Trix editor that needed HTML-to-Prawn conversion.
 
 The key was building a small **HtmlFormatter** class that converts Trix HTML into Prawn's inline format:
 
@@ -126,7 +126,7 @@ class Pdfs::HtmlFormatter
 end
 ```
 
-The entire Grover removal commit was satisfying — deleting `config/initializers/grover.rb`, removing Puppeteer from `package.json`, dropping the CI Chromium setup step.
+The entire Grover removal commit was satisfying: deleting `config/initializers/grover.rb`, removing Puppeteer from `package.json`, dropping the CI Chromium setup step.
 
 ---
 
@@ -148,7 +148,7 @@ What started as a simple "render this as PDF" became a configurable system. Each
 | Per-field ordering | Drag to reorder via position |
 | Per-field visibility | Enable/disable individual fields |
 
-This level of configurability would have been miserable with HTML templates — you'd be generating dynamic CSS for every combination. With Prawn, each setting maps directly to a method parameter:
+This level of configurability would have been miserable with HTML templates: you'd be generating dynamic CSS for every combination. With Prawn, each setting maps directly to a method parameter:
 
 ```ruby
 pdf.text text, align: :right, style: :bold
@@ -180,7 +180,7 @@ class Pdfs::AppointmentGenerator < Pdfs::BaseGenerator
 end
 ```
 
-The base class renders them in the order defined by the `position` column in the database — so hospitals can reorder their PDF fields from the admin UI without touching code.
+The base class renders them in the order defined by the `position` column in the database, so hospitals can reorder their PDF fields from the admin UI without touching code.
 
 ---
 
@@ -203,7 +203,7 @@ The base class renders them in the order defined by the `position` column in the
 
 ## Gotchas I Ran Into
 
-**Prawn and Unicode.** Prawn's built-in fonts (Helvetica, Times Roman, Courier) have limited Unicode support. Spanish characters like accented vowels work, but if you need full UTF-8 (CJK, emoji), you'll need to register custom TTF fonts. Prawn warns you about this on every render — loudly.
+**Prawn and Unicode.** Prawn's built-in fonts (Helvetica, Times Roman, Courier) have limited Unicode support. Spanish characters like accented vowels work, but if you need full UTF-8 (CJK, emoji), you'll need to register custom TTF fonts. Prawn warns you about this on every render: loudly.
 
 **The matrix gem.** Prawn depends on the `matrix` gem for transformation matrices in its graphics engine. Ruby 3.1+ removed `matrix` from the standard library, so you need it as an explicit dependency. This tripped me up during the initial install.
 
@@ -229,10 +229,10 @@ end
 
 Absolutely.
 
-The Grover removal deleted more code than Prawn added. CI runs faster without Chromium. Deployments are simpler — no binary dependencies, no buildpacks, no Node.js requirement for PDF generation. Memory usage dropped noticeably.
+The Grover removal deleted more code than Prawn added. CI runs faster without Chromium. Deployments are simpler: no binary dependencies, no buildpacks, no Node.js requirement for PDF generation. Memory usage dropped noticeably.
 
-The trade-off is that you lose the "write HTML, get PDF" convenience. You're building documents programmatically instead of visually. But for structured documents like medical records — where the layout is label-value pairs, headers, and text blocks — Prawn's approach maps more naturally to the data than HTML ever did.
+The trade-off is that you lose the "write HTML, get PDF" convenience. You're building documents programmatically instead of visually. But for structured documents like medical records , where the layout is label-value pairs, headers, and text blocks , Prawn's approach maps more naturally to the data than HTML ever did.
 
-If your PDFs are basically web pages with complex layouts, Grover (or its alternatives) might still be the right call. But if your PDFs are **documents** — structured, data-driven, configurable — Prawn is simpler, faster, and easier to maintain than anything that needs a browser to run.
+If your PDFs are basically web pages with complex layouts, Grover (or its alternatives) might still be the right call. But if your PDFs are **documents** , structured, data-driven, configurable , Prawn is simpler, faster, and easier to maintain than anything that needs a browser to run.
 
 Sometimes the tool that feels like a step backwards is actually a step in the right direction.

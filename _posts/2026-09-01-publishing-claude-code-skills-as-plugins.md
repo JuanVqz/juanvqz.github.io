@@ -21,7 +21,7 @@ These three concepts confused me at first, so let me clarify:
 - **Plugin**: A package containing one or more skills (and optionally hooks, agents, MCP servers). Defined by `.claude-plugin/plugin.json`. This is the container.
 - **Marketplace**: A git repo with a `marketplace.json` at its root that lists available plugins. This is the distribution channel.
 
-A single repo can serve as both a plugin and a marketplace. That's the key insight.
+A single repo can serve as both a plugin and a marketplace, which is what makes this simple.
 
 ---
 

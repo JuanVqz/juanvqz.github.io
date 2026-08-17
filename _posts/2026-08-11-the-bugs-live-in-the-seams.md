@@ -216,7 +216,7 @@ Which also drops the regression test from a browser test to a model test that ru
 
 ## My Fix Had a Seam In It
 
-I want to be honest about how this ended, because it is the best evidence for the whole argument.
+Here is how it ended, which is the best evidence for the argument.
 
 Code review caught that my fix was half a fix.
 
