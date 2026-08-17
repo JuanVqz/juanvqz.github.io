@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Linux Mint on a MacBook Pro 2015: Getting Wi-Fi Working Offline"
-date: 2026-09-09 10:00:00 -0600
-last_modified_at: 2026-09-09 10:00:00 -0600
+date: 2026-10-20 09:00:00 -0600
+last_modified_at: 2026-10-20 09:00:00 -0600
 categories: [development]
 tags: [linux, linux-mint, macbook, broadcom, wifi, drivers, openclaw]
 ---

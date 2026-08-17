@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Parallel CI Deprecation Tracking in next_rails"
-date: 2026-09-16 10:00:00 -0600
-last_modified_at: 2026-09-16 10:00:00 -0600
+date: 2026-08-25 09:00:00 -0600
+last_modified_at: 2026-08-25 09:00:00 -0600
 categories: [development]
 tags: [rails, ruby, open-source, next_rails, ci, deprecations, fastruby]
 ---

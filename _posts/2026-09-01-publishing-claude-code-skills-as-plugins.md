@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Publishing Claude Code Skills as Plugins"
-date: 2026-09-23 10:00:00 -0600
-last_modified_at: 2026-09-23 10:00:00 -0600
+date: 2026-09-01 09:00:00 -0600
+last_modified_at: 2026-09-01 09:00:00 -0600
 categories: [development]
 tags: [claude-code, ai, plugins, rails, open-source, fastruby]
 ---

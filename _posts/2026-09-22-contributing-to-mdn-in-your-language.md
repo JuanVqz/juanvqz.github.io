@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Contributing to MDN in Your Language"
-date: 2026-10-07 10:00:00 -0600
-last_modified_at: 2026-10-07 10:00:00 -0600
+date: 2026-09-22 09:00:00 -0600
+last_modified_at: 2026-09-22 09:00:00 -0600
 categories: [development]
 tags: [mdn, localization, open-source, documentation, contribution, community]
 ---
