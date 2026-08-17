@@ -92,6 +92,70 @@ The GitHub Actions workflow (`.github/workflows/pages-deploy.yml`) runs:
 2. `jekyll build` with production environment
 3. htmlproofer validation
 
+## Traps this repo has already sprung
+
+Two of these cost a live incident. Read before touching the theme or the tabs.
+
+### Overriding a theme file: read the original first
+
+`assets/css/jekyll-theme-chirpy.scss` in the gem is **not** a plain `@use 'main'`. It switches on
+environment:
+
+```scss
+@use 'main{%- if jekyll.environment == 'production' -%}.bundle{%- endif -%}';
+```
+
+Development gets `main`; production gets `main.bundle`, which carries the compiled theme styles.
+Overriding that file with a hardcoded `@use 'main'` to append custom CSS shipped a **70KB** stylesheet
+to production instead of **108KB**, and the live site lost most of its styling. Development looked
+perfect throughout, because in development the hardcoded import is the correct one.
+
+**`jekyll build` and htmlproofer both pass either way.** Neither checks that the CSS is the *right*
+CSS. After any change that touches styles, compare the built size:
+
+```bash
+JEKYLL_ENV=production bundle exec jekyll build
+ls -la _site/assets/css/jekyll-theme-chirpy.css   # expect ~108KB, not ~70KB
+```
+
+Same rule for any theme file: copy the gem's version and edit it, never write a replacement from
+scratch.
+
+### Removing a tab removes the page, and posts link to it
+
+Deleting `_tabs/tags.md` and `_tabs/categories.md` to trim the sidebar deleted the `/tags/` and
+`/categories/` **pages**. Every generated per-tag page links back to its index, so htmlproofer found
+**68 broken links** and CI would have failed.
+
+To keep a page but drop it from the sidebar, move it out of the `_tabs` collection to the repo root
+with an explicit permalink:
+
+```yaml
+---
+layout: tags
+title: Tags
+permalink: /tags/
+---
+```
+
+Run the same check CI runs before pushing anything structural:
+
+```bash
+bundle exec htmlproofer _site --disable-external \
+  --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
+```
+
+### Future-dated posts need a build on their date
+
+Jekyll excludes future-dated posts (`future: false` by default). Before the daily cron existed, the
+deploy workflow ran only on push, and nothing had been pushed to `main` since 25 June — so **eight
+finished posts dated September were invisible and would never have published**. The cron in
+`pages-deploy.yml` is what makes scheduling work. Do not remove it.
+
+A related trap: a post dated in the **past** publishes the moment it merges. One post merged with a
+date ten days old and appeared instantly, backdated, outside the Tuesday cadence. When scheduling,
+check both directions, not just the future.
+
 ## Prose style is linted
 
 `scripts/lint-prose.rb` checks posts against the house style. `.github/workflows/prose.yml` runs it
