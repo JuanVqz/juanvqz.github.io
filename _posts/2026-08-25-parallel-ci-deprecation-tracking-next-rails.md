@@ -143,7 +143,7 @@ If someone ever hits memory limits here, the fix would be streaming: read each s
 
 These two PRs add a complete workflow for tracking deprecations in parallel CI:
 
-- [PR #176](https://github.com/fastruby/next_rails/pull/176) — Parallel CI support (shard files per node)
-- [PR #177](https://github.com/fastruby/next_rails/pull/177) — `deprecations merge` command (combine shards)
+- [PR #176](https://github.com/fastruby/next_rails/pull/176), Parallel CI support (shard files per node)
+- [PR #177](https://github.com/fastruby/next_rails/pull/177), `deprecations merge` command (combine shards)
 
 If you use `next_rails` for Rails upgrades and run parallel CI, these features should make deprecation tracking work out of the box. Check out the [next_rails README](https://github.com/fastruby/next_rails#parallel-ci-support) for the full setup guide.

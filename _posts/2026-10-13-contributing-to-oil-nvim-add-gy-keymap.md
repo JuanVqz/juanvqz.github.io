@@ -25,7 +25,7 @@ g.       Toggle hidden files and directories
 g\       Toggle trash
 ```
 
-Nothing for copying paths. I checked the docs and found `actions.yank_entry` — it yanks the filepath to a register. But no default keymap.
+Nothing for copying paths. I checked the docs and found `actions.yank_entry`: it yanks the filepath to a register. But no default keymap.
 
 ---
 
@@ -102,4 +102,4 @@ Open source doesn't always require deep architectural changes. Sometimes it's ju
 
 If you use oil.nvim and find yourself needing to copy file paths, try `gy`. And if you notice something missing in a tool you use daily, consider contributing. The maintainers appreciate it, and so does everyone else who benefits.
 
-[PR #746](https://github.com/stevearc/oil.nvim/pull/746) — Add `gy` keymap for `yank_entry` action
+[PR #746](https://github.com/stevearc/oil.nvim/pull/746), Add `gy` keymap for `yank_entry` action

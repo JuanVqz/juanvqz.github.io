@@ -13,7 +13,7 @@ My résumé says `hello@juanvasquez.dev`. My replies came from a Gmail address t
 the sort.
 
 That is because `hello@` was never a real mailbox. It was a Cloudflare Email Routing rule
-forwarding everything at my domain into Gmail. Free, five minutes to set up, works perfectly —
+forwarding everything at my domain into Gmail. Free, five minutes to set up, works perfectly: 
 in one direction. Cloudflare Email Routing **receives and forwards. It cannot send.** There is no
 SMTP server behind it, so there is nothing for Gmail to hand an outgoing message to.
 
@@ -171,7 +171,7 @@ $ dig +short MX juanvasquez.dev
 
 Then send a real message to [mail-tester.com](https://www.mail-tester.com) and read the score. Mine
 came back **10/10**, SPF and DKIM both passing, not blocklisted. Write a couple of sentences of
-normal prose rather than the word "test" — one-word emails score badly for reasons that have
+normal prose rather than the word "test": one-word emails score badly for reasons that have
 nothing to do with your DNS.
 
 One warning that stays forever in this setup: Zoho's admin console will keep showing **"Yet to point
@@ -200,7 +200,7 @@ subscription after you have felt the problem than before.
 
 ## Would I recommend it?
 
-If you want **one professional address on a domain you own, sending and receiving, for nothing** —
+If you want **one professional address on a domain you own, sending and receiving, for nothing**: 
 yes, and it takes under an hour.
 
 Just go in knowing what the free tier is: Zoho's free plan is a **webmail-only mailbox**, not a mail
@@ -216,8 +216,8 @@ the whole time. Only sending was missing, and that turned out to be the small ha
 ## What is your setup?
 
 This is the best free arrangement I found, but I doubt it is the only one. If you are sending from
-a domain you own without paying for it — a different provider, an SMTP relay, a self-hosted setup,
-something I have not thought of — I would genuinely like to hear it.
+a domain you own without paying for it: a different provider, an SMTP relay, a self-hosted setup,
+something I have not thought of: I would genuinely like to hear it.
 
 Tell me what you use and what it cost you in friction, on
 [GitHub](https://github.com/JuanVqz) or [X](https://x.com/juanvqz_). If something better turns up I

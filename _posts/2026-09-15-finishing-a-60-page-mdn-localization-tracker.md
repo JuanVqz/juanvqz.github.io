@@ -161,6 +161,6 @@ If you read Spanish and want a first open source contribution with a genuinely w
 
 ## Links
 
-[Issue #35373](https://github.com/mdn/translated-content/issues/35373) — the tracker this post is about
-[Issue #9638](https://github.com/mdn/translated-content/issues/9638) — the next one, 43 subtasks open
-[Spanish localization guide](https://github.com/mdn/translated-content/blob/main/docs/es/README.md) — start here
+[Issue #35373](https://github.com/mdn/translated-content/issues/35373), the tracker this post is about
+[Issue #9638](https://github.com/mdn/translated-content/issues/9638), the next one, 43 subtasks open
+[Spanish localization guide](https://github.com/mdn/translated-content/blob/main/docs/es/README.md), start here
