@@ -12,11 +12,12 @@ timezone: America/Mexico_City
 
 title: JuanVqz's Blog
 
-tagline: Writing about software development, technology, and life
+tagline: Senior Rails engineer. I modernize Rails apps that have fallen behind.
 
 description: >-
-  Personal blog by Juan Vásquez (@JuanVqz) — a software developer sharing lessons learned,
-  technical insights, and reflections on the craft of building software.
+  Juan Vásquez (@JuanVqz), senior Ruby on Rails engineer and Rails modernization specialist.
+  Writing about Rails upgrades, multi-tenant architecture, background jobs and the craft of
+  keeping production applications alive.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.

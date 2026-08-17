@@ -5,6 +5,7 @@ date: 2026-05-26 09:00:00 -0600
 last_modified_at: 2026-05-25 09:00:00 -0600
 categories: [development]
 tags: [rails, propshaft, esbuild, vite, asset-pipeline, importmaps, pwa, doctors-journey]
+pin: true
 ---
 
 ## The Problem

@@ -46,6 +46,10 @@ layout: default
   {% endfor %}
 {% endif %}
 
+{% if paginator.page == 1 or paginator.page == nil %}
+  {% include hero.html %}
+{% endif %}
+
 <div id="post-list" class="flex-grow-1 px-xl-1">
   {% for post in posts %}
     <article class="card-wrapper card">

@@ -1,0 +1,40 @@
+---
+---
+
+@use 'main';
+
+/* Home hero
+   ------------------------------------------------------------------ */
+.hero-intro {
+  padding: 0 0 1.25rem;
+  border-bottom: 1px solid var(--main-border-color);
+
+  .hero-name {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+  }
+
+  .hero-role {
+    color: var(--text-muted-color);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-pitch {
+    max-width: 46rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .hero-links a {
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+/* Post excerpts were dim grey on dark grey; lift the contrast a little. */
+#post-list .post-preview .card-text.content {
+  color: var(--text-color);
+  opacity: 0.85;
+}
