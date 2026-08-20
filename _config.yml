@@ -95,7 +95,7 @@ avatar: https://avatars.githubusercontent.com/u/7331511?v=4
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-social_preview_image: https://avatars.githubusercontent.com/u/7331511?v=4
+social_preview_image: /assets/img/og-default.png
 
 # Auto-generated Open Graph images via `jekyll-og-image`.
 # The plugin is dev-only (see Gemfile). A GitHub Actions workflow regenerates
