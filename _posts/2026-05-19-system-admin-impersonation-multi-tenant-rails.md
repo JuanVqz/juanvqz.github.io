@@ -5,7 +5,6 @@ date: 2026-05-19 09:00:00 -0600
 last_modified_at: 2026-05-19 09:00:00 -0600
 categories: [development]
 tags: [rails, multi-tenant, devise, impersonation, doctors-journey]
-pin: true
 ---
 
 ## The Problem
