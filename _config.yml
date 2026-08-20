@@ -102,6 +102,9 @@ social_preview_image: https://avatars.githubusercontent.com/u/7331511?v=4
 # PNGs and commits them into `assets/img/og/posts/` on push; Vercel builds
 # then serve them as static assets without needing `libvips`. Per-post `image:`
 # frontmatter overrides the generated image.
+plugins:
+  - jekyll-og-image
+
 og_image:
   collections: ["posts"]
   output_dir: "assets/img/og"

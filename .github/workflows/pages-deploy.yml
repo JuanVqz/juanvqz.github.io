@@ -31,12 +31,18 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      BUNDLE_WITHOUT: "development"
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+
+      # jekyll-og-image renders the Open Graph images during the build and needs
+      # libvips to do it. Without this step the build fails rather than silently
+      # shipping posts with no social preview.
+      - name: Install libvips
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libvips-tools libvips-dev
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
