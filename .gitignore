@@ -22,7 +22,9 @@ package-lock.json
 !.vscode/tasks.json
 
 # Open Graph images, generated into the source tree at build time by
-# jekyll-og-image and served from _site. Not committed.
+# jekyll-og-image and served from _site. Not committed. The site-wide default
+# card lives outside this directory, at assets/img/og-default.png, so it stays
+# tracked without needing a gitignore negation.
 assets/img/og
 
 # Misc
