@@ -12,7 +12,7 @@ timezone: America/Mexico_City
 
 title: JuanVqz's Blog
 
-tagline: Senior Rails engineer. I modernize Rails apps that have fallen behind.
+tagline: Senior Rails Engineer. I modernize Rails apps that have fallen behind.
 
 description: >-
   Juan Vásquez (@JuanVqz), senior Ruby on Rails engineer and Rails modernization specialist.
@@ -95,13 +95,16 @@ avatar: https://avatars.githubusercontent.com/u/7331511?v=4
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-social_preview_image: https://avatars.githubusercontent.com/u/7331511?v=4
+social_preview_image: /assets/img/og-default.png
 
 # Auto-generated Open Graph images via `jekyll-og-image`.
 # The plugin is dev-only (see Gemfile). A GitHub Actions workflow regenerates
 # PNGs and commits them into `assets/img/og/posts/` on push; Vercel builds
 # then serve them as static assets without needing `libvips`. Per-post `image:`
 # frontmatter overrides the generated image.
+plugins:
+  - jekyll-og-image
+
 og_image:
   collections: ["posts"]
   output_dir: "assets/img/og"

@@ -8,6 +8,14 @@ on:
       - README.md
       - LICENSE
 
+  # Build on pull requests too, so a change to the build itself is exercised
+  # before it reaches main. The deploy job is skipped for these; see its `if`.
+  pull_request:
+    paths-ignore:
+      - .gitignore
+      - README.md
+      - LICENSE
+
   # Daily rebuild so future-dated posts actually publish on their date.
   # Jekyll excludes future posts (future: false by default), and this workflow otherwise only runs
   # on push - so a post dated ahead stays invisible until something unrelated triggers a build.
@@ -23,20 +31,27 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
+# Allow one concurrent deployment per ref. Scoped by ref so a pull request build
+# cannot cancel a deploy already running on main.
 concurrency:
-  group: "pages"
+  group: "pages-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      BUNDLE_WITHOUT: "development"
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+
+      # jekyll-og-image renders the Open Graph images during the build and needs
+      # libvips to do it. Without this step the build fails rather than silently
+      # shipping posts with no social preview.
+      - name: Install libvips
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libvips-tools libvips-dev
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -63,6 +78,8 @@ jobs:
         uses: actions/upload-pages-artifact@v3
 
   deploy:
+    # Pull requests build and run htmlproofer, but never publish.
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

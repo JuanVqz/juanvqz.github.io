@@ -152,6 +152,9 @@ deploy workflow ran only on push, and nothing had been pushed to `main` since 25
 finished posts dated September were invisible and would never have published**. The cron in
 `pages-deploy.yml` is what makes scheduling work. Do not remove it.
 
+The same default bit the OG image pipeline: a build that skips future posts also skips generating
+their images. See the Social Preview Images section.
+
 A related trap: a post dated in the **past** publishes the moment it merges. One post merged with a
 date ten days old and appeared instantly, backdated, outside the Tuesday cadence. When scheduling,
 check both directions, not just the future.
@@ -234,22 +237,49 @@ image:
 
 ### Social Preview Images (Open Graph)
 
-Open Graph images are **auto-generated** by `jekyll-og-image` via a GitHub Actions workflow. No manual step — write a post, push, the workflow regenerates and commits the PNGs back to the branch, and the Pages deploy picks them up as static assets.
+Open Graph images are **generated during the Pages build**, by `jekyll-og-image`. There is no manual
+step and nothing to commit: write a post, push, and the deploy renders its card.
 
-Setup:
+How it fits together:
 
-1. `jekyll-og-image` is in the `Gemfile` `:development` group and is **not** listed under `_config.yml` `plugins:`. `_plugins/og_image_loader.rb` requires the gem when it is available (rescuing `LoadError` so a build without the gem installed does not crash) and registers a `pre_render` hook that sets `page.image` from `assets/img/og/posts/<slug>.png` whenever a matching PNG exists. This makes Chirpy emit the correct `og:image` and `twitter:image` meta tags even when the plugin itself is not loaded.
-   - The Pages workflow sets `BUNDLE_WITHOUT: "development"` so the plugin is not installed at
-     deploy time; it needs libvips, which the deploy image does not have. The `og-images.yml`
-     workflow installs libvips explicitly and is the only place the gem actually runs.
-2. `.github/workflows/og-images.yml` runs on pushes that touch `_posts/`, `_config.yml`, the avatar, the Gemfile, or the workflow itself. It installs `libvips`, runs `tools/og-images.sh` (which builds the site and copies the generated PNGs into `assets/img/og/posts/`), and commits any new/changed images back to the branch with `[skip og]` in the message to prevent loops.
-3. The local `_layouts/home.html` override hides the image from the post list. The local `_layouts/post.html` override hides the banner at the top of post pages. The image is used only for social sharing.
+1. `jekyll-og-image` is a normal `Gemfile` dependency (not `:development`) and is listed under
+   `_config.yml` `plugins:`. Its generator writes the PNGs into the source tree, registers them as
+   static files so they reach `_site`, and **sets `page.image` itself**, which is what makes Chirpy
+   emit `og:image` and `twitter:image`.
+2. **The gem needs libvips at runtime**, so `pages-deploy.yml` installs it before building. Locally:
+   `brew install vips`. Without it the build fails, which is the point: the previous setup could
+   silently produce nothing.
+3. **The images are build output and are gitignored** (`assets/img/og`). Do not commit them and do
+   not add a workflow that does.
+4. The site-wide card for everything that is NOT a post lives at `assets/img/og-default.png` and is
+   committed, deliberately outside the ignored directory so it needs no gitignore negation. It is
+   built from `tools/og-default.svg`:
 
-To regenerate locally:
+   ```bash
+   vips copy tools/og-default.svg assets/img/og-default.png
+   ```
 
-```bash
-bash tools/og-images.sh
-```
+   `_config.yml` `social_preview_image` points at it, and it covers the home page, `about`,
+   `archives`, `cv`, tag and category pages, and 404.
+5. The local `_layouts/home.html` override hides the image from the post list, and
+   `_layouts/post.html` hides the banner on post pages. The image is only for social sharing.
+
+**History, so nobody rebuilds the old machinery.** Until 2026-08-20 the gem was in `:development`,
+the deploy set `BUNDLE_WITHOUT: "development"` to skip it, and a separate `og-images.yml` workflow
+generated the PNGs and committed them back. That indirection failed silently: `tools/og-images.sh`
+ran a plain `jekyll build`, Jekyll skips future-dated posts, so scheduled posts were never rendered,
+no PNG was produced, and the workflow reported "No OG image changes" while exiting green. Thirteen
+posts had no social preview and nothing was failing. `og-images.yml`, `tools/og-images.sh` and
+`_plugins/og_image_loader.rb` are all gone.
+
+**Generating a card per PAGE does not work yet**, if you are tempted by
+`og_image.collections: ["posts", "pages"]`. The gem only covers `site.pages`, so `about`, `archives`
+and `cv` are invisible to it (they live in the `tabs` collection), and `index.html` has no `title`,
+so the home card renders the literal word "Untitled". Add titles to those pages first.
+
+**Config changes need a server restart.** Jekyll's watcher reloads posts and pages but not
+`_config.yml`. A stale `jekyll serve` will keep serving cards built from config you already changed,
+which looks exactly like a bug in the site.
 
 **Custom image for a specific post:**
 

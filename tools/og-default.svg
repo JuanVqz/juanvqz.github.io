@@ -1,0 +1,11 @@
+<!-- Source for assets/img/og-default.png, the social preview for the home page
+     and the tab pages. Regenerate with:  vips copy tools/og-default.svg assets/img/og-default.png -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#FFFFFF"/>
+  <text x="80" y="250" font-family="Helvetica" font-weight="bold" font-size="86" fill="#2f313d">JuanVqz&#8217;s Blog</text>
+  <text x="80" y="330" font-family="Helvetica" font-size="38" fill="#535358">Senior Rails Engineer.</text>
+  <text x="80" y="382" font-family="Helvetica" font-size="38" fill="#535358">I modernize Rails apps that have fallen behind.</text>
+  <text x="80" y="530" font-family="Helvetica" font-size="30" fill="#535358">Ruby &#183; Rails &#183; Performance &#183; Open Source</text>
+  <text x="1120" y="530" font-family="Helvetica" font-size="30" fill="#535358" text-anchor="end">www.juanvasquez.dev</text>
+  <rect x="0" y="608" width="1200" height="22" fill="#2f313d"/>
+</svg>

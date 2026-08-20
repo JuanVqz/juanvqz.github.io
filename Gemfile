@@ -4,9 +4,10 @@ source 'https://rubygems.org'
 
 gem 'jekyll-theme-chirpy', '~> 7.2', '>= 7.2.4'
 
-group :development do
-  gem 'jekyll-og-image', '~> 2.1'
-end
+# Generates Open Graph images during the build. Needs libvips at runtime
+# (macOS: brew install vips), so it is NOT in :development: the Pages deploy
+# builds the images itself and there is nothing to commit.
+gem 'jekyll-og-image', '~> 2.1'
 
 gem 'html-proofer', '~> 5.0', group: :test
 
