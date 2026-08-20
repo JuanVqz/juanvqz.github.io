@@ -110,6 +110,12 @@ Overriding that file with a hardcoded `@use 'main'` to append custom CSS shipped
 to production instead of **108KB**, and the live site lost most of its styling. Development looked
 perfect throughout, because in development the hardcoded import is the correct one.
 
+`assets/feed.xml` is the other override in this repo, for the same reason. Two edits from the gem's
+version, both marked CHANGED in the file: the entry limit is 20 rather than 5, and the summary uses
+`truncatewords` rather than a character `truncate` that cut mid-word. **The entry limit is what the
+GitHub profile README reads**, at JuanVqz/juanvqz, so raising `max_post_count` there does nothing
+unless the feed carries enough posts. Re-copy from the gem and reapply both on a theme upgrade.
+
 **`jekyll build` and htmlproofer both pass either way.** Neither checks that the CSS is the *right*
 CSS. After any change that touches styles, compare the built size:
 
