@@ -4,190 +4,134 @@ title: "A Game About Juan, Installed by Juan"
 date: 2026-11-17 09:00:00 -0600
 last_modified_at: 2026-11-17 09:00:00 -0600
 categories: [tools]
-tags: [portmaster, muos, handheld, anbernic, linux, box86]
+tags: [portmaster, muos, handheld, anbernic, linux, box86, guacamelee, rg40xx-v,
+  retro-gaming, emulation, gog, arm, arm64, indie-games, metroidvania, sd-card,
+  game-porting, drm-free]
 image:
   path: /assets/img/posts/guacamelee-on-a-handheld/og.png
   alt: Guacamelee running on an Anbernic RG40XX V
 ---
 
 The protagonist of Guacamelee! is a luchador named Juan Aguacate. My name is Juan.
-That is the entire reason this post exists.
-
-The rest of it is about the four downloads, two dead ends and one hardcoded filename
-between wanting to play a game on my Anbernic RG40XX V and playing it.
+That is the entire reason I wanted it on my handheld.
 
 ![Guacamelee running on the handheld, Juan in front of the Pueblucho church](/assets/img/posts/guacamelee-on-a-handheld/church.png#center)
 
-## Two kinds of PortMaster port
+It runs, it looks like that, and it took a detour to get there. If you have an
+Anbernic or something like it, the detour is the useful part.
 
-[PortMaster](https://portmaster.games/) brings PC games to Linux handhelds. I assumed
-that meant it brings *games*. It does not always.
+## The port that was not a game
 
-Ports come in two kinds, and the catalogue tells you which, if you look at the right
-field:
+My handheld is an Anbernic RG40XX V running muOS. It plays old console games happily,
+but PC games need [PortMaster](https://portmaster.games/), which packages them up for
+these little ARM machines.
 
-- **Ready to run**: the port contains the game. Install, launch, play.
-- **Everything else**: the port is an engine or a wrapper. You supply the game files
-  from a copy you own.
+I browsed the catalogue and installed Blood, the 1997 shooter. It appeared in my ports
+list with a nice icon. I launched it. Black screen, then straight back to the menu. No
+error, no message, nothing to work with.
 
-I learned this by installing Blood, watching it appear in my ports list, launching it,
-and getting a black screen and a bounce back to the menu. No error. The log said what
-the menu would not:
+The answer was in a log file the menu never shows you:
 
 ```
-source/blood/src/screen.cpp(215): BLOOD.PAL not found (RFF files may be wrong version)
+BLOOD.PAL not found (RFF files may be wrong version)
 ```
 
-The port was 1.2 MB. A 1997 shooter is not 1.2 MB. Size is the giveaway: anything
-under a few megabytes that claims to be a full game is an engine waiting for assets.
+The port had no game in it. It was 1.2 MB, which should have told me something, since
+a 1997 shooter is not 1.2 MB. What I had installed was the engine, waiting for game
+files I was supposed to own and supply myself.
 
-Stardew Valley was already on my card in the same state, installed weeks earlier, its
-`gamedata/` folder holding nothing but a `.gitkeep`. I had never noticed because I had
-never launched it.
+Then I found Stardew Valley sitting on my card in exactly the same state, installed
+weeks earlier, its game folder empty. I had never noticed because I had never tried to
+play it.
 
-## Checking before you buy
+So: PortMaster ports come in two kinds. Some contain the game. Some are a shell around
+a game you have to buy elsewhere. Both look identical in the menu.
 
-PortMaster publishes its whole catalogue as JSON, which turns "will this work" from a
-forum question into a lookup:
+## Reading the label before buying
 
-```bash
-curl -sL https://raw.githubusercontent.com/PortsMaster/PortMaster-Info/main/ports.json
-```
+Guacamelee is the second kind. That was fine, I was happy to pay for it, but I did not
+want to spend money and then discover it would not run.
 
-Three fields decide it:
+PortMaster publishes its entire catalogue as a data file, which means "will this work"
+stops being a forum question and becomes something you can look up. Three things
+decide it:
 
-| Field | What it tells you |
+| What to check | Why it matters |
 |---|---|
-| `avail` | Which devices the porters list. Mine is `rg40xx-v` |
-| `rtr` | `true` = contains the game. `false` = bring your own files |
-| `runtime` | Extra downloads needed, like Godot or mono |
+| Is my device listed? | Porters say which handhelds they support |
+| Does it include the game? | Or do I need to buy it separately |
+| Does it need a runtime? | Extra downloads, some of them large |
 
-For Guacamelee:
+Guacamelee needed buying, needed no extra runtime, and listed my exact handheld. Good
+so far.
 
-```json
-"rtr": false,
-"runtime": [],
-"inst": "Add your Humble Bundle Linux Guacamelee_DRMFREE.sh, or GOGs
-         gog_guacamelee_gold_edition_2.0.0.3.sh to the guacamelee folder"
-```
+The part that decided it was older than I expected. These ports run x86 games on ARM
+hardware through a translation layer called [Box86](https://box86.org/), and Box86
+only handles **32-bit** programs. Modern Linux games are 64-bit. This one shipped in
+2014, back when 32-bit was still normal, and that is the only reason any of this works.
 
-So: buy it, Linux build, and the filename is not a suggestion. More on that shortly.
+So before paying, I opened up the installer GOG sells and looked for a folder called
+`lib32`. It was there. That is the whole check, and it turned "probably" into "buy it".
 
-The `runtime` field matters more than it looks on a 1 GB device. A port needing
-`mono` pulls a 250 MB runtime; Godot 4 pulls its own compositor. Ready-to-run ports
-with an empty `runtime` are the ones that behave.
+## The fussy bit
 
-## The engine underneath
+One warning if you do this. GOG sells the game for three operating systems, and you
+want the Linux one: a single self-extracting file of about 528 MB, not the Galaxy
+installer and not the Mac version.
 
-Reading the launcher script explains what you are buying:
+And the name of that file has to be exactly right. The port looks for one specific
+filename, character for character, rather than anything matching a pattern. If your
+download is named even slightly differently, setup fails with "Game installation file
+is missing" and you rename it to match. Trivial once you know, baffling if you do not.
 
-```bash
-export PORT_32BIT="Y"
-BINARYNAME="game-bin"
-export LD_LIBRARY_PATH="$GAMEDIR/box86/native":...
-```
+## Five minutes
 
-The handheld is ARM. The game is x86. [Box86](https://box86.org/) translates between
-them, and it only handles **32-bit** x86. That single constraint decides whether a
-given store's build will work.
-
-Guacamelee! Gold Edition shipped for Linux in 2014, back when 32-bit builds were
-normal. That age is why this works at all. A modern Linux release would be 64-bit only
-and Box86 could not touch it.
-
-## Four downloads to get one file
-
-GOG's download page has an OS selector. I clicked the buttons in the worst possible
-order:
-
-1. **GOG Galaxy installer**, 397 KB. A stub that downloads the launcher that
-   downloads the game.
-2. **macOS `.dmg`**, 536 MB. Correct size, wrong operating system entirely.
-3. **The Linux `.sh`**, 528 MB. The one, hiding behind the penguin tab.
-
-Three wrong buttons before the right one, and only the last is a single self-extracting
-installer of the kind the port expects.
-
-Then the filename. The port's extractor does this:
-
-```bash
-"$controlfolder/7zzs.$DEVICE_ARCH" x -aoa gog_guacamelee_gold_edition_2.0.0.3.sh
-if [ -d "data/noarch/game" ]; then
-```
-
-It greps for that exact string. Not a pattern, not a glob. If GOG ever bumps the
-version, extraction fails with "Game installation file is missing" and the fix is to
-rename your download to match.
-
-Before buying, I checked the installer's contents:
-
-```bash
-unzip -Z1 gog_guacamelee_gold_edition_2.0.0.3.sh | grep data/noarch/game
-```
-
-```
-data/noarch/game/lib32/libSDL2-2.0.so.0
-data/noarch/game/lib32/libfmodevent-4.44.27.so
-```
-
-`lib32`. The 32-bit build Box86 needs. That was the moment it went from "probably" to
-"buy it".
-
-## Five minutes of patching
-
-First launch extracts the installer into place. PortMaster warns it takes about five
-minutes, and it takes about five minutes.
+First launch unpacks everything. PortMaster says it takes about five minutes, and it
+takes about five minutes.
 
 ![The PortMaster patch screen extracting the game files](/assets/img/posts/guacamelee-on-a-handheld/patching.png#center)
 
-Watching `lib32` scroll past on the device, after checking for it on the laptop, was
-the most satisfying part of the afternoon. Then it deletes the 528 MB installer and
-boots straight into the game from then on.
+Watching `lib32` scroll past on the handheld, after checking for it on my laptop an
+hour earlier, was the most satisfying part of the afternoon.
 
 ## It runs
 
 ![The luchador statue in the town plaza](/assets/img/posts/guacamelee-on-a-handheld/statue.png#center)
 
-Full speed. No stutter in the first hour.
-
-The options screen tells you why:
+Full speed, no stutter, an hour in.
 
 ![Options showing 640x480 at 60Hz and language set to Spanish](/assets/img/posts/guacamelee-on-a-handheld/options.png#center)
 
-640×480 at 60 Hz. My first instinct was to look for a higher setting, which was the
-wrong instinct: the RG40XX V's panel *is* 640×480. The game is rendering one pixel per
-pixel, on a display refreshing at exactly the rate it outputs. There is nothing to
-improve. Anything higher would be downscaled back, costing framerate for no visible
-gain.
+I opened the options to raise the resolution and found 640×480. My first thought was
+that this seemed low for how good it looked. My second thought, after checking, was
+that the screen *is* 640×480. There was nothing to raise. The game was already drawing
+one pixel for every pixel the display has, which is the best it can do.
 
-Worth noting for the 4:3 screen: Guacamelee was designed for 16:9, so you are playing
-a cropped view rather than a squashed one.
+The screen is 4:3 and the game was made for widescreen, so you get a cropped view
+rather than a squashed one. In practice you stop noticing.
 
-And the language menu offers Spanish, French and more. Playing a game steeped in
-Mexican folklore, in Spanish, on a handheld, is a better experience than I expected
-from a port I nearly did not buy.
+The language menu has Spanish and French. Playing a game built on Mexican folklore, in
+Spanish, on a handheld I can put in a jacket pocket, is better than I expected from
+something I nearly talked myself out of buying.
 
-## What I would tell myself
+## If you try this
 
-Quitting takes a few minutes, which is the one rough edge. The save held, which is the
-part that matters.
+- **Check whether the port includes the game before you buy anything.** A small
+  download and a black screen means it is waiting for files you do not have.
+- **Check whether it needs a runtime.** On a 1 GB device, a port that drags in a
+  250 MB runtime is a different proposition to one that does not.
+- **Take the Linux build**, not the Galaxy installer, not the Mac one.
+- **Match the filename exactly.** Most brittle step, easiest fix.
+- **Look for `lib32` inside the installer before paying.** One check, and it answers
+  the only question that matters.
 
-If you are doing this yourself:
+One last thing: GOG bundles Super Turbo Championship Edition with Gold Edition, and it
+looks like two games for one price. On the handheld it is one. Super Turbo is a
+separate 2014 release with no PortMaster port, so it sits in your library, playable on
+a desktop, invisible to the handheld.
 
-- **Check `rtr` before you buy anything.** A small download plus a black screen is a
-  port waiting for files you do not have.
-- **Check `runtime` too.** On 1 GB of RAM, a Godot or mono dependency is a different
-  proposition to a native SDL build.
-- **Take the Linux build, not Galaxy, not the `.dmg`.** The penguin tab is easy to
-  miss and nothing else works.
-- **Match the filename exactly.** It is the most brittle part of the whole chain and
-  the easiest to fix.
-- **Look for `lib32` before paying.** One command, and it answers the only question
-  Box86 cares about.
-
-Gold Edition only, by the way. GOG bundles Super Turbo Championship Edition, and it is
-a separate 2014 engine with no PortMaster port. It sits in your library, playable on a
-desktop, invisible to the handheld.
+Quitting the game takes a few minutes, which is the one rough edge. The save held,
+which is the part that matters.
 
 A game about a man called Juan who keeps getting knocked down and coming back. Took
-four downloads, two dead ports and a hardcoded filename. Fitting enough.
+two empty ports and one fussy filename to get there. Fitting enough.
