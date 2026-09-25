@@ -34,3 +34,7 @@ assets/js/dist
 
 # Claude Code local state
 .claude
+
+# Local secrets (Cloudinary, etc). Never commit.
+.env
+.env.*
