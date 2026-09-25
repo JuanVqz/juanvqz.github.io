@@ -116,6 +116,13 @@ version, both marked CHANGED in the file: the entry limit is 20 rather than 5, a
 GitHub profile README reads**, at JuanVqz/juanvqz, so raising `max_post_count` there does nothing
 unless the feed carries enough posts. Re-copy from the gem and reapply both on a theme upgrade.
 
+`_data/origin/cors.yml` is a third override, with one edit marked CHANGED: the Google Fonts URL uses
+`display=optional` rather than `swap`. In the fallback font the site title "JuanVqz's Blog" wraps to
+two lines in the sidebar, so the late swap to Lato pulled the whole nav up 34px and the post text up
+29px, a layout shift (CLS ~0.02 to 0.12) that Cloudflare Web Analytics reported on desktop. The Chirpy
+demo site's short title does not wrap, so this is specific to this blog, not a theme bug.
+Re-copy from the gem and reapply on a theme upgrade.
+
 **`jekyll build` and htmlproofer both pass either way.** Neither checks that the CSS is the *right*
 CSS. After any change that touches styles, compare the built size:
 
