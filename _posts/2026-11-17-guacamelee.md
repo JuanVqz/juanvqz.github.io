@@ -15,37 +15,25 @@ image:
 The protagonist of Guacamelee! is a luchador named Juan Aguacate. My name is Juan.
 That is the entire reason I wanted it on my handheld.
 
-![Guacamelee running on the handheld, Juan in front of the Pueblucho church](https://res.cloudinary.com/juan-vasquez/image/upload/w_1200,c_limit,q_80/v1790297855/blog/guacamelee/images/church.png#center)
+![Guacamelee running on the handheld, Juan in front of the Pueblucho church](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1790297855/blog/guacamelee/images/church.png#center)
 
 It runs, it looks like that, and it took a detour to get there. If you have an
 Anbernic or something like it, the detour is the useful part.
 
-## The port that was not a game
+## Ports come in two kinds
 
 My handheld is an Anbernic RG40XX V running muOS. It plays old console games happily,
 but PC games need [PortMaster](https://portmaster.games/), which packages them up for
 these little ARM machines.
 
-I browsed the catalogue and installed Blood, the 1997 shooter. It appeared in my ports
-list with a nice icon. I launched it. Black screen, then straight back to the menu. No
-error, no message, nothing to work with.
+What nobody tells you up front is that a PortMaster entry might not contain a game at
+all. Some ports include everything. Others are only the engine, a shell waiting for
+game files you own and supply yourself. In the menu the two look identical: same
+listing, same icon, same install button. Install the second kind without the files and
+you get a black screen and a bounce back to the menu, with no error to explain why.
 
-The answer was in a log file the menu never shows you:
-
-```
-BLOOD.PAL not found (RFF files may be wrong version)
-```
-
-The port had no game in it. It was 1.2 MB, which should have told me something, since
-a 1997 shooter is not 1.2 MB. What I had installed was the engine, waiting for game
-files I was supposed to own and supply myself.
-
-Then I found Stardew Valley sitting on my card in exactly the same state, installed
-weeks earlier, its game folder empty. I had never noticed because I had never tried to
-play it.
-
-So: PortMaster ports come in two kinds. Some contain the game. Some are a shell around
-a game you have to buy elsewhere. Both look identical in the menu.
+Size is the giveaway. A port measured in single-digit megabytes is not carrying a full
+game with it.
 
 ## Reading the label before buying
 
@@ -89,18 +77,18 @@ is missing" and you rename it to match. Trivial once you know, baffling if you d
 First launch unpacks everything. PortMaster says it takes about five minutes, and it
 takes about five minutes.
 
-![The PortMaster patch screen extracting the game files](https://res.cloudinary.com/juan-vasquez/image/upload/w_1200,c_limit,q_80/v1790297857/blog/guacamelee/images/patching.png#center)
+![The PortMaster patch screen extracting the game files](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1790297857/blog/guacamelee/images/patching.png#center)
 
 Watching `lib32` scroll past on the handheld, after checking for it on my laptop an
 hour earlier, was the most satisfying part of the afternoon.
 
 ## It runs
 
-![The luchador statue in the town plaza](https://res.cloudinary.com/juan-vasquez/image/upload/w_1200,c_limit,q_80/v1790297859/blog/guacamelee/images/statue.png#center)
+![The luchador statue in the town plaza](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1790297859/blog/guacamelee/images/statue.png#center)
 
 Full speed, no stutter, an hour in.
 
-![Options showing 640x480 at 60Hz and language set to Spanish](https://res.cloudinary.com/juan-vasquez/image/upload/w_1200,c_limit,q_80/v1790297861/blog/guacamelee/images/options.png#center)
+![Options showing 640x480 at 60Hz and language set to Spanish](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1790297861/blog/guacamelee/images/options.png#center)
 
 I opened the options to raise the resolution and found 640×480. My first thought was
 that this seemed low for how good it looked. My second thought, after checking, was
@@ -133,5 +121,5 @@ a desktop, invisible to the handheld.
 Quitting the game takes a few minutes, which is the one rough edge. The save held,
 which is the part that matters.
 
-A game about a man called Juan who keeps getting knocked down and coming back. Took
-two empty ports and one fussy filename to get there. Fitting enough.
+A game about a man called Juan who keeps getting knocked down and coming back. Took a
+few false starts and one fussy filename to get there. Fitting enough.
