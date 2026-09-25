@@ -15,7 +15,7 @@ image:
 The protagonist of Guacamelee! is a luchador named Juan Aguacate. My name is Juan.
 That is the entire reason I wanted it on my handheld.
 
-![Guacamelee running on the handheld, Juan in front of the Pueblucho church](/assets/img/posts/guacamelee/church.png#center)
+![Guacamelee running on the handheld, Juan in front of the Pueblucho church](https://res.cloudinary.com/juan-vasquez/image/upload/w_1200,c_limit,q_80/v1790297855/blog/guacamelee/images/church.png#center)
 
 It runs, it looks like that, and it took a detour to get there. If you have an
 Anbernic or something like it, the detour is the useful part.
@@ -89,18 +89,18 @@ is missing" and you rename it to match. Trivial once you know, baffling if you d
 First launch unpacks everything. PortMaster says it takes about five minutes, and it
 takes about five minutes.
 
-![The PortMaster patch screen extracting the game files](/assets/img/posts/guacamelee/patching.png#center)
+![The PortMaster patch screen extracting the game files](https://res.cloudinary.com/juan-vasquez/image/upload/w_1200,c_limit,q_80/v1790297857/blog/guacamelee/images/patching.png#center)
 
 Watching `lib32` scroll past on the handheld, after checking for it on my laptop an
 hour earlier, was the most satisfying part of the afternoon.
 
 ## It runs
 
-![The luchador statue in the town plaza](/assets/img/posts/guacamelee/statue.png#center)
+![The luchador statue in the town plaza](https://res.cloudinary.com/juan-vasquez/image/upload/w_1200,c_limit,q_80/v1790297859/blog/guacamelee/images/statue.png#center)
 
 Full speed, no stutter, an hour in.
 
-![Options showing 640x480 at 60Hz and language set to Spanish](/assets/img/posts/guacamelee/options.png#center)
+![Options showing 640x480 at 60Hz and language set to Spanish](https://res.cloudinary.com/juan-vasquez/image/upload/w_1200,c_limit,q_80/v1790297861/blog/guacamelee/images/options.png#center)
 
 I opened the options to raise the resolution and found 640×480. My first thought was
 that this seemed low for how good it looked. My second thought, after checking, was
