@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "A Game About Juan, Installed by Juan"
-date: 2026-11-17 09:00:00 -0600
-last_modified_at: 2026-11-17 09:00:00 -0600
+date: 2026-10-01 09:00:00 -0600
+last_modified_at: 2026-10-01 09:00:00 -0600
 categories: [tools]
 tags: [portmaster, muos, handheld, anbernic, linux, box86, guacamelee, rg40xx-v,
   retro-gaming, emulation, gog, arm, arm64, indie-games, metroidvania, sd-card,
