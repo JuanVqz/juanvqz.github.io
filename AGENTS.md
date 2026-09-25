@@ -121,7 +121,9 @@ unless the feed carries enough posts. Re-copy from the gem and reapply both on a
 two lines in the sidebar, so the late swap to Lato pulled the whole nav up 34px and the post text up
 29px, a layout shift (CLS ~0.02 to 0.12) that Cloudflare Web Analytics reported on desktop. The Chirpy
 demo site's short title does not wrap, so this is specific to this blog, not a theme bug.
-Re-copy from the gem and reapply on a theme upgrade.
+Re-copy from the gem and reapply on a theme upgrade. It pairs with a rule at the end of the SCSS
+override: Chirpy 7.6.0 fixed `.site-subtitle` at `height: 3rem`, and this three-line tagline spilled
+into the nav, so the override sets it back to `auto`.
 
 **`jekyll build` and htmlproofer both pass either way.** Neither checks that the CSS is the *right*
 CSS. After any change that touches styles, compare the built size:

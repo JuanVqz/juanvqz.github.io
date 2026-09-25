@@ -1,6 +1,10 @@
 ---
 ---
 
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
 /* prettier-ignore */
 @use 'main
 {%- if jekyll.environment == 'production' -%}
@@ -45,4 +49,11 @@
 #post-list .post-preview .card-text.content {
   color: var(--text-color);
   opacity: 0.85;
+}
+
+/* Chirpy 7.6.0 fixes the sidebar tagline at 3rem (two lines) to stop it flickering while fonts load.
+   This tagline wraps to three lines and spilled into the nav. Fonts load with display=optional
+   (see _data/origin/cors.yml), so they never swap mid-page and the fixed height is not needed. */
+#sidebar .site-subtitle {
+  height: auto;
 }
