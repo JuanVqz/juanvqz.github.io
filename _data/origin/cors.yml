@@ -15,8 +15,9 @@ resource_hints:
       - rel: dns-prefetch
 
 # Web Fonts
-# CHANGED from the gem: display=optional instead of swap. A late swap reflowed the
-# sidebar and post text and caused layout shift (CLS). Re-copy on a theme upgrade.
+# CHANGED from jekyll-theme-chirpy 7.5.0 (_data/origin/cors.yml in the gem):
+# display=optional instead of swap. A late swap reflowed the sidebar and post
+# text and caused layout shift (CLS). Re-copy from the gem on a theme upgrade.
 webfonts: https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=optional
 
 # Libraries
