@@ -77,9 +77,9 @@ Mexican town with a church, a plaza and a statue in the middle of it.
 I have played plenty of games that borrow a skull and call it Mexican. This one feels
 like someone who has been to the cemetery on the second of November.
 
-It is also cheap. GOG had it at **75% off, $2.95 instead of $11.79** when I bought it,
-which is roughly what a coffee costs and less than most people spend deciding whether
-to buy something.
+It is also cheap. I bought it on GOG at 75% off, which put it well under the price of
+a coffee. A game from 2013 goes on deep discount often, so if it is not on sale when
+you look, wait a week.
 
 ## Five minutes
 
