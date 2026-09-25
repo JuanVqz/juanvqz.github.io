@@ -61,16 +61,25 @@ only handles **32-bit** programs. Modern Linux games are 64-bit. This one shippe
 So before paying, I opened up the installer GOG sells and looked for a folder called
 `lib32`. It was there. That is the whole check, and it turned "probably" into "buy it".
 
-## The fussy bit
+## What you are buying
 
-One warning if you do this. GOG sells the game for three operating systems, and you
-want the Linux one: a single self-extracting file of about 528 MB, not the Galaxy
-installer and not the Mac version.
+Guacamelee! is a metroidvania built on lucha libre. You play Juan Aguacate, an agave
+farmer who dies in the first few minutes, puts on a mask in the land of the dead, and
+comes back as a luchador to rescue El Presidente's daughter from a charro skeleton
+named Carlos Calaca.
 
-And the name of that file has to be exactly right. The port looks for one specific
-filename, character for character, rather than anything matching a pattern. If your
-download is named even slightly differently, setup fails with "Game installation file
-is missing" and you rename it to match. Trivial once you know, baffling if you do not.
+DrinkBox Studios did their homework. The two worlds you swap between are the living
+and the dead, and they are drawn the way Día de Muertos really looks: marigolds,
+papel picado, sugar skulls, alebrije colours turned up past what any other game would
+dare. The bosses are folklore. The enemies are folklore. Even the map is a small
+Mexican town with a church, a plaza and a statue in the middle of it.
+
+I have played plenty of games that borrow a skull and call it Mexican. This one feels
+like someone who has been to the cemetery on the second of November.
+
+It is also cheap. GOG had it at **75% off, $2.95 instead of $11.79** when I bought it,
+which is roughly what a coffee costs and less than most people spend deciding whether
+to buy something.
 
 ## Five minutes
 
