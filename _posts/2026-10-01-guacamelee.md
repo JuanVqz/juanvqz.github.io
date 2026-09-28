@@ -7,9 +7,6 @@ categories: [tools]
 tags: [portmaster, muos, handheld, anbernic, linux, box86, guacamelee, rg40xx-v,
   retro-gaming, emulation, gog, arm, arm64, indie-games, metroidvania, sd-card,
   game-porting, drm-free]
-image:
-  path: /assets/img/posts/guacamelee/og.png
-  alt: Guacamelee running on an Anbernic RG40XX V
 ---
 
 I wanted Guacamelee! because it is about luchadores. Then I found out the luchador is
@@ -57,6 +54,10 @@ is about 7 MB.
 
 This is worth the five minutes because it tests the whole chain at once, and because
 of something nobody tells you up front: a PortMaster entry might not contain a game at all.
+Some ports include everything. Others are only the engine, waiting for game files you
+own and supply yourself. In the menu the two look identical, and installing the second
+kind without the files gets you a black screen and a bounce back to the menu, with no
+error to explain why. Guacamelee is the second kind.
 
 ## Check before you pay
 
@@ -98,8 +99,13 @@ installer by name, turned "probably" into "buy it".
 After buying, I checked anyway. I opened the installer on my laptop and looked for a
 folder called `lib32`. It was there.
 
+GOG sells the game for three operating systems. Take the Linux one, a single
+self-extracting `.sh` file, not the Galaxy installer and not the Mac version. Its name
+has to match the one in the catalogue entry character for character. If it differs,
+setup fails with "Game installation file is missing", and you rename the file to match.
+
 It helped that it is cheap. I bought it on GOG at 75% off, well under the price of a coffee.
-A game from 2013 goes on deep discount often, so if it is not on sale when you look, wait a week.
+A game that old goes on deep discount often, so if it is not on sale when you look, wait a week.
 
 ## Five minutes
 
