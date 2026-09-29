@@ -62,15 +62,17 @@ error to explain why. Guacamelee is the second kind.
 ## Check before you pay
 
 PortMaster publishes its whole catalogue as a data file, so "will this work" is
-something you look up rather than ask on a forum. Two things to confirm:
+something you look up rather than ask on a forum. Three things to confirm:
 
 1. Your handheld is on the port's supported list.
 2. It needs no extra runtime. A port that drags in a 250 MB runtime is a different proposition on a 1 GB device.
+3. Whether it brings the game or expects you to supply it.
 
-To check both, open the catalogue in your browser:
+To check all three, open the catalogue in your browser:
 <https://raw.githubusercontent.com/PortsMaster/PortMaster-Info/main/ports.json>. Search
 the page for the game you want. In its entry, `avail` lists the supported devices (the
-Anbernic RG40XX V is `rg40xx-v`), and you want `runtime` to be an empty `[]`. If the
+Anbernic RG40XX V is `rg40xx-v`), you want `runtime` to be an empty `[]`, and `rtr` (ready to run) tells you
+whether the game comes included. If the
 search finds nothing, try a shorter piece of the title before giving up.
 
 Guacamelee's entry, trimmed to the parts that matter:
@@ -80,27 +82,29 @@ Guacamelee's entry, trimmed to the parts that matter:
   "arch": ["armhf"],
   "avail": ["rg40xx-h:ALL", "rg40xx-v:ALL", "rg35xx-plus:ALL"],
   "inst": "Add your Humble Bundle Linux Guacamelee\\_DRMFREE.sh, or GOGs gog\\_guacamelee\\_gold\\_edition\\_2.0.0.3.sh to the guacamelee folder and run the game.",
+  "rtr": false,
   "runtime": [],
   "title": "Guacamelee"
 }
 ```
 
-Guacamelee passed both. The part I did not expect was that its age mattered most.
+Guacamelee passed the first two, and `rtr: false` plus the `inst` line say plainly
+that the game files are on you. The part I did not expect was that its age mattered most.
 These ports run x86 games on ARM hardware through a translation layer called
 [Box86](https://box86.org/), and Box86 only handles **32-bit** programs.
-Modern Linux games are 64-bit. Guacamelee shipped in 2014, when 32-bit was still normal,
+Modern Linux games are 64-bit. Guacamelee's Linux build shipped in 2014, when 32-bit was still normal,
 and that is the only reason any of this works.
 
 The catalogue answers that too. Guacamelee's entry lists its architecture as `armhf`,
 the 32-bit build, and names the exact file it wants: GOG's
-`gog_guacamelee_gold_edition_2.0.0.3.sh`. A port built for 32-bit, asking for a 2014
+`gog_guacamelee_gold_edition_2.0.0.3.sh`. A port built for 32-bit, asking for GOG's
 installer by name, turned "probably" into "buy it".
 
 After buying, I checked anyway. I opened the installer on my laptop and looked for a
 folder called `lib32`. It was there.
 
-GOG sells the game for three operating systems. Take the Linux one, a single
-self-extracting `.sh` file, not the Galaxy installer and not the Mac version. Its name
+GOG sells the game for Windows and Linux. Take the Linux one, a single
+self-extracting `.sh` file, not the Galaxy installer and not the Windows version. Its name
 has to match the one in the catalogue entry character for character. If it differs,
 setup fails with "Game installation file is missing", and you rename the file to match.
 
@@ -129,8 +133,8 @@ that this seemed low for how good it looked. My second thought, after checking, 
 that the screen *is* 640×480. There was nothing to raise. The game was already drawing
 one pixel for every pixel the display has, which is the best it can do.
 
-The screen is 4:3 and the game was made for widescreen, so you get a cropped view
-rather than a squashed one. In practice you stop noticing.
+The screen is 4:3 and the game was made for widescreen, so you get black bars above
+and below rather than a squashed picture. In practice you stop noticing.
 
 The language menu has several languages, Spanish and French among them.
 Playing a game built on Mexican folklore, in Spanish, on a handheld I can put in a jacket pocket, is better than I expected from
@@ -138,19 +142,19 @@ something I nearly talked myself out of buying.
 
 ## If you try this
 
-- **Check whether the port includes the game before you buy anything.** A small
-  download and a black screen means it is waiting for files you do not have.
+- **Check whether the port includes the game before you buy anything.** In the
+  catalogue, `rtr: false` means it is waiting for files you do not have.
 - **Check whether it needs a runtime.** On a 1 GB device, a port that drags in a
   250 MB runtime is a different proposition to one that does not.
-- **Take the Linux build**, not the Galaxy installer, not the Mac one.
+- **Take the Linux build**, not the Galaxy installer, not the Windows one.
 - **Match the filename exactly.** Most brittle step, easiest fix.
 - **Look up the port in PortMaster's catalogue before paying.** Your device on the
   list, no runtime, and a 32-bit build answer the only question that matters.
 
 One last thing: GOG bundles Super Turbo Championship Edition with Gold Edition, and it
 looks like two games for one price. On the handheld it is one. Super Turbo is a
-separate 2014 release with no PortMaster port, so it sits in your library, playable on
-a desktop, invisible to the handheld.
+separate 2014 release, Windows only, with no PortMaster port, so it sits in your library,
+playable on a Windows PC, invisible to the handheld.
 
 Quitting the game takes a few minutes, which is the one rough edge. The save held,
 which is the part that matters.
