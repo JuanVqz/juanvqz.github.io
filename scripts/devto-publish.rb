@@ -80,13 +80,16 @@ puts "Posts live in the last #{options[:days]} days: #{posts.size}"
 exit if posts.empty?
 
 by_title = drafts(api_key).to_h { |d| [d["title"].to_s.strip, d] }
+puts "Drafts on dev.to: #{by_title.size}"
 failures = []
 published = {}
 
 posts.each do |post|
   draft = by_title[post[:title]]
   unless draft
-    puts "  skip    #{post[:file]}: no dev.to draft (not imported yet, or already published)"
+    puts "  skip    #{post[:file]}: no dev.to draft titled #{post[:title].inspect}"
+    near = by_title.keys.find { |t| t.downcase.include?(post[:title].downcase[0, 20]) }
+    puts "          closest draft title: #{near.inspect}" if near
     next
   end
 
