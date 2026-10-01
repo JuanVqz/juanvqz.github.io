@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Publishes the dev.to draft of every post that is live on the site.
+#
+#   DEVTO_API_KEY=... ruby scripts/devto-publish.rb            # dry run, prints the plan
+#   DEVTO_API_KEY=... ruby scripts/devto-publish.rb --publish  # publishes
+#   ruby scripts/devto-publish.rb --days 14                    # widen the window
+#
+# dev.to imports posts from /devto.xml as drafts. This finds the drafts whose
+# title matches a post dated in the last DAYS days (7 by default) and not in
+# the future, and publishes them. Older drafts are left alone on purpose:
+# re-importing the archive would otherwise publish years of old posts at once.
+#
+# The imported body carries `published: false` in its own front matter, and
+# dev.to lets that override the `published` field of the request, so the
+# script flips it inside the body as well.
+#
+# The API key comes from https://dev.to/settings/extensions.
+
+require "date"
+require "json"
+require "net/http"
+require "optparse"
+require "time"
+require "yaml"
+
+API = URI("https://dev.to/api/")
+ROOT = File.expand_path("..", __dir__)
+
+options = { days: 7, publish: false }
+OptionParser.new do |o|
+  o.on("--publish", "Publish the drafts (default: dry run)") { options[:publish] = true }
+  o.on("--days N", Integer, "Only posts dated in the last N days") { |n| options[:days] = n }
+end.parse!
+
+api_key = ENV.fetch("DEVTO_API_KEY", "")
+abort "DEVTO_API_KEY is not set." if api_key.empty?
+
+def request(method, path, api_key, body = nil)
+  uri = API + path
+  req = Net::HTTP.const_get(method).new(uri)
+  req["api-key"] = api_key
+  req["Accept"] = "application/vnd.forem.api-v1+json"
+  req["Content-Type"] = "application/json"
+  req["User-Agent"] = "juanvasquez.dev devto-publish"
+  req.body = JSON.generate(body) if body
+
+  res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) { |http| http.request(req) }
+  abort "#{method.upcase} #{uri.path} failed: #{res.code} #{res.body}" unless res.is_a?(Net::HTTPSuccess)
+
+  JSON.parse(res.body)
+end
+
+def due_posts(days)
+  now = Time.now
+  Dir[File.join(ROOT, "_posts", "*.md")].filter_map do |path|
+    data = YAML.safe_load(File.read(path)[/\A---\n(.*?)\n---/m, 1].to_s, permitted_classes: [Date, Time])
+    date = data["date"].is_a?(Time) ? data["date"] : Time.parse(data["date"].to_s)
+    next if date > now || date < now - (days * 86_400)
+
+    { title: data["title"].to_s.strip, date: date, file: File.basename(path) }
+  end
+end
+
+def drafts(api_key)
+  (1..).each_with_object([]) do |page, all|
+    batch = request("Get", "articles/me/unpublished?per_page=1000&page=#{page}", api_key)
+    all.concat(batch)
+    break all if batch.size < 1000
+  end
+end
+
+def published_body(markdown)
+  markdown.sub(/\A(---\n.*?)^published:\s*false\s*$(.*?\n---)/m, "\\1published: true\\2")
+end
+
+posts = due_posts(options[:days])
+puts "Posts live in the last #{options[:days]} days: #{posts.size}"
+exit if posts.empty?
+
+by_title = drafts(api_key).to_h { |d| [d["title"].to_s.strip, d] }
+
+posts.each do |post|
+  draft = by_title[post[:title]]
+  unless draft
+    puts "  skip    #{post[:file]}: no dev.to draft (not imported yet, or already published)"
+    next
+  end
+
+  unless options[:publish]
+    puts "  would publish #{post[:file]} -> dev.to draft #{draft['id']}"
+    next
+  end
+
+  article = { published: true, body_markdown: published_body(draft["body_markdown"].to_s) }
+  result = request("Put", "articles/#{draft['id']}", api_key, { article: article })
+  puts "  published #{post[:file]} -> #{result['url']}"
+end

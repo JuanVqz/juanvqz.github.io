@@ -174,6 +174,31 @@ A related trap: a post dated in the **past** publishes the moment it merges. One
 date ten days old and appeared instantly, backdated, outside the Tuesday cadence. When scheduling,
 check both directions, not just the future.
 
+## Cross-posting to dev.to
+
+dev.to imports posts as drafts from `/devto.xml` (Settings → Extensions → "Publishing to DEV from
+RSS"). `.github/workflows/devto-publish.yml` then runs `scripts/devto-publish.rb`, which publishes
+the drafts of posts dated in the last 7 days. It runs after each deploy and every three hours,
+because dev.to fetches the feed on its own schedule. It needs the `DEVTO_API_KEY` repository secret
+(key from https://dev.to/settings/extensions) and skips itself without one.
+
+```bash
+DEVTO_API_KEY=... ruby scripts/devto-publish.rb            # dry run
+DEVTO_API_KEY=... ruby scripts/devto-publish.rb --publish
+```
+
+Two things the dev.to side does that are easy to trip on:
+
+- **Drafts match on title or link.** dev.to skips a feed entry when an article of yours has the same
+  title or link, so a deleted draft is imported again on the next fetch. Renaming a post after it
+  was imported makes a second draft.
+- **The imported body carries `published: false` in its own front matter**, and that overrides the
+  API's `published` field. The script flips it inside the body; a plain `published: true` call
+  does nothing.
+
+The 7-day window is deliberate: the feed holds the whole archive, and publishing every matching
+draft would push years of old posts to dev.to at once.
+
 ## Prose style is linted
 
 `scripts/lint-prose.rb` checks posts against the house style. `.github/workflows/prose.yml` runs it
