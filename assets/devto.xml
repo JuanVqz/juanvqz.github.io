@@ -28,12 +28,7 @@ permalink: /devto.xml
     <atom:link href="{{ page.url | absolute_url }}" rel="self" type="application/rss+xml" />
 {%- for post in site.posts %}
   {%- assign post_url = post.url | absolute_url %}
-  {%- assign body = post.content
-    | devto_code
-    | replace: 'src="/', 'src="SITE_URL/'
-    | replace: 'href="/', 'href="SITE_URL/'
-    | replace: 'SITE_URL//', '//'
-    | replace: 'SITE_URL', site_url %}
+  {%- assign body = post.content | devto_html: site_url %}
     <item>
       <title>{{ post.title | xml_escape }}</title>
       <link>{{ post_url }}</link>
