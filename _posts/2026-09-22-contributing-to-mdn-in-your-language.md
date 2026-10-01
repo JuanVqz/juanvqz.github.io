@@ -60,7 +60,7 @@ The full list is in the guide. When a term is not on it, look at how nearby Span
 
 **Callout keywords stay in English.** Write `> [!NOTE]`, not `> [!Nota]`. The build renders the first as a styled box with "Nota:" already on it. The second becomes a plain quote.
 
-**Glossary links need a Spanish label.** `{{Glossary("TLD")}}` shows the English term. When the natural Spanish differs, pass it as the second argument: `{{Glossary("TLD", "Dominio de primer nivel")}}`.
+**Glossary links need a Spanish label.** `{% raw %}{{Glossary("TLD")}}{% endraw %}` shows the English term. When the natural Spanish differs, pass it as the second argument: `{% raw %}{{Glossary("TLD", "Dominio de primer nivel")}}{% endraw %}`.
 
 **Unresolved doubts get a searchable marker.** If you can't settle something while translating, leave `<!-- TODO(l10n-es): ... -->`. The prefix matters: searching `files/es/` for plain `TODO` also matches the Spanish word *TODOS*.
 
