@@ -72,7 +72,11 @@ def drafts(api_key)
 end
 
 def published_body(markdown)
-  markdown.sub(/\A(---\r?\n.*?)^published:[ \t]*false[ \t]*(?=\r?$)(.*?\r?\n---)/m, '\1published: true\2')
+  # Only inside the front matter: up to the first closing ---, so a
+  # "published: false" line in the post body is left alone.
+  markdown.sub(/\A---\r?\n.*?^---[ \t]*\r?$/m) do |front_matter|
+    front_matter.sub(/^published:[ \t]*false[ \t]*(?=\r?$)/, "published: true")
+  end
 end
 
 posts = due_posts(options[:days])
