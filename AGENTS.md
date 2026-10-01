@@ -178,8 +178,8 @@ check both directions, not just the future.
 
 dev.to imports posts as drafts from `/devto.xml` (Settings → Extensions → "Publishing to DEV from
 RSS"). `.github/workflows/devto-publish.yml` then runs `scripts/devto-publish.rb`, which publishes
-the drafts of posts dated in the last 7 days. It runs after each deploy and every three hours,
-because dev.to fetches the feed on its own schedule. It needs the `DEVTO_API_KEY` repository secret
+the drafts of posts dated in the last 7 days. It runs after each deploy and once a day at 21:00
+UTC, because dev.to fetches the feed on its own schedule. It needs the `DEVTO_API_KEY` repository secret
 (key from https://dev.to/settings/extensions) and skips itself without one.
 
 ```bash

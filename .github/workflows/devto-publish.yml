@@ -7,10 +7,12 @@ on:
     branches: [main]
 
   # dev.to imports /devto.xml on its own schedule, so the draft may not exist
-  # yet when the deploy finishes. Retry every three hours; a post dev.to has
+  # yet when the deploy finishes. Retry once a day, a few hours after the daily
+  # deploy; the 7-day window catches anything a run missed. A post dev.to has
   # already published is skipped, so repeated runs change nothing.
+  # 21:00 UTC = 15:00 America/Mexico_City.
   schedule:
-    - cron: "17 */3 * * *"
+    - cron: "0 21 * * *"
 
   workflow_dispatch:
     inputs:
