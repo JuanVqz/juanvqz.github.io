@@ -47,7 +47,7 @@ def request(method, path, api_key, body = nil)
   req.body = JSON.generate(body) if body
 
   res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) { |http| http.request(req) }
-  abort "#{method.upcase} #{uri.path} failed: #{res.code} #{res.body}" unless res.is_a?(Net::HTTPSuccess)
+  raise "#{method.upcase} #{uri.path} failed: #{res.code} #{res.body}" unless res.is_a?(Net::HTTPSuccess)
 
   JSON.parse(res.body)
 end
@@ -72,7 +72,7 @@ def drafts(api_key)
 end
 
 def published_body(markdown)
-  markdown.sub(/\A(---\n.*?)^published:\s*false\s*$(.*?\n---)/m, "\\1published: true\\2")
+  markdown.sub(/\A(---\r?\n.*?)^published:[ \t]*false[ \t]*(?=\r?$)(.*?\r?\n---)/m, '\1published: true\2')
 end
 
 posts = due_posts(options[:days])
@@ -80,6 +80,8 @@ puts "Posts live in the last #{options[:days]} days: #{posts.size}"
 exit if posts.empty?
 
 by_title = drafts(api_key).to_h { |d| [d["title"].to_s.strip, d] }
+failures = []
+published = {}
 
 posts.each do |post|
   draft = by_title[post[:title]]
@@ -93,7 +95,24 @@ posts.each do |post|
     next
   end
 
-  article = { published: true, body_markdown: published_body(draft["body_markdown"].to_s) }
-  result = request("Put", "articles/#{draft['id']}", api_key, { article: article })
-  puts "  published #{post[:file]} -> #{result['url']}"
+  # One rejected post must not stop the rest, or every retry would stop at it.
+  begin
+    article = { published: true, body_markdown: published_body(draft["body_markdown"].to_s) }
+    result = request("Put", "articles/#{draft['id']}", api_key, { article: article })
+    published[draft["id"]] = post[:file]
+    puts "  sent    #{post[:file]} -> #{result['url']}"
+  rescue StandardError => e
+    failures << post[:file]
+    warn "  FAILED  #{post[:file]}: #{e.message}"
+  end
 end
+
+# The PUT response does not say whether the article is published, so ask
+# dev.to again: anything still in the drafts list did not go out.
+unless published.empty?
+  still_drafts = drafts(api_key).map { |d| d["id"] } & published.keys
+  still_drafts.each { |id| failures << published[id] }
+  warn "  STILL A DRAFT: #{still_drafts.map { |id| published[id] }.join(", ")}" if still_drafts.any?
+end
+
+abort "#{failures.size} post(s) failed to publish: #{failures.join(", ")}" if failures.any?
