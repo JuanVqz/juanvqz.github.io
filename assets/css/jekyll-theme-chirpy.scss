@@ -57,3 +57,13 @@
 #sidebar .site-subtitle {
   height: auto;
 }
+
+/* Post body text 2px larger than Chirpy's (1.08rem / 1.03rem from 1200px up). Scoped to posts:
+   only the post layout puts data-toc on its <article>, so pages and the home list keep the theme size. */
+article[data-toc] .content {
+  font-size: calc(1.08rem + 2px);
+
+  @media all and (min-width: 1200px) {
+    font-size: calc(1.03rem + 2px);
+  }
+}
