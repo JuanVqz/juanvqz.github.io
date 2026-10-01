@@ -264,7 +264,9 @@ Moving it should be small, because of how the compose file is laid out. The whol
 configuration is three files: `docker-compose.yml`, `config/config.yml` and `.env`.
 The `.env` stays out of git, so it gets copied by hand. The database, scraped art and
 cache stay behind in their volumes, and rebuilding them is one rescan, minutes for 313
-games, cheaper than migrating them.
+games, cheaper than migrating them. The `assets` folder is the exception: it is a
+plain folder next to the compose file, and it holds the saves made in the browser, so
+it moves with the configuration.
 
 Two things change on a real server:
 
