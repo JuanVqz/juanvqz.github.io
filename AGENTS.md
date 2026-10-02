@@ -18,9 +18,17 @@ holds the domain (a Pages convention, which Vercel ignores), and the Pages API r
 It was never attached to the domain, and it was retired on 2026-08-17 to remove the duplication and
 the confusion it caused. Do not reconnect it without updating this file.
 
-The workflow builds on push to `main`, **on a daily cron at 13:00 UTC**, and on manual dispatch. The
-cron matters: Jekyll excludes future-dated posts, so a post dated ahead only appears when a build
-runs on or after its date. Without the cron, scheduled posts never publish.
+The workflow builds on push to `main`, **on a daily cron at 15:07 UTC** (09:07 Mexico City), and on
+manual dispatch. The cron matters: Jekyll excludes future-dated posts, so a post dated ahead only
+appears when a build runs on or after its date and time. Without the cron, scheduled posts never
+publish.
+
+**The weekly post goes out on Tuesdays at 09:00 -0600** (some extra posts use an earlier time, such as
+06:00). The cron has to start after the latest post time: a
+build before 15:00 UTC still sees a 09:00 post as future and skips it until the next day. GitHub
+starts scheduled runs late (the old 13:00 UTC cron ran between 15:53 and 20:04 UTC), so the post
+appears some time after 09:07. If it needs to be punctual, trigger `workflow_dispatch` from an
+external scheduler instead.
 
 ## Installation
 
