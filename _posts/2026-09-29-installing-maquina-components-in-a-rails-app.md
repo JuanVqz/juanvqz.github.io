@@ -4,7 +4,7 @@ title: "Installing maquina-components in a Rails App"
 date: 2026-09-29 09:00:00 -0600
 last_modified_at: 2026-09-29 09:00:00 -0600
 categories: [development]
-tags: [rails, tailwind-css, maquina-components, hotwire, ui]
+tags: [rails, tailwind-css, maquina-components, hotwire, ui, may-store-journey]
 ---
 
 I recently migrated [MayStore](https://github.com/JuanVqz/may_store), a multitenant order management app, from 520 lines of custom CSS to [maquina-components](https://github.com/maquina-app/maquina_components). This post covers what it takes, what worked well, and a few gotchas.
