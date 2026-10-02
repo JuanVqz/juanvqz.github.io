@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Cross-Posting a Jekyll Blog to dev.to, Complete"
-date: 2026-11-24 09:00:00 -0600
-last_modified_at: 2026-11-24 09:00:00 -0600
+date: 2026-10-06 09:00:00 -0600
+last_modified_at: 2026-10-06 09:00:00 -0600
 categories: [development]
 tags: [jekyll, dev-to, ruby, rubygems, github-actions, release-please, rss]
 ---
@@ -19,7 +19,7 @@ This blog runs on [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy). It
 
 ```xml
 <content type="text/html" src="https://www.juanvasquez.dev/blog/some-post/" />
-<summary>The first 90 words of the post [...]</summary>
+<summary>The first 90 words of the post […]</summary>
 ```
 
 The `<content>` element is empty. It only points at the post with `src`. dev.to runs [Forem](https://github.com/forem/forem), and the importer picks the body in `Feeds::AssembleArticleMarkdown`:
@@ -30,7 +30,7 @@ def get_content
 end
 ```
 
-Feedjira, the parser Forem uses, returns `nil` for an empty `<content>`, so dev.to took the summary. Ninety words and a `[...]`. Nothing on my side was broken: it is how the theme's feed is built.
+Feedjira, the parser Forem uses, returns `nil` for an empty `<content>`, so dev.to took the summary. Ninety words and a `[…]`. Nothing on my side was broken: it is how the theme's feed is built.
 
 ---
 
@@ -100,7 +100,7 @@ All of these come from Forem's source, because none of them is on a settings pag
 - **Only the first four tags survive**, stripped to letters and digits. `tailwind-css` becomes `tailwindcss`.
 - **"Replace self-referential links"** rewrites links between your posts to the dev.to articles imported from them, drafts included. If the linked post is still a draft, readers get a link that does not work for them.
 - **Feeds are only fetched for accounts active in the last three months** (`Feeds::Import`).
-- **The one-time "Import from XML" box** takes at most 25 entries and 500 KB (`Feeds::ImportFromXml`). My feed has 43 posts, so it would have been rejected.
+- **The one-time "Import from XML" box** takes at most 25 entries and 500 KB (`Feeds::ImportFromXml`). My feed had 43 posts when I checked, so it would have been rejected.
 
 ---
 
@@ -133,7 +133,7 @@ bundle exec jekyll-devto publish --publish
 
 The repository ships an example GitHub Actions workflow that runs it after each deploy and once a day, because dev.to fetches the feed on its own schedule.
 
-I checked it two ways before calling it done. On this blog, with my in-repo version removed, the gem produces the same `devto.xml` for all 43 posts; the only difference is the build timestamp. And on a fresh `jekyll new` site with the default theme, the feed is valid and its code blocks and links survive the replay of dev.to's import.
+I checked it two ways before calling it done. On this blog, with my in-repo version removed, the gem produced the same `devto.xml` for all 43 posts it carried at the time; the only difference was the build timestamp. And on a fresh `jekyll new` site with the default theme, the feed is valid and its code blocks and links survive the replay of dev.to's import.
 
 ---
 
