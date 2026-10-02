@@ -210,79 +210,24 @@ defaults:
       layout: page
       permalink: /:title/
 
-  # dev.to series (jekyll-devto reads devto_series). Set here rather than in each post so the
-  # posts themselves stay untouched; dev.to matches a series by its exact name, so keep it identical.
-  # A new post can set devto_series in its own front matter instead.
+  # dev.to series (jekyll-devto reads devto_series), one scope per series. The path is a glob:
+  # {a,b} lists post slugs, and the leading * stands for the date, so rescheduling a post keeps
+  # its series. A list (path: [a, b]) would apply to every file, so it must stay one string.
+  # dev.to matches a series by its exact name. A new post can also set devto_series itself.
   - scope:
-      path: "_posts/2026-03-31-migrating-from-heroku-to-railway.md"
+      path: "_posts/*-{migrating-from-heroku-to-railway,upgrading-rails-from-5-to-8-seven-years,multi-tenant-active-storage,from-sprockets-to-vite-rails-asset-pipeline,from-haml-to-erb-going-back-to-rails-native-templates,system-admin-impersonation-multi-tenant-rails,from-vite-to-propshaft-esbuild-rails-asset-pipeline,from-wicked-pdf-to-prawn-rails-pdf-generation,from-bulma-to-tailwind-css-migration-rails}.md"
     values:
       devto_series: "Modernizing a Doctors App"
   - scope:
-      path: "_posts/2026-04-07-upgrading-rails-from-5-to-8-seven-years.md"
-    values:
-      devto_series: "Modernizing a Doctors App"
-  - scope:
-      path: "_posts/2026-04-14-multi-tenant-active-storage.md"
-    values:
-      devto_series: "Modernizing a Doctors App"
-  - scope:
-      path: "_posts/2026-04-28-from-sprockets-to-vite-rails-asset-pipeline.md"
-    values:
-      devto_series: "Modernizing a Doctors App"
-  - scope:
-      path: "_posts/2026-05-05-from-haml-to-erb-going-back-to-rails-native-templates.md"
-    values:
-      devto_series: "Modernizing a Doctors App"
-  - scope:
-      path: "_posts/2026-05-19-system-admin-impersonation-multi-tenant-rails.md"
-    values:
-      devto_series: "Modernizing a Doctors App"
-  - scope:
-      path: "_posts/2026-05-26-from-vite-to-propshaft-esbuild-rails-asset-pipeline.md"
-    values:
-      devto_series: "Modernizing a Doctors App"
-  - scope:
-      path: "_posts/2026-08-18-from-wicked-pdf-to-prawn-rails-pdf-generation.md"
-    values:
-      devto_series: "Modernizing a Doctors App"
-  - scope:
-      path: "_posts/2026-09-08-from-bulma-to-tailwind-css-migration-rails.md"
-    values:
-      devto_series: "Modernizing a Doctors App"
-  - scope:
-      path: "_posts/2026-03-19-from-turbo-streams-to-turbo-morph-in-rails.md"
+      path: "_posts/*-{from-turbo-streams-to-turbo-morph-in-rails,the-bugs-live-in-the-seams,installing-maquina-components-in-a-rails-app,installing-reactionview-and-what-the-herb-linter-found}.md"
     values:
       devto_series: "Building a Cafe Ordering App"
   - scope:
-      path: "_posts/2026-08-11-the-bugs-live-in-the-seams.md"
-    values:
-      devto_series: "Building a Cafe Ordering App"
-  - scope:
-      path: "_posts/2026-09-29-installing-maquina-components-in-a-rails-app.md"
-    values:
-      devto_series: "Building a Cafe Ordering App"
-  - scope:
-      path: "_posts/2026-11-03-installing-reactionview-and-what-the-herb-linter-found.md"
-    values:
-      devto_series: "Building a Cafe Ordering App"
-  - scope:
-      path: "_posts/2026-09-15-finishing-a-60-page-mdn-localization-tracker.md"
+      path: "_posts/*-{finishing-a-60-page-mdn-localization-tracker,contributing-to-mdn-in-your-language}.md"
     values:
       devto_series: "MDN in Spanish"
   - scope:
-      path: "_posts/2026-09-22-contributing-to-mdn-in-your-language.md"
-    values:
-      devto_series: "MDN in Spanish"
-  - scope:
-      path: "_posts/2026-10-01-guacamelee.md"
-    values:
-      devto_series: "Retro Handheld"
-  - scope:
-      path: "_posts/2026-10-13-first-look-at-romm.md"
-    values:
-      devto_series: "Retro Handheld"
-  - scope:
-      path: "_posts/2026-11-24-updating-a-rom-hack-without-losing-your-save.md"
+      path: "_posts/*-{guacamelee,first-look-at-romm,updating-a-rom-hack-without-losing-your-save}.md"
     values:
       devto_series: "Retro Handheld"
 
