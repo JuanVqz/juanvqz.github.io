@@ -73,7 +73,8 @@ OnionOS, but nothing in it is specific to that setup.
 3. **Add the new version next to the old one, with a different filename.** Never
    replace the old ROM. Put the version in the name, more on that below.
 4. **Copy only the `.srm` to the new name.** `Pokemon - Recharged Yellow.srm` becomes
-   `Pokemon - Recharged Yellow (1.9.7).srm`, in the same folder. No `.state` files.
+   `Pokemon - Recharged Yellow (1.9.7).srm`, in the same folder. No `.state` files, and
+   if an earlier attempt left any under the new name, delete them first.
 5. **Open the new version.** With no save state to resume, it starts from the intro.
    Get to the title screen and choose **Continue**.
 6. **Save in the game straight away.** Now the `.srm` is written by the new version,
@@ -115,12 +116,12 @@ patch = File.binread("recharged-yellow_1.9.7.bps")
 base, result = patch[-12, 8].unpack("V2").map { format("%08x", _1) }
 rom = format("%08x", Zlib.crc32(File.binread("Pokemon - Recharged Yellow (1.9.7).gba")))
 
-puts "patch builds #{result}, this ROM is #{rom}"
+puts "patch expects #{base}, builds #{result}, this ROM is #{rom}"
 ```
 
 My mystery ROM matched none of the patches I had. So I renamed every hack to carry its
 version, checked against its patch, and now the filename says it:
-`Pokemon - Recharged Yellow (1.9.7).gba`. The same checksum also told me which original
+`Pokemon - Recharged Yellow (1.9.7).gba`. The "original" checksum also told me which one
 to patch: every Recharged Yellow patch I had expects Pokémon Emerald, even though at
 least one download site lists FireRed as the base.
 
