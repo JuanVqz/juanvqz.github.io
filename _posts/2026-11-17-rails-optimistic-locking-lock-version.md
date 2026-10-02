@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Add a Column, Change Your App: Rails Optimistic Locking"
-date: 2026-11-10 09:00:00 -0600
-last_modified_at: 2026-11-10 09:00:00 -0600
+date: 2026-11-17 09:00:00 -0600
+last_modified_at: 2026-11-17 09:00:00 -0600
 categories: [rails]
 tags: [rails, activerecord, concurrency, postgresql, locking]
 ---
