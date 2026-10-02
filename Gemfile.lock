@@ -78,6 +78,9 @@ GEM
       webrick (~> 1.7)
     jekyll-archives (2.3.0)
       jekyll (>= 3.6, < 5.0)
+    jekyll-devto (0.1.0)
+      jekyll (>= 4.0, < 5)
+      rexml (~> 3.2)
     jekyll-include-cache (0.2.1)
       jekyll (>= 3.7, < 5.0)
     jekyll-og-image (2.1.1)
@@ -167,6 +170,7 @@ PLATFORMS
 
 DEPENDENCIES
   html-proofer (~> 5.0)
+  jekyll-devto (~> 0.1)
   jekyll-og-image (~> 2.1)
   jekyll-theme-chirpy (~> 7.2, >= 7.2.4)
   tzinfo (>= 1, < 3)

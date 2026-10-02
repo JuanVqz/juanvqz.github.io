@@ -176,28 +176,33 @@ check both directions, not just the future.
 
 ## Cross-posting to dev.to
 
-dev.to imports posts as drafts from `/devto.xml` (Settings → Extensions → "Publishing to DEV from
-RSS"). `.github/workflows/devto-publish.yml` then runs `scripts/devto-publish.rb`, which publishes
-the drafts of posts dated in the last 7 days. It runs after each deploy and once a day at 21:00
-UTC, because dev.to fetches the feed on its own schedule. It needs the `DEVTO_API_KEY` repository secret
-(key from https://dev.to/settings/extensions) and skips itself without one.
+Handled by the [`jekyll-devto`](https://github.com/JuanVqz/jekyll-devto) gem, which was extracted from
+this repo. It is in the `Gemfile` and under `plugins:` in `_config.yml`.
+
+- **The feed.** The gem generates `/devto.xml`, an RSS feed with the full post, code blocks without
+  Rouge line numbers, and absolute links. dev.to imports it as drafts (Settings → Extensions →
+  "Publishing to DEV from RSS", with "Mark the RSS source as canonical URL" on). `feed.xml` stays
+  the theme's summary feed; the GitHub profile README reads that one.
+- **Publishing the drafts.** `.github/workflows/devto-publish.yml` runs `bundle exec jekyll-devto
+  publish --publish` after each deploy and once a day at 21:00 UTC, because dev.to fetches the feed on
+  its own schedule. It publishes the drafts of posts published in the last 7 days, read from the live
+  feed. It needs the `DEVTO_API_KEY` repository secret (key from https://dev.to/settings/extensions)
+  and skips itself without one.
 
 ```bash
-DEVTO_API_KEY=... ruby scripts/devto-publish.rb            # dry run
-DEVTO_API_KEY=... ruby scripts/devto-publish.rb --publish
+DEVTO_API_KEY=... bundle exec jekyll-devto publish            # dry run
+DEVTO_API_KEY=... bundle exec jekyll-devto publish --publish
 ```
 
-Two things the dev.to side does that are easy to trip on:
+A fix to the feed or the publisher belongs in the gem, not here. The gem's README lists the dev.to
+behaviour it depends on. The ones that matter day to day:
 
 - **Drafts match on title or link.** dev.to skips a feed entry when an article of yours has the same
   title or link, so a deleted draft is imported again on the next fetch. Renaming a post after it
   was imported makes a second draft.
-- **The imported body carries `published: false` in its own front matter**, and that overrides the
-  API's `published` field. The script flips it inside the body; a plain `published: true` call
-  does nothing.
-
-The 7-day window is deliberate: the feed holds the whole archive, and publishing every matching
-draft would push years of old posts to dev.to at once.
+- **The 7-day window is deliberate.** The feed holds the whole archive, and publishing every matching
+  draft would push years of old posts to dev.to at once. Older drafts stay drafts until published by
+  hand or with `--days N`.
 
 ## Prose style is linted
 
