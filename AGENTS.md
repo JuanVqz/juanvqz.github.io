@@ -212,6 +212,65 @@ behaviour it depends on. The ones that matter day to day:
   draft would push years of old posts to dev.to at once. Older drafts stay drafts until published by
   hand or with `--days N`.
 
+### dev.to series
+
+Posts are grouped into dev.to series through `devto_series`. Four exist, each defined once in
+`_config.yml` under `defaults`, as one scope whose path lists the post slugs:
+
+| Series | Who belongs |
+|---|---|
+| Modernizing a Doctors App | the `doctors-journey` posts |
+| Building a Cafe Ordering App | the `may-store-journey` posts (MayStore, order management for cafes) |
+| MDN in Spanish | the MDN localization posts |
+| Retro Handheld | the handheld and retro gaming posts |
+
+The `*-journey` tags stay on the posts: they group them on the blog's tag pages, and dev.to never
+sees them (it keeps only the first four tags).
+
+**To add a post to an existing series**, add its slug to that series' `{...}` in `_config.yml`.
+The slug is the filename without the date and without `.md`:
+
+```yaml
+# _posts/2026-12-08-moving-maystore-to-solid-queue.md  ->  moving-maystore-to-solid-queue
+- scope:
+    path: "_posts/*-{from-turbo-streams-to-turbo-morph-in-rails,...,moving-maystore-to-solid-queue}.md"
+  values:
+    devto_series: "Building a Cafe Ordering App"
+```
+
+Commas only, no spaces, and the date stays out, so rescheduling a post keeps its series. If the post
+belongs to one of the `*-journey` groups, give it that tag too.
+
+**To start a new series**, add a new scope block like the ones there, with the series name exactly
+as it should read on dev.to. dev.to creates the series the first time it publishes a post in it.
+
+**A single post** can instead set `devto_series: "Name"` in its own front matter. Prefer the
+`_config.yml` list so each series is in one place; the post's own front matter wins if both set it.
+
+Rules that are easy to break:
+
+- **The name must be identical everywhere.** dev.to matches a series by its exact name
+  (`Collection.find_series`); "Retro Handheld" and "Retro HandHeld" are two different series.
+- **The path must stay one string.** A YAML list (`path: [a, b]`) is not supported, and Jekyll applies
+  a scope whose path is not a string to every file, which would put every post in that series.
+- **`_plugins/devto-series-check.rb` fails the build** when a listed slug matches no post (a typo),
+  or when the glob catches a post it does not list (the leading `*` matches any longer slug ending
+  in a listed one, such as `revisiting-guacamelee`). Fix the list; do not remove the check.
+
+**When the series reaches dev.to.** A draft gets its series when `jekyll-devto publish` publishes
+it. An article **already published** on dev.to does not: run the local repair script (in the
+gitignored `notes/bin/`, so it exists only on Juan's machine) after the change is deployed:
+
+```bash
+read -s DEVTO_API_KEY && export DEVTO_API_KEY
+ruby notes/bin/devto-repair-published-article.rb SLUG [SLUG ...] --series          # dry run
+ruby notes/bin/devto-repair-published-article.rb SLUG [SLUG ...] --series --apply
+```
+
+SLUG is the dev.to slug (the end of the dev.to URL, with its random suffix such as `-24jd`), not
+the blog's. Articles written in dev.to's editor have no front matter, so the script sends the series
+as the API's `series` field, which also moves them out of a series set by hand.
+
 ## Prose style is linted
 
 `scripts/lint-prose.rb` checks posts against the house style. `.github/workflows/prose.yml` runs it
