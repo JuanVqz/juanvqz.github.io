@@ -19,9 +19,11 @@ on:
   # Daily rebuild so future-dated posts actually publish on their date.
   # Jekyll excludes future posts (future: false by default), and this workflow otherwise only runs
   # on push - so a post dated ahead stays invisible until something unrelated triggers a build.
-  # 13:00 UTC = 07:00 America/Mexico_City.
+  # Posts are dated 09:00 America/Mexico_City (15:00 UTC), so the build must start after that or
+  # Jekyll still treats the post as future and it waits a day. 15:07 UTC = 09:07 Mexico City.
+  # Minute 7, not 0: GitHub starts scheduled runs late, and worst at the top of the hour.
   schedule:
-    - cron: "0 13 * * *"
+    - cron: "7 15 * * *"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
