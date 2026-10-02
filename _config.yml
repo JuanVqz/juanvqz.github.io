@@ -211,8 +211,10 @@ defaults:
       permalink: /:title/
 
   # dev.to series (jekyll-devto reads devto_series), one scope per series. The path is a glob:
-  # {a,b} lists post slugs, and the leading * stands for the date, so rescheduling a post keeps
-  # its series. A list (path: [a, b]) would apply to every file, so it must stay one string.
+  # {a,b} lists post slugs, and the leading * is there for the date, so rescheduling a post keeps
+  # its series. The * also matches any longer slug ending in a listed one, so
+  # _plugins/devto-series-check.rb fails the build on that and on a slug that matches no post.
+  # A list (path: [a, b]) would apply to every file, so it must stay one string.
   # dev.to matches a series by its exact name. A new post can also set devto_series itself.
   - scope:
       path: "_posts/*-{migrating-from-heroku-to-railway,upgrading-rails-from-5-to-8-seven-years,multi-tenant-active-storage,from-sprockets-to-vite-rails-asset-pipeline,from-haml-to-erb-going-back-to-rails-native-templates,system-admin-impersonation-multi-tenant-rails,from-vite-to-propshaft-esbuild-rails-asset-pipeline,from-wicked-pdf-to-prawn-rails-pdf-generation,from-bulma-to-tailwind-css-migration-rails}.md"
