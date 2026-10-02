@@ -6,13 +6,15 @@ on:
     types: [completed]
     branches: [main]
 
-  # dev.to imports /devto.xml on its own schedule, so the draft may not exist
-  # yet when the deploy finishes. Retry once a day, a few hours after the daily
-  # deploy; the 7-day window catches anything a run missed. A post dev.to has
-  # already published is skipped, so repeated runs change nothing.
-  # 21:00 UTC = 15:00 America/Mexico_City.
+  # dev.to imports /devto.xml on its own clock: its job runs hourly at minute 20 but
+  # re-reads a feed only when the last read is over 4 hours old (Feeds::ImportArticlesWorker),
+  # so the draft shows up 0 to about 4h20m after the post goes live. On Tuesdays, when the
+  # weekly post goes out at 09:00 Mexico City (15:00 UTC), retry hourly at minute 35, 15
+  # minutes after each possible import, until the end of the day. The daily run covers any
+  # other day. A post dev.to already published is skipped, so repeated runs change nothing.
   schedule:
-    - cron: "0 21 * * *"
+    - cron: "35 15-23 * * 2" # Tuesdays 09:35 to 17:35 Mexico City
+    - cron: "35 21 * * *"    # daily fallback, 15:35 Mexico City
 
   workflow_dispatch:
     inputs:
