@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "First Look at RomM: An App Store for Games I Already Own"
-date: 2026-10-08 06:00:00 -0600
-last_modified_at: 2026-10-08 06:00:00 -0600
+date: 2026-10-13 09:00:00 -0600
+last_modified_at: 2026-10-13 09:00:00 -0600
 categories: [personal]
 tags: [romm, grout, muos, onionos, handheld, anbernic, miyoo, docker, self-hosted,
   retro-gaming, emulation, retroachievements, screenscraper, homelab]

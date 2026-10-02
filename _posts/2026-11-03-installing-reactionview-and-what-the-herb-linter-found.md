@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Installing ReActionView: What the Herb Linter Found in My Views"
-date: 2026-10-27 09:00:00 -0600
-last_modified_at: 2026-10-27 09:00:00 -0600
+date: 2026-11-03 09:00:00 -0600
+last_modified_at: 2026-11-03 09:00:00 -0600
 categories: [development]
 tags: [rails, erb, herb, reactionview, linter, may-store-journey]
 ---

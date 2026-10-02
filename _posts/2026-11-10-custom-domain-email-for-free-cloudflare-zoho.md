@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Custom Domain Email for $0: What Zoho's Free Plan Actually Gives You"
-date: 2026-11-03 09:00:00 -0600
-last_modified_at: 2026-11-03 09:00:00 -0600
+date: 2026-11-10 09:00:00 -0600
+last_modified_at: 2026-11-10 09:00:00 -0600
 categories: [development]
 tags: [email, dns, cloudflare, zoho, spf, dkim, dmarc]
 ---
