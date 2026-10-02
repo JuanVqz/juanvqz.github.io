@@ -11,7 +11,7 @@ gem 'jekyll-og-image', '~> 2.1'
 
 # Generates /devto.xml, the full-content feed dev.to imports, and the
 # `jekyll-devto publish` command the devto-publish workflow runs.
-gem 'jekyll-devto', '~> 0.2'
+gem 'jekyll-devto', '~> 0.3'
 
 gem 'html-proofer', '~> 5.0', group: :test
 
