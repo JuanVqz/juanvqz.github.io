@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
     inputs:
       days:
-        description: "Publish drafts of posts dated in the last N days"
+        description: "Publish drafts of posts published in the last N days"
         default: "7"
 
 permissions:
@@ -45,7 +45,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.4
+          bundler-cache: true
 
       - name: Publish dev.to drafts
         if: env.DEVTO_API_KEY != ''
-        run: ruby scripts/devto-publish.rb --publish --days "$DAYS"
+        run: bundle exec jekyll-devto publish --publish --days "$DAYS"

@@ -104,6 +104,7 @@ social_preview_image: /assets/img/og-default.png
 # frontmatter overrides the generated image.
 plugins:
   - jekyll-og-image
+  - jekyll-devto
 
 og_image:
   collections: ["posts"]
