@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Updating a ROM Hack Without Losing 48 Hours of Pokémon"
-date: 2026-11-17 06:00:00 -0600
-last_modified_at: 2026-11-17 06:00:00 -0600
+date: 2026-11-24 09:00:00 -0600
+last_modified_at: 2026-11-24 09:00:00 -0600
 categories: [personal]
 tags: [pokemon, romhack, gba, onionos, miyoo, muos, anbernic, retroarch, mgba,
   save-states, srm, bps, handheld, retro-gaming, emulation]
