@@ -7,7 +7,7 @@ categories: [development]
 tags: [immich, ssd, data-recovery, smartctl, ext4, homelab, linux, macos]
 ---
 
-My home server ran [Immich](https://immich.app/) in Docker. The photos lived on two 1 TB SSDs, sold to me as Kingston, one per Immich install, because I was afraid the 240 GB system disk would fill up. Then the server started losing disks, I pulled both SSDs, plugged them into my Mac, and only one showed up.
+My home server ran [Immich](https://immich.app/) in Docker. The photos lived on two 1 TB SSDs, sold to me as Kingston, one per Immich install, because I was afraid the 240 GB system disk would fill up. Then the server started losing disks. I pulled both SSDs, plugged them into my Mac, and only one showed up.
 
 This post is what I did next: getting the photos off without making things worse, proving every copy was good, and finding out that both SSDs were no-name drives that fall over under sustained writes while SMART says everything is fine.
 
@@ -297,7 +297,7 @@ This is what I would do now:
 - Put the Immich library on a NAS hard drive (CMR) from a known brand. For photos, space and reliability matter more than speed.
 - Add a second one, from another batch, for a nightly backup, so one dead disk costs nothing.
 - Buy from the store itself or the brand's official store, not a marketplace seller.
-- Give every new disk `smartctl`, `badblocks` and SMART again before it gets a single photo.
+- Give every new disk `smartctl`, then `badblocks`, then `smartctl` again before it gets a single photo.
 
 ---
 
