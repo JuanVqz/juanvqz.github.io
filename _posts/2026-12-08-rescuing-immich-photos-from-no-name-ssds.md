@@ -17,7 +17,8 @@ This post is what I did next: getting the photos off without making things worse
 
 - Stop writing to the disk. Don't click "Initialize", don't run `fsck` on the only copy.
 - Read the filesystem read-only. On macOS, `debugfs -c` from `e2fsprogs` reads a damaged ext4 without mounting it.
-- Copy in small chunks and verify each one before moving on. Verify with checksums, not file sizes.
+- Copy in small chunks and check each one (every file present, exact size) before moving on.
+- When deciding whether two sets hold the same files, compare checksums, not sizes. Size matching cost me 69 photos until I hashed everything.
 - `SMART PASSED` proves little on a cheap SSD. Read the attributes, then run a write test (`badblocks`, `f3probe`).
 - A drive that reports its model as `SSD 1TB` is a no-name drive, whatever the box or the seller said. Check every new drive with `smartctl` and a write test inside the return window.
 
@@ -76,14 +77,19 @@ ls: Filesystem not open
 The bitmaps say where free space is. My files don't live there. `debugfs -c` (catastrophic mode) skips them and opens the filesystem anyway, still read-only:
 
 ```bash
-sudo /opt/homebrew/opt/e2fsprogs/sbin/debugfs -c -R "ls -l /Server/immich-app/library" /dev/disk5s1
+sudo /opt/homebrew/opt/e2fsprogs/sbin/debugfs -c -R "ls -l /Server/immich-app" /dev/disk5s1
 ```
 
 ```console
-encoded-video  library  upload  profile  thumbs  backups
+ 35389442   40775 (2)   1000   1000    4096 18-Dec-2025 18:27 .
+ 35389441   40775 (2)   1000   1000    4096 18-Dec-2025 18:21 ..
+ 35389443   40700 (2)    999   1000    4096 14-Apr-2026 23:39 postgres
+ 35389444   40755 (2)   1000   1000    4096 18-Dec-2025 18:28 library
 ```
 
-To let scripts read the raw partition without typing a password every time, I gave my user read access to that one device node. It resets when the disk is unplugged and allows no writes:
+Inside `library/` were `encoded-video`, `library`, `upload`, `profile`, `thumbs` and `backups`.
+
+To let scripts read the raw partition without typing a password every time, I made that one device node readable by every local user. It resets when the disk is unplugged and allows no writes:
 
 ```bash
 sudo chmod o+r /dev/disk5s1
@@ -137,7 +143,7 @@ I didn't want a three-hour copy that ends in an error and leaves me guessing wha
 Things that confused the numbers on the way:
 
 - `rdump` prints `Operation not permitted while changing ownership` for every file on exFAT. exFAT has no Linux owners. Harmless.
-- macOS writes `._*` AppleDouble files next to everything on exFAT. My first "missing files" count on the second SSD said 17,002. Excluding `._*`, it was 7,853.
+- macOS writes `._*` AppleDouble files next to everything it copies onto non-Mac filesystems. The second SSD had thousands of them from an earlier copy made on a Mac, and they look like photos to a filename filter (`._DJI_0030.MP4`). My first "files only on the second SSD" count said 17,002. Excluding `._*`, it was 7,853. They also appear on the exFAT destination, so exclude them on both sides.
 - exFAT on a large stick uses 128 KB clusters, so 25,000 empty Immich directories ate gigabytes of `du` output with no data in them.
 - Six "missing" files in `upload/` had mode `000000`. They weren't files: they were directory entries the journal never committed.
 
@@ -153,7 +159,7 @@ Later I hashed all 18,496 photos and videos on that SSD and compared md5 against
 SSD2 media: 18496; found in rescue 1: 10574; only in rescue 2: 7853; NOT rescued: 69
 ```
 
-69 files had the same size as a rescued file and different content. Size matching would have lost them. Use checksums.
+69 files had the same size as a rescued file and different content. Size matching would have lost them. I copied those 69 (1.3 GB) off the SSD right away and checked them with md5 on both destinations. Use checksums.
 
 ---
 
