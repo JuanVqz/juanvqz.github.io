@@ -18,7 +18,7 @@ This post is what I did next: getting the photos off without making things worse
 - Stop writing to the disk. Don't click "Initialize", don't run `fsck` on the only copy.
 - Read the filesystem read-only. On macOS, `debugfs -c` from `e2fsprogs` reads a damaged ext4 without mounting it.
 - Copy in small chunks and check each one (every file present, exact size) before moving on.
-- When deciding whether two sets hold the same files, compare checksums, not sizes. Size matching cost me 69 photos until I hashed everything.
+- When deciding whether two sets hold the same files, compare checksums, not sizes. Size matching nearly cost me 69 photos and videos until I hashed everything.
 - `SMART PASSED` proves little on a cheap SSD. Read the attributes, then run a write test (`badblocks`, `f3probe`).
 - A drive that reports its model as `SSD 1TB` is a no-name drive, whatever the box or the seller said. Check every new drive with `smartctl` and a write test inside the return window.
 
@@ -142,10 +142,10 @@ I didn't want a three-hour copy that ends in an error and leaves me guessing wha
 
 Things that confused the numbers on the way:
 
-- `rdump` prints `Operation not permitted while changing ownership` for every file on exFAT. exFAT has no Linux owners. Harmless.
-- macOS writes `._*` AppleDouble files next to everything it copies onto non-Mac filesystems. The second SSD had thousands of them from an earlier copy made on a Mac, and they look like photos to a filename filter (`._DJI_0030.MP4`). My first "files only on the second SSD" count said 17,002. Excluding `._*`, it was 7,853. They also appear on the exFAT destination, so exclude them on both sides.
+- `rdump` prints `Operation not permitted while changing ownership` for every file. It tries to give each file its original owner (uid 1000 on the server), and my scripts ran `debugfs` as a normal user, which can't do that. The data is copied fine. Harmless.
+- macOS writes `._*` AppleDouble files next to files that carry extended attributes when it copies them onto non-Mac filesystems. The second SSD had thousands of them from an earlier copy made on a Mac, and they look like photos to a filename filter (`._DJI_0030.MP4`). My first "files only on the second SSD" count said 17,002. Excluding `._*`, it was 7,853. They also appear on the exFAT destination, so exclude them on both sides.
 - exFAT on a large stick uses 128 KB clusters, so 25,000 empty Immich directories ate gigabytes of `du` output with no data in them.
-- Six "missing" files in `upload/` had mode `000000`. They weren't files: they were directory entries the journal never committed.
+- Six "missing" files in `upload/` had mode `000000`. They weren't files: they were directory entries whose changes were still in the journal, never written to their final place on disk.
 
 ---
 
@@ -208,7 +208,7 @@ A genuine drive identifies itself with its brand and a real model number in `Dev
 - **`Device is: Not in smartctl database`.** smartmontools knows the common models of every big brand. Not proof on its own, but it adds up.
 - **Attributes named `Unknown_Attribute`.** Big brands' attributes are mostly decoded by smartctl. A wall of unknown IDs points to a generic controller.
 
-On a Mac with the drive connected directly (not through a USB enclosure), System Information → Storage or `diskutil info` shows the same model string. Windows shows it in Device Manager.
+Through a USB enclosure, macOS (`diskutil info`, System Information) and Windows (Device Manager) may show a name the enclosure reports, not the drive's own model. Linux with `smartctl -d sat` reads the drive itself, which is why I did these checks there.
 
 ### Ask the brand
 
