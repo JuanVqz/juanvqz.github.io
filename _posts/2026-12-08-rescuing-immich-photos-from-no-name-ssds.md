@@ -38,7 +38,7 @@ My rules from then on:
 
 ## Reading a damaged ext4 on a Mac
 
-`diskutil list` showed the disk with a `Linux Filesystem` partition: the hardware was fine, macOS can't read ext4. Homebrew's `e2fsprogs` includes `debugfs`, which reads ext4 straight from the device and opens read-only unless you pass `-w`:
+`diskutil list` showed the disk with a `Linux Filesystem` partition: the drive was responding, and macOS can't read ext4. Homebrew's `e2fsprogs` includes `debugfs`, which reads ext4 straight from the device and opens read-only unless you pass `-w`:
 
 ```bash
 brew install e2fsprogs
@@ -52,7 +52,13 @@ It refused:
 ls: Filesystem not open
 ```
 
-`dumpe2fs -h` showed the `needs_recovery` flag: the disk had been unplugged from Linux without a clean unmount, so the journal still held unapplied changes and the free-space bitmaps didn't match their checksums. My files don't live in the bitmaps. `debugfs -c` (catastrophic mode) skips them and opens the filesystem anyway, still read-only. Inside was the whole Immich folder.
+`dumpe2fs -h` showed the `needs_recovery` flag: the disk had been unplugged from Linux without a clean unmount, so the journal still held unapplied changes and the free-space bitmaps didn't match their checksums. My files don't live in the bitmaps. `debugfs -c` (catastrophic mode) skips them and opens the filesystem anyway, still read-only:
+
+```bash
+sudo /opt/homebrew/opt/e2fsprogs/sbin/debugfs -c -R "ls -l /Server/immich-app" /dev/disk5s1
+```
+
+Inside was the whole Immich folder.
 
 To let scripts read the partition without a password prompt, I made that device node readable by every local user. It resets on unplug and allows no writes:
 
@@ -90,7 +96,7 @@ I didn't want a three-hour copy that ends in an error. So a script walked the tr
 
 23 chunks, 12,160 originals, 81.5 GB, about an hour, followed by an md5 of 45 random files read again from the SSD.
 
-Two things threw the counts off. macOS `._*` AppleDouble files: the second SSD had thousands from an old Mac copy (`._DJI_0030.MP4` looks like a video to a filename filter), and my first "missing" count was 17,002 instead of 7,853. And six "missing" files with mode `000000` weren't files at all: their changes were still in the journal.
+Two things threw the counts off. macOS `._*` AppleDouble files: the second SSD had thousands from an old Mac copy (`._DJI_0030.MP4` looks like a video to a filename filter), and my first count of files only on the second SSD was 17,002 instead of 7,853. And six "missing" files with mode `000000` weren't files at all: their changes were still in the journal.
 
 ---
 
@@ -174,7 +180,7 @@ For any new drive: `smartctl`, then `f3probe`, then a full write while watching 
 
 ## The SATA port that turned itself off
 
-The server board's manual (ASUS TUF GAMING B460M-PLUS (WI-FI)) says, under "Connectors with shared bandwidth":
+The server board is an ASUS TUF GAMING B460M-PLUS (WI-FI). Its manual says, under "Connectors with shared bandwidth":
 
 > M.2_1 shares bandwidth with SATA6G_1. When M.2_1 runs SATA mode, SATA6G_1 will be disabled.
 
