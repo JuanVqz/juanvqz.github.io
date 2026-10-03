@@ -285,12 +285,13 @@ My system disk is a SATA M.2 in `M.2_1`. Anything on `SATA6G_1` was invisible. R
 
 ## What I'm doing instead
 
-When I checked on 2026-10-02, a 2 TB Samsung 870 EVO cost USD 499.99 at Newegg, and a 4 TB Seagate IronWolf NAS hard drive cost USD 189.99. That's about USD 250 per TB against USD 47.50. So:
+This is what I would do now:
 
-- The WD Green M.2 stays the system disk: Linux, Docker, the Immich database.
-- One 4 TB NAS hard drive (CMR) for the Immich library.
-- A second one, from another batch, for a nightly backup.
-- Every new disk gets `smartctl`, `badblocks` and SMART again before it gets a single photo.
+- Keep the WD Green M.2 as the system disk: Linux, Docker, the Immich database.
+- Put the Immich library on a NAS hard drive (CMR) from a known brand. For photos, space and reliability matter more than speed.
+- Add a second one, from another batch, for a nightly backup, so one dead disk costs nothing.
+- Buy from the store itself or the brand's official store, not a marketplace seller.
+- Give every new disk `smartctl`, `badblocks` and SMART again before it gets a single photo.
 
 ---
 
