@@ -15,12 +15,18 @@ on:
   schedule:
     - cron: "35 15-23 * * 2" # Tuesdays 09:35 to 17:35 Mexico City
     - cron: "35 21 * * *"    # daily fallback, 15:35 Mexico City
+    # The backlog: one older draft (2026 posts only, see _config.yml) on Thursdays and Saturdays,
+    # newest first, so the archive reaches dev.to two posts a week and followers are not flooded.
+    - cron: "5 17 * * 4,6"   # Thursdays and Saturdays 11:05 Mexico City (minute 5: on-the-hour runs get dropped under load)
 
   workflow_dispatch:
     inputs:
       days:
         description: "Publish drafts of posts published in the last N days"
         default: "7"
+      backlog:
+        description: "Also publish up to N drafts of older posts, newest first"
+        default: "0"
 
 permissions:
   contents: read
@@ -38,6 +44,8 @@ jobs:
       # Passed through env, never interpolated into the script: a value typed
       # into the manual trigger would otherwise run as shell code.
       DAYS: ${{ inputs.days || '7' }}
+      # 1 only on the Thursday and Saturday backlog run (or when asked for by hand).
+      BACKLOG: ${{ github.event.schedule == '5 17 * * 4,6' && '1' || inputs.backlog || '0' }}
 
     steps:
       - name: Checkout
@@ -51,4 +59,4 @@ jobs:
 
       - name: Publish dev.to drafts
         if: env.DEVTO_API_KEY != ''
-        run: bundle exec jekyll-devto publish --publish --days "$DAYS"
+        run: bundle exec jekyll-devto publish --publish --days "$DAYS" --backlog "$BACKLOG"
