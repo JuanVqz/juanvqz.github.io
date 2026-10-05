@@ -112,3 +112,5 @@ the ROM under another name, which gets its own `.srm`.
 
 Recharged Yellow is made by [Jaizu](https://jaizu.moe/), and the patch comes from
 [Jaizu's Ko-fi](https://ko-fi.com/s/7fec26b127). If you play it, it is worth supporting. Fifty hours in, I am still not done.
+
+*This is part of a series about retro handhelds. Earlier posts covered [installing Guacamelee! on the Anbernic](/blog/guacamelee/) and [a first look at RomM](/blog/first-look-at-romm/).*
