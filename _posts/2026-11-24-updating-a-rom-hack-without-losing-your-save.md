@@ -13,7 +13,7 @@ I only found out halfway through this post: the save screen says 48 hours. Then 
 noticed the hack had a new release, 1.9.7, with a long list of bug fixes, and I wanted
 it without starting over.
 
-![Recharged Yellow title screen, from Jaizu's site](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791216709/blog/updating-a-rom-hack-without-losing-your-save/images/recharged-yellow.png#center)
+![Recharged Yellow title screen from Jaizu's site, taken on the earlier 1.9.5 release](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791216709/blog/updating-a-rom-hack-without-losing-your-save/images/recharged-yellow.png#center)
 
 It worked, but not on the first try. The first try froze the game so hard that the
 menu button did nothing and I had to hold the power button to turn the console off.
