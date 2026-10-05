@@ -64,6 +64,8 @@ That left the code without a language, so dev.to showed it unhighlighted. `Feeds
 
 It matches blocks to fences by their first line of code, not by position. dev.to does not fence a code block inside a list item, so on one of my posts there were three blocks and two fences, and counting by position would have put the wrong language on every fence after the gap. Across this blog, 217 of the 218 blocks that have a language now get it on dev.to. The one left is that block inside a list.
 
+Forem can also fill in a missing language itself: `Article#detect_code_block_languages` asks an AI model when the feature is turned on. One of my posts came out with a <code>```json</code> fence that no version of the feed had carried, so it may be on at dev.to, but I could not confirm it, and the feed does not rely on it.
+
 ---
 
 ## Absolute links, but not inside code
@@ -120,7 +122,7 @@ My replay had skipped that check, which is why it never saw it. Now it runs it, 
 
 ## Covers, and why they are opt-in
 
-The next version used each post's Open Graph image as its dev.to cover. On my blog that image carries the post title, and dev.to prints the title right under the cover, so every article said its own name twice.
+The next version used each post's Open Graph image as its dev.to cover. On my blog that image carries the post title, and dev.to prints the title right under the cover, so the first two articles that got one said their own name twice.
 
 So covers are opt-in. Without one, dev.to generates its own share image for the article (`Article#generate_social_image`), so nothing is lost. A post sets `devto_cover` to a path, or to `true` for its image, or to `false` to keep it off, and `devto: { cover: image }` in `_config.yml` turns it on for every post on a site whose images have no title on them.
 
@@ -188,7 +190,7 @@ Every version since went out the same way: merge the release pull request, and C
 
 ## What I would tell myself before starting
 
-- Run the real pipeline. Every bug in this post showed up only when the feed went through Feedjira, `CleanHtml` and ReverseMarkdown, never by looking at the XML.
+- Run the real pipeline. Most bugs in this post showed up only when the feed went through Feedjira, `CleanHtml` and ReverseMarkdown, never by looking at the XML.
 - Then check what the service stored. A replay is only as faithful as the steps you copied into it, and mine had left out the one that kept 15 posts as raw HTML.
 - Front matter is YAML, so test every type. `devto_cover: true` crashed the whole Jekyll build, because `true` reached code that expected a string. A test that builds a site for every key with every YAML type, `true`, numbers, lists and hashes, found 14 more crashes like it.
 - Read the source of the service you integrate with. Forem's code answered every question its settings page did not.
