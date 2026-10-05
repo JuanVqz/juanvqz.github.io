@@ -13,6 +13,8 @@ I only found out halfway through this post: the save screen says 48 hours. Then 
 noticed the hack had a new release, 1.9.7, with a long list of bug fixes, and I wanted
 it without starting over.
 
+![A wild Articuno appears, one of the legendary Pokémon you can catch in Recharged Yellow](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791215775/blog/updating-a-rom-hack-without-losing-your-save/images/articuno.png#center)
+
 It worked, but not on the first try. The first try froze the game so hard that the
 menu button did nothing and I had to hold the power button to turn the console off.
 The rule I came away with is short, so here it is up front:
@@ -82,6 +84,11 @@ OnionOS, but nothing in it is specific to that setup.
 
 When I did it this way it loaded straight into my file, team and 48 hours intact.
 Only once the new version had saved on its own did I delete the old one.
+
+![The save prompt on 1.9.7 in Lavender Town: 8 badges, 86 in the Pokédex, 49:59 on the clock](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791215776/blog/updating-a-rom-hack-without-losing-your-save/images/save-screen.png#center)
+
+That is the new version a few sessions later, with the clock still counting from where
+the old one stopped.
 
 Where the files live, for the two systems I use:
 
