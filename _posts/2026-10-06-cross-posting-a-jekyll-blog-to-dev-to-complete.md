@@ -60,7 +60,11 @@ The fix rewrites each Rouge block back to a plain `<pre><code>` and drops the hi
 - **Kramdown block options.** `{: .nolineno }` adds a class to the wrapper and `{: file="app/models/user.rb" }` adds an attribute, so a pattern that expected exactly `class="language-ruby highlighter-rouge"` skipped those blocks.
 - **The `{% raw %}{% highlight ruby linenos %}{% endraw %}` tag.** It renders a `<figure>` with `gutter` and `code` cells instead of Kramdown's `rouge-gutter` and `rouge-code`.
 
-One thing I could not fix: code blocks arrive on dev.to without a language. `Feeds::CleanHtml` removes every `class` attribute before converting, and ReverseMarkdown reads the language from a class, so no feed can carry it through.
+That left the code without a language, so dev.to showed it unhighlighted. `Feeds::CleanHtml` removes every `class` attribute before converting, and Forem reads the language from a class, so no feed can carry it through that way. It can carry it another way: CleanHtml only removes classes, so each block now goes out as `<pre data-lang="ruby">`, and the publisher writes that language into the draft's fences right before publishing it.
+
+It matches blocks to fences by their first line of code, not by position. dev.to does not fence a code block inside a list item, so on one of my posts there were three blocks and two fences, and counting by position would have put the wrong language on every fence after the gap. Across this blog, 217 of the 218 blocks that have a language now get it on dev.to. The one left is that block inside a list.
+
+Forem can also fill in a missing language itself: `Article#detect_code_block_languages` asks an AI model when the feature is turned on. One of my posts came out with a <code>```json</code> fence that no version of the feed had carried, so it may be on at dev.to, but I could not confirm it, and the feed does not rely on it.
 
 ---
 
@@ -89,6 +93,38 @@ There is no setting to change it. So I wrote a small publisher: it lists my draf
 The first version would have published nothing, and the reason is in `Article#evaluate_front_matter`. dev.to evaluates the front matter inside the body on every save, so that `published: false` overrides the `published: true` you send in the request. The publisher has to flip it inside the body, and only inside the front matter, never a matching line further down the post.
 
 There was one more catch. The response to that `PUT` has no `published` field, so you cannot read back whether it worked. The publisher lists the drafts again afterwards, and any post still among them fails the run.
+
+---
+
+## The import that kept raw HTML
+
+The replay said every post converted cleanly. Then I compared it with what dev.to had stored, which the public API returns as `body_markdown`, and one of my posts was not Markdown at all. It was the raw HTML, `<p>` tags, classes and all.
+
+The reason is a heuristic in the same importer. It converts the feed to Markdown only when the HTML looks like HTML:
+
+```ruby
+def html_content?(content)
+  return false if content.blank?
+
+  block_tag_count = content.scan(/<\s*(p|div|h[1-6]|ul|ol|li|blockquote|pre|table|section|figure)[\s>]/i).size
+  return false if block_tag_count.zero?
+
+  paragraph_breaks = content.scan(/\n\s*\n/).size
+  block_tag_count > paragraph_breaks
+end
+```
+
+Kramdown puts a blank line between every block, so the two counts come out almost equal, and a few blank lines inside code blocks tip it either way. That post had 58 block tags and 59 blank lines: one line too many, and dev.to kept the HTML. None of the conversion happens on that path, so no code fences and no languages. Across this blog, 15 of 43 posts had gone that way.
+
+My replay had skipped that check, which is why it never saw it. Now it runs it, and the feed removes the blank lines between tags and writes the newlines inside code as `&#10;`, which is the same character once parsed. The post reads exactly the same, the blank-line count drops to zero, and every post takes the Markdown path.
+
+---
+
+## Covers, and why they are opt-in
+
+The next version used each post's Open Graph image as its dev.to cover. On my blog that image carries the post title, and dev.to prints the title right under the cover, so the first two articles that got one said their own name twice.
+
+So covers are opt-in. Without one, dev.to generates its own share image for the article (`Article#generate_social_image`), so nothing is lost. A post sets `devto_cover` to a path, or to `true` for its image, or to `false` to keep it off, and `devto: { cover: image }` in `_config.yml` turns it on for every post on a site whose images have no title on them.
 
 ---
 
@@ -131,7 +167,9 @@ bundle exec jekyll-devto publish            # dry run
 bundle exec jekyll-devto publish --publish
 ```
 
-The repository ships an example GitHub Actions workflow that runs it after each deploy and once a day, because dev.to fetches the feed on its own schedule.
+The repository ships an example GitHub Actions workflow that runs it after each deploy and on a schedule, because dev.to fetches the feed on its own: its import job runs every hour but reads a feed again only when the last read is more than four hours old.
+
+Two optional front matter keys cover the rest of what dev.to does differently. `devto_tags` picks the four tags dev.to keeps, and `devto_series` puts the post in a dev.to series, created the first time it is used. The series name has to be identical on every post, because dev.to matches a series by its exact name.
 
 I checked it two ways before calling it done. On this blog, with my in-repo version removed, the gem produced the same `devto.xml` for all 43 posts it carried at the time; the only difference was the build timestamp. And on a fresh `jekyll new` site with the default theme, the feed is valid and its code blocks and links survive the replay of dev.to's import.
 
@@ -146,11 +184,15 @@ Two traps on the way to `0.1.0`:
 - **The first release would have been 1.0.0.** With no previous release, release-please ignores a `0.0.0` manifest and falls back to `1.0.0` unless `initial-version` is set. A version number on RubyGems can never be reused, even after a yank, so that one would have stuck. A code review caught it before the merge.
 - **A pending trusted publisher lasts 12 hours.** For a gem that does not exist yet, rubygems.org holds the name for whoever pushes it from that workflow, and the hold expires. After the first push it becomes permanent.
 
+Every version since went out the same way: merge the release pull request, and CI does the rest.
+
 ---
 
 ## What I would tell myself before starting
 
-- Run the real pipeline. Every bug in this post showed up only when the feed went through Feedjira, `CleanHtml` and ReverseMarkdown, never by looking at the XML.
+- Run the real pipeline. Most bugs in this post showed up only when the feed went through Feedjira, `CleanHtml` and ReverseMarkdown, never by looking at the XML.
+- Then check what the service stored. A replay is only as faithful as the steps you copied into it, and mine had left out the one that kept 15 posts as raw HTML.
+- Front matter is YAML, so test every type. `devto_cover: true` crashed the whole Jekyll build, because `true` reached code that expected a string. A test that builds a site for every key with every YAML type, `true`, numbers, lists and hashes, found 14 more crashes like it.
 - Read the source of the service you integrate with. Forem's code answered every question its settings page did not.
 - Let someone review it. Half the fixes here came from review, and one suggested fix was wrong: it checked a `published` field the API response does not have. Checking it against the code before applying it saved a publisher that would have failed every post.
 
