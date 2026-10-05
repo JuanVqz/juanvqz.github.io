@@ -212,6 +212,21 @@ behaviour it depends on. The ones that matter day to day:
   draft would push years of old posts to dev.to at once. Older drafts stay drafts until published by
   hand or with `--days N`.
 
+### What reaches dev.to, and the backlog
+
+**Only 2026 posts go to dev.to.** A `defaults` scope in `_config.yml` sets `devto: false` on every
+post before 2026 (`_posts/202[0-5]-*`), which keeps them out of `devto.xml`. Their old drafts on
+dev.to stay drafts. The posts themselves are untouched and stay on the blog.
+
+**Older 2026 posts go out two a week.** dev.to imported them as drafts, and the 7-day window never
+publishes them. On Thursdays and Saturdays at 11:00 Mexico City, `devto-publish.yml` runs
+`jekyll-devto publish --publish --backlog 1`, which publishes the newest one still a draft. Each
+publish notifies the followers on dev.to, which is why it is slow. The gem keeps no state: a
+published draft stops being a candidate, so the next run takes the next one. To publish more by
+hand, run the workflow manually with a `backlog` value.
+
+To keep one 2026 post off dev.to, give it `devto: false` in its front matter.
+
 ### dev.to series
 
 Posts are grouped into dev.to series through `devto_series`. Four exist, each defined once in

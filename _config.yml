@@ -210,6 +210,13 @@ defaults:
       layout: page
       permalink: /:title/
 
+  # Only 2026 posts go to dev.to: devto: false keeps everything older out of devto.xml, so
+  # jekyll-devto never imports or publishes it (their old drafts on dev.to stay drafts).
+  - scope:
+      path: "_posts/202[0-5]-*"
+    values:
+      devto: false
+
   # dev.to series (jekyll-devto reads devto_series), one scope per series. The path is a glob:
   # {a,b} lists post slugs, and the leading * is there for the date, so rescheduling a post keeps
   # its series. The * also matches any longer slug ending in a listed one, so
