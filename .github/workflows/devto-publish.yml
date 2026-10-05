@@ -17,7 +17,7 @@ on:
     - cron: "35 21 * * *"    # daily fallback, 15:35 Mexico City
     # The backlog: one older draft (2026 posts only, see _config.yml) on Thursdays and Saturdays,
     # newest first, so the archive reaches dev.to two posts a week and followers are not flooded.
-    - cron: "0 17 * * 4,6"   # Thursdays and Saturdays 11:00 Mexico City
+    - cron: "5 17 * * 4,6"   # Thursdays and Saturdays 11:05 Mexico City (minute 5: on-the-hour runs get dropped under load)
 
   workflow_dispatch:
     inputs:
@@ -45,7 +45,7 @@ jobs:
       # into the manual trigger would otherwise run as shell code.
       DAYS: ${{ inputs.days || '7' }}
       # 1 only on the Thursday and Saturday backlog run (or when asked for by hand).
-      BACKLOG: ${{ github.event.schedule == '0 17 * * 4,6' && '1' || inputs.backlog || '0' }}
+      BACKLOG: ${{ github.event.schedule == '5 17 * * 4,6' && '1' || inputs.backlog || '0' }}
 
     steps:
       - name: Checkout
