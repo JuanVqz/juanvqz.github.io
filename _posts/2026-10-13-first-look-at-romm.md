@@ -282,3 +282,5 @@ That move is the next post: RomM on a real local server, running all the time.
 
 For now, on a laptop, it does one job well, which is more than the SD card shuffle
 managed.
+
+*This is part of a series about retro handhelds. The first post covered [installing Guacamelee! on the Anbernic](/blog/guacamelee/), and the rest are under the [handheld tag](/tags/handheld/).*

@@ -161,3 +161,5 @@ which is the part that matters.
 
 A game about a man called Juan who keeps getting knocked down and coming back. Took a
 few false starts and one fussy filename to get there. Fitting enough.
+
+*This is the first post in a series about retro handhelds. The rest are under the [handheld tag](/tags/handheld/).*
