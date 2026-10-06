@@ -56,10 +56,12 @@ du -xh --max-depth=1 / 2>/dev/null | sort -rh | head
 Then go one level deeper wherever the big number is:
 
 ```bash
-du -xh --max-depth=2 ~ 2>/dev/null | sort -rh | head
+du -xh --max-depth=3 ~ 2>/dev/null | sort -rh | head
 ```
 
 ```console
+67G	/home/me
+66G	/home/me/Pictures
 66G	/home/me/Pictures/photos
 39G	/home/me/Pictures/photos/phone-1
 27G	/home/me/Pictures/photos/phone-2
@@ -126,7 +128,7 @@ cd ~/Server/immich-app && docker compose down --volumes
 docker system prune --all --volumes --force
 ```
 
-**`--volumes` deletes data**, not only images. A database that lives in a named volume goes with it. Run `docker volume ls` first and only prune volumes you're sure about. Without `--all`, `prune` only removes dangling images (untagged leftovers); with it, every image not used by a container goes too.
+**`--volumes` deletes data**, not only images. `docker compose down --volumes` removes the named volumes the compose file declares, so a database that lives in one goes with it. `docker system prune --volumes` only removes anonymous volumes (Docker 23 and later), so named volumes left by other projects stay until you remove them with `docker volume rm`. Run `docker volume ls` first and only remove volumes you're sure about. Without `--all`, `prune` only removes dangling images (untagged leftovers); with it, every image not used by a container goes too.
 
 ---
 
