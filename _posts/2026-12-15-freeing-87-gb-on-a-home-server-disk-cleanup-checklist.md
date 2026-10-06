@@ -60,10 +60,10 @@ du -xh --max-depth=2 ~ 2>/dev/null | sort -rh | head
 ```
 
 ```console
-66G	/home/green/Pictures/photos
-39G	/home/green/Pictures/photos/Kenia
-27G	/home/green/Pictures/photos/Juan
-1.2G	/home/green/.cache
+66G	/home/me/Pictures/photos
+39G	/home/me/Pictures/photos/phone-1
+27G	/home/me/Pictures/photos/phone-2
+1.2G	/home/me/.cache
 ```
 
 ---
@@ -252,21 +252,9 @@ What's left is the operating system itself (`/usr` is 12 GB) and one Timeshift s
 
 ### Mac: Mole
 
-[Mole](https://github.com/tw93/mole) is an open-source (GPL-3.0) command-line cleaner for macOS, installed with `brew install mole`. Every destructive command has a `--dry-run`:
+[Mole](https://github.com/tw93/mole) is an open-source command-line cleaner for macOS (`brew install mole`). It cleans caches, uninstalls apps with their leftovers, finds old project folders like `node_modules`, and has a disk explorer. Every destructive command has a `--dry-run`; the [README](https://github.com/tw93/mole#readme) lists them all.
 
-| Command | What it does |
-|---|---|
-| `mo clean` | Caches, logs and leftovers from uninstalled apps |
-| `mo uninstall` | Removes an app together with its support files |
-| `mo analyze` | Interactive disk usage explorer, like `ncdu` |
-| `mo purge` | Rebuildable project folders: `node_modules`, `coverage`, build output |
-| `mo installer` | Forgotten `.dmg`, `.pkg` and `.iso` files |
-| `mo optimize` | Maintenance tasks for system services and databases |
-| `mo status` | Live CPU, memory, disk and network dashboard |
-
-On my Mac, `mo clean --dry-run` found 12.78 GB: 4.46 GB of app caches, 2.6 GB of npm caches, 1.73 GB of Opera cache, 927 MB of Aerial wallpaper videos, and more. It also lists what it won't touch but you should look at, and that was the real find: Docker Desktop was using 92 GB, with 54.6 GB of images and 8.9 GB of volumes reclaimable. `docker system df` on the Mac tells the same story, but I hadn't thought to look. Mole writes the full list of paths to `~/.config/mole/clean-list.txt`, so you can read it before running the real thing.
-
-Mole is macOS only. The README mentions an experimental Windows branch and nothing for Linux.
+On my Mac, `mo clean --dry-run` found 12.78 GB of caches. The better find was in its report of what it won't touch: Docker Desktop was using 92 GB, more than half of it reclaimable. Mole is macOS only; the README mentions an experimental Windows branch and nothing for Linux.
 
 ### Linux
 
@@ -289,3 +277,4 @@ On a headless server I'd install `ncdu` or `gdu` for step 1 and do the rest by h
 - **Check what is on the disk before assuming it is full of nothing.** Half of it was photos I already had in two other places.
 - **Never trust a filename and a size.** That's the second time the same name and size hid different bytes.
 - **Look at the numbers after each step.** The apt cache I thought I'd cleared was still there.
+- **Check more often.** A `df -h` once a month, or a `duf` alias in the shell, would have caught this long before the disk was over half full.
