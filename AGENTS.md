@@ -301,7 +301,9 @@ ruby scripts/lint-prose.rb _posts/2026-09*.md # specific files
 
 **Errors** block: em dashes, and phrases that read as generated (*I want to be honest*, *it's worth
 noting*, *the key insight*, *here's the thing*, *in conclusion*, *let's dive in*, *delve*, and
-corporate filler like *leverage*, *seamless*, *robust*), and three backticks in prose, such as inline code showing a fence: dev.to turns them into a fence opener and every later code block renders as plain text.
+corporate filler like *leverage*, *seamless*, *robust*). Also three backticks in prose, such as
+inline code showing a fence: dev.to turns them into a fence opener and every later code block
+renders as plain text.
 
 **Warnings** do not block: hedging (*kind of*, *I think maybe*) and filler adverbs (*just*, *really*,
 *actually*, *very*). These are judgement calls, and sometimes the filler word is the right word.

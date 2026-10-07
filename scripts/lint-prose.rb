@@ -63,7 +63,8 @@ def prose_lines(path)
       in_front = false if stripped == "---"
       next
     end
-    if stripped.start_with?("```", "~~~")
+    # A fence can sit in a blockquote ("> ```") or open right after a list marker.
+    if stripped.sub(/\A(>\s*)+/, "").sub(/\A([-*+]|\d+\.)\s+/, "").start_with?("```", "~~~")
       in_fence = !in_fence
       next
     end
