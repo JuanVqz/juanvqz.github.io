@@ -2,7 +2,7 @@
 layout: post
 title: "Cross-Posting a Jekyll Blog to dev.to, Complete"
 date: 2026-10-06 09:00:00 -0600
-last_modified_at: 2026-10-06 09:00:00 -0600
+last_modified_at: 2026-10-06 21:45:00 -0600
 categories: [development]
 tags: [jekyll, dev-to, ruby, rubygems, github-actions, release-please, rss]
 ---
@@ -64,7 +64,7 @@ That left the code without a language, so dev.to showed it unhighlighted. `Feeds
 
 It matches blocks to fences by their first line of code, not by position. dev.to does not fence a code block inside a list item, so on one of my posts there were three blocks and two fences, and counting by position would have put the wrong language on every fence after the gap. Across this blog, 217 of the 218 blocks that have a language now get it on dev.to. The one left is that block inside a list.
 
-Forem can also fill in a missing language itself: `Article#detect_code_block_languages` asks an AI model when the feature is turned on. One of my posts came out with a <code>```json</code> fence that no version of the feed had carried, so it may be on at dev.to, but I could not confirm it, and the feed does not rely on it.
+Forem can also fill in a missing language itself: `Article#detect_code_block_languages` asks an AI model when the feature is turned on. One of my posts came out with a JSON fence that no version of the feed had carried, so it may be on at dev.to, but I could not confirm it, and the feed does not rely on it.
 
 ---
 
@@ -159,18 +159,7 @@ Two optional front matter keys cover the rest of what dev.to does differently. `
 
 I checked it two ways before calling it done. On this blog, with my in-repo version removed, the gem produced the same `devto.xml` for all 43 posts it carried at the time; the only difference was the build timestamp. And on a fresh `jekyll new` site with the default theme, the feed is valid and its code blocks and links survive the replay of dev.to's import.
 
----
-
-## Releasing it without typing an MFA code
-
-The gem is released with [release-please](https://github.com/googleapis/release-please) and RubyGems [trusted publishing](https://guides.rubygems.org/trusted-publishing/). Merging a release pull request tags the version, creates the GitHub release, and pushes the gem from CI with a short-lived key, so there is no API key in the repository. The gemspec requires MFA, and rubygems.org lets those keys through anyway: in its source, `Pusher#verify_mfa_requirement` passes when the key does not belong to a user.
-
-Two traps on the way to `0.1.0`:
-
-- **The first release would have been 1.0.0.** With no previous release, release-please ignores a `0.0.0` manifest and falls back to `1.0.0` unless `initial-version` is set. A version number on RubyGems can never be reused, even after a yank, so that one would have stuck. A code review caught it before the merge.
-- **A pending trusted publisher lasts 12 hours.** For a gem that does not exist yet, rubygems.org holds the name for whoever pushes it from that workflow, and the hold expires. After the first push it becomes permanent.
-
-Every version since went out the same way: merge the release pull request, and CI does the rest.
+Every version is released from CI with [release-please](https://github.com/googleapis/release-please) and RubyGems [trusted publishing](https://guides.rubygems.org/trusted-publishing/), so there is no API key in the repository.
 
 ---
 
