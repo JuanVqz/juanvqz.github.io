@@ -7,7 +7,7 @@ categories: [development]
 tags: [ruby, rubygems, release-please, github-actions]
 ---
 
-When I turned my dev.to fixes into [jekyll-devto](/blog/cross-posting-a-jekyll-blog-to-dev-to-complete/), I did not want the usual release routine: bump the version by hand, write the changelog, tag, `gem build`, `gem push`, type an MFA code. Five versions later I have not typed any of it. I merge a pull request, and CI does the rest.
+When I turned my dev.to fixes into [jekyll-devto](/blog/cross-posting-a-jekyll-blog-to-dev-to-complete/), I did not want the usual release routine: bump the version by hand, write the changelog, tag, `gem build`, `gem push`, type an MFA code. Six releases later I have not typed any of it. I merge a pull request, and CI does the rest.
 
 Two pieces make that work: [release-please](https://github.com/googleapis/release-please) writes the release, and RubyGems [trusted publishing](https://guides.rubygems.org/trusted-publishing/) pushes it without an API key. This is the setup, and the traps I found on the way.
 
@@ -40,6 +40,8 @@ Two files in the repository root. The config:
       "changelog-sections": [
         { "type": "feat", "section": "Features" },
         { "type": "fix", "section": "Bug Fixes" },
+        { "type": "perf", "section": "Performance Improvements" },
+        { "type": "refactor", "section": "Code Refactoring" },
         { "type": "docs", "section": "Documentation" },
         { "type": "test", "section": "Tests", "hidden": true },
         { "type": "ci", "section": "Continuous Integration", "hidden": true },
@@ -54,7 +56,7 @@ And the manifest, which release-please updates on every release:
 
 ```json
 {
-  ".": "0.4.0"
+  ".": "0.4.1"
 }
 ```
 
@@ -140,7 +142,7 @@ release-please rewrites its pull request only when the release notes change. A h
 
 ### Merging adds a co-author
 
-The release pull request is opened by `github-actions[bot]`, and a squash merge from the web adds a `Co-authored-by: github-actions[bot]` line to the commit. I merge it from the terminal with my own subject and body instead:
+The release pull request is opened by `github-actions[bot]`, and a squash merge that keeps GitHub's default message adds a `Co-authored-by: github-actions[bot]` line to the commit. I merge it with my own subject and body instead:
 
 ```sh
 gh pr merge 21 --squash --delete-branch \
@@ -156,6 +158,6 @@ release-please cannot open its pull request until **Settings → Actions → Gen
 
 ## Was it worth it
 
-For a gem I release a few times a week while it is new, yes. The commit messages I already wrote became the changelog, and I stopped keeping a version number in my head. There is no RubyGems key to rotate or leak, and the only manual step left is the one that should be manual: deciding a version is ready.
+For a gem I released six times in its first week, yes. The commit messages I already wrote became the changelog, and I stopped keeping a version number in my head. There is no RubyGems key to rotate or leak, and the only manual step left is the one that should be manual: deciding a version is ready.
 
 The full setup is in the [jekyll-devto repository](https://github.com/JuanVqz/jekyll-devto), including the `AGENTS.md` notes on each of these traps.
