@@ -4,7 +4,7 @@ title: "Cross-Posting a Jekyll Blog to dev.to, Complete"
 date: 2026-10-06 09:00:00 -0600
 last_modified_at: 2026-10-06 21:45:00 -0600
 categories: [development]
-tags: [jekyll, dev-to, ruby, rubygems, github-actions, rss]
+tags: [jekyll, dev-to, ruby, rubygems, github-actions, release-please, rss]
 ---
 
 My blog has been connected to dev.to's "Publishing to DEV Community from RSS" for a long time. Every post I wrote showed up on dev.to as a draft, which sounds like the whole job done for me. It was not. Every draft was cut short, so before publishing anything on dev.to I opened the draft and pasted the rest of the post by hand. An integration that makes you sync by hand is not an integration.
@@ -159,7 +159,7 @@ Two optional front matter keys cover the rest of what dev.to does differently. `
 
 I checked it two ways before calling it done. On this blog, with my in-repo version removed, the gem produced the same `devto.xml` for all 43 posts it carried at the time; the only difference was the build timestamp. And on a fresh `jekyll new` site with the default theme, the feed is valid and its code blocks and links survive the replay of dev.to's import.
 
-Every version is released from CI with release-please and RubyGems trusted publishing, so there is no API key in the repository.
+Every version is released from CI with [release-please](https://github.com/googleapis/release-please) and RubyGems [trusted publishing](https://guides.rubygems.org/trusted-publishing/), so there is no API key in the repository.
 
 ---
 
