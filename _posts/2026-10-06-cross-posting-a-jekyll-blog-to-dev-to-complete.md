@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Cross-Posting a Jekyll Blog to dev.to, Complete"
+title: "Cross-Posting Full Jekyll Posts to dev.to"
 date: 2026-10-06 09:00:00 -0600
-last_modified_at: 2026-10-06 21:45:00 -0600
+last_modified_at: 2026-10-06 22:39:00 -0600
 categories: [development]
 tags: [jekyll, dev-to, ruby, rubygems, github-actions, release-please, rss]
 ---
