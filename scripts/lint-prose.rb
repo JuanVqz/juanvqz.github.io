@@ -31,7 +31,12 @@ ERRORS = {
     [/\bdelv(e|es|ing|ed)\b/i, "Nobody says this."],
   "corporate filler" =>
     [/\b(leverag(e|es|ing|ed)|seamless(ly)?|game.changer|robust)\b/i,
-     "Say what it actually does."]
+     "Say what it actually does."],
+  # Lines that start with ``` are fences and never get here, so any ``` left is
+  # inside the prose. dev.to's import turns it into a fence opener, and every code
+  # block after it renders as plain text (happened in the 2026-10-06 post).
+  "triple backticks in prose" =>
+    [/```/, "Breaks the code fences on dev.to. Write it out in words (\"a JSON fence\")."]
 }.freeze
 
 WARNINGS = {
