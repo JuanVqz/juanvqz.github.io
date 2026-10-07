@@ -98,11 +98,11 @@ There was one more catch. The response to that `PUT` has no `published` field, s
 
 ## The import that kept raw HTML
 
-The replay said every post converted cleanly, but what dev.to had stored said otherwise: one of my posts was still raw HTML, `<p>` tags and all, with no code fences.
+The replay said every post converted cleanly, but what dev.to had stored said otherwise: one of my posts was still raw HTML, `<p>` tags and all, with no code fences. My replay had skipped one check in the importer.
 
-dev.to only converts a feed to Markdown when it has more HTML block tags than blank lines. Kramdown puts a blank line between every block, so a post sits right on that edge, and mine was one blank line over. Across the blog, 15 of 43 posts had gone that way.
+dev.to converts a post to Markdown only when it has more HTML block tags than blank lines. Kramdown puts a blank line between every block, so a post sits right on that edge, and the blank lines inside its code blocks decide which side it lands on. Across the blog, 15 of 43 posts had landed on the wrong one.
 
-The fix was to make the feed drop those blank lines without changing how a post reads. Now every post takes the Markdown path.
+The fix was to make the feed drop the blank lines between tags and encode the ones inside code, so a post reads exactly the same. Now every post takes the Markdown path.
 
 ---
 
