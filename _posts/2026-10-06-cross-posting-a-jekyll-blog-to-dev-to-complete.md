@@ -98,25 +98,11 @@ There was one more catch. The response to that `PUT` has no `published` field, s
 
 ## The import that kept raw HTML
 
-The replay said every post converted cleanly. Then I compared it with what dev.to had stored, which the public API returns as `body_markdown`, and one of my posts was not Markdown at all. It was the raw HTML, `<p>` tags, classes and all.
+The replay said every post converted cleanly, but what dev.to had stored said otherwise: one of my posts was still raw HTML, `<p>` tags and all, with no code fences. My replay had skipped one check in the importer.
 
-The reason is a heuristic in the same importer. It converts the feed to Markdown only when the HTML looks like HTML:
+dev.to converts a post to Markdown only when it has more HTML block tags than blank lines. Kramdown puts a blank line between every block, so a post sits right on that edge, and the blank lines inside its code blocks decide which side it lands on. Across the blog, 15 of 43 posts had landed on the wrong one.
 
-```ruby
-def html_content?(content)
-  return false if content.blank?
-
-  block_tag_count = content.scan(/<\s*(p|div|h[1-6]|ul|ol|li|blockquote|pre|table|section|figure)[\s>]/i).size
-  return false if block_tag_count.zero?
-
-  paragraph_breaks = content.scan(/\n\s*\n/).size
-  block_tag_count > paragraph_breaks
-end
-```
-
-Kramdown puts a blank line between every block, so the two counts come out almost equal, and a few blank lines inside code blocks tip it either way. That post had 58 block tags and 59 blank lines: one line too many, and dev.to kept the HTML. None of the conversion happens on that path, so no code fences and no languages. Across this blog, 15 of 43 posts had gone that way.
-
-My replay had skipped that check, which is why it never saw it. Now it runs it, and the feed removes the blank lines between tags and writes the newlines inside code as `&#10;`, which is the same character once parsed. The post reads exactly the same, the blank-line count drops to zero, and every post takes the Markdown path.
+The fix was to make the feed drop the blank lines between tags and encode the ones inside code, so a post reads exactly the same. Now every post takes the Markdown path.
 
 ---
 
