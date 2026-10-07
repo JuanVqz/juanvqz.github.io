@@ -206,8 +206,9 @@ A fix to the feed or the publisher belongs in the gem, not here. The gem's READM
 behaviour it depends on. The ones that matter day to day:
 
 - **Drafts match on title or link.** dev.to skips a feed entry when an article of yours has the same
-  title or link, so a deleted draft is imported again on the next fetch. Renaming a post after it
-  was imported makes a second draft.
+  title or link, so a deleted draft is imported again on the next fetch. To rename an imported
+  post, keep its filename (the link) and change the title on dev.to too, before dev.to next reads
+  the feed (`Feeds::CheckItemPreviouslyImported`). A new title with a new link makes a second draft.
 - **The 7-day window is deliberate.** The feed holds the whole archive, and publishing every matching
   draft would push years of old posts to dev.to at once. Older drafts stay drafts until published by
   hand or with `--days N`.
