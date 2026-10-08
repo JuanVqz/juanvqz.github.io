@@ -50,6 +50,17 @@ jobs:
       # jekyll-og-image renders the Open Graph images during the build and needs
       # libvips to do it. Without this step the build fails rather than silently
       # shipping posts with no social preview.
+      # Committed cards are never regenerated: jekyll-og-image skips any file
+      # that already exists, so a tracked PNG would ship stale forever.
+      - name: Check no Open Graph cards are committed
+        run: |
+          tracked=$(git ls-files assets/img/og)
+          if [ -n "$tracked" ]; then
+            echo "These generated cards are committed; git rm them:"
+            echo "$tracked"
+            exit 1
+          fi
+
       - name: Install libvips
         run: |
           sudo apt-get update
