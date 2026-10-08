@@ -314,6 +314,15 @@ inside a shell comment stays.
 
 Add or relax a rule by editing the `ERRORS` and `WARNINGS` hashes at the top of the script.
 
+## Post images live on Cloudinary
+
+`scripts/check-post-images.rb` runs in the deploy build and fails when a post's images are in the
+repo: any file under `assets/img/posts` other than a custom social card
+(`assets/img/posts/<slug>/og.png`), or a post body linking an image under `/assets/img/`. Upload
+them with `ruby notes/cloudinary_upload.rb _posts/<post>.md` (gitignored, on Juan's machine), which
+rewrites the post, then `git rm` the local files. Before deleting, check the post's dev.to draft
+does not still link them: `jekyll-devto` publishes the draft's stored body as is.
+
 ## Code Style Guidelines
 
 ### General Conventions
