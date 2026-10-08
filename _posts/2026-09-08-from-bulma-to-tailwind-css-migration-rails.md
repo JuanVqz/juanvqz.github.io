@@ -21,7 +21,7 @@ Then the app grew, the requirements got more specific, and Bulma started getting
 
 Here's the patient list page in the Bulma era:
 
-![Bulma version of the patient list](/assets/img/posts/css-migration/bulma-patients.png)
+![Bulma version of the patient list](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791487933/blog/from-bulma-to-tailwind-css-migration-rails/images/bulma-patients.png#center)
 _Bulma's default styling: functional, but rigid_
 
 The HAML template was clean and readable:
@@ -91,7 +91,7 @@ That last step was the bulk of the work. Every `is-link` became a set of Tailwin
 
 Here's the same patient list in Tailwind:
 
-![Tailwind version of the patient list](/assets/img/posts/css-migration/tailwind-patients.png)
+![Tailwind version of the patient list](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791487934/blog/from-bulma-to-tailwind-css-migration-rails/images/tailwind-patients.png#center)
 _Tailwind version: dark mode ready, cleaner layout_
 
 And the template:
