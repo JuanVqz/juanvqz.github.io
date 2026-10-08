@@ -89,7 +89,7 @@ Two things got in the way on the first boot:
 
 ## 128 errors in 19 seconds
 
-![memtest86+ with all four sticks: Status Failed, Errors 128 after 19 seconds](/assets/img/posts/finding-a-bad-ram-stick-with-memtest86/memtest-4-sticks-errors.jpg)
+![memtest86+ with all four sticks: Status Failed, Errors 128 after 19 seconds](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791488071/blog/finding-a-bad-ram-stick-with-memtest86/images/memtest-4-sticks-errors.jpg)
 
 With all four sticks, memtest86+ failed in 19 seconds. Each row is an address where the value read back was not the value written. Time to pull sticks.
 
@@ -99,11 +99,11 @@ The board manual recommends DIMM_A2 and DIMM_B2 for two sticks: the second and f
 
 The first pair did not even boot. The board beeped one long and two short on repeat, and one stick's RGB stayed dark. That stick was not fully seated. DDR4 takes more force than you expect: press until both clips close on their own. After that, both lit up and the pair ran for almost 8 minutes with 0 errors.
 
-![memtest86+ with sticks 1 and 2: 15.8 GB, 0 errors after almost 8 minutes](/assets/img/posts/finding-a-bad-ram-stick-with-memtest86/memtest-pair-1-2-clean.jpg)
+![memtest86+ with sticks 1 and 2: 15.8 GB, 0 errors after almost 8 minutes](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791488072/blog/finding-a-bad-ram-stick-with-memtest86/images/memtest-pair-1-2-clean.jpg)
 
 The second pair, both lit and seated, failed in 10 seconds:
 
-![memtest86+ with sticks 3 and 4: Status Failed, 254 errors after 10 seconds](/assets/img/posts/finding-a-bad-ram-stick-with-memtest86/memtest-pair-3-4-errors.jpg)
+![memtest86+ with sticks 3 and 4: Status Failed, 254 errors after 10 seconds](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791488074/blog/finding-a-bad-ram-stick-with-memtest86/images/memtest-pair-3-4-errors.jpg)
 
 Stick 3 alone in DIMM_A2 failed right away. Stick 4 alone ran with 0 errors.
 
@@ -113,7 +113,7 @@ I had bought the RAM in two orders, April 2021 and January 2022, and never kept 
 
 The three good sticks went back in: the complete 2022 kit in DIMM_A2 and DIMM_B2, the surviving 2021 stick in DIMM_A1. Three sticks is not in the manual's diagrams, but the board runs it fine (Intel calls it Flex Mode).
 
-![memtest86+ with three sticks: 23.8 GB, Pass 1, Errors 0, PASS banner after 44 minutes](/assets/img/posts/finding-a-bad-ram-stick-with-memtest86/memtest-3-sticks-pass.jpg)
+![memtest86+ with three sticks: 23.8 GB, Pass 1, Errors 0, PASS banner after 44 minutes](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791488076/blog/finding-a-bad-ram-stick-with-memtest86/images/memtest-3-sticks-pass.jpg)
 
 One full pass over 23.8 GB took 44 minutes, with 0 errors.
 
@@ -125,7 +125,7 @@ Only now was it safe to fix the filesystem. Booting without the stick landed at 
 fsck -f -y /dev/sda2
 ```
 
-![fsck fixing free blocks and inode counts, ending with FILE SYSTEM WAS MODIFIED](/assets/img/posts/finding-a-bad-ram-stick-with-memtest86/fsck-file-system-was-modified.jpg)
+![fsck fixing free blocks and inode counts, ending with FILE SYSTEM WAS MODIFIED](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791488077/blog/finding-a-bad-ram-stick-with-memtest86/images/fsck-file-system-was-modified.jpg)
 
 The part I captured is bookkeeping: free block and inode counts per group, nine inode bitmap entries, and the filesystem-wide free counts, which ext4 only updates lazily. Earlier output scrolled off the screen, so I cannot show how it handled the inode that triggered the error. `/lost+found` was empty afterwards, so no files were orphaned.
 
