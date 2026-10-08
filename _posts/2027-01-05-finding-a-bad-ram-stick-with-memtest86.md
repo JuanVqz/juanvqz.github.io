@@ -10,7 +10,8 @@ tags: [homelab, linux, memtest86, ram, ext4, hardware, troubleshooting]
 The morning after I restored [Immich](https://immich.app/) on my rebuilt home server, `docker compose logs -f` answered with this:
 
 ```text
-Error response from daemon: can not get logs from container which is dead or marked for removal
+Error response from daemon:
+can not get logs from container which is dead or marked for removal
 ```
 
 The containers were "up" but `unhealthy`, and their health checks were failing in a way I had never seen:
@@ -32,14 +33,17 @@ The system disk had gone read-only overnight. This is how I traced it to one bad
 `errors=remount-ro` is the Ubuntu default: when ext4 finds an error, it stops writing to protect the disk. The kernel log had the moment it happened, at one minute past midnight:
 
 ```text
-EXT4-fs error (device sda2): ext4_lookup:1785: inode #9456551: comm rsync: iget: checksum invalid
+EXT4-fs error (device sda2):
+ext4_lookup:1785: inode #9456551: comm rsync: iget: checksum invalid
 Aborting journal on device sda2-8.
 EXT4-fs (sda2): Remounting filesystem read-only
 ```
 
-The `rsync` was the nightly Timeshift snapshot, reading an icon file. A checksum error on a system disk sounds like a dying SSD. But the 45 minutes before it told a different story.
+The `rsync` was the nightly Timeshift snapshot, reading an icon file. A checksum error on a system disk sounds like a dying SSD but it was not.
 
 ## Random programs crashing at garbage addresses
+
+The 45 minutes before that were full of crashes. The `python3` lines are Immich's machine learning container, which runs Python 3.13:
 
 ```text
 python3[525875]: segfault at 282f4d1402b0 ip 0000712f4ce2f740 ... error 4 in libpython3.13.so.1.0
@@ -66,7 +70,7 @@ The data disk was a separate HDD and still writable, so the copy went there. The
 
 ## memtest86+ without an ISO
 
-[memtest86+](https://www.memtest.org/) boots instead of your operating system and writes known patterns to every memory address, then reads them back. It was not installed, and it could not be installed on a read-only disk, so it went on a USB stick prepared on my Mac.
+[memtest86+](https://www.memtest.org/) boots instead of your operating system and writes known patterns to every memory address, then reads them back. It was not installed, and it could not be installed on a read-only disk, so it went on a USB stick.
 
 The x86_64 binary in `mt86plus_8.10.binaries.zip` is already a UEFI executable (it starts with `MZ` and has a `PE` header for `0x8664`). On a UEFI board you do not need to write an ISO. A FAT32 stick with one file is enough:
 
@@ -83,22 +87,11 @@ Two things got in the way on the first boot:
 - I missed the F8 boot menu, and Linux stopped at the `(initramfs)` prompt because of the filesystem errors. `poweroff -f` there, and nothing else.
 - Booting the stick gave **"Secure Boot violation"**. memtest86+ is not signed. On this ASUS board, Boot > Secure Boot > OS Type "Other OS" turns Secure Boot off, and Linux Mint still boots fine with it.
 
-## 256 errors in 19 seconds
+## 128 errors in 19 seconds
 
 ![memtest86+ with all four sticks: Status Failed, Errors 128 after 19 seconds](/assets/img/posts/finding-a-bad-ram-stick-with-memtest86/memtest-4-sticks-errors.jpg)
 
-With all four sticks, memtest86+ failed in 19 seconds and then froze with 256 errors. The interesting part is the table. Compare the expected and found values:
-
-```text
-Expected            Found
-000000049e547500    0000d8049e547500
-000000049e547540    000051049e547540
-000000049e547600    0000d7049e547600
-```
-
-Every wrong value differs in the same byte, bits 40 to 47, and only there. A 64-bit memory bus is split across the chips on a stick, one byte each, so one bad byte in every error points at one bad chip rather than at timings or the board.
-
-The RAM line said `1333MHz (DDR4-2666) CAS 16-18-18-35` even though the BIOS had Ai Overclock Tuner on Auto, not XMP. Forcing DDR4-2133 did not stick, and the next run failed the same way. Time to pull sticks.
+With all four sticks, memtest86+ failed in 19 seconds. Each row is an address where the value read back was not the value written. Time to pull sticks.
 
 ## Testing pairs, then single sticks
 
@@ -152,5 +145,4 @@ Two problems overlapped, and each one made the other harder to see.
 - Random crashes in unrelated programs are a memory symptom. Test RAM before you run `fsck` on anything.
 - memtest86+ on UEFI is one file on a FAT32 stick. Turn Secure Boot off for the test.
 - A dark RGB stick is not seated. Push until the clips close by themselves.
-- In memtest86+, compare Expected and Found. Errors in the same byte across addresses point at one chip on one stick.
 - Serial number prefixes can tell you which purchase a stick came from.
