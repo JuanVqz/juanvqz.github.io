@@ -98,10 +98,11 @@ avatar: https://avatars.githubusercontent.com/u/7331511?v=4
 social_preview_image: /assets/img/og-default.png
 
 # Auto-generated Open Graph images via `jekyll-og-image`.
-# The plugin is dev-only (see Gemfile). A GitHub Actions workflow regenerates
-# PNGs and commits them into `assets/img/og/posts/` on push; Vercel builds
-# then serve them as static assets without needing `libvips`. Per-post `image:`
-# frontmatter overrides the generated image.
+# The Pages deploy renders them at build time (it installs `libvips`) into
+# `assets/img/og/posts/`, which is gitignored: do not commit them. The plugin
+# skips any card whose file already exists, so a committed PNG would be served
+# forever instead of regenerated. Per-post `image:` frontmatter overrides the
+# generated image.
 plugins:
   - jekyll-og-image
   - jekyll-devto
