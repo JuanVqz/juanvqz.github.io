@@ -100,8 +100,6 @@ https://homelab.<tailnet>.ts.net/
 
 Before that, two switches in the Tailscale admin console: MagicDNS and HTTPS certificates. The certificate comes from Let's Encrypt and Tailscale renews it. Machine names end up in public Certificate Transparency logs, so name the node something boring.
 
-<!-- TODO: screenshot of Immich open at https://homelab.<tailnet>.ts.net in the browser, padlock visible -->
-
 I also disabled key expiry for the server node. Tailscale suggests it for [trusted servers](https://tailscale.com/docs/features/access-control/key-expiry): otherwise the server drops off the tailnet every 180 days until someone logs in on it. Phones and laptops keep the default.
 
 On the phones, the server URL in the Immich app is the same `https://homelab.<tailnet>.ts.net`, and Tailscale's VPN On Demand (iOS) can keep the connection up so background backups also run away from home.
@@ -116,7 +114,7 @@ Change it in Administration > Settings > Machine Learning > Smart Search, then r
 
 ![Smart Search queue with 17,194 jobs waiting](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791572890/blog/a-private-immich-setup-for-a-home-server/images/smart-search-queue-multilingual.png)
 
-It ran overnight on the CPU and finished with 17,196 photos indexed and no failures.
+It ran overnight on the CPU and finished with 17,196 photos and videos indexed and no failures.
 
 Searching "perro" (dog) now brings back our dogs, in photos and videos, and even a dog mural:
 

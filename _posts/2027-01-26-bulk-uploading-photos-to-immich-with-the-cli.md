@@ -30,8 +30,7 @@ Each user creates a key in Account Settings > API Keys. The CLI's `upload` comma
 The keys never went through chat or a terminal history. Each one lives in a file on the server, readable only by my user:
 
 ```bash
-nano ~/.immich-key-kenia
-chmod 600 ~/.immich-key-kenia
+(umask 077 && nano ~/.immich-key-kenia)   # created as 600 from the start
 curl -s -H "x-api-key: $(tr -d ' \n' < ~/.immich-key-kenia)" localhost:2283/api/users/me
 ```
 
@@ -39,20 +38,20 @@ The last line must print the right user's name before anything else happens.
 
 ## The CLI as a container, same version as the server
 
-No Node.js install on the server. The CLI has an image, and I pin it to the server's version:
+No Node.js install on the server. The CLI has an image, and I pin it to the server's version (3.3.0 at the time):
 
 ```sh
-#!/bin/sh
+#!/bin/bash
 # immich-upload.sh <key-file> <folder> <log-name>
-K=$(tr -d " \n" < "$1")
+export IMMICH_API_KEY=$(tr -d " \n" < "$1")
 docker run --rm --network host \
-  -e IMMICH_INSTANCE_URL=http://localhost:2283/api -e IMMICH_API_KEY="$K" \
+  -e IMMICH_INSTANCE_URL=http://localhost:2283/api -e IMMICH_API_KEY \
   -v "$2":/import:ro ghcr.io/immich-app/immich-cli:3.3.0 upload --recursive /import 2>&1 \
   | tee "/mnt/data/import/logs/$3.log"
-echo "EXIT=$?" >> "/mnt/data/import/logs/$3.log"
+echo "EXIT=${PIPESTATUS[0]}" >> "/mnt/data/import/logs/$3.log"
 ```
 
-`--network host` because Immich only listens on `127.0.0.1:2283`. The folder is mounted read-only. I never pass `--album`, which names albums after folders (mine were date folders), or `--delete`.
+`-e IMMICH_API_KEY` without a value passes the key from the environment, so it never shows up in `ps` on the server. `${PIPESTATUS[0]}` is the CLI's exit code; a plain `$?` after the pipe would be `tee`'s, which is always 0. `--network host` because Immich only listens on `127.0.0.1:2283`. The folder is mounted read-only. I never pass `--album`, which names albums after folders (mine were date folders), or `--delete`.
 
 ## Dry run
 
@@ -72,10 +71,11 @@ kenia-1-set2-library   Successfully uploaded 382 new assets (3.7 GB)
 kenia-2-set2-photos    Found 4339 new files and 377 duplicates
                        Successfully uploaded 4339 new assets (20.6 GB)
 juan-1-orphans         Successfully uploaded 1244 new assets (4.1 GB)
-juan-2-set2-photos     Successfully uploaded 2680 new assets (19.9 GB)
+juan-2-set2-photos     Found 2681 new files and 0 duplicates
+                       Successfully uploaded 2680 new assets (19.9 GB)
 ```
 
-Nine sections, every log ending in `EXIT=0`.
+Nine sections, every log ending in `EXIT=0`. That line is weaker than it looks: my first version of the script used `$?`, which recorded `tee`'s exit code, not the CLI's. The version above fixes it, but the real proof is the next section.
 
 ## Prove it
 
@@ -100,7 +100,7 @@ The next day, Kenia's phone started syncing and she saw my photos in her account
 
 The culprit was a folder from the old SSD called `photos/Kenia`, files named `Kenia - 1 of 7373.jpeg` and up. I had uploaded it to her account because of its name. It was a Google Photos export of a shared library, with photos from both of our phones.
 
-The EXIF data told them apart. Grouping her account by camera:
+The EXIF data told them apart. Grouping her account by camera (the biggest groups):
 
 ```text
 iPhone 13 Pro Max   6418    (hers)
