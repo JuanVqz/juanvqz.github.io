@@ -66,6 +66,8 @@ its platforms, so most of the mapping became unnecessary. The consoles keep thei
 a small `systems.yml` in my repo maps one to the other for the scripts that copy games
 to the cards.
 
+![RomM setup wizard listing gameandwatch, megadrive and pcengine as Unidentified](/assets/img/posts/romm-on-a-home-server/setup-wizard-unidentified-platforms.png)
+
 Then the setup wizard listed seven folders as unidentified, Mega Drive and PC Engine
 among them. Two separate things were going on.
 
@@ -78,7 +80,8 @@ platform each folder resolves to.
 
 Second, the wizard. It compares the folder name with the platform slug and skips the
 alias table, so `gameandwatch` looks unidentified there even with the mapping fixed. The
-scan uses the table. Select the folders anyway; the scan said
+scan uses the table. The wizard locks detected folders in anyway, so there is nothing
+to click; the scan said
 `Folder g-and-w[gameandwatch] identified as Game & Watch`.
 
 The fixed mappings, which only say what RomM would work out by itself:
@@ -101,7 +104,12 @@ RomM 5.4.0 came out as stable the day I set this up. I installed 5.3.1.
 
 Grout, the app on the handhelds, says in its README that the RomM version it needs is
 the first three numbers of its own version. The newest Grout was v5.3.1.3, so RomM
-5.3.1 it is. Both get upgraded together, once a 5.4 Grout exists. MariaDB is pinned to
+5.3.1 it is. Both get upgraded together, once a 5.4 Grout exists. RomM itself keeps suggesting
+the upgrade.
+
+![RomM scan page with a New version available 5.4.0 notice](/assets/img/posts/romm-on-a-home-server/new-version-available-toast.png)
+
+MariaDB is pinned to
 11.8, a long-term support release, instead of `latest`.
 
 ## Only reachable where it needs to be
@@ -135,7 +143,7 @@ has no way to change the server it is paired with, short of reinstalling it.
 ## Our art first
 
 The first post ended with a script that copies RomM's covers *into* my library. With
-the whole library on the server, the other direction matters more. I already have box
+the whole library on the server, the other direction matters more. I already have
 art for 2,474 of those games, pulled from the cards over the years, and it is known to
 display on the consoles. RomM would download a cover for every one of them anyway.
 
@@ -163,7 +171,10 @@ scan:
 
 ScreenScraper and libretro come next because they have real box art. SteamGridDB comes
 later because its covers are fan-made. The gamelist also has to be ticked as a source
-when you start the scan, or RomM ignores the file.
+when you start the scan, or RomM ignores the file. During the scan, games matched from
+it get an ES badge next to the other sources.
+
+![RomM live scan progress with an ES badge on games matched from gamelist.xml](/assets/img/posts/romm-on-a-home-server/scan-live-progress-gamelist-badge.png)
 
 One side effect: linking 2,474 files at once crashed RomM's folder watcher with
 `OSError: [Errno 7] Argument list too long`. RomM restarted it within seconds, but a
@@ -212,7 +223,7 @@ with the other sources. The games that missed it get filled in by later scans, a
 thousand a day.
 
 LaunchBox helps here. Its game database is free, and RomM downloads a copy of it with a
-task (Settings, then Tasks, then the LaunchBox metadata update). It took a minute, costs
+task (Administration, then Tasks, then "Scheduled LaunchBox metadata update"). It took a minute, costs
 no quota, and with `ENABLE_SCHEDULED_UPDATE_LAUNCHBOX_METADATA=true` RomM refreshes it
 every night.
 
