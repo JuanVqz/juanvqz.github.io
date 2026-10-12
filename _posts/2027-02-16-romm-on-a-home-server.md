@@ -25,9 +25,9 @@ I delete it. That only works if RomM has the whole library, not 313 games.
   data next to them.
 - RomM 5.3.1, not the 5.4.0 released that same day: Grout supports only the RomM
   version that matches its own.
-- Rename your system folders to ES-DE names (`megadrive`, `pcengine`) and RomM knows
-  them. Then do not "help" it with old platform slugs: a binding wins over its built-in
-  table.
+- Name your system folders the ES-DE way (`megadrive`, `pcengine`) and RomM maps them
+  itself, with no platform mappings in `config.yml`. Old mappings are worse than none:
+  a mapping wins over RomM's built-in table.
 - An ES-DE `gamelist.xml` lets RomM use box art you already have instead of
   downloading it again.
 - Turn off manuals: they were half the disk RomM used.
@@ -77,24 +77,15 @@ as unknown platforms. I checked by asking RomM itself, inside the container, whi
 platform each folder resolves to.
 
 Second, the wizard. It compares the folder name with the platform slug and skips the
-alias table, so `gameandwatch` looks unidentified there even with the mapping fixed. The
+alias table, so `gameandwatch` looks unidentified there with or without a mapping. The
 scan uses the table. The wizard locks detected folders in anyway, so there is nothing
 to click; the scan said
 `Folder g-and-w[gameandwatch] identified as Game & Watch`.
 
-The fixed mappings, which only say what RomM would work out by itself:
-
-```yaml
-system:
-  platforms:
-    megadrive: genesis
-    mastersystem: sms
-    pcengine: tg16
-    ngp: neo-geo-pocket
-    neogeo: neogeoaes
-    sega32x: sega32
-    gameandwatch: g-and-w
-```
+So I deleted the mappings. With ES-DE names, `config.yml` has no `system.platforms`
+block at all: I cleared it inside the container and asked again, and every folder
+resolved to the same platform. Following the convention means there is nothing to
+map, and nothing to go stale when RomM renames a slug.
 
 ## The version that matches Grout
 
