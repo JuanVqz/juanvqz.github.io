@@ -151,7 +151,7 @@ A test transcode with `h264_qsv` encoded 206 frames in half a second, so the CPU
 
 We have two Fire TV Sticks, and they are not on the tailnet. The official Jellyfin app from the Amazon Appstore connects to the server's LAN address on port 8096, typed in by hand. That port is bound to the server's LAN IP only, not to every interface. The app's automatic discovery does not find the server: it broadcasts on UDP 7359, and a Docker port bound to one IP does not receive broadcasts. A test probe from the Mac got no answer. Typing the address once is easier.
 
-Away from home, the phones use Tailscale, the same as Immich: `tailscale serve` gives Jellyfin its own HTTPS port on the tailnet, `https://homelab.your-tailnet.ts.net:8920`. The admin pages of the other apps get the same treatment on their own ports, and none of them listens on anything but `127.0.0.1`.
+Away from home, the phones use Tailscale, the same as Immich: `tailscale serve` gives Jellyfin its own HTTPS port on the tailnet, `https://homelab.<tailnet>.ts.net:8920`. The admin pages of the other apps get the same treatment on their own ports, and none of them listens on anything but `127.0.0.1`.
 
 One setting tripped me up. Jellyfin limits bitrate for remote clients and not for local ones, and behind a proxy it has to know which addresses to trust for the real client IP. I expected requests from `tailscale serve` to arrive from `127.0.0.1`. They do not: Docker hands every connection to the container from its bridge gateway, so Jellyfin saw `172.20.0.1` for everything. That gateway is what goes in **Known Proxies**. With `127.0.0.1` there, remote viewers counted as local.
 
