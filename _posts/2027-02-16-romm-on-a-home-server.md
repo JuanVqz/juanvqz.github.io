@@ -286,7 +286,7 @@ scan afterwards skips every game already done, so a lost scan costs minutes, not
 ## Where it stands
 
 RomM runs on the server all the time, with every game, our own covers first and the
-scrapers filling the rest. Grout is paired on the Anbernic and sees the whole library.
+scrapers filling the rest. Grout is paired on the Anbernic and the Miyoo, and both see the whole library.
 One setting to know: Download Art is off by default in Grout, so my first downloads
 came without covers until I turned it on. Saves are not synced yet, and that part goes
 slowly, because one of those saves is a 48-hour game of Pokémon.
