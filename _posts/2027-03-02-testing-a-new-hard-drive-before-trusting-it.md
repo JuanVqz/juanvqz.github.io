@@ -33,7 +33,7 @@ That slot matters. The board manual says it in one line:
 SATA6G_1 will be disabled.
 ```
 
-A SATA M.2 in `M.2_1` turns off the first SATA port. A disk plugged in there does not show up at all, and that is most likely why a disk "disappeared" on this server before. The new disk went on `SATA6G_2`, and Linux confirmed it on the second port, with the M.2 on the first:
+A SATA M.2 in `M.2_1` turns off the first SATA port. A disk plugged in there does not show up at all, and it may be part of why a disk "disappeared" on this server before, next to an SSD that was failing on its own. The new disk went on `SATA6G_2`, and Linux confirmed it on the second port, with the M.2 on the first:
 
 ```text
 $ ls -l /dev/disk/by-path/ | grep -v part
@@ -212,7 +212,7 @@ Reading and comparing: done
 Testing with pattern 0x55:  57.33% done, 9:47:09 elapsed. (0/0/0 errors)
 ```
 
-The three numbers are read errors, write errors and corruption errors. Pattern `0xaa` had written every sector and read every one back with zero errors. That is the coverage that catches bad sectors and a disk that dies early, which were the real risks. The remaining patterns would have added about 20 more hours, for problems that only show up with specific data.
+The three numbers are read errors, write errors and corruption errors. Pattern `0xaa` had written every sector and read every one back with zero errors. That is the coverage that catches bad sectors and a disk that dies early, which were the real risks. The bad RAM stick was still in the server during this run, but bad RAM tends to add false errors, not hide real ones, so a clean result still counts. The remaining patterns would have added about 20 more hours, for problems that only show up with specific data.
 
 So I stopped it:
 
@@ -269,7 +269,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 - `-m 0`: ext4 reserves 5% for root by default, about 100 GB on this disk. On a data-only disk that reserve is wasted.
 - `noatime`: reading a file does not cause a write.
 - Mount by `UUID=`, never `/dev/sdb`.
-- `nofail`: if the disk ever fails to mount, the server still boots. Immich writes marker files into its folders and checks them at startup, so it refuses to run instead of filling the system SSD.
+- `nofail`: if the disk ever fails to mount, the server still boots. Immich writes marker files into its folders and checks them at startup, so it refuses to run instead of filling the system SSD. Anything else that writes under `/mnt/data` does not check, so a disk that fails to mount has to be noticed and fixed quickly.
 
 That disk now holds the photo library behind my [private Immich setup](/blog/a-private-immich-setup-for-a-home-server/).
 
