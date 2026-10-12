@@ -48,9 +48,10 @@ Everything handheld lives under one folder on the server's data disk:
   romm/    RomM's database, scraped covers and saves
 ```
 
-The rest of the server keeps one folder per app (`/mnt/data/immich/`). This one breaks
-the pattern on purpose. The ROMs and the art are the library, and RomM is one app that
-reads it. If I ever replace RomM, `romm/` goes and the library stays where it is.
+This is the rule for the whole data disk: a folder is named for what it holds, not for
+the app that reads it. The ROMs and the art are the library, and RomM is one app that
+reads it, so its data sits inside the library folder as `romm/`. If I ever replace
+RomM, `romm/` goes and the library stays where it is.
 
 The copy from the laptop went with `rsync`, and I checked it with an md5 of every file
 on both sides: 23,920 files, no differences. The laptop is still the master copy.
