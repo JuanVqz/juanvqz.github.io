@@ -47,7 +47,7 @@ So I went back to the old way of using a computer from somewhere else: SSH.
 
 The two SSH apps I looked at were Blink Shell and Termius. Blink's strong point is [Mosh](https://blink.sh/), which keeps a connection alive when the phone sleeps or moves from Wi-Fi to cellular. That fits a long Claude Code session well. But Blink is a subscription after a free trial, and I did not want to pay for something I was trying for the first time.
 
-Termius has a free plan, Starter, that [includes SSH](https://termius.com/pricing). Without Mosh, a dropped connection stays dropped: I reconnect and run `tmux attach` again. Since tmux keeps the session running on the Mac, nothing is lost, it only costs a few taps.
+Termius has a free plan, Starter, that [includes SSH](https://termius.com/pricing). Its App Store listing says Starter has Mosh too, but Mosh also needs `mosh-server` on the other end, and I did not want to install anything else on the Mac. So I use plain SSH, and a dropped connection stays dropped: I reconnect and run `tmux attach` again. Since tmux keeps the session running on the Mac, nothing is lost, it only costs a few taps.
 
 ## Setting it up
 
@@ -138,7 +138,7 @@ From Termius on the phone:
 tmux attach -t homelab
 ```
 
-The phone now shows the same Claude Code session as the Mac, and I can type into it. To leave without closing it, detach with `Ctrl-b` then `d` ([tmux's default prefix and binding](https://man.openbsd.org/tmux.1)). If the connection drops, the session keeps running on the Mac, and `tmux attach -t homelab` picks it up where it was.
+The phone now shows the same Claude Code session as the Mac, and I can type into it. To leave without closing it, detach with `Ctrl-b` then `d` ([tmux's default prefix and binding](https://man.openbsd.org/tmux.1)). If the connection drops, the session keeps running on the Mac, and `tmux attach -t homelab` picks it up where it was. The Remote Control docs give the same advice for a `claude` running on a remote machine: start it inside tmux or screen, so it survives the SSH connection.
 
 ### Why tmux and not tmate or Zellij
 
@@ -165,7 +165,7 @@ The Claude Code session reaches the server over SSH as my user, but it does not 
 2. I paste them into Termius, on the server host, and type the password there.
 3. I tell the session I am done, and it checks the result from the Mac.
 
-That is how I installed [Samba](/blog/a-private-file-share-on-a-home-server-with-samba/), set up its users and shared folder, and later ran [OpenRGB](/blog/turning-off-rgb-on-a-linux-server/) to turn off the server's RAM and motherboard LEDs. All of it from the phone, with the Claude Code session on the Mac checking each step.
+That is how I installed Samba, set up its users and shared folder, and later ran OpenRGB to turn off the server's RAM and motherboard LEDs. All of it from the phone, with the Claude Code session on the Mac checking each step.
 
 ## The Mac has to stay awake
 
