@@ -17,7 +17,7 @@ This is what I checked, what the disk told me, and why I stopped the surface tes
 
 - Read the motherboard manual before picking a SATA port. Some ports turn off when an M.2 is installed.
 - `smartctl -a` tells you more than `PASSED`: power-on hours, old self-tests, and the hottest the disk has ever been.
-- `badblocks -wsv` on an empty disk, inside `tmux`, with the temperature logged.
+- `badblocks -wsv` erases the whole disk, so run it only on an empty one, inside `tmux`, with the temperature logged.
 - One full write and read pass with 0 errors was enough for me to move on.
 
 ---
@@ -48,10 +48,12 @@ sdb      1.8T disk sata   ST2000VM003-1ET164
 
 1.8T is the 2 TB on the box, counted in powers of two.
 
+On my server the new disk is `sdb`. In the commands below I write `/dev/sdX`: replace it with your disk's name from `lsblk`, and check the model and size first. Two of these commands erase the disk.
+
 ## What SMART said
 
 ```bash
-sudo smartctl -a /dev/sdb
+sudo smartctl -a /dev/sdX
 ```
 
 The header (trimmed):
@@ -66,7 +68,7 @@ SATA Version is:  SATA 3.1, 6.0 Gb/s (current: 6.0 Gb/s)
 SMART overall-health self-assessment test result: PASSED
 ```
 
-`PASSED` is where most people stop. The attribute table is where the story is:
+`PASSED` is where most people stop. The attribute table is where the story is (columns trimmed):
 
 ```text
 ID# ATTRIBUTE_NAME          VALUE WORST THRESH WHEN_FAILED RAW_VALUE
@@ -119,7 +121,7 @@ So it is either a disk that sat on a shelf and went through some factory or sell
 Newer Seagate disks keep a FARM log with their own power-on hours, separate from SMART. A refurbisher who resets SMART usually does not reset FARM, so a big number there would mean a used disk. This model is too old for it:
 
 ```text
-$ sudo smartctl -l farm /dev/sdb
+$ sudo smartctl -l farm /dev/sdX
 FARM log (GP Log 0xa6) not supported
 ```
 
@@ -129,8 +131,11 @@ No second opinion, then. That left the surface test as the real check.
 
 `badblocks -w` writes a pattern to every block and reads it back. It destroys everything on the disk, which was fine: it was empty.
 
+> `badblocks -w` erases the whole disk you point it at, with no confirmation. Replace `sdX` with your new, empty disk, and run `lsblk -o NAME,SIZE,MODEL` right before to make sure. Pointed at the wrong letter, it wipes that disk instead.
+{: .prompt-danger }
+
 ```bash
-sudo badblocks -wsv -b 4096 /dev/sdb
+sudo badblocks -wsv -b 4096 /dev/sdX
 ```
 
 ```text
@@ -144,7 +149,7 @@ My first run was in a plain SSH session from my Mac. If the Mac slept or the con
 ```bash
 ssh homelab
 tmux new -s badblocks
-sudo badblocks -wsv -b 4096 /dev/sdb
+sudo badblocks -wsv -b 4096 /dev/sdX
 # Ctrl+B, then D to detach. Later: tmux attach -t badblocks
 ```
 
@@ -174,6 +179,7 @@ echo drivetemp | sudo tee /etc/modules-load.d/drivetemp.conf
 ```
 
 ```text
+$ sensors drivetemp-*
 drivetemp-scsi-1-0
 Adapter: SCSI adapter
 temp1:        +30.0 C  (low  =  +1.0 C, high = +61.0 C)
@@ -212,7 +218,7 @@ Reading and comparing: done
 Testing with pattern 0x55:  57.33% done, 9:47:09 elapsed. (0/0/0 errors)
 ```
 
-The three numbers are read errors, write errors and corruption errors. Pattern `0xaa` had written every sector and read every one back with zero errors. That is the coverage that catches bad sectors and a disk that dies early, which were the real risks. The bad RAM stick was still in the server during this run, but bad RAM tends to add false errors, not hide real ones, so a clean result still counts. The remaining patterns would have added about 20 more hours, for problems that only show up with specific data.
+The three numbers are read errors, write errors and corruption errors. Pattern `0xaa` had written every sector and read every one back with zero errors. That is the coverage that catches bad sectors and a disk that dies early, which were the real risks. The [bad RAM stick](/blog/finding-a-bad-ram-stick-with-memtest86/) I found a day later was still in the server during this run, but bad RAM tends to add false errors, not hide real ones, so a clean result still counts. The remaining patterns would have added about 20 more hours, for problems that only show up with specific data.
 
 So I stopped it:
 
@@ -249,16 +255,16 @@ Still 0 reallocated, 0 pending, 0 uncorrectable, now at 23 hours. The `In_the_pa
 
 ## Formatting it
 
-The disk passed, so it got one GPT partition and ext4. The first line refuses to run unless `/dev/sdb` is the disk with the serial I expect, because `sdX` names can change between boots and this command erases the disk:
+The disk passed, so it got one GPT partition and ext4. This command erases the disk too. Its first line refuses to go on unless `/dev/sdX` is the disk with the serial you expect, because `sdX` names can change between boots. Read the serial off the label or from `lsblk -o NAME,SERIAL,MODEL`, and put it in place of `<your-disk-serial>`:
 
 ```bash
-[ "$(lsblk -dno SERIAL /dev/sdb)" = "<serial>" ] || { echo "WRONG DISK, stop"; false; } && \
-sudo parted -s /dev/sdb mklabel gpt mkpart data ext4 1MiB 100% && \
-sudo mkfs.ext4 -L data -m 0 /dev/sdb1 && \
+[ "$(lsblk -dno SERIAL /dev/sdX)" = "<your-disk-serial>" ] || { echo "WRONG DISK, stop"; false; } && \
+sudo parted -s /dev/sdX mklabel gpt mkpart data ext4 1MiB 100% && \
+sudo mkfs.ext4 -L data -m 0 /dev/sdX1 && \
 sudo mkdir -p /mnt/data && \
-echo "UUID=$(sudo blkid -s UUID -o value /dev/sdb1) /mnt/data ext4 defaults,noatime,nofail 0 2" | sudo tee -a /etc/fstab && \
+echo "UUID=$(sudo blkid -s UUID -o value /dev/sdX1) /mnt/data ext4 defaults,noatime,nofail 0 2" | sudo tee -a /etc/fstab && \
 sudo systemctl daemon-reload && sudo mount -a && \
-sudo chown green:green /mnt/data && df -h /mnt/data
+sudo chown "$USER":"$USER" /mnt/data && df -h /mnt/data
 ```
 
 ```text
@@ -268,7 +274,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 - `-m 0`: ext4 reserves 5% for root by default, about 100 GB on this disk. On a data-only disk that reserve is wasted.
 - `noatime`: reading a file does not cause a write.
-- Mount by `UUID=`, never `/dev/sdb`.
+- Mount by `UUID=`, never `/dev/sdX`. The letter can change between boots.
 - `nofail`: if the disk ever fails to mount, the server still boots. Immich writes marker files into its folders and checks them at startup, so it refuses to run instead of filling the system SSD. Anything else that writes under `/mnt/data` does not check, so a disk that fails to mount has to be noticed and fixed quickly.
 
 That disk now holds the photo library behind my [private Immich setup](/blog/a-private-immich-setup-for-a-home-server/).
