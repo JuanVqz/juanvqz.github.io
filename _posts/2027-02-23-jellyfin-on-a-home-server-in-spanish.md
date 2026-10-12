@@ -4,12 +4,12 @@ title: "Jellyfin on a Home Server, Set Up for Spanish"
 date: 2027-02-23 09:00:00 -0600
 last_modified_at: 2027-02-23 09:00:00 -0600
 categories: [development]
-tags: [jellyfin, homelab, docker, self-hosting, tailscale, bazarr, radarr, sonarr]
+tags: [jellyfin, homelab, docker, self-hosting, tailscale, bazarr, radarr, sonarr, lidarr]
 ---
 
 Kenia and I watch almost everything in Spanish. Streaming apps get that right most of the time, so a home media server had to get it right too, without either of us opening a settings menu before every movie.
 
-The server already runs [Immich](/blog/a-private-immich-setup-for-a-home-server/) and a [Samba share](/blog/a-private-file-share-on-a-home-server-with-samba/). Jellyfin joined it with the usual helpers: Radarr and Sonarr to name and file movies and series, Bazarr for subtitles, qBittorrent as the download client. I started from Pelado Nerd's [media-stack](https://github.com/Pelado-Nerdworks/media-stack) repo and changed what did not fit: no indexers, admin pages on the loopback only, Spanish everywhere.
+The server already runs [Immich](/blog/a-private-immich-setup-for-a-home-server/) and a [Samba share](/blog/a-private-file-share-on-a-home-server-with-samba/). Jellyfin joined it with the usual helpers: Radarr and Sonarr to name and file movies and series, Lidarr for music, Prowlarr to hold the indexer list, Bazarr for subtitles, qBittorrent as the download client. I started from Pelado Nerd's [media-stack](https://github.com/Pelado-Nerdworks/media-stack) repo and changed what did not fit: no bundled indexers, admin pages on the loopback only, Spanish everywhere.
 
 The screenshots come from a copy of the stack on my laptop, playing Blender's open movies (Big Buck Bunny, Tears of Steel, Sintel, Elephants Dream), with the same settings as the server.
 
@@ -20,6 +20,7 @@ The screenshots come from a copy of the stack on my laptop, playing Blender's op
 - Set the metadata language to Spanish (Latin America, `es-419`) and the country to Mexico, per library. When TMDB has no Spanish text for a film, Jellyfin shows the English one.
 - Per user: audio language Spanish, "play the default audio track" off, subtitles Spanish in **Smart** mode. A Spanish dub plays when there is one; an English film shows Spanish subtitles on its own.
 - Bazarr asks for Spanish first, then English. Radarr keeps the `.srt` files that come with a movie.
+- Jellyfin did not notice new files on its own. A Webhook connection in Radarr, Sonarr and Lidarr calls `/Library/Refresh` after each import; the built-in "Emby / Jellyfin" connection passes its test but fails against Jellyfin 12.
 - Intel Quick Sync does the transcoding: pass `/dev/dri` to the container and add the `render` group.
 - TVs reach Jellyfin on the LAN; phones away from home go through Tailscale. Behind Docker, Known Proxies is the Docker gateway, not `127.0.0.1`.
 - A small script stops the downloads when the data disk drops under 300 GB free and sends a notification to my phone.
@@ -43,12 +44,12 @@ The media sits on the server's data disk:
 
 ```
 /mnt/data/media/
-  torrents/{movies,series}   downloads in progress and seeding
-  incoming/{movies,series}   files I copy in by hand
-  library/{movies,series}    what Jellyfin shows
+  torrents/{movies,series,music}   downloads in progress and seeding
+  incoming/{movies,series,music}   files I copy in by hand
+  library/{movies,series,music}    what Jellyfin shows
 ```
 
-Radarr and Sonarr see all of `/mnt/data/media` as one mount, `/data`. That detail is what makes hardlinks work: when a download finishes, the file appears in `library/` without being copied, and the disk holds it once. Mount `torrents` and `library` as two separate volumes and every import becomes a copy plus a delete.
+Radarr, Sonarr and Lidarr see all of `/mnt/data/media` as one mount, `/data`. That detail is what makes hardlinks work: when a download finishes, the file appears in `library/` without being copied, and the disk holds it once. Mount `torrents` and `library` as two separate volumes and every import becomes a copy plus a delete.
 
 Radarr names each folder with the ID Jellyfin reads, so matching never depends on guessing from the title:
 
@@ -59,7 +60,7 @@ Radarr names each folder with the ID Jellyfin reads, so matching never depends o
 
 ## Spanish metadata
 
-Each library has its own metadata language. Mine are "Películas" and "Series", both set to Spanish (Latin America) with country Mexico, so titles, plots and genres come in Spanish when TMDB has them:
+Each library has its own metadata language. Mine are "Películas", "Series" and "Música", all set to Spanish (Latin America) with country Mexico, so titles, plots and genres come in Spanish when TMDB has them:
 
 ![Big Buck Bunny details page in Jellyfin with the plot and genres in Spanish](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825388/blog/jellyfin-on-a-home-server-in-spanish/images/movie-details.png)
 
@@ -104,6 +105,28 @@ One default fights this. Radarr's quality profiles come with the language set to
 
 Radarr can also show its own titles and plots in Spanish (Latin America), which makes its lists match what Jellyfin shows.
 
+## Music with Lidarr
+
+Lidarr does for albums what Radarr does for movies: same `/data` mount, its own qBittorrent category (`lidarr`, saved to `torrents/music`), hardlinks into `library/music`, and a Jellyfin library "Música" on that folder. Prowlarr pushes the same indexer list to Radarr, Sonarr and Lidarr, so there is one place to manage it.
+
+I tested it end to end with Nine Inch Nails' "The Slip", which the band released for free under a Creative Commons license: a search in Lidarr, the download in qBittorrent, a hardlinked import, and the album in Jellyfin with its cover and ten tracks.
+
+One default to change when adding an artist: set Monitor to **None**, then turn on only the albums you want. The default, "All Albums", grabs the whole discography. And check which artist matched before adding it, because searching an album title can turn up a band with the same name.
+
+## Jellyfin does not notice new files
+
+The first album arrived in the library folder and Jellyfin did not show it. Real-time monitoring was on, and it did nothing. The fix is to have Radarr, Sonarr and Lidarr tell Jellyfin after each import.
+
+Each of them has a built-in "Emby / Jellyfin" connection, and with Jellyfin 12 it is a trap: the **Test** button passes, but a real import calls `/mediabrowser/Library/MediaFolders`, which returns 404. What works is a plain **Webhook** connection (Settings, Connect) on import, upgrade, rename and delete:
+
+```text
+Method:  POST
+URL:     http://jellyfin:8096/Library/Refresh
+Header:  Authorization: MediaBrowser Token="<api key>"
+```
+
+`jellyfin` is the container name, so the call stays on the Docker network. The API key comes from Jellyfin's Dashboard, API Keys. Jellyfin 12 only accepts it in that `Authorization` header: `X-Emby-Token`, `X-MediaBrowser-Token` and `?api_key=` all returned 401 for me. The webhook's own Test button triggers a real library scan, so it is easy to check.
+
 ## Quick Sync for transcoding
 
 Most of the time Jellyfin plays the file as it is. When a client cannot (a phone on mobile data, a codec the TV lacks), it transcodes. The server has an Intel UHD 630, the same Quick Sync the Immich setup already uses. The container needs the GPU device and the group that owns it:
@@ -128,7 +151,7 @@ A test transcode with `h264_qsv` encoded 206 frames in half a second, so the CPU
 
 We have two Fire TV Sticks, and they are not on the tailnet. The official Jellyfin app from the Amazon Appstore connects to the server's LAN address on port 8096, typed in by hand. That port is bound to the server's LAN IP only, not to every interface. The app's automatic discovery does not find the server: it broadcasts on UDP 7359, and a Docker port bound to one IP does not receive broadcasts. A test probe from the Mac got no answer. Typing the address once is easier.
 
-Away from home, the phones use Tailscale, the same as Immich: `tailscale serve` gives Jellyfin its own HTTPS port on the tailnet, `https://homelab.<tailnet>.ts.net:8920`. The admin pages of the other apps get the same treatment on their own ports, and none of them listens on anything but `127.0.0.1`.
+Away from home, the phones use Tailscale, the same as Immich: `tailscale serve` gives Jellyfin its own HTTPS port on the tailnet, `https://homelab.your-tailnet.ts.net:8920`. The admin pages of the other apps get the same treatment on their own ports, and none of them listens on anything but `127.0.0.1`.
 
 One setting tripped me up. Jellyfin limits bitrate for remote clients and not for local ones, and behind a proxy it has to know which addresses to trust for the real client IP. I expected requests from `tailscale serve` to arrive from `127.0.0.1`. They do not: Docker hands every connection to the container from its bridge gateway, so Jellyfin saw `172.20.0.1` for everything. That gateway is what goes in **Known Proxies**. With `127.0.0.1` there, remote viewers counted as local.
 
@@ -145,6 +168,7 @@ The one bug was the login. The script looked for a cookie named `SID`, and qBitt
 - **Create every folder before the first `docker compose up`**, as the user the containers run as. Docker creates missing bind-mount folders as root. The linuxserver images fix the ownership of their config folder; the official Jellyfin image does not, and it crash-looped on a root-owned config folder.
 - **qBittorrent defaults to manual torrent management**, which ignores the save path of each category. Switch it to automatic, or Radarr and Sonarr downloads all land in the same folder.
 - **Renaming a movie folder through the Radarr API left the movie without a file** until a rescan, and Bazarr only lists movies that have one.
+- **Jellyfin keeps items when a library folder is completely empty.** It logs the folder as "inaccessible or empty" and skips it, a guard against an unmounted disk wiping the library. The catch: delete the last album in a library and it stays listed until you remove it in Jellyfin by hand.
 
 ## Wrapping up
 
