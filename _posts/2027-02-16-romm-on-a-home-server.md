@@ -48,8 +48,8 @@ Everything handheld lives under one folder on the server's data disk:
   romm/    RomM's database, scraped covers and saves
 ```
 
-This is the rule for the whole data disk: a folder is named for what it holds, not for
-the app that reads it. The ROMs and the art are the library, and RomM is one app that
+This is the rule for the whole data disk: one folder per group of related services,
+named for what they share, not for one app. The ROMs and the art are the library, and RomM is one app that
 reads it, so its data sits inside the library folder as `romm/`. If I ever replace
 RomM, `romm/` goes and the library stays where it is.
 
