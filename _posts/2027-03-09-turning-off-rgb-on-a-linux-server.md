@@ -7,7 +7,7 @@ categories: [development]
 tags: [homelab, linux, openrgb, systemd, ram, hardware]
 ---
 
-My home server is an old gaming PC. It sits in a corner, nobody looks at a screen on it, and its three RAM sticks glow in rainbow colors all night. These are the same Corsair Vengeance RGB Pro sticks from the [bad RAM stick hunt](/blog/finding-a-bad-ram-stick-with-memtest86/), minus the one that failed.
+My home server is an old gaming PC. It sits in a corner, nobody looks at a screen on it, and its three RAM sticks glow in rainbow colors all night. These are Corsair Vengeance RGB Pro sticks, and there used to be four, until one failed memtest86+ last October.
 
 The sticks have no switch, and the BIOS has no option for them. Their LED controller sits on the SMBus, so the only way to turn them off is from software. This is how I did it with OpenRGB from an SSH session, and how I keep them off after a reboot.
 
@@ -18,6 +18,7 @@ The sticks have no switch, and the BIOS has no option for them. Their LED contro
 - Use the OpenRGB AppImage on Ubuntu 24.04 based distros; the `.deb` does not install.
 - Run it as root and set every device to black: `--noautoconnect -c 000000`, with no mode.
 - A systemd oneshot runs the same command at boot.
+- On the ASUS board, OpenRGB only controls the decorative strip. The Q-LED fault lights keep working.
 
 ---
 
@@ -89,13 +90,13 @@ Device 3 is the board. Before turning it off for good, I wanted to know which li
 sudo /opt/openrgb/OpenRGB.AppImage --noautoconnect -d 3 -m static -c FF0000
 ```
 
-Only the LED strip on the board turned red. The case fans did not change, so their LEDs are not on a board RGB header. My guess is they take power from the PSU directly, which means the only way to turn them off is to unplug or replace them.
+Only the decorative LED strip on the board turned red. The case fans did not change, so their LEDs are not on any of the board's RGB headers, and no software on this machine can reach them. Those are a job for the screwdriver: unplug their LED cables the next time the case is open.
 
-I also wanted to be sure that turning off the strip would not hide a warning. It does not. The board's fault lights are the ASUS Q-LEDs, separate from the strip and not controlled by OpenRGB. The [ASUS spec page](https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b460m-plus-wi-fi/techspec/) lists them as CPU (red), DRAM (yellow), VGA (white) and Boot Device (yellow green). The strip is decoration.
+I also wanted to be sure that turning off the strip would not hide a warning. It does not. The board's fault lights are the ASUS Q-LEDs, separate from the strip and not controlled by OpenRGB. The [ASUS spec page](https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b460m-plus-wi-fi/techspec/) lists them as CPU (red), DRAM (yellow), VGA (white) and Boot Device (yellow green). Those keep working whatever OpenRGB does, so device 3 can stay black.
 
 ## Keeping them off after a reboot
 
-I have not confirmed that the sticks forget their setting after a power cut, but I would rather not find out at 2 a.m. A systemd oneshot runs the same command at every boot. The 15-second sleep is a guess: if the SMBus driver loads later than that, OpenRGB finds no sticks and still exits cleanly, so the first real reboot is the actual test.
+I have not confirmed that the sticks forget their setting after a power cut, but I would rather not find out at 2 a.m. A systemd oneshot runs the same command at every boot:
 
 ```ini
 [Unit]
@@ -113,7 +114,7 @@ ExecStart=/opt/openrgb/OpenRGB.AppImage --noautoconnect -c 000000
 WantedBy=multi-user.target
 ```
 
-The 15 second sleep is a cheap guard: if the service started before the SMBus driver was ready, OpenRGB could miss the RAM sticks. The unit file lives in the server's git checkout, so I link it instead of copying it:
+The 15-second sleep is a cheap guard and a guess: if the service started before the SMBus driver was ready, OpenRGB could miss the RAM sticks. The unit file lives in the server's git checkout, so I link it instead of copying it:
 
 ```sh
 sudo systemctl link /srv/homelab/services/openrgb/leds-off.service
@@ -122,11 +123,12 @@ sudo systemctl enable --now leds-off.service
 
 `systemctl status leds-off.service` showed the sleep, then the main command with `status=0/SUCCESS`, then "Deactivated successfully". The whole run took about 34 seconds, 1.3 seconds of it CPU time.
 
-I have not rebooted the server since, so the boot path is still untested. The service ran fine with `--now`, which runs the same steps, but a real boot is the test that counts.
+I have not rebooted the server since, so the boot path is still untested. `--now` runs the same steps, but only a real boot tells whether 15 seconds is enough.
 
 ## Takeaways
 
 - RGB RAM with no BIOS option is still controllable: it sits on the SMBus, and root can reach it.
 - On Ubuntu 24.04 and its derivatives, take the OpenRGB AppImage, not the `.deb`.
 - If OpenRGB says a mode is not available, drop `-m`. The plain color still applies.
-- Before turning off a board's lights, check which ones are the fault indicators.
+- Before turning off a board's lights, check which ones are the fault indicators. On this ASUS board they are the Q-LEDs, and OpenRGB does not touch them.
+- Fan LEDs that are not on a board header are out of software's reach. Unplug them instead.
