@@ -95,7 +95,7 @@ I also wanted to be sure that turning off the strip would not hide a warning. It
 
 ## Keeping them off after a reboot
 
-I have not confirmed that the sticks forget their setting after a power cut, but I would rather not find out at 2 a.m. A systemd oneshot runs the same command at every boot:
+I have not confirmed that the sticks forget their setting after a power cut, but I would rather not find out at 2 a.m. A systemd oneshot runs the same command at every boot. The 15-second sleep is a guess: if the SMBus driver loads later than that, OpenRGB finds no sticks and still exits cleanly, so the first real reboot is the actual test.
 
 ```ini
 [Unit]
