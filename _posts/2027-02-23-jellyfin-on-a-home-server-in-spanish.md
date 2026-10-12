@@ -9,7 +9,7 @@ tags: [jellyfin, homelab, docker, self-hosting, tailscale, bazarr, radarr, sonar
 
 Kenia and I watch almost everything in Spanish. Streaming apps get that right most of the time, so a home media server had to get it right too, without either of us opening a settings menu before every movie.
 
-The server already runs [Immich](/blog/a-private-immich-setup-for-a-home-server/) and a Samba share. Jellyfin joined it with the usual helpers: Radarr and Sonarr to name and file movies and series, Bazarr for subtitles, qBittorrent as the download client. I started from Pelado Nerd's [media-stack](https://github.com/Pelado-Nerdworks/media-stack) repo and changed what did not fit: no indexers, admin pages on the loopback only, Spanish everywhere.
+The server already runs [Immich](/blog/a-private-immich-setup-for-a-home-server/) and a [Samba share](/blog/a-private-file-share-on-a-home-server-with-samba/). Jellyfin joined it with the usual helpers: Radarr and Sonarr to name and file movies and series, Bazarr for subtitles, qBittorrent as the download client. I started from Pelado Nerd's [media-stack](https://github.com/Pelado-Nerdworks/media-stack) repo and changed what did not fit: no indexers, admin pages on the loopback only, Spanish everywhere.
 
 The screenshots come from a copy of the stack on my laptop, playing Blender's open movies (Big Buck Bunny, Tears of Steel, Sintel, Elephants Dream), with the same settings as the server.
 
@@ -126,7 +126,7 @@ A test transcode with `h264_qsv` encoded 206 frames in half a second, so the CPU
 
 ## TVs on the LAN, phones through Tailscale
 
-We have two Fire TV Sticks, and they are not on the tailnet. The official Jellyfin app from the Amazon Appstore connects to the server's LAN address on port 8096, and Jellyfin also answers discovery on UDP 7359 so the app can find it. Both are bound to the server's LAN IP only, not to every interface.
+We have two Fire TV Sticks, and they are not on the tailnet. The official Jellyfin app from the Amazon Appstore connects to the server's LAN address on port 8096, typed in by hand. That port is bound to the server's LAN IP only, not to every interface. The app's automatic discovery does not find the server: it broadcasts on UDP 7359, and a Docker port bound to one IP never sees a broadcast. Jellyfin's docs say discovery needs host networking, and typing the address once is easier.
 
 Away from home, the phones use Tailscale, the same as Immich: `tailscale serve` gives Jellyfin its own HTTPS port on the tailnet, `https://homelab.<tailnet>.ts.net:8920`. The admin pages of the other apps get the same treatment on their own ports, and none of them listens on anything but `127.0.0.1`.
 
