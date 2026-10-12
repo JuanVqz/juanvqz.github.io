@@ -7,7 +7,7 @@ categories: [development]
 tags: [homelab, linux, openrgb, systemd, ram, hardware]
 ---
 
-My home server is an old gaming PC. It sits in a corner, nobody looks at a screen on it, and its three RAM sticks glow in rainbow colors all night. These are Corsair Vengeance RGB Pro sticks, and there used to be four, until one failed memtest86+ last October.
+My home server is an old gaming PC. It sits in a corner, nobody looks at a screen on it, and its three RAM sticks glow in rainbow colors all night. These are the same Corsair Vengeance RGB Pro sticks from the [bad RAM stick hunt](/blog/finding-a-bad-ram-stick-with-memtest86/), minus the one that failed.
 
 The sticks have no switch, and the BIOS has no option for them. Their LED controller sits on the SMBus, so the only way to turn them off is from software. This is how I did it with OpenRGB from an SSH session, and how I keep them off after a reboot.
 
