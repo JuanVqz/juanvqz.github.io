@@ -15,9 +15,9 @@ Claude Code has an official feature for this, and it was blocked on my account. 
 
 ## TL;DR
 
-- Remote Control said `Error: Remote Control is disabled by your organization's policy`. My Claude Code login is a work account.
+- Remote Control said `Error: Remote Control is disabled by your organization's policy`. The account belongs to an organization that has it turned off.
 - Tailscale gives the iPhone a private path to the Mac. Termius (free) is the SSH app. tmux keeps the session alive when the phone disconnects.
-- The SSH key from the phone only works from Tailscale addresses, with `from="100.64.0.0/10"` in `authorized_keys`.
+- The SSH key from the phone only works from Tailscale addresses, with `from="100.64.0.0/10,127.0.0.1,::1"` in `authorized_keys`.
 - Read the host fingerprint prompt. Mine was for the wrong machine.
 - The Mac has to stay awake.
 
@@ -32,7 +32,7 @@ $ claude remote-control --help
 Error: Remote Control is disabled by your organization's policy. Contact your organization admin for access.
 ```
 
-The docs explain why: on Team and Enterprise plans, an Owner has to turn Remote Control on in the admin settings first. The Claude Code on my Mac is signed in with my work account, and that organization has it off. Asking a work admin to turn it on so I could manage my home server did not feel right. The work account is for work.
+The docs explain why: on Team and Enterprise plans, an Owner has to turn Remote Control on in the admin settings first. The Claude Code on my Mac is signed in to an organization that has it off, and that is not my setting to change.
 
 So I went back to the old way of using a computer from somewhere else: SSH.
 
@@ -165,7 +165,7 @@ The Claude Code session reaches the server over SSH as my user, but it does not 
 2. I paste them into Termius, on the server host, and type the password there.
 3. I tell the session I am done, and it checks the result from the Mac.
 
-That is how I installed Samba, set up its users and shared folder, and later ran OpenRGB to turn off the server's RAM and motherboard LEDs. All of it from the phone, with the Claude Code session on the Mac checking each step.
+That is how I installed [Samba](/blog/a-private-file-share-on-a-home-server-with-samba/), set up its users and shared folder, and later ran [OpenRGB](/blog/turning-off-rgb-on-a-linux-server/) to turn off the server's RAM and motherboard LEDs. All of it from the phone, with the Claude Code session on the Mac checking each step.
 
 ## The Mac has to stay awake
 
@@ -183,6 +183,6 @@ On a laptop, that only holds while it is plugged in.
 - Tailscale on the Mac, the server and the phone.
 - Remote Login on the Mac.
 - Termius, free plan, with one ED25519 key.
-- That key in `authorized_keys`, limited to `100.64.0.0/10`.
+- That key in `authorized_keys`, limited to `100.64.0.0/10` plus localhost.
 - tmux, and a session started before leaving the desk.
 - A Mac that does not sleep.
