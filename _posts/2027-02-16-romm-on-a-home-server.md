@@ -211,6 +211,16 @@ After that, RomM stops calling ScreenScraper for the rest of the scan and carrie
 with the other sources. The games that missed it get filled in by later scans, a few
 thousand a day.
 
+Four hours in, at game 3,842, the scan stopped by itself:
+
+```
+Scan 2c455200-5fb7-4abb-9136-4ee9f8b0b2a2 is over: it exceeded the 14400s SCAN_TIMEOUT
+```
+
+RomM gives a scan four hours by default. A library this size at ScreenScraper's pace
+needs more, so `SCAN_TIMEOUT=86400` (a day) went into the compose file, and a Quick scan
+picked up where the first one stopped.
+
 LaunchBox helps here. Its game database is free, and RomM downloads a copy of it with a
 task (Administration, then Tasks, then "Scheduled LaunchBox metadata update"). It took a minute, costs
 no quota, and with `ENABLE_SCHEDULED_UPDATE_LAUNCHBOX_METADATA=true` RomM refreshes it
