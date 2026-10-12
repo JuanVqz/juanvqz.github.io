@@ -79,12 +79,11 @@ include = /srv/homelab/services/samba/homelab.conf
    # better behavior with the Mac Finder and the iPhone Files app
    vfs objects = fruit streams_xattr
    fruit:metadata = stream
-   fruit:resource = stream
 ```
 
 `valid users = @share` means members of the group, not "anyone with a Samba password". If I add a Samba user later for something else, a scanner for example, it does not get into this folder by accident. Adding a person to the share is the `useradd` line plus `smbpasswd`.
 
-[`vfs_fruit`](https://www.samba.org/samba/docs/current/man-html/vfs_fruit.8.html) is Samba's module for Apple clients. It stores the extra metadata macOS writes in extended attributes instead of littering the share with `._` files.
+[`vfs_fruit`](https://www.samba.org/samba/docs/current/man-html/vfs_fruit.8.html) is Samba's module for Apple clients. With `streams_xattr` it keeps Finder metadata in extended attributes. Resource forks stay in `._` files, the default: the man page marks `fruit:resource = stream` as experimental and warns against it with `streams_xattr`, because most filesystems limit how big an extended attribute can be. I had that line in my first version.
 
 `testparm` checks a config file without touching the running server, and does not need root:
 
@@ -124,7 +123,7 @@ The server runs Linux Mint, which ships Ubuntu's Samba package. Its stock `smb.c
 Read the merged result rather than the file:
 
 ```console
-$ sudo testparm -s 2>/dev/null | grep -E '^\[|map to guest|restrict anon|min protocol|smb ports'
+$ testparm -s 2>/dev/null | grep -E '^\[|map to guest|restrict anon|min protocol|smb ports'
 [global]
 	restrict anonymous = 2
 	server min protocol = SMB3
@@ -141,9 +140,15 @@ sudo systemctl restart smbd
 sudo systemctl disable --now nmbd
 ```
 
+Later changes to the share file only need a reload, which keeps open connections:
+
+```bash
+sudo smbcontrol all reload-config
+```
+
 ## The firewall that was never on
 
-The plan was simple: allow 445 from the LAN and from Tailscale. I added the rules, then checked from the Mac, and port 139 answered from the LAN. With 445-only rules, that should not happen.
+The plan was simple: allow 445 from the LAN and from Tailscale. I added the rules and checked from the Mac before any of the hardening above, and port 139 answered from the LAN. `smbd` was listening there, but with 445-only rules, that should not happen.
 
 ```console
 $ systemctl is-active ufw
@@ -163,28 +168,31 @@ $ sudo ufw show added
 Added user rules (see 'ufw status' for running firewall):
 ufw allow 22/tcp
 ufw allow from 192.168.0.0/24 to any port 445 proto tcp
-ufw allow in on tailscale0 to any port 445 proto tcp
 ufw allow from 192.168.0.0/24 to any port 22 proto tcp
 ufw allow in on tailscale0
 ufw allow 41641/udp
 ```
 
-That list had an old `ufw allow 22/tcp`, SSH from anywhere, IPv6 included. Out it went, along with a Tailscale rule the wider one already covers.
+That list had an old `ufw allow 22/tcp`, SSH from anywhere, IPv6 included. Out it went:
 
-My first draft of the rules allowed only ports 22 and 445 on `tailscale0`. That would have cut off Immich, which is served by `tailscale serve` on port 443 of the same interface. Only my own devices can reach `tailscale0`, so I allow all of it:
+```bash
+sudo ufw delete allow 22/tcp
+```
+
+Only my own devices can reach `tailscale0`, so I allow everything on it. The full set:
 
 ```bash
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw allow from 192.168.0.0/24 to any port 22 proto tcp
 sudo ufw allow from 192.168.0.0/24 to any port 445 proto tcp
+sudo ufw allow from 192.168.0.0/24 to any port 22 proto tcp
 sudo ufw allow in on tailscale0
 sudo ufw allow 41641/udp
 ```
 
 `41641/udp` is the port Tailscale uses for direct connections between devices.
 
-The SSH rule has to be there before `ufw enable`, or the session that runs it is the first thing to go. Keep that session open until a new one connects, and if it all goes wrong, `sudo ufw disable` at the server's keyboard undoes it.
+The SSH rule has to be there before `ufw enable`. The session that runs it survives either way, because `ufw` keeps established connections, but without the rule every new SSH connection is refused, including the next one after a reboot. Keep that session open until a new one connects, and if it all goes wrong, `sudo ufw disable` at the server's keyboard undoes it.
 
 ```console
 $ sudo ufw enable
@@ -207,11 +215,13 @@ Anywhere (v6) on tailscale0 ALLOW IN    Anywhere (v6)
 ## Checking it from the Mac
 
 ```bash
-nc -vz -G 3 192.168.0.25 445                  # LAN: open
-nc -vz -G 3 192.168.0.25 139                  # LAN: closed
+nc -vz -G 3 <server-ip> 445                   # LAN: open
+nc -vz -G 3 <server-ip> 8080                  # LAN: Operation timed out
 nc -vz -G 3 homelab.<tailnet>.ts.net 445      # Tailscale: open
-smbutil view -N //guest@192.168.0.25          # Authentication error
+smbutil view -N //guest@<server-ip>           # Authentication error
 ```
+
+The 8080 line is the one that proves the firewall. Nothing listens there, so without a firewall the server answers right away with `Connection refused`. A timeout means `ufw` dropped the packet.
 
 SSH from a new terminal still worked, Immich still answered over Tailscale, and the Immich containers could still reach the internet with `deny (routed)` in place.
 
