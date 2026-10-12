@@ -61,11 +61,11 @@ Radarr names each folder with the ID Jellyfin reads, so matching never depends o
 
 Each library has its own metadata language. Mine are "Películas" and "Series", both set to Spanish (Latin America) with country Mexico, so titles, plots and genres come in Spanish when TMDB has them:
 
-![Big Buck Bunny details page in Jellyfin with the plot and genres in Spanish](/assets/img/posts/jellyfin-on-a-home-server-in-spanish/movie-details.png)
+![Big Buck Bunny details page in Jellyfin with the plot and genres in Spanish](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825388/blog/jellyfin-on-a-home-server-in-spanish/images/movie-details.png)
 
 TMDB does not have a Spanish plot for every film. Of the four open movies, only Big Buck Bunny had one; Sintel and Elephants Dream came in English, and Tears of Steel had none at all. Jellyfin falls back without complaining, so a mixed library is normal, not a broken setting.
 
-![Jellyfin home screen in Spanish with the Películas library and four open movies](/assets/img/posts/jellyfin-on-a-home-server-in-spanish/home.png)
+![Jellyfin home screen in Spanish with the Películas library and four open movies](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825390/blog/jellyfin-on-a-home-server-in-spanish/images/home.png)
 
 ## The right audio and subtitles, without touching anything
 
@@ -75,13 +75,13 @@ This is the part that matters day to day. Three user settings do it:
 - **"Play default audio track regardless of language": off.** Many files mark the original-language track as the default. With this on, the default wins and the Spanish track is ignored.
 - **Subtitles: Spanish, in Smart mode.** Smart loads subtitles in your language only when the audio is in another one. A dubbed movie plays clean; an English one gets Spanish subtitles.
 
-![Jellyfin playback settings with Spanish as the preferred audio language](/assets/img/posts/jellyfin-on-a-home-server-in-spanish/playback-preferences.png)
+![Jellyfin playback settings with Spanish as the preferred audio language](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825391/blog/jellyfin-on-a-home-server-in-spanish/images/playback-preferences.png)
 
-![Jellyfin subtitle settings with Spanish and Smart mode](/assets/img/posts/jellyfin-on-a-home-server-in-spanish/subtitle-preferences.png)
+![Jellyfin subtitle settings with Spanish and Smart mode](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825392/blog/jellyfin-on-a-home-server-in-spanish/images/subtitle-preferences.png)
 
 Tears of Steel is a good test: English audio, and Blender publishes an official Spanish subtitle file. I dropped `Tears of Steel (2012).es.srt` next to the video, pressed play, and the subtitles were on without choosing anything:
 
-![Tears of Steel playing in Jellyfin with Spanish subtitles shown automatically](/assets/img/posts/jellyfin-on-a-home-server-in-spanish/subtitles-playing.png)
+![Tears of Steel playing in Jellyfin with Spanish subtitles shown automatically](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825395/blog/jellyfin-on-a-home-server-in-spanish/images/subtitles-playing.png)
 
 These settings are per user, so when Kenia gets her own account it needs the same three.
 
@@ -120,13 +120,13 @@ services:
 
 Then Dashboard, Playback, Transcoding: hardware acceleration "Intel Quick Sync (QSV)", and hardware decoding for the codecs the chip supports.
 
-![Jellyfin transcoding settings with Intel Quick Sync selected](/assets/img/posts/jellyfin-on-a-home-server-in-spanish/transcoding.png)
+![Jellyfin transcoding settings with Intel Quick Sync selected](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825397/blog/jellyfin-on-a-home-server-in-spanish/images/transcoding.png)
 
 A test transcode with `h264_qsv` encoded 206 frames in half a second, so the CPU is not the limit.
 
 ## TVs on the LAN, phones through Tailscale
 
-We have two Fire TV Sticks, and they are not on the tailnet. The official Jellyfin app from the Amazon Appstore connects to the server's LAN address on port 8096, typed in by hand. That port is bound to the server's LAN IP only, not to every interface. The app's automatic discovery does not find the server: it broadcasts on UDP 7359, and a Docker port bound to one IP never sees a broadcast. Jellyfin's docs say discovery needs host networking, and typing the address once is easier.
+We have two Fire TV Sticks, and they are not on the tailnet. The official Jellyfin app from the Amazon Appstore connects to the server's LAN address on port 8096, typed in by hand. That port is bound to the server's LAN IP only, not to every interface. The app's automatic discovery does not find the server: it broadcasts on UDP 7359, and a Docker port bound to one IP does not receive broadcasts. A test probe from the Mac got no answer. Typing the address once is easier.
 
 Away from home, the phones use Tailscale, the same as Immich: `tailscale serve` gives Jellyfin its own HTTPS port on the tailnet, `https://homelab.<tailnet>.ts.net:8920`. The admin pages of the other apps get the same treatment on their own ports, and none of them listens on anything but `127.0.0.1`.
 
