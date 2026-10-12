@@ -81,7 +81,7 @@ include = /srv/homelab/services/samba/homelab.conf
    fruit:metadata = stream
 ```
 
-`valid users = @share` means members of the group, not "anyone with a Samba password". If I add a Samba user later for something else, a scanner for example, it does not get into this folder by accident. Adding a person to the share is the `useradd` line plus `smbpasswd`.
+`valid users = @share` means members of the group, not "anyone with a Samba password". A Samba user I add later for something else, a scanner for example, does not get into this folder by accident. Adding a person to the share is the `useradd` line plus `smbpasswd`.
 
 [`vfs_fruit`](https://www.samba.org/samba/docs/current/man-html/vfs_fruit.8.html) is Samba's module for Apple clients. With `streams_xattr` it keeps Finder metadata in extended attributes. Resource forks stay in `._` files, the default: the man page marks `fruit:resource = stream` as experimental and warns against it with `streams_xattr`, because most filesystems limit how big an extended attribute can be. I had that line in my first version.
 
@@ -148,7 +148,7 @@ sudo smbcontrol all reload-config
 
 ## The firewall that was never on
 
-The plan was simple: allow 445 from the LAN and from Tailscale. I added the rules and checked from the Mac before any of the hardening above, and port 139 answered from the LAN. `smbd` was listening there, but with 445-only rules, that should not happen.
+The plan was simple: allow 445 from the LAN and from Tailscale. I added the rules and tested from the Mac before doing the hardening above. Port 139 answered from the LAN. `smbd` was listening there, but with rules for 445 only, the firewall should have dropped it.
 
 ```console
 $ systemctl is-active ufw
@@ -167,8 +167,8 @@ A second trap: while `ufw` is inactive, `ufw status` prints only `Status: inacti
 $ sudo ufw show added
 Added user rules (see 'ufw status' for running firewall):
 ufw allow 22/tcp
-ufw allow from 192.168.0.0/24 to any port 445 proto tcp
-ufw allow from 192.168.0.0/24 to any port 22 proto tcp
+ufw allow from 192.168.1.0/24 to any port 445 proto tcp
+ufw allow from 192.168.1.0/24 to any port 22 proto tcp
 ufw allow in on tailscale0
 ufw allow 41641/udp
 ```
@@ -179,13 +179,13 @@ That list had an old `ufw allow 22/tcp`, SSH from anywhere, IPv6 included. Out i
 sudo ufw delete allow 22/tcp
 ```
 
-Only my own devices can reach `tailscale0`, so I allow everything on it. The full set:
+Only my own devices can reach `tailscale0`, so I allow everything on it. The full set, with `192.168.1.0/24` standing in for your LAN's range:
 
 ```bash
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw allow from 192.168.0.0/24 to any port 445 proto tcp
-sudo ufw allow from 192.168.0.0/24 to any port 22 proto tcp
+sudo ufw allow from 192.168.1.0/24 to any port 445 proto tcp
+sudo ufw allow from 192.168.1.0/24 to any port 22 proto tcp
 sudo ufw allow in on tailscale0
 sudo ufw allow 41641/udp
 ```
@@ -204,8 +204,8 @@ New profiles: skip
 
 To                         Action      From
 --                         ------      ----
-445/tcp                    ALLOW IN    192.168.0.0/24
-22/tcp                     ALLOW IN    192.168.0.0/24
+445/tcp                    ALLOW IN    192.168.1.0/24
+22/tcp                     ALLOW IN    192.168.1.0/24
 Anywhere on tailscale0     ALLOW IN    Anywhere
 41641/udp                  ALLOW IN    Anywhere
 Anywhere (v6) on tailscale0 ALLOW IN    Anywhere (v6)
@@ -238,3 +238,29 @@ On the iPhone, open Files, tap the `...` button on Browse, then Connect to Serve
 ![iPhone Files app showing the share folder with one file](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825408/blog/a-private-file-share-on-a-home-server-with-samba/images/iphone-files-share-folder.png){: width="360" }
 
 The address is the Tailscale name, so the same entry works on the home Wi-Fi and on mobile data, as long as Tailscale is connected.
+
+## A second share for files a container picks up
+
+Once the share worked, I wanted a folder where I can drop movies and series from the Mac for Radarr and Sonarr to import. Those apps run in Docker as my main server user, `green`, and need to rename and move whatever lands there. A file written as `juan` with `660` permissions would be stuck.
+
+The fix is a second section in the same `homelab.conf`, where Samba writes every file as `green`:
+
+```ini
+[incoming]
+   comment = Drop movies and series here for Radarr and Sonarr to import
+   path = /mnt/data/media/incoming
+   valid users = juan
+   read only = no
+   browseable = yes
+   guest ok = no
+   force user = green
+   force group = green
+   create mask = 0664
+   directory mask = 0775
+   vfs objects = fruit streams_xattr
+   fruit:metadata = stream
+```
+
+`valid users = juan` keeps it to me, and `force user` means I log in as `juan` but the files belong to `green`. The firewall needs nothing new: it is the same port, and `smbcontrol all reload-config` picks it up.
+
+For books I went the other way: instead of Samba changing the owner, the container joins the group. A folder inside the main share is mounted into the book app's container, which runs with the `share` group, so it can read and remove what Kenia drops there from her iPhone.
