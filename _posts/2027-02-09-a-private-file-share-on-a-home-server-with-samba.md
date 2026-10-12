@@ -229,12 +229,12 @@ SSH from a new terminal still worked, Immich still answered over Tailscale, and 
 
 On the Mac, Finder > Go > Connect to Server (`Cmd+K`), then `smb://homelab.<tailnet>.ts.net`, then the Samba user and password:
 
-![Finder connected to the homelab server as juan, showing the share folder](/assets/img/posts/a-private-file-share-on-a-home-server-with-samba/finder-connected-as-juan.png)
+![Finder connected to the homelab server as juan, showing the share folder](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825406/blog/a-private-file-share-on-a-home-server-with-samba/images/finder-connected-as-juan.png)
 
 On the iPhone, open Files, tap the `...` button on Browse, then Connect to Server, and use the same address. The server then shows up under Shared:
 
-![iPhone Files app Browse screen with Homelab listed under Shared](/assets/img/posts/a-private-file-share-on-a-home-server-with-samba/iphone-files-browse-homelab.png){: width="360" }
+![iPhone Files app Browse screen with Homelab listed under Shared](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825407/blog/a-private-file-share-on-a-home-server-with-samba/images/iphone-files-browse-homelab.png){: width="360" }
 
-![iPhone Files app showing the share folder with one file](/assets/img/posts/a-private-file-share-on-a-home-server-with-samba/iphone-files-share-folder.png){: width="360" }
+![iPhone Files app showing the share folder with one file](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825408/blog/a-private-file-share-on-a-home-server-with-samba/images/iphone-files-share-folder.png){: width="360" }
 
 The address is the Tailscale name, so the same entry works on the home Wi-Fi and on mobile data, as long as Tailscale is connected.
