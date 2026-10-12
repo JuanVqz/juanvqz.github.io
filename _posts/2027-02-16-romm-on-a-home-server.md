@@ -53,9 +53,6 @@ named for what they share, not for one app. The ROMs and the art are the library
 reads it, so its data sits inside the library folder as `romm/`. If I ever replace
 RomM, `romm/` goes and the library stays where it is.
 
-The copy from the laptop went with `rsync`, and I checked it with an md5 of every file
-on both sides: 23,920 files, no differences. The laptop is still the master copy.
-
 ## Folder names RomM already knows
 
 In the first post my system folders used OnionOS codes: `FC`, `SFC`, `MD`, `PCE`. RomM
