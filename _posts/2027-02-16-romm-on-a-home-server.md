@@ -25,11 +25,14 @@ I delete it. That only works if RomM has the whole library, not 313 games.
   data next to them.
 - RomM 5.3.1, not the 5.4.0 released that same day: Grout supports only the RomM
   version that matches its own.
-- Name your system folders the ES-DE way (`megadrive`, `pcengine`) and RomM maps them
-  itself, with no platform mappings in `config.yml`. Old mappings are worse than none:
-  a mapping wins over RomM's built-in table.
+- Name your system folders the ES-DE way (`megadrive`, `pcengine`) and RomM's scan maps
+  them itself. Old mappings are worse than none: a mapping wins over RomM's built-in
+  table. Grout is the exception: it wants a binding for the folders whose name differs
+  from RomM's slug.
 - An ES-DE `gamelist.xml` lets RomM use box art you already have instead of
   downloading it again.
+- Copy art with readable permissions (`rsync --chmod=D755,F644`), or RomM serves 403
+  for the large covers.
 - Turn off manuals: they were half the disk RomM used.
 - The first full scan of 15,655 games takes about 16 hours, and ScreenScraper's daily
   quota runs out partway through.
@@ -60,9 +63,9 @@ did not know them, so `config.yml` mapped each one to a RomM platform.
 
 Before the move I renamed the library folders to the names the ES-DE frontend uses:
 `nes`, `snes`, `megadrive`, `pcengine`. RomM ships its own table that turns those into
-its platforms, so most of the mapping became unnecessary. The consoles keep their codes;
-a small `systems.yml` in my repo maps one to the other for the scripts that copy games
-to the cards.
+its platforms, so most of the mapping became unnecessary. The cards kept their codes,
+and a small `systems.yml` in my repo maps one to the other for the scripts that copy
+games to them.
 
 ![RomM setup wizard listing gameandwatch, megadrive and pcengine as Unidentified](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825411/blog/romm-on-a-home-server/images/setup-wizard-unidentified-platforms.png)
 
@@ -82,30 +85,54 @@ scan uses the table. The wizard locks detected folders in anyway, so there is no
 to click; the scan said
 `Folder g-and-w[gameandwatch] identified as Game & Watch`.
 
-So I deleted the mappings. With ES-DE names, `config.yml` has no `system.platforms`
-block at all: I cleared it inside the container and asked again, and every folder
-resolved to the same platform. Following the convention means there is nothing to
-map, and nothing to go stale when RomM renames a slug.
+So I deleted the mappings. With no `system.platforms` block at all, I asked again
+inside the container, and every folder resolved to the same platform. For the scan,
+following the convention means there is nothing to map.
+
+Grout, the RomM app on the handhelds, brought the block back two days later. RomM
+sends it to its clients as the platform binding, and Grout keys its own tables by RomM
+slugs (`genesis`, `sms`, `tg16`). Without a binding, Grout missed the folders whose
+name differs from the slug: no folder suggestion and no save folder for them. So
+there are seven bindings again, and each one names the
+platform the scan already picks, which leaves the scan as it was:
+
+```yaml
+system:
+  platforms:
+    gameandwatch: g-and-w
+    mastersystem: sms
+    megadrive: genesis
+    neogeo: neogeoaes
+    ngp: neo-geo-pocket
+    pcengine: tg16
+    sega32x: sega32
+```
+
+These are RomM 5.3.1 slugs, so they are the first thing to check when I upgrade RomM.
+Grout's box art for muOS does not use the binding yet, so covers for those systems land
+in a folder muOS never reads. I opened
+[a pull request for that](https://github.com/rommapp/grout/pull/300); until then I copy
+that art by hand.
 
 ## The version that matches Grout
 
 RomM 5.4.0 came out as stable the day I set this up. I installed 5.3.1.
 
-Grout, the app on the handhelds, says in its README that the RomM version it needs is
-the first three numbers of its own version. The newest Grout was v5.3.1.3, so RomM
-5.3.1 it is. Both get upgraded together, once a 5.4 Grout exists. RomM itself keeps suggesting
-the upgrade.
+Grout's README says that the RomM version it needs is the first three numbers of
+its own version. The newest Grout was v5.3.1.3, so RomM
+5.3.1 it is. Both get upgraded together, once a 5.4 Grout exists. RomM itself keeps
+suggesting the upgrade.
 
 ![RomM scan page with a New version available 5.4.0 notice](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825413/blog/romm-on-a-home-server/images/new-version-available-toast.png)
 
-MariaDB is pinned to
-11.8, a long-term support release, instead of `latest`.
+MariaDB is pinned too, to 11.8, a long-term support release, instead of `latest`.
 
 ## Only reachable where it needs to be
 
 Docker publishes ports by writing its own firewall rules, ahead of `ufw`, so a plain
 `8080:8080` is open to the whole network whatever the firewall says. RomM is bound to
-two addresses instead: the server's own loopback, and its LAN address for the handhelds.
+two addresses instead: the server's own loopback, which Tailscale serves when I am away
+from home, and its LAN address for the handhelds.
 
 ```yaml
 services:
@@ -126,8 +153,9 @@ The ROMs are still read-only, for the same reason as before: art is matched by
 filename, and RomM must never tidy a filename.
 
 The LAN binding has a catch: if the server's address changes, the container will not
-start. So the router gets a reservation for the server before Grout is paired. Grout
-has no way to change the server it is paired with, short of reinstalling it.
+start. So the server needs a DHCP reservation in the router. Grout cares too: it has
+no setting to change the server it is paired with. Even reinstalling keeps the old
+pairing; I had to delete Grout's folder on the card and pair again.
 
 ## Our art first
 
@@ -163,11 +191,29 @@ later because its covers are fan-made. The gamelist also has to be ticked as a s
 when you start the scan, or RomM ignores the file. During the scan, games matched from
 it get an ES badge next to the other sources.
 
+RomM's automatic scans never tick it. The nightly rescan and the rescans on file
+changes leave the gamelist out, so a ROM added later gets a scraper's cover. After
+adding games that have art, I run the script again and start a scan by hand with the
+gamelist ticked.
+
 ![RomM live scan progress with an ES badge on games matched from gamelist.xml](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825415/blog/romm-on-a-home-server/images/scan-live-progress-gamelist-badge.png)
 
 One side effect: linking 2,474 files at once crashed RomM's folder watcher with
 `OSError: [Errno 7] Argument list too long`. RomM restarted it within seconds, but a
 batch that big may not trigger a rescan, so after a large copy I start a scan by hand.
+
+The last surprise was a 403. My art came off exFAT SD cards, where every file reads as
+mode 700, and `rsync -a` kept that mode on the server. RomM copies each cover into its
+own folder with the same mode, and the web server inside the container runs as the
+`romm` user, which could not read them. The large covers answered 403, and Grout could
+not download art. The fix is to set the mode while copying:
+
+```sh
+rsync -a --chmod=D755,F644 library-art/ server:/mnt/data/handhelds/art/
+```
+
+For files already on the server, a `chmod 644` on the files and `755` on the folders,
+in both the art folder and RomM's `resources/`, fixed the covers RomM had copied.
 
 ## Manuals were half the disk
 
@@ -240,9 +286,10 @@ scan afterwards skips every game already done, so a lost scan costs minutes, not
 ## Where it stands
 
 RomM runs on the server all the time, with every game, our own covers first and the
-scrapers filling the rest. Grout is not paired yet; that waits for the router
-reservation. Saves are not synced yet either, and that part goes slowly, because one of
-those saves is a 48-hour game of Pokémon.
+scrapers filling the rest. Grout is paired on the Anbernic and sees the whole library.
+One setting to know: Download Art is off by default in Grout, so my first downloads
+came without covers until I turned it on. Saves are not synced yet, and that part goes
+slowly, because one of those saves is a 48-hour game of Pokémon.
 
 *This is part of a series about retro handhelds; the rest are under the
 [handheld tag](/tags/handheld/).*
