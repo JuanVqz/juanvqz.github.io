@@ -216,12 +216,12 @@ Anywhere (v6) on tailscale0 ALLOW IN    Anywhere (v6)
 
 ```bash
 nc -vz -G 3 <server-ip> 445                   # LAN: open
-nc -vz -G 3 <server-ip> 8080                  # LAN: Operation timed out
+nc -vz -G 3 <server-ip> 9999                  # LAN: Operation timed out
 nc -vz -G 3 homelab.<tailnet>.ts.net 445      # Tailscale: open
 smbutil view -N //guest@<server-ip>           # Authentication error
 ```
 
-The 8080 line is the one that proves the firewall. Nothing listens there, so without a firewall the server answers right away with `Connection refused`. A timeout means `ufw` dropped the packet.
+The 9999 line is the one that proves the firewall. Nothing listens there, so without a firewall the server answers right away with `Connection refused`. A timeout means `ufw` dropped the packet.
 
 SSH from a new terminal still worked, Immich still answered over Tailscale, and the Immich containers could still reach the internet with `deny (routed)` in place.
 
