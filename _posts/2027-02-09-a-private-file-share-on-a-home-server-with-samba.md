@@ -233,8 +233,8 @@ On the Mac, Finder > Go > Connect to Server (`Cmd+K`), then `smb://homelab.<tail
 
 On the iPhone, open Files, tap the `...` button on Browse, then Connect to Server, and use the same address. The server then shows up under Shared:
 
-![iPhone Files app Browse screen with Homelab listed under Shared](/assets/img/posts/a-private-file-share-on-a-home-server-with-samba/iphone-files-browse-homelab.png)
+![iPhone Files app Browse screen with Homelab listed under Shared](/assets/img/posts/a-private-file-share-on-a-home-server-with-samba/iphone-files-browse-homelab.png){: width="360" }
 
-![iPhone Files app showing the share folder with one file](/assets/img/posts/a-private-file-share-on-a-home-server-with-samba/iphone-files-share-folder.png)
+![iPhone Files app showing the share folder with one file](/assets/img/posts/a-private-file-share-on-a-home-server-with-samba/iphone-files-share-folder.png){: width="360" }
 
 The address is the Tailscale name, so the same entry works on the home Wi-Fi and on mobile data, as long as Tailscale is connected.
