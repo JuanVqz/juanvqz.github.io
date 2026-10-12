@@ -8,11 +8,11 @@ tags: [romm, grout, homelab, docker, self-hosted, retro-gaming, emulation, handh
   screenscraper, retroachievements, launchbox, es-de]
 ---
 
-My [first look at RomM](/blog/first-look-at-romm/) ran on a laptop, against a curated
-folder of 313 games. It earned a permanent place, and the laptop showed why it could
-not be that place: a laptop sleeps, and RomM only helps while it is awake.
+My [first look at RomM](/blog/first-look-at-romm/) was an experiment from the start:
+RomM on a laptop, against a curated folder of 313 games, to see whether it was worth
+running on the home server. It was.
 
-So RomM moved to the home server. On the way, the plan changed. I stopped wanting the
+So RomM moved to the server. On the way, the plan changed. I stopped wanting the
 consoles to hold everything. The idea now is to empty the handhelds, keep only what I
 am playing, and pull a new game from RomM when I want to try one. If I do not like it,
 I delete it. That only works if RomM has the whole library, not 313 games.
