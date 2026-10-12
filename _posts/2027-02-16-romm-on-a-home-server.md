@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "RomM on a Home Server: the Whole Library, Our Own Box Art, and a 15-Hour Scan"
+title: "RomM on a Home Server: the Whole Library, Our Own Box Art, and a 16-Hour Scan"
 date: 2027-02-16 09:00:00 -0600
 last_modified_at: 2027-02-16 09:00:00 -0600
 categories: [personal]
-tags: [romm, grout, homelab, docker, self-hosted, retro-gaming, emulation, handheld,
+tags: [romm, grout, homelab, docker, self-hosting, retro-gaming, emulation, handheld,
   screenscraper, retroachievements, launchbox, es-de]
 ---
 
@@ -31,7 +31,7 @@ I delete it. That only works if RomM has the whole library, not 313 games.
 - An ES-DE `gamelist.xml` lets RomM use box art you already have instead of
   downloading it again.
 - Turn off manuals: they were half the disk RomM used.
-- The first full scan of 15,655 games takes about 15 hours, and ScreenScraper's daily
+- The first full scan of 15,655 games takes about 16 hours, and ScreenScraper's daily
   quota runs out partway through.
 
 ---
@@ -71,7 +71,7 @@ among them. Two separate things were going on.
 
 First, a real bug, and it was mine. I had carried the mappings over from the laptop
 test, and three of them used slugs RomM 5.3.1 no longer has: `genesis-slash-megadrive`
-is now `genesis`, `turbografx-16-slash-pc-engine` is now `tg16`. A mapping in
+is now `genesis`, `turbografx-16-slash-pc-engine` is now `tg16`, and `ps` is now `psx`. A mapping in
 `config.yml` wins over RomM's built-in table, so those folders would have been scanned
 as unknown platforms. I checked by asking RomM itself, inside the container, which
 platform each folder resolves to.
@@ -192,11 +192,11 @@ That is half of an estimated 28 GB for the whole library. The manuals already do
 were deleted, and their entries cleared in the database so the web interface shows no
 broken links.
 
-## The 15-hour scan
+## The 16-hour scan
 
 The full scan covers 15,655 games across 20 systems, with hashing on so
 RetroAchievements can match each ROM. It ran at about 16 games a minute, which put it at
-roughly 15 hours.
+roughly 16 hours.
 
 The limit is ScreenScraper. A free account allows one request at a time, so four scan
 workers wait for each other, and 20,000 requests a day. RomM logs the quota as it goes:
@@ -228,7 +228,7 @@ every night.
 
 ## The restart that cost me a wizard
 
-I restarted RomM twice while setting this up, once to load the fixed mappings and once
+I restarted RomM twice while setting this up, once to load the config without the mappings and once
 for the manuals. The first restart caught me halfway through the setup wizard, and my
 admin account was never saved. The second stopped both the scan and
 the LaunchBox download in the middle.
