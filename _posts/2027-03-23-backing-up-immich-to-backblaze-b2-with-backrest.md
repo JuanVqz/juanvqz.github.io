@@ -81,7 +81,7 @@ curl -s -u "$B2_IMMICH_KEY_ID:$B2_IMMICH_APP_KEY" \
 
 ## What goes in the backup
 
-Immich's upload folder on the HDD holds five folders, and not all of them are worth paying for:
+Immich's upload folder on the HDD holds these, and not all of them are worth paying for:
 
 | Folder | Size | Back up? |
 |---|---|---|
