@@ -44,7 +44,13 @@ sudo smbpasswd -a juan
 sudo smbpasswd -a kenia
 ```
 
-`smbpasswd` keeps its own password database, separate from the Linux one. My server login account is not a Samba user at all.
+`smbpasswd` keeps its own password database, separate from the Linux one: a Samba password is not a login password, and a Linux user only reaches the share once it has one.
+
+My server login user, `green`, is not a Samba user, but it is in the `share` group. The folder below is `drwxrws--- root:share`, so without the group my own account could not even list it from an SSH session. I recommend adding your login user to the group, so you can always fix files in the share from the server:
+
+```bash
+sudo usermod -aG share green
+```
 
 The folder lives on the 2 TB data disk:
 
