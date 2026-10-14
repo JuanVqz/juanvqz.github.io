@@ -18,6 +18,7 @@ After the [rescue](/blog/rescuing-immich-photos-from-no-name-ssds/), Immich ende
 - Backrest (a web UI for restic) with the Immich folder mounted read-only.
 - Back up `library/`, `upload/`, `profile/` and `backups/`. Skip what Immich can rebuild.
 - Set restic's hourly retention to 0 when you back up once a day.
+- Raise the B2 storage cap before the first upload, or it stops at the free 10 GB.
 
 ---
 
@@ -194,6 +195,21 @@ While it runs, the backup uses the whole upload, so anything else sending data o
 
 After the first run, each night uploads only the new photos.
 
+### The storage cap
+
+The first run did not get far. Two and a half hours in, Backrest marked it failed:
+
+```text
+Fatal: unable to save snapshot: client.PutObject: Cannot upload files,
+storage cap exceeded. See the Caps & Alerts page to increase your cap.
+```
+
+At 9.8 Mbit/s, two and a half hours is about 11 GB, right around the 10 GB that B2 gives for free. The account had a storage cap, and B2 enforces it by refusing uploads, not by charging. The fix is on the B2 side, under **Caps & Alerts**: raise the storage cap above the size of the backup, with room to grow. Nothing in restic or Backrest needed to change.
+
+<!-- TODO after the next run: confirm it reused the ~11 GB already uploaded (restic skips data its saved index lists) and add the numbers. -->
+
+Set the cap before the first run, not after it fails at 3 a.m.
+
 ## What the bucket looks like
 
 Nothing in B2 is readable as a photo. The browser shows restic's layout, all of it encrypted:
@@ -219,4 +235,5 @@ To browse or restore, open a snapshot in Backrest. It shows the original paths, 
 - A key per bucket, in a file named after the bucket.
 - The source mounted read-only, and a separate folder to restore into.
 - Hourly retention at 0 for a daily backup.
+- The B2 storage cap raised before the first upload.
 - Check the login works without trusting the setup screen: a `curl` without credentials must get `401`.
