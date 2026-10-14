@@ -38,7 +38,7 @@ The region is chosen once per account and cannot change. Price is the same in ev
 
 ## The bucket
 
-![B2 bucket details: private, lifecycle set, Object Lock disabled, encryption enabled](/assets/img/posts/backing-up-immich-to-backblaze-b2-with-backrest/b2-bucket-details.png)
+![B2 bucket details with Object Lock disabled and encryption enabled](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955141/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/b2-bucket-details.png)
 
 - **Private.** Nothing in it is ever shared by link.
 - **Lifecycle: "Keep only the last version of the file".** B2 keeps old versions of every file by default. restic manages its own history, so old versions are dead weight. In the API this shows as `daysFromHidingToDeleting: 1`.
@@ -48,7 +48,7 @@ The region is chosen once per account and cannot change. Price is the same in ev
 
 The master application key can do anything in the account. The backup gets its own key, limited to one bucket with read and write access:
 
-![B2 application key limited to one bucket, with its list of capabilities](/assets/img/posts/backing-up-immich-to-backblaze-b2-with-backrest/b2-application-key-capabilities.png)
+![B2 application key limited to one bucket, with its list of capabilities](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955142/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/b2-application-key-capabilities.png)
 
 Creating it does not touch the master key. Keys are independent; only generating a new master key cancels the old master.
 
@@ -170,7 +170,7 @@ After saving, two small files appeared in the bucket, `immich/config` and one fi
 
 The plan ties the four folders to the repository, runs at 03:00 (an hour after Immich's database dump), and decides how many snapshots to keep:
 
-![Backrest Add Plan form with the four Immich folders](/assets/img/posts/backing-up-immich-to-backblaze-b2-with-backrest/backrest-add-plan-form.png)
+![Backrest Add Plan form with the four Immich folders](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955143/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/backrest-add-plan-form.png)
 
 The retention defaults were hourly 24, daily 7, weekly 4, monthly 3. The hourly one looks harmless for a daily backup, but restic reads `--keep-hourly 24` as "the last 24 hours **that have a snapshot**", one snapshot each. With one backup a day, that keeps 24 daily snapshots: 24 days, not 24 hours. I set:
 
@@ -184,11 +184,11 @@ Snapshots share their data, so a longer history costs almost nothing. The only e
 
 I started the first run by hand instead of waiting for 03:00:
 
-![Backrest plan view with the first backup running, 3 of 21,748 files](/assets/img/posts/backing-up-immich-to-backblaze-b2-with-backrest/backrest-first-backup-progress.png)
+![Backrest plan view with the first backup running, 3 of 21,748 files](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955144/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/backrest-first-backup-progress.png)
 
 135.74 GiB in 21,748 files. restic reads the database dumps first, then the library. I measured the upload on the server's network interface over a minute: 9.8 Mbit/s, which is all my home connection sends. At that rate the first run takes about 31 hours. Photos and videos are already compressed, so restic's compression does not change much.
 
-![Backrest dashboard showing the backup in progress](/assets/img/posts/backing-up-immich-to-backblaze-b2-with-backrest/backrest-dashboard-backing-up.png)
+![Backrest dashboard showing the backup in progress](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955145/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/backrest-dashboard-backing-up.png)
 
 While it runs, the backup uses the whole upload, so anything else sending data out of the house shares what is left. Phone backups to Immich over the home Wi-Fi do not use the internet upload at all. If that is a problem, restic's `--limit-upload` caps it, and an interrupted run loses nothing: restic saves its index as it goes, and the next run skips what is already in the bucket.
 
