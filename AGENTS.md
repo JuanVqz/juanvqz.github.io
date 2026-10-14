@@ -323,6 +323,11 @@ them with `ruby notes/cloudinary_upload.rb _posts/<post>.md` (gitignored, on Jua
 rewrites the post, then `git rm` the local files. Before deleting, check the post's dev.to draft
 does not still link them: `jekyll-devto` publishes the draft's stored body as is.
 
+Name screenshot files for what they show, numbered in post order, before they reach a post or
+Cloudinary: `01-b2-bucket-empty.png`, `05-backrest-add-plan-form.png`. Never keep the tool's name
+(`Screenshot 2026-10-13 at 19.57.58.png`, `Pasted ...`, `Opera Snapshot_<date>_<site>.png`): it
+reads badly in image URLs, and browser snapshot names can carry a private host name.
+
 ## Code Style Guidelines
 
 ### General Conventions
