@@ -43,7 +43,7 @@ I delete it. That only works if RomM has the whole library, not 313 games.
 
 Everything handheld lives under one folder on the server's data disk:
 
-```
+```text
 /mnt/data/handhelds/
   roms/    44 GB, one folder per system
   art/     box art, named after each ROM
@@ -70,10 +70,11 @@ games to them.
 ![RomM setup wizard listing gameandwatch, megadrive and pcengine as Unidentified](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791825411/blog/romm-on-a-home-server/images/setup-wizard-unidentified-platforms.png)
 
 Then the setup wizard listed seven folders as unidentified, Mega Drive and PC Engine
-among them. Two separate things were going on.
+among them. The screenshot above is from a smaller test run with fewer systems, where
+three showed up the same way. Two separate things were going on.
 
 First, a real bug, and it was mine. I had carried the mappings over from the laptop
-test, and three of them used slugs RomM 5.3.1 no longer has: `genesis-slash-megadrive`
+test, and three of them used slugs RomM 5.3.1 does not have: `genesis-slash-megadrive`
 is now `genesis`, `turbografx-16-slash-pc-engine` is now `tg16`, and `ps` is now `psx`. A mapping in
 `config.yml` wins over RomM's built-in table, so those folders would have been scanned
 as unknown platforms. I checked by asking RomM itself, inside the container, which
@@ -234,7 +235,8 @@ scan:
     - screenshot
 ```
 
-That is half of an estimated 28 GB for the whole library. The manuals already downloaded
+At 221 MB for 123 games, the whole library would take about 28 GB of media, and
+dropping manuals saves about half of it. The manuals already downloaded
 were deleted, and their entries cleared in the database so the web interface shows no
 broken links.
 
@@ -247,19 +249,21 @@ roughly 16 hours.
 The limit is ScreenScraper. A free account allows one request at a time, so four scan
 workers wait for each other, and 20,000 requests a day. RomM logs the quota as it goes:
 
-```
+```text
 ScreenScraper: SCAN_WORKERS is 4 but this account allows 1 simultaneous requests, so the extra workers will queue
 ScreenScraper quota: 2590/20000 daily requests used (17410 left), 0/2000 unrecognized-ROM requests used (2000 left)
 ```
 
 That was about 3.7 requests per game, so the quota runs out somewhere past game 5,000.
 After that, RomM stops calling ScreenScraper for the rest of the scan and carries on
-with the other sources. The games that missed it get filled in by later scans, a few
-thousand a day.
+with the other sources. Later automatic scans do not fill the gap: the nightly rescan
+is a Quick scan, and a Quick scan only checks the files of games it already knows. The
+fix is a scan by hand, "Unmatched games" with ScreenScraper ticked, a day at a time
+until the quota stops running out.
 
 Four hours in, at game 3,842, the scan stopped by itself:
 
-```
+```text
 Scan 2c455200-5fb7-4abb-9136-4ee9f8b0b2a2 is over: it exceeded the 14400s SCAN_TIMEOUT
 ```
 
@@ -274,8 +278,8 @@ every night.
 
 ## The restart that cost me a wizard
 
-I restarted RomM twice while setting this up, once to load the config without the mappings and once
-for the manuals. The first restart caught me halfway through the setup wizard, and my
+During the first setup I restarted RomM twice, once to load the config without the
+mappings and once for the manuals. The first restart caught me halfway through the setup wizard, and my
 admin account was never saved. The second stopped both the scan and
 the LaunchBox download in the middle.
 
