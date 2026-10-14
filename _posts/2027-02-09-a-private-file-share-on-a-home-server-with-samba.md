@@ -87,7 +87,7 @@ include = /srv/homelab/services/samba/homelab.conf
    fruit:metadata = stream
 ```
 
-`valid users = @share` means members of the group, not "anyone with a Samba password". A Samba user I add later for something else, a scanner for example, does not get into this folder by accident. Adding a person to the share is the `useradd` line plus `smbpasswd`.
+`valid users = @share` means members of the group, not "anyone with a Samba password". A Samba user I add later for something else, a scanner for example, does not get into this folder by accident. The reverse also holds: `green` is in the group but has no Samba password, so it cannot connect today, and the day I give it one with `smbpasswd`, it gets this share too. Adding a person to the share is the `useradd` line plus `smbpasswd`.
 
 [`vfs_fruit`](https://www.samba.org/samba/docs/current/man-html/vfs_fruit.8.html) is Samba's module for Apple clients. With `streams_xattr` it keeps Finder metadata in extended attributes. Resource forks stay in `._` files, the default: the man page marks `fruit:resource = stream` as experimental and warns against it with `streams_xattr`, because most filesystems limit how big an extended attribute can be. I had that line in my first version.
 
@@ -137,7 +137,7 @@ $ testparm -s 2>/dev/null | grep -E '^\[|map to guest|restrict anon|min protocol
 [share]
 ```
 
-Only two sections are left, and `map to guest` is gone from the output: `testparm -s` hides settings that equal the default, and `Never` is the default. `testparm -sv` prints everything if you want to see it.
+Only two sections are left (this was before the second share at the end of this post), and `map to guest` is gone from the output: `testparm -s` hides settings that equal the default, and `Never` is the default. `testparm -sv` prints everything if you want to see it.
 
 `nmbd`, the NetBIOS name service, is not needed either. Clients reach the server by its Tailscale name:
 
@@ -167,7 +167,7 @@ The first one only says the systemd unit ran at boot. It is a oneshot unit that 
 
 Until Samba, the only TCP port open to the LAN was SSH, so the gap had not cost anything yet. With a file share listening, it mattered.
 
-A second trap: while `ufw` is inactive, `ufw status` prints only `Status: inactive`, not the rules. To see what is about to be applied:
+A second trap: while `ufw` is inactive, `ufw status` prints only `Status: inactive`, not the rules. To see what is about to be applied (here and below, `192.168.1.0/24` stands in for my LAN's range):
 
 ```console
 $ sudo ufw show added
@@ -185,7 +185,7 @@ That list had an old `ufw allow 22/tcp`, SSH from anywhere, IPv6 included. Out i
 sudo ufw delete allow 22/tcp
 ```
 
-Only my own devices can reach `tailscale0`, so I allow everything on it. The full set, with `192.168.1.0/24` standing in for your LAN's range:
+Only my own devices can reach `tailscale0`, so I allow everything on it. The full set, with your LAN's range in place of `192.168.1.0/24`:
 
 ```bash
 sudo ufw default deny incoming
@@ -198,7 +198,7 @@ sudo ufw allow 41641/udp
 
 `41641/udp` is the port Tailscale uses for direct connections between devices.
 
-The SSH rule has to be there before `ufw enable`. The session that runs it survives either way, because `ufw` keeps established connections, but without the rule every new SSH connection is refused, including the next one after a reboot. Keep that session open until a new one connects, and if it all goes wrong, `sudo ufw disable` at the server's keyboard undoes it.
+The SSH rule has to be there before `ufw enable`. The session that runs it survives either way, because `ufw` keeps established connections, but without the rule every new SSH connection from the LAN times out, including the next one after a reboot. SSH over Tailscale still works, thanks to the `tailscale0` rule, if the other device is on the tailnet. Keep that session open until a new one connects, and if it all goes wrong, `sudo ufw disable` at the server's keyboard undoes it.
 
 ```console
 $ sudo ufw enable
@@ -266,6 +266,8 @@ The fix is a second section in the same `homelab.conf`, where Samba writes every
    vfs objects = fruit streams_xattr
    fruit:metadata = stream
 ```
+
+The folder itself belongs to `green` too (`drwxr-xr-x green:green`): the media stack created it as `green`, and `force user` can only write where `green` can. If yours does not exist yet, `sudo install -d -o green -g green /mnt/data/media/incoming` creates it.
 
 `valid users = juan` keeps it to me, and `force user` means I log in as `juan` but the files belong to `green`. The firewall needs nothing new: it is the same port, and `smbcontrol all reload-config` picks it up.
 
