@@ -237,7 +237,7 @@ defaults:
     values:
       devto_series: "MDN in Spanish"
   - scope:
-      path: "_posts/*-{guacamelee,first-look-at-romm,updating-a-rom-hack-without-losing-your-save}.md"
+      path: "_posts/*-{guacamelee,first-look-at-romm,updating-a-rom-hack-without-losing-your-save,romm-on-a-home-server}.md"
     values:
       devto_series: "Retro Handheld"
 
