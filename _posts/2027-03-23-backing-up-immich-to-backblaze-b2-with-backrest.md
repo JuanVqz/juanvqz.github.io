@@ -23,13 +23,12 @@ After the [rescue](/blog/rescuing-immich-photos-from-no-name-ssds/), Immich ende
 
 ## Why B2
 
-I compared three places to keep about 136 GB:
+I compared two places to keep about 136 GB (prices from October 2026):
 
 | Service | Price | Note |
 |---|---|---|
 | Backblaze B2 | USD 6.95 per TB per month | Downloads free up to 3x what you store |
 | Cloudflare R2 | USD 15 per TB per month | Downloads always free |
-| Hetzner Storage Box | EUR 3.20 per TB, flat | Cheaper per TB, but you pay for the whole box |
 
 B2 won on price at this size. The [pricing page](https://www.backblaze.com/cloud-storage/pricing) also lists the first 10 GB as free, so 136 GB comes to under a dollar a month. I looked for a promo code before signing up: there is no official one, and the codes on coupon sites are old and mostly for Computer Backup.
 
@@ -60,7 +59,7 @@ nano /srv/homelab/services/backrest/b2-immich.env
 chmod 600 /srv/homelab/services/backrest/b2-immich.env
 ```
 
-```bash
+```text
 B2_IMMICH_KEY_ID=...
 B2_IMMICH_APP_KEY=...
 ```
@@ -70,19 +69,19 @@ The names carry the bucket on purpose. A second bucket later gets its own file a
 Before going further, I checked the key works and sees only its bucket, without printing the secret:
 
 ```bash
-set -a; . ./b2-immich.env; set +a
+set -a; . /srv/homelab/services/backrest/b2-immich.env; set +a
 curl -s -u "$B2_IMMICH_KEY_ID:$B2_IMMICH_APP_KEY" \
   https://api.backblazeb2.com/b2api/v3/b2_authorize_account \
   | python3 -c 'import json,sys; s=json.load(sys.stdin)["apiInfo"]["storageApi"]; print(s["bucketName"], s["s3ApiUrl"])'
 ```
 
 ```text
-homelab-immich-2016 https://s3.us-west-004.backblazeb2.com
+<bucket> https://s3.us-west-004.backblazeb2.com
 ```
 
 ## What goes in the backup
 
-Immich keeps everything under one folder, but not all of it is worth paying for:
+Immich's upload folder on the HDD holds five folders, and not all of them are worth paying for:
 
 | Folder | Size | Back up? |
 |---|---|---|
@@ -91,11 +90,12 @@ Immich keeps everything under one folder, but not all of it is worth paying for:
 | `profile/` | 56 KB | Yes. Profile pictures |
 | `backups/` | 729 MB | Yes. Immich's nightly database dump |
 | `encoded-video/` | 20 GB | No. Immich transcodes again |
-| `thumbs/` | | No. Immich regenerates them |
+
+Thumbnails are not in that folder at all: they live on the SSD since the [setup post](/blog/a-private-immich-setup-for-a-home-server/), and Immich can regenerate them, so they stay out too.
 
 The database dump matters more than its size suggests. Albums, faces, people, favorites and users live in the database, not in the files. Without it, a restore is a pile of photos.
 
-The live Postgres folder stays out. A copy of a database taken while it runs can be inconsistent; the dump Immich writes every night at 02:00 is the database backup.
+The live Postgres folder (588 MB, on the SSD) stays out. A copy of a database taken while it runs can be inconsistent; the dump Immich writes every night at 02:00 is the database backup.
 
 ## Backrest
 
@@ -152,13 +152,13 @@ curl -s -o /dev/null -w "%{http_code}\n" -X POST \
 401
 ```
 
-Then the login itself hung in Safari, in a private window too. It is an open bug, [backrest#1402](https://github.com/garethgeorge/backrest/issues/1402): on macOS 27 the tab that submits the login never finishes. Opera logged in on the first try, so I use Opera for Backrest.
+Then the login itself hung in Safari, in a private window too. It matches [backrest#1402](https://github.com/garethgeorge/backrest/issues/1402), still open in October 2026: in Safari on macOS 27, the tab that submits the login never finishes, although the login works and a new tab in the same window opens the dashboard. Opera logged in on the first try, so I use Opera for Backrest.
 
 ## The repository
 
 A restic repository is the encrypted store in the bucket. In Backrest it takes a name, a URI, a password and the credentials:
 
-- **URI:** `s3:https://s3.us-west-004.backblazeb2.com/homelab-immich-2016/immich`
+- **URI:** `s3:https://s3.us-west-004.backblazeb2.com/<bucket>/immich`
 - **Password:** a new random one from the password manager. This is the encryption key for every byte in the bucket, not the Backrest login. Lose it and nobody can read the backup, Backblaze included.
 - **Env vars:** `AWS_ACCESS_KEY_ID=${B2_IMMICH_KEY_ID}` and `AWS_SECRET_ACCESS_KEY=${B2_IMMICH_APP_KEY}`. Backrest expands `${VAR}` from its own environment ([`env.go`](https://github.com/garethgeorge/backrest/blob/v1.14.1/internal/orchestrator/repo/env.go)), so the secret stays in the file.
 
@@ -190,7 +190,7 @@ I started the first run by hand instead of waiting for 03:00:
 
 ![Backrest dashboard showing the backup in progress](/assets/img/posts/backing-up-immich-to-backblaze-b2-with-backrest/backrest-dashboard-backing-up.png)
 
-While it runs, the upload is saturated: video calls and anything reaching the server from outside get slow. Phones at home still back up to Immich at full speed, since that traffic stays on the LAN. If that is a problem, restic's `--limit-upload` caps it, and an interrupted run loses nothing: restic saves its index as it goes, and the next run skips what is already in the bucket.
+While it runs, the backup uses the whole upload, so anything else sending data out of the house shares what is left. Phone backups to Immich over the home Wi-Fi do not use the internet upload at all. If that is a problem, restic's `--limit-upload` caps it, and an interrupted run loses nothing: restic saves its index as it goes, and the next run skips what is already in the bucket.
 
 After the first run, each night uploads only the new photos.
 
@@ -199,7 +199,7 @@ After the first run, each night uploads only the new photos.
 Nothing in B2 is readable as a photo. The browser shows restic's layout, all of it encrypted:
 
 ```text
-homelab-immich-2016/
+<bucket>/
   immich/
     config
     keys/
