@@ -197,18 +197,28 @@ After the first run, each night uploads only the new photos.
 
 ### The storage cap
 
-The first run did not get far. Two and a half hours in, Backrest marked it failed:
+The first run did not get far. Two and a half hours in, at 7.58% and 10.28 GiB, Backrest marked it failed:
+
+![Backrest plan view with the first backup failed: storage cap exceeded](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791956296/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/backrest-plan-backup-cap-exceeded.png)
 
 ```text
 Fatal: unable to save snapshot: client.PutObject: Cannot upload files,
 storage cap exceeded. See the Caps & Alerts page to increase your cap.
 ```
 
-At 9.8 Mbit/s, two and a half hours is about 11 GB, right around the 10 GB that B2 gives for free. The account had a storage cap, and B2 enforces it by refusing uploads, not by charging. The fix is on the B2 side, under **Caps & Alerts**: raise the storage cap above the size of the backup, with room to grow. Nothing in restic or Backrest needed to change.
+10.28 GiB is about 11 GB, right past the 10 GB that B2 gives for free. A B2 account comes with caps, and B2 enforces them by refusing uploads, not by charging. So once a backup grows past the free 10 GB, the caps have to go up, under **Caps & Alerts** in the B2 web UI. The caps are daily, in dollars:
 
-<!-- TODO after the next run: confirm it reused the ~11 GB already uploaded (restic skips data its saved index lists) and add the numbers. -->
+![B2 Edit Caps dialog with a daily storage cap of 0.10 dollars and a download cap of 0](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791956297/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/b2-edit-caps.png)
 
-Set the cap before the first run, not after it fails at 3 a.m.
+- **Storage: USD 0.10 a day.** At USD 6.95 per TB per month, a day of storage costs about USD 0.00023 per GB. 146 GB minus the free 10 GB is about USD 0.03 a day, and USD 0.10 leaves room for about 430 GB. The worst case is about USD 3 a month.
+- **Download bandwidth: USD 0.** Downloads are free up to three times what you store, which covers a full restore. A cap of 0 only blocks downloads that would cost money; if a restore ever needs more, raise it for that day.
+- **"No Cap" stays unchecked** on both. It removes the limit, so a runaway job could bill without one.
+
+The dialog says changes take effect in about a minute. Nothing in restic or Backrest needed to change. The 10.26 GB already in the bucket stays: restic had saved 14 index files before the failure, and the next run skips the data they list.
+
+<!-- TODO after the next run: confirm how much it reused and add the numbers. -->
+
+Raise the cap before the first run, not after it fails at night.
 
 ## What the bucket looks like
 
