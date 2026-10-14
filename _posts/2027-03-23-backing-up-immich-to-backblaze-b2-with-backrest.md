@@ -4,10 +4,10 @@ title: "Backing Up Immich to Backblaze B2 With Backrest"
 date: 2027-03-23 09:00:00 -0600
 last_modified_at: 2027-03-23 09:00:00 -0600
 categories: [development]
-tags: [immich, backups, backblaze, homelab, restic, self-hosting]
+tags: [immich, backup, backblaze, homelab, restic, self-hosting]
 ---
 
-After the [rescue](/blog/rescuing-immich-photos-from-no-name-ssds/), Immich ended up on a single 2 TB disk in my home server. Every photo my wife and I take lands there first, and for a while it was the only copy. The [setup post](/blog/a-private-immich-setup-for-a-home-server/) closed with "the photos need a backup of their own". This is that backup: Backrest on the server, a private bucket on Backblaze B2, about a dollar a month.
+After the [rescue](/blog/rescuing-immich-photos-from-no-name-ssds/), Immich ended up on a single 2 TB disk in my home server. Every photo my wife and I take lands there first, and for a while it was the only copy. The [setup post](/blog/a-private-immich-setup-for-a-home-server/) closed with "the photos need a backup of their own". This is that backup: Backrest on the server, a private bucket on Backblaze B2, under a dollar a month.
 
 ---
 
@@ -23,14 +23,14 @@ After the [rescue](/blog/rescuing-immich-photos-from-no-name-ssds/), Immich ende
 
 ## Why B2
 
-I compared two places to keep about 136 GB (prices from October 2026):
+I compared two places to keep about 146 GB (prices from October 2026):
 
 | Service | Price | Note |
 |---|---|---|
 | Backblaze B2 | USD 6.95 per TB per month | Downloads free up to 3x what you store |
 | Cloudflare R2 | USD 15 per TB per month | Downloads always free |
 
-B2 won on price at this size. The [pricing page](https://www.backblaze.com/cloud-storage/pricing) also lists the first 10 GB as free, so 136 GB comes to under a dollar a month. I looked for a promo code before signing up: there is no official one, and the codes on coupon sites are old and mostly for Computer Backup.
+B2 won on price at this size. The [pricing page](https://www.backblaze.com/cloud-storage/pricing) also lists the first 10 GB as free, so 146 GB comes to about USD 0.94 a month. I looked for a promo code before signing up: there is no official one, and the codes on coupon sites are old and mostly for Computer Backup.
 
 That is the other thing to get right on signup: Backblaze sells two products. **Computer Backup** is their own app for a Mac or Windows PC. **B2 Cloud Storage** is the S3-compatible storage that backup tools write to. A Linux server needs B2.
 
@@ -64,7 +64,7 @@ B2_IMMICH_KEY_ID=...
 B2_IMMICH_APP_KEY=...
 ```
 
-The names carry the bucket on purpose. A second bucket later gets its own file and its own variable names, so one key can never leak into the other repository.
+The names carry the bucket on purpose. A second bucket later gets its own file and its own variable names, so a repository that points at the wrong key is easy to spot in its settings.
 
 Before going further, I checked the key works and sees only its bucket, without printing the secret:
 
@@ -85,17 +85,17 @@ Immich's upload folder on the HDD holds these, and not all of them are worth pay
 
 | Folder | Size | Back up? |
 |---|---|---|
-| `library/` | 135 GB | Yes. The originals |
-| `upload/` | 287 MB | Yes. Uploads still being processed |
-| `profile/` | 56 KB | Yes. Profile pictures |
-| `backups/` | 729 MB | Yes. Immich's nightly database dump |
-| `encoded-video/` | 20 GB | No. Immich transcodes again |
+| `library/` | 135 GiB | Yes. The originals |
+| `upload/` | 287 MiB | Yes. Uploads still being processed |
+| `profile/` | 56 KiB | Yes. Profile pictures |
+| `backups/` | 729 MiB | Yes. Immich's nightly database dump |
+| `encoded-video/` | 20 GiB | No. Immich transcodes again |
 
 Thumbnails are not in that folder at all: they live on the SSD since the [setup post](/blog/a-private-immich-setup-for-a-home-server/), and Immich can regenerate them, so they stay out too.
 
 The database dump matters more than its size suggests. Albums, faces, people, favorites and users live in the database, not in the files. Without it, a restore is a pile of photos.
 
-The live Postgres folder (588 MB, on the SSD) stays out. A copy of a database taken while it runs can be inconsistent; the dump Immich writes every night at 02:00 is the database backup.
+The live Postgres folder (588 MiB, on the SSD) stays out. A copy of a database taken while it runs can be inconsistent; the dump Immich writes every night at 02:00 is the database backup.
 
 ## Backrest
 
@@ -178,19 +178,19 @@ The retention defaults were hourly 24, daily 7, weekly 4, monthly 3. The hourly 
 |---|---|---|---|---|
 | 0 | 7 | 4 | 12 | 2 |
 
-Snapshots share their data, so a longer history costs almost nothing. The only extra storage is photos deleted from Immich, kept until their last snapshot expires, which is the point.
+Snapshots share their data, so a longer history of photos costs almost nothing: the extra storage is photos deleted from Immich, kept until their last snapshot expires, which is the point. The database dumps are different. Each one is about 145 MB, a new one arrives every night, and compressed files barely deduplicate, so every monthly and yearly snapshot keeps its own set. After a year that adds up to a few tens of GB, about USD 0.20 a month at today's size.
 
 ## The first upload
 
 I started the first run by hand instead of waiting for 03:00:
 
-![Backrest plan view with the first backup running, 3 of 21,748 files](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955144/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/backrest-first-backup-progress.png)
+![Backrest plan view with the first backup running, 3 of 21,748 files](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955410/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/backrest-plan-first-backup-progress.png)
 
-135.74 GiB in 21,748 files. restic reads the database dumps first, then the library. I measured the upload on the server's network interface over a minute: 9.8 Mbit/s, which is all my home connection sends. At that rate the first run takes about 31 hours. Photos and videos are already compressed, so restic's compression does not change much.
+135.74 GiB (about 146 GB) in 21,748 files. restic reads the database dumps first, then the library. I measured the upload on the server's network interface over a minute: 9.8 Mbit/s, which is all my home connection sends. At that rate the first run takes about 33 hours. Photos and videos are already compressed, so restic's compression does not change much.
 
-![Backrest dashboard showing the backup in progress](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955145/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/backrest-dashboard-backing-up.png)
+![Backrest dashboard showing the backup in progress](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955411/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/backrest-dashboard-backing-up.png)
 
-While it runs, the backup uses the whole upload, so anything else sending data out of the house shares what is left. Phone backups to Immich over the home Wi-Fi do not use the internet upload at all. If that is a problem, restic's `--limit-upload` caps it, and an interrupted run loses nothing: restic saves its index as it goes, and the next run skips what is already in the bucket.
+While it runs, the backup uses the whole upload, so anything else sending data out of the house shares what is left. Phone backups to Immich over the home Wi-Fi do not use the internet upload at all. If that is a problem, restic's `--limit-upload` caps it. An interrupted run loses little: restic saves its index every few minutes, and the next run skips everything that index lists. Only the data uploaded since the last save goes up again.
 
 After the first run, each night uploads only the new photos.
 
