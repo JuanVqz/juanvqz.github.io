@@ -19,7 +19,8 @@ The screenshots come from a copy of the stack on my laptop, playing Blender's op
 
 - Set the metadata language to Spanish (Latin America, `es-419`) and the country to Mexico, per library. When TMDB has no Spanish text for a film, Jellyfin shows the English one.
 - Per user: audio language Spanish, "play the default audio track" off, subtitles Spanish in **Smart** mode. A Spanish dub plays when there is one; an English film shows Spanish subtitles on its own.
-- Bazarr asks for Spanish first, then English. Radarr keeps the `.srt` files that come with a movie.
+- Bazarr asks for Spanish first, then English. Radarr keeps the `.srt` files that come with a movie. A free OpenSubtitles account is what made Spanish subtitles show up for series.
+- Movies and series use one quality profile, 720p to 1080p, no 4K and no remux. WEB and Bluray 1080p share a group, so the Spanish score decides between them.
 - Jellyfin did not notice new files on its own. A Webhook connection in Radarr, Sonarr and Lidarr calls `/Library/Refresh` after each import; the built-in "Emby / Jellyfin" connection passes its test but fails against Jellyfin 12.
 - Intel Quick Sync does the transcoding: pass `/dev/dri` to the container and add the `render` group.
 - TVs reach Jellyfin on the LAN; phones away from home go through Tailscale. Behind Docker, Known Proxies is the Docker gateway, not `127.0.0.1`.
@@ -95,7 +96,9 @@ Two things I learned:
 - **Ask for `es`, not Latin American Spanish.** Few subtitle providers list Latin American Spanish separately, so a profile that requires it finds almost nothing.
 - **The subtitles bundled with a movie are often the best ones.** Radarr can import "extra files" next to the video. I turned it on for `srt,ass,ssa,sub,idx`. For Tears of Steel, no Bazarr provider had a match, and the `.es.srt` that came with the film is what Jellyfin showed.
 
-The free providers work without an account. OpenSubtitles, the biggest one, needs a free account, which I have not created yet.
+The free providers work without an account, and for Spanish they are thin. After five days, one series of 53 episodes had Spanish subtitles for exactly one of them. Every provider with good Spanish coverage in Bazarr 1.6 needs an account or an API key: OpenSubtitles.com, SubDL, Addic7ed. I made a free OpenSubtitles.com account, entered the username and password in Bazarr (no API key needed), and ran the "missing subtitles" search. Nine episodes got Spanish subtitles in the first run.
+
+The free account allows 20 downloads a day. When it runs out, Bazarr pauses that provider for a few hours and tries again later, so a whole series fills in over a few days without anyone doing anything. With the "Spanish, then English" profile, part of that daily allowance goes to English subtitles for episodes that have no Spanish one yet. I kept it that way: an English subtitle is better than none while the Spanish one turns up.
 
 ## Spanish dubs score higher
 
@@ -104,6 +107,23 @@ Radarr and Sonarr decide between versions of the same title with custom formats.
 One default fights this. Radarr's quality profiles come with the language set to "Original", which rejects a Spanish dub of an English film. Set it to "Any" and let the custom formats do the ranking.
 
 Radarr can also show its own titles and plots in Spanish (Latin America), which makes its lists match what Jellyfin shows.
+
+## 1080p is enough
+
+The first movies came in with the "Any" profile, and some of them arrived in 4K. One was an 81 GB remux. It stuttered on my laptop, and on our TVs it would have looked no better than 1080p. I moved every movie to the "HD - 720p/1080p" profile, deleted the 4K files and their torrents, and searched again.
+
+Changing a movie's profile does not replace a file it already has. With upgrades off, Radarr keeps what is on disk. To get the smaller version I had to delete the file first, then search.
+
+Two more changes made the profile do what I meant:
+
+- **No remux.** A 1080p remux is the disc's video and audio copied untouched: one movie took 26.8 GB at about 31 Mbps. A good encode of the same film is 4 to 10 GB and looks nearly the same on a TV. Remux-1080p is off in the profile now, so Radarr grabs encodes only.
+- **WEB and Bluray in one group.** Radarr ranks quality before custom formats. For one movie it found a 1080p WEB-DL with Latin American Spanish audio (+150) and a 1080p Bluray in English only (0), and it took the English Bluray, because Bluray ranks above WEB-DL. I put WEB-DL, WEBRip and Bluray 1080p in one group, "WEB/Bluray 1080p". Inside a group they count as equal, so the Spanish score decides.
+
+Then I deleted the profiles I do not use, "Any", "SD" and "Ultra-HD", so the add dialog cannot offer them. Radarr refused to delete "Any" at first: two collections (the groups of related films Radarr creates on its own) still pointed at it. Moving them to the HD profile cleared the way. Sonarr got the same profile and the same group.
+
+Lidarr has the same idea for music: its "Standard" profile now allows only MP3 at 256 or 320 kbps, MP3 V0, and AAC at 256 or 320, about 100 MB an album. FLAC is to music what a remux is to film, three to four times larger for a difference I do not hear on a TV or a phone.
+
+**Interactive Search** is where I pick by hand now. It lists every release with its size, language, seeders and custom format score, and says why Radarr rejected the ones it would not take.
 
 ## Music with Lidarr
 
@@ -167,6 +187,7 @@ The one bug was the login. The script looked for a cookie named `SID`, and qBitt
 
 - **Create every folder before the first `docker compose up`**, as the user the containers run as. Docker creates missing bind-mount folders as root. The linuxserver images fix the ownership of their config folder; the official Jellyfin image does not, and it crash-looped on a root-owned config folder.
 - **qBittorrent defaults to manual torrent management**, which ignores the save path of each category. Switch it to automatic, or Radarr and Sonarr downloads all land in the same folder.
+- **Removing a download with "blocklist" makes Radarr search again** and grab a replacement on its own, unless "skip redownload" is ticked too. I blocklisted one release to grab another by hand, and Radarr grabbed a third one alongside it.
 - **Renaming a movie folder through the Radarr API left the movie without a file** until a rescan, and Bazarr only lists movies that have one.
 - **Jellyfin keeps items when a library folder is completely empty.** It logs the folder as "inaccessible or empty" and skips it, a guard against an unmounted disk wiping the library. The catch: delete the last album in a library and it stays listed until you remove it in Jellyfin by hand.
 
