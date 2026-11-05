@@ -179,7 +179,7 @@ The retention defaults were hourly 24, daily 7, weekly 4, monthly 3. The hourly 
 |---|---|---|---|---|
 | 0 | 7 | 4 | 12 | 2 |
 
-Snapshots share their data, so a longer history of photos costs almost nothing: the extra storage is photos deleted from Immich, kept until their last snapshot expires, which is the point. The database dumps are different. Each one is about 145 MB, a new one arrives every night, and compressed files barely deduplicate, so every monthly and yearly snapshot keeps its own set. After a year that adds up to a few tens of GB, about USD 0.20 a month at today's size.
+Snapshots share their data, so a longer history costs almost nothing: the extra storage is photos deleted from Immich, kept until their last snapshot expires, which is the point. I expected the database dumps to be the exception, since a new compressed dump of about 150 MB arrives every night. They turned out cheap too: on a night with nothing else new, the backup grows by a few MB, not 150.
 
 ## The first upload
 
@@ -187,13 +187,11 @@ I started the first run by hand instead of waiting for 03:00:
 
 ![Backrest plan view with the first backup running, 3 of 21,748 files](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955410/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/backrest-plan-first-backup-progress.png)
 
-135.74 GiB (about 146 GB) in 21,748 files. restic reads the database dumps first, then the library. I measured the upload on the server's network interface over a minute: 9.8 Mbit/s, which is all my home connection sends. At that rate the first run takes about 33 hours. Photos and videos are already compressed, so restic's compression does not change much.
+135.74 GiB (145.75 GB) in 21,748 files. restic reads the database dumps first, then the library. I measured the upload on the server's network interface over a minute: 9.8 Mbit/s, which is all my home connection sends. At that rate the first run would take about 33 hours. Photos and videos are already compressed, so restic's compression does not change much.
 
 ![Backrest dashboard showing the backup in progress](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791955411/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/backrest-dashboard-backing-up.png)
 
-While it runs, the backup uses the whole upload, so anything else sending data out of the house shares what is left. Phone backups to Immich over the home Wi-Fi do not use the internet upload at all. If that is a problem, restic's `--limit-upload` caps it. An interrupted run loses little: restic saves its index every few minutes, and the next run skips everything that index lists. Only the data uploaded since the last save goes up again.
-
-After the first run, each night uploads only the new photos.
+While it runs, the backup uses the whole upload, so anything else sending data out of the house shares what is left. If that is a problem, restic's `--limit-upload` caps it. Phone backups to Immich over the home Wi-Fi are not affected: they never leave the house. An interrupted run loses little: restic saves its index every few minutes, and the next run skips everything that index lists. Only the data uploaded since the last save goes up again.
 
 ### The storage cap
 
@@ -216,9 +214,13 @@ The bucket held 10.26 GB, a little over the 10 GB that B2 gives for free. I had 
 
 The dialog says changes take effect in about a minute. Nothing in restic or Backrest needed to change. The 10.26 GB already in the bucket stays: restic had saved 14 index files before the failure, and the next run skips the data they list.
 
-<!-- TODO after the next run: confirm how much it reused and add the numbers. -->
+Raise the cap before the first run, not after it fails partway.
 
-Raise the cap before the first run, not after it fails at night.
+### How it finished
+
+I started it again the same night and left it alone. It finished a day and a half later, a bit faster than my estimate. It uploaded about 20 GB less than it read, between what the failed run had already sent and duplicates restic stores only once.
+
+Since then it runs every night at 03:00 and only sends what changed. Most nights that is the new database dump and a few photos, and the whole thing is over in a few minutes.
 
 ## What the bucket looks like
 
