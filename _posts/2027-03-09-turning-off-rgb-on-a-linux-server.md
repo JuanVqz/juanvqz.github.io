@@ -36,13 +36,13 @@ I ran everything below from my phone over SSH. Nothing here needs a desktop.
 
 [OpenRGB](https://codeberg.org/OpenRGB/OpenRGB/releases) 1.0 came out in September 2026, and its releases now live on Codeberg. The Debian bookworm `.deb` refuses to install on Mint 22. Its dependencies use Debian package names:
 
-- `libmbedtls14`, `libmbedcrypto7`, `libmbedx509-1` and `libqt6widgets6`. Ubuntu 24.04 renamed these with a `t64` suffix during its 64-bit `time_t` transition, so it has `libmbedtls14t64` and `libqt6widgets6t64` instead.
+- `libmbedtls14`, `libmbedcrypto7`, `libmbedx509-1` and `libqt6widgets6`. Ubuntu 24.04 renamed these with a `t64` suffix during its 64-bit `time_t` transition, so it has `libmbedtls14t64`, `libqt6widgets6t64` and so on instead.
 - `libhidapi-hotplug-hidraw0` and `libhidapi-hotplug-libusb0` (>= 0.15.0). Ubuntu does not ship these at all. It has `libhidapi-hidraw0` 0.14.
 
-The trixie `.deb` is for Debian 13, so that one is out too. The AppImage has no such problem. It needs FUSE 2, and `libfuse2t64` was already installed:
+Version 1.1 has the same dependencies, so the same applies. The trixie `.deb` is for Debian 13, so that one is out too. The AppImage has no such problem. It needs FUSE 2, and `libfuse2t64` was already installed. I used the 1.0 x86_64 AppImage; the glob picks up whichever version you downloaded:
 
 ```sh
-sudo install -D -m 755 OpenRGB_1.0_x86_64_81bbe18.AppImage /opt/openrgb/OpenRGB.AppImage
+sudo install -D -m 755 OpenRGB_*_x86_64_*.AppImage /opt/openrgb/OpenRGB.AppImage
 ```
 
 ## Listing the devices
@@ -51,7 +51,7 @@ sudo install -D -m 755 OpenRGB_1.0_x86_64_81bbe18.AppImage /opt/openrgb/OpenRGB.
 sudo /opt/openrgb/OpenRGB.AppImage --noautoconnect -l
 ```
 
-`--noautoconnect` tells it not to try to connect to a local OpenRGB server first. The command takes 15 to 20 seconds and looks hung the whole time. It is scanning the buses. Then it lists four devices, each with a block of details I trimmed here:
+`--noautoconnect` tells it not to try to connect to a local OpenRGB server first. The command takes 15 to 20 seconds and looks hung while it scans the buses. Then it lists four devices, each with a block of details I trimmed here:
 
 ```text
 0: Corsair Vengeance RGB Pro DDR4
@@ -76,7 +76,7 @@ It printed this three times, once per stick:
 Error: Mode 'static' not available for device 'Corsair Vengeance RGB Pro DDR4'
 ```
 
-And yet everything went dark. Without a mode the stick does not support, OpenRGB applies the color directly. So the command I kept has no mode at all:
+And yet everything went dark. When the mode does not exist on a device, OpenRGB skips the mode but still applies the color in direct mode. So the command I kept has no mode at all:
 
 ```sh
 sudo /opt/openrgb/OpenRGB.AppImage --noautoconnect -c 000000
@@ -90,13 +90,13 @@ Device 3 is the board. Before turning it off for good, I wanted to know which li
 sudo /opt/openrgb/OpenRGB.AppImage --noautoconnect -d 3 -m static -c FF0000
 ```
 
-Only the decorative LED strip on the board turned red. The case fans did not change, so their LEDs are not on any of the board's RGB headers, and no software on this machine can reach them. Those are a job for the screwdriver: unplug their LED cables the next time the case is open.
+Only the decorative LED strip on the board turned red. The case fans did not change, so their LEDs are not on any of the board's RGB headers, and OpenRGB cannot reach them. Those are a job for the screwdriver: unplug their LED cables the next time the case is open.
 
-I also wanted to be sure that turning off the strip would not hide a warning. It does not. The board's fault lights are the ASUS Q-LEDs, separate from the strip and not controlled by OpenRGB. The [ASUS spec page](https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b460m-plus-wi-fi/techspec/) lists them as CPU (red), DRAM (yellow), VGA (white) and Boot Device (yellow green). Those keep working whatever OpenRGB does, so device 3 can stay black.
+I also wanted to be sure that turning off the strip would not hide a warning. It does not. The board's fault lights are the ASUS Q-LEDs, separate from the strip and not controlled by OpenRGB, so device 3 can stay black. The [ASUS spec page](https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b460m-plus-wi-fi/techspec/) lists them as CPU (red), DRAM (yellow), VGA (white) and Boot Device (yellow green).
 
 ## Keeping them off after a reboot
 
-I have not confirmed that the sticks forget their setting after a power cut, but I would rather not find out at 2 a.m. A systemd oneshot runs the same command at every boot:
+A systemd oneshot runs the same command at every boot, in case the sticks forget their setting after a power cut:
 
 ```ini
 [Unit]
@@ -121,7 +121,7 @@ sudo systemctl link /srv/homelab/services/openrgb/leds-off.service
 sudo systemctl enable --now leds-off.service
 ```
 
-`systemctl status leds-off.service` showed the sleep, then the main command with `status=0/SUCCESS`, then "Deactivated successfully". The whole run took about 34 seconds, 1.3 seconds of it CPU time.
+`systemctl status leds-off.service` showed the sleep, then the main command with `status=0/SUCCESS`, then "Deactivated successfully". The whole run took about 34 seconds.
 
 I have not rebooted the server since, so the boot path is still untested. `--now` runs the same steps, but only a real boot tells whether 15 seconds is enough.
 
