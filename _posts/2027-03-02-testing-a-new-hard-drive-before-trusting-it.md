@@ -17,7 +17,7 @@ This is what I checked, what the disk told me, and why I stopped the surface tes
 
 - Read the motherboard manual before picking a SATA port. Some ports turn off when an M.2 is installed.
 - `smartctl -a` tells you more than `PASSED`: power-on hours, old self-tests, and the hottest the disk has ever been.
-- `badblocks -wsv` erases the whole disk, so run it only on an empty one, inside `tmux`, with the temperature logged.
+- `badblocks -wsv` erases the whole disk, so run it only on an empty one, inside a terminal multiplexer like `tmux`, with the temperature logged.
 - One full write and read pass with 0 errors was enough for me to move on.
 
 ---
@@ -127,7 +127,7 @@ FARM log (GP Log 0xa6) not supported
 
 No second opinion, then. That left the surface test as the real check.
 
-## badblocks, inside tmux
+## badblocks
 
 `badblocks -w` writes a pattern to every block and reads it back. It destroys everything on the disk, which was fine: it was empty.
 
@@ -144,28 +144,7 @@ From block 0 to 488378645
 Testing with pattern 0xaa:   0.05% done, 0:06 elapsed. (0/0/0 errors)
 ```
 
-My first run was in a plain SSH session from my Mac. If the Mac slept or the connection dropped, the test would die with it. Ctrl+C, and start it again inside `tmux` on the server:
-
-```bash
-ssh homelab
-tmux new -s badblocks
-sudo badblocks -wsv -b 4096 /dev/sdX
-# Ctrl+B, then D to detach. Later: tmux attach -t badblocks
-```
-
-`tmux` refused to start:
-
-```text
-missing or unsuitable terminal: xterm-ghostty
-```
-
-The server did not know my terminal, [Ghostty](https://ghostty.org/). Copying its terminfo entry from the Mac fixed it:
-
-```bash
-infocmp -x xterm-ghostty | ssh homelab -- tic -x -
-```
-
-Then a new SSH session, and the test was running in a session that would outlive my laptop.
+My first run was in a plain SSH session from my Mac. If the Mac slept or the connection dropped, the test would die with it, hours in. So I stopped it with Ctrl+C and started it again inside a terminal multiplexer on the server. I use `tmux`; `screen` does the same job. The test keeps running when you disconnect, and you can reattach later to check on it.
 
 ## Watching the temperature
 
@@ -186,14 +165,13 @@ temp1:        +30.0 C  (low  =  +1.0 C, high = +61.0 C)
                        (crit low =  +2.0 C, crit = +60.0 C)
 ```
 
-That is the Seagate, already under badblocks. A second `tmux` window wrote a line every 10 minutes to `~/hdd-temp.log` (`hwmon10` was the Seagate on my server; check `/sys/class/hwmon/hwmon*/device/model` for yours):
+That is the Seagate, already under badblocks. In a second `tmux` window, a loop wrote a line every 10 minutes to `~/hdd-temp.log` (`hwmon10` was the Seagate on my server; check `/sys/class/hwmon/hwmon*/device/model` for yours):
 
 ```bash
-tmux new-window -d -t badblocks -n templog \
-  'for i in $(seq 1 240); do
-     echo "$(date +%F\ %T) hdd=$(( $(cat /sys/class/hwmon/hwmon10/temp1_input)/1000 ))C bb=$(pgrep -x badblocks >/dev/null && echo running || echo stopped)" >> ~/hdd-temp.log
-     sleep 600
-   done'
+for i in $(seq 1 240); do
+  echo "$(date +%F\ %T) hdd=$(( $(cat /sys/class/hwmon/hwmon10/temp1_input)/1000 ))C bb=$(pgrep -x badblocks >/dev/null && echo running || echo stopped)" >> ~/hdd-temp.log
+  sleep 600
+done
 ```
 
 ```text
@@ -285,6 +263,6 @@ That disk now holds the photo library behind my [private Immich setup](/blog/a-p
 - `smartctl -a`, and read the attributes, the self-test log and the lifetime temperature, not the `PASSED` line.
 - On a Seagate, try `smartctl -l farm` for a second hour count.
 - Load `drivetemp` and log the temperature during the test.
-- Run `badblocks -wsv` inside `tmux` on the server, never in a session that dies with your laptop.
+- Run `badblocks -wsv` inside `tmux` or `screen` on the server, never in a session that dies with your laptop.
 - One full pattern with `(0/0/0 errors)` and a clean SMART afterwards is my bar. If you have the time, let all four patterns finish.
 - Do it inside the return window.
