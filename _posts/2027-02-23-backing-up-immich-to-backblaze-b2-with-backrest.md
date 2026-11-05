@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Backing Up Immich to Backblaze B2 With Backrest"
-date: 2027-03-23 09:00:00 -0600
-last_modified_at: 2027-03-23 09:00:00 -0600
+date: 2027-02-23 09:00:00 -0600
+last_modified_at: 2027-02-23 09:00:00 -0600
 categories: [development]
 tags: [immich, backup, backblaze, homelab, restic, self-hosting]
 ---
@@ -31,7 +31,7 @@ I compared two places to keep about 146 GB (prices from October 2026):
 | Backblaze B2 | USD 6.95 per TB per month | Downloads free up to 3x what you store |
 | Cloudflare R2 | USD 15 per TB per month | Downloads always free |
 
-B2 won on price at this size. The [pricing page](https://www.backblaze.com/cloud-storage/pricing) also lists the first 10 GB as free, so 146 GB comes to about USD 0.94 a month. I looked for a promo code before signing up: there is no official one, and the codes on coupon sites are old and mostly for Computer Backup.
+B2 won on price at this size. The [pricing page](https://www.backblaze.com/cloud-storage/pricing) also lists the first 10 GB as free, so 146 GB comes to about USD 0.94 a month.
 
 That is the other thing to get right on signup: Backblaze sells two products. **Computer Backup** is their own app for a Mac or Windows PC. **B2 Cloud Storage** is the S3-compatible storage that backup tools write to. A Linux server needs B2.
 
@@ -53,11 +53,11 @@ The master application key can do anything in the account. The backup gets its o
 
 Creating it does not touch the master key. Keys are independent; only generating a new master key cancels the old master.
 
-B2 shows the secret once. I pasted it straight into a file on the server, never into a chat or a terminal history:
+B2 shows the secret once. I pasted it straight into a file next to Backrest's compose file, never into a chat or a terminal history:
 
 ```bash
-nano /srv/homelab/services/backrest/b2-immich.env
-chmod 600 /srv/homelab/services/backrest/b2-immich.env
+nano b2-immich.env
+chmod 600 b2-immich.env
 ```
 
 ```text
@@ -70,7 +70,7 @@ The names carry the bucket on purpose. A second bucket later gets its own file a
 Before going further, I checked the key works and sees only its bucket, without printing the secret:
 
 ```bash
-set -a; . /srv/homelab/services/backrest/b2-immich.env; set +a
+set -a; . ./b2-immich.env; set +a
 curl -s -u "$B2_IMMICH_KEY_ID:$B2_IMMICH_APP_KEY" \
   https://api.backblazeb2.com/b2api/v3/b2_authorize_account \
   | python3 -c 'import json,sys; s=json.load(sys.stdin)["apiInfo"]["storageApi"]; print(s["bucketName"], s["s3ApiUrl"])'
@@ -206,7 +206,7 @@ Fatal: unable to save snapshot: client.PutObject: Cannot upload files,
 storage cap exceeded. See the Caps & Alerts page to increase your cap.
 ```
 
-10.28 GiB is about 11 GB, right past the 10 GB that B2 gives for free. A B2 account comes with caps, and B2 enforces them by refusing uploads, not by charging. So once a backup grows past the free 10 GB, the caps have to go up, under **Caps & Alerts** in the B2 web UI. The caps are daily, in dollars:
+The bucket held 10.26 GB, a little over the 10 GB that B2 gives for free. I had never set a cap on the account, so it was still at the free tier, and B2 enforces caps by refusing uploads, not by charging. Once a backup grows past the free 10 GB, the caps have to go up, under **Caps & Alerts** in the B2 web UI. The caps are daily, in dollars:
 
 ![B2 Edit Caps dialog with a daily storage cap of 0.10 dollars and a download cap of 0](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791956297/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/b2-edit-caps.png)
 
