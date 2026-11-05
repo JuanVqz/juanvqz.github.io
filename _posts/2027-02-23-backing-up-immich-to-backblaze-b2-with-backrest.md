@@ -179,7 +179,7 @@ The retention defaults were hourly 24, daily 7, weekly 4, monthly 3. The hourly 
 |---|---|---|---|---|
 | 0 | 7 | 4 | 12 | 2 |
 
-Snapshots share their data, so a longer history costs almost nothing: the extra storage is photos deleted from Immich, kept until their last snapshot expires, which is the point. I expected the database dumps to be the exception, since a new compressed dump of about 150 MB arrives every night. They turned out cheap too: on a night with nothing else new, the backup grows by a few MB, not 150.
+Snapshots share their data, so a longer history costs almost nothing: the extra storage is photos deleted from Immich, kept until their last snapshot expires, which is the point. I expected the database dumps to be the exception, since a new compressed dump of about 150 MB arrives every night. Immich keeps the last 14, so the folder grows to about 2 GB; the table above is smaller because there were only a few dumps when I measured it. They turned out cheap too: on a night with nothing else new, the backup grows by a few MB, not 150.
 
 ## The first upload
 
@@ -208,7 +208,7 @@ The bucket held 10.26 GB, a little over the 10 GB that B2 gives for free. I had 
 
 ![B2 Edit Caps dialog with a daily storage cap of 0.10 dollars and a download cap of 0](https://res.cloudinary.com/juan-vasquez/image/upload/f_auto,q_auto,w_1200,c_limit/v1791956297/blog/backing-up-immich-to-backblaze-b2-with-backrest/images/b2-edit-caps.png)
 
-- **Storage: USD 0.10 a day.** At USD 6.95 per TB per month, a day of storage costs about USD 0.00023 per GB. 146 GB minus the free 10 GB is about USD 0.03 a day, and USD 0.10 leaves room for about 430 GB. The worst case is about USD 3 a month.
+- **Storage: USD 0.10 a day.** At USD 6.95 per TB per month, a day of storage costs about USD 0.00023 per GB. 146 GB minus the free 10 GB is about USD 0.03 a day, and USD 0.10 leaves room for about 440 GB, counting the free 10 GB. The worst case is about USD 3 a month.
 - **Download bandwidth: USD 0.** Downloads are free up to three times what you store, which covers a full restore. A cap of 0 only blocks downloads that would cost money; if a restore ever needs more, raise it for that day.
 - **"No Cap" stays unchecked** on both. It removes the limit, so a runaway job could bill without one.
 
@@ -218,7 +218,7 @@ Raise the cap before the first run, not after it fails partway.
 
 ### How it finished
 
-I started it again the same night and left it alone. It finished a day and a half later, a bit faster than my estimate. It uploaded about 20 GB less than it read, between what the failed run had already sent and duplicates restic stores only once.
+I started it again the same night and left it alone. It finished about 30 hours later, a bit faster than my estimate. It uploaded about 20 GB less than it read, between what the failed run had already sent and duplicates restic stores only once.
 
 Since then it runs every night at 03:00 and only sends what changed. Most nights that is the new database dump and a few photos, and the whole thing is over in a few minutes.
 
